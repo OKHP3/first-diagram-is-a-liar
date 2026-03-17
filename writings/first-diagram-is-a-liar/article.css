@@ -1,0 +1,284 @@
+/* ============================================================
+   Article: The First Diagram Is Usually a Liar
+   Scoped styles — extends /assets/css/theme.css
+   ============================================================ */
+
+/* ── Hero ─────────────────────────────────────────────────── */
+
+.article-hero {
+  padding-block: 4rem 3rem;
+  padding-inline: min(2.5rem, 4vw);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.article-hero__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 720px) {
+  .article-hero__inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+.article-hero__eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 0.75rem;
+}
+
+.article-hero__eyebrow a {
+  color: inherit;
+}
+
+.article-hero__eyebrow a:hover {
+  text-decoration: underline;
+}
+
+.article-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+
+.article-hero__meta {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  margin: 0 0 1.5rem;
+}
+
+.article-hero__meta a {
+  color: var(--color-accent);
+}
+
+.article-hero__meta a:hover {
+  text-decoration: underline;
+}
+
+.article-hero__tagline {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 56ch;
+  margin: 0;
+}
+
+.article-hero__image {
+  max-width: 340px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ── Article body ─────────────────────────────────────────── */
+
+.article-body {
+  max-width: 72ch;
+  margin: 0 auto;
+  padding-block: 3.5rem;
+  padding-inline: min(2.5rem, 4vw);
+}
+
+.article-body h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  line-height: 1.2;
+  margin: 2.5rem 0 0.75rem;
+  color: var(--color-fg);
+}
+
+.article-body p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--color-fg);
+  margin: 0 0 1.25rem;
+}
+
+.article-body strong {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.article-body a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-body a:hover {
+  opacity: 0.8;
+}
+
+/* Pull-quote */
+.article-pullquote {
+  border-left: 3px solid var(--color-accent);
+  margin: 2rem 0;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-surface-soft);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--color-fg);
+}
+
+/* Code / prompt block */
+.article-codeblock {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-fg);
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  white-space: pre;
+}
+
+/* Mermaid diagram wrapper */
+.diagram-wrap {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+}
+
+.diagram-caption {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  text-align: center;
+  margin: 0.75rem 0 0;
+  font-style: italic;
+}
+
+.diagram-caption a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* ── Council gallery ──────────────────────────────────────── */
+
+.council-gallery {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-block: 3.5rem;
+  padding-inline: min(2.5rem, 4vw);
+}
+
+.council-gallery__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.council-gallery__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin: 0 0 0.5rem;
+}
+
+.council-gallery__subhead {
+  font-size: 1rem;
+  color: var(--color-muted);
+  margin: 0 0 2.5rem;
+  max-width: 60ch;
+}
+
+.council-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.council-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.council-card__label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.council-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.council-card__note {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.council-card__links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.council-card__link {
+  font-size: 0.82rem;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.council-card__link:hover {
+  opacity: 0.75;
+}
+
+/* ── Article CTA ──────────────────────────────────────────── */
+
+.article-cta {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-block: 3rem;
+  padding-inline: min(2.5rem, 4vw);
+  text-align: center;
+}
+
+.article-cta__inner {
+  max-width: 56ch;
+  margin: 0 auto;
+}
+
+.article-cta__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  margin: 0 0 0.75rem;
+}
+
+.article-cta__body {
+  font-size: 1rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+  margin: 0 0 1.5rem;
+}
+
+.article-cta__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
