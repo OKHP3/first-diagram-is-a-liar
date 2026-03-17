@@ -1,9 +1,14 @@
 /* ============================================================
-   Article: The First Diagram Is Usually a Liar
-   Scoped styles — extends /assets/css/theme.css
+   LONG-FORM ARTICLE TEMPLATE
+   Append this entire block to the bottom of /assets/css/theme.css
+   Supports: writings/[slug]/index.html pages
+   Classes: .article-hero, .article-body, .article-pullquote,
+            .article-codeblock, .diagram-wrap, .council-gallery,
+            .council-grid, .council-card, .article-cta
    ============================================================ */
 
-/* ── Hero ─────────────────────────────────────────────────── */
+
+/* ── Article Hero ─────────────────────────────────────────── */
 
 .article-hero {
   padding-block: 4rem 3rem;
@@ -77,7 +82,8 @@
   box-shadow: var(--shadow-soft);
 }
 
-/* ── Article body ─────────────────────────────────────────── */
+
+/* ── Article Body ─────────────────────────────────────────── */
 
 .article-body {
   max-width: 72ch;
@@ -116,7 +122,9 @@
   opacity: 0.8;
 }
 
-/* Pull-quote */
+
+/* ── Pull-quote ───────────────────────────────────────────── */
+
 .article-pullquote {
   border-left: 3px solid var(--color-accent);
   margin: 2rem 0;
@@ -129,7 +137,9 @@
   color: var(--color-fg);
 }
 
-/* Code / prompt block */
+
+/* ── Code / prompt block ──────────────────────────────────── */
+
 .article-codeblock {
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
@@ -144,7 +154,9 @@
   white-space: pre;
 }
 
-/* Mermaid diagram wrapper */
+
+/* ── Mermaid diagram wrapper ──────────────────────────────── */
+
 .diagram-wrap {
   margin: 2rem 0;
   padding: 1.5rem;
@@ -167,7 +179,8 @@
   text-decoration: underline;
 }
 
-/* ── Council gallery ──────────────────────────────────────── */
+
+/* ── Council Gallery ──────────────────────────────────────── */
 
 .council-gallery {
   border-top: 1px solid var(--color-border-subtle);
@@ -249,6 +262,7 @@
   opacity: 0.75;
 }
 
+
 /* ── Article CTA ──────────────────────────────────────────── */
 
 .article-cta {
@@ -282,3 +296,8 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+
+/* ============================================================
+   END LONG-FORM ARTICLE TEMPLATE
+   ============================================================ */
