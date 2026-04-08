@@ -1,135 +1,113 @@
 # The First Diagram Is Usually a Liar
 
-A dedicated project repository for the writing, diagramming, comparison, and publication workflow behind **The First Diagram Is Usually a Liar**.
+**A public methodology archive for the article, the Council of AIs shootout,
+and the prompts that started it all.**
 
-This repo exists because the effort outgrew “one article in a larger system.” It now includes article lineage, Mermaid diagram variants, slide decks, exports, poll assets, Council of AIs materials, website content, and premium companion concepts.
+---
 
-## What this project is
+## The Article
 
-At the center of this repo is a simple working thesis:
+Live at:
+**[overkillhill.com/writings/first-diagram-is-a-liar](https://overkillhill.com/writings/first-diagram-is-a-liar/)**
 
-> A picture is not automatically worth 1,000 words.  
-> It earns its place when it removes enough ambiguity to justify the words, effort, and attention it took to create it.
+Also published on LinkedIn:
+**[The First Diagram Is Usually a Liar — LinkedIn Pulse](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)**
 
-This project explores that thesis through:
-- article drafts and revisions
-- Mermaid diagram experiments
-- the **ETCH-AI-SKETCH** visual comparison exercise
-- a **Council of AIs** process for generating, evaluating, and synthesizing outputs
-- slide decks, exports, and derived assets
-- public iteration from **v0.1** toward **v1.0**
+---
 
-## Why this has its own repo
+## What This Project Is
 
-This stopped being just a subfolder artifact.
+A LinkedIn article became an experiment. The experiment became a methodology.
+This repo is the receipt stack.
 
-It now has its own:
-- article lineage
-- diagram sets
-- slideware
-- poll strategy
-- website assets
-- archive trail
-- monetizable companion materials
+The article argues that the first diagram almost always lies — it shows the
+happy path instead of the honest path. It introduces ROY (Return on Your Words)
+as the real metric for visual communication, and documents what happened when
+six AI models competed to diagram the same idea.
 
-This repo is the product-line workspace.
+The prompts that drove the experiment were not polished. They were not
+lab-grade. They were natural language, spoken at speed, and fired without
+heavy pre-production. That's also part of the thesis: velocity has value.
+Over-engineering a prompt too early creates the same friction the workflow
+was built to escape.
 
-If **OverKill-Hill-FoundRy** is the factory, this repo is the dedicated line for this project.
+This repo makes all of that visible.
 
-## Core ideas
+---
 
-This project sits at the intersection of:
-- **visual thinking**
-- **Mermaid diagramming**
-- **ROY: Return on Your Words**
-- **promptcraft**
-- **multi-model synthesis**
-- **public iteration**
-- **artifact-first publishing**
+## What's in Here
 
-A recurring belief here is that the first diagram is often too clean, too linear, and too eager to look finished. The better versions usually come later, after revision, challenge, comparison, and synthesis.
+```
+etch-ai-sketch-vibe-diagramming-shootout/
+├── README.md               ← shootout context and methodology
+├── council-brief.md        ← the governing brief sent to all council members
+├── prompts/                ← all 8 prompts, lightly cleaned, with context
+├── diagrams/               ← Mermaid source files, V1 and V2, all models
+├── images/                 ← rendered PNGs used in the article and post
+└── slides/                 ← the ETCH-AI-SKETCH deck (PDF)
+```
 
-## Repository structure
+---
 
-### `/article/`
-Working drafts and article revisions.
+## The Short Version of the Argument
 
-### `/diagrams/`
-Mermaid source, contest entries, exports, thumbnails, winners, and supporting variants.
+A picture is not automatically worth 1,000 words.
 
-### `/slides/`
-PowerPoint decks, PDFs, notes, and presentation derivatives.
+The real question is ROY — Return on Your Words:
 
-### `/images/`
-Covers, article images, social crops, winner images, and supporting visuals.
+> Understanding produced ÷ Explanation invested
 
-### `/polls/`
-Poll copy, option labels, comment support copy, and release sequencing.
+If it costs more to make the diagram than the diagram saves in comprehension,
+the ROI is negative. If a rough prompt generates a diagram that replaces three
+meetings worth of explanation, the ROI is extraordinary.
 
-### `/council/`
-AI council interviews, rankings, scorecards, synthesis notes, and comparative commentary.
+Mermaid plus LLMs collapsed the production cost of diagrams enough to make
+them cheap to draft, cheap to revise, and cheap to throw away. That changes
+the game.
 
-### `/web/`
-Static website-ready content and assets for GitHub Pages or related publishing surfaces.
+---
 
-### `/kofi/`
-Companion product ideas, supporter bundle concepts, and monetization copy.
+## The Council
 
-### `/archive/`
-Raw notes, receipts, historical source links, and change records.
+Six models. Same brief. Two rounds. One human orchestrator.
 
-## Publication model
+| Model | Role | Notes |
+|---|---|---|
+| ChatGPT | Core competitor | Strongest all-around scaffolding |
+| Claude | Core competitor | Best narrative architecture, Round 2 winner |
+| Copilot | Core competitor | Cleanest renderer-level config, Round 1 winner |
+| Perplexity | Core competitor | Tightest ROY framing |
+| Gemini | Core competitor | Free tier — capability ceiling noted |
+| Notion | Archivist / synthesizer | Different role — not a voting peer |
+| Replit | Late entry | Not part of initial apples-to-apples round |
 
-This project is designed to work across multiple surfaces without losing coherence.
+---
 
-### LinkedIn
-Used for discovery, commentary, launch moments, polls, and thought-leadership distribution.
+## Round Winners
 
-### Website hub
-Used as the canonical public archive and evolving home for article revisions, diagrams, galleries, and supporting context.
+**Round 1 — Copilot V1**
+Earned it by configuring Mermaid at the renderer level via YAML front matter —
+not just styling nodes, but operating on the theme engine itself.
 
-### Ko-fi
-Used for optional premium companion materials such as bundles, decks, exports, prompt packs, or behind-the-scenes notes.
+**Round 2 — Claude V2**
+Earned it by making the revision loops visible. Solid arrows for forward motion.
+Dashed arrows for the loops everyone always wants to hide. The diagram stopped
+performing certainty and started showing honest recursion.
 
-### Council workflow
-Used internally to compare, critique, and synthesize outputs from multiple AI systems before publication.
+---
 
-## Current status
+## Author
 
-This repo begins at the **protoform** stage.
+**Jamie Hill** — Lead Enterprise Architect, OverKill Hill P³™
+[LinkedIn](https://www.linkedin.com/in/jamiehill75) ·
+[OverKill Hill P³™](https://overkillhill.com) ·
+[LinkedIn Company Page](https://www.linkedin.com/company/overkillhillp3)
 
-The project is expected to evolve along a path such as:
-- v0.1
-- v0.2
-- v0.3
-- v1.0
+---
 
-Not every artifact will appear at once. Some material is intentionally staged for later releases.
+## License
 
-## Working principles
-
-- clarity over clutter
-- structure over decoration
-- iteration over premature polish
-- artifacts over hype
-- durable organization over improvisational sprawl
-
-## Notes
-
-This is a working repository, not just a museum piece.
-
-Some materials will be rough.
-Some will be drafts.
-Some will be archive receipts.
-Some will be publishable.
-
-That is intentional.
-
-The point is not to pretend the work emerged fully formed. The point is to preserve the lineage of how it actually became useful.
-
-## OverKill Hill P³
-
-**Precision · Protocol · Promptcraft**
-
-This repo is one expression of that broader ethos:
-turning words into structure, structure into systems, and systems into leverage.
+The Mermaid source files in `diagrams/` are provided for reference, learning,
+and adaptation. The article text, brand assets, and slide deck content are
+© OverKill Hill P³™. If you adapt the diagrams or methodology, attribution
+is appreciated but not required.
