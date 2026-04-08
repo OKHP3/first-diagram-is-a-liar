@@ -1,17 +1,21 @@
 # Slides — ETCH-AI-SKETCH Shootout
 
-**The ETCH-AI-SKETCH presentation deck documenting the full diagram competition.**
+**The ETCH-AI-SKETCH presentation deck in all available formats.**
 
 ---
 
-## What's in This Folder
+## Files in This Folder
 
-| File | Format | Notes |
-|---|---|---|
-| `etch-ai-sketch-deck.pdf` | PDF | Public distribution version — 18 slides |
+| File | Format | Orientation | Notes |
+|---|---|---|---|
+| `etch-ai-sketch-using-a-council-to-design-at-velocity-square.pptx` | PPTX | Square | Source file — square format |
+| `etch-ai-sketch-using-a-council-to-design-at-velocity-wide.pptx` | PPTX | Wide (16:9) | Source file — wide format |
+| `etch-ai-sketch-using-a-council-to-design-at-velocity-square.pdf` | PDF | Square | Public distribution — square |
+| `etch-ai-sketch-using-a-council-to-design-at-velocity.pdf` | PDF | Wide (16:9) | Public distribution — wide |
 
-The PPTX source files are maintained in the private production repository.
-This PDF is the public-safe distribution version.
+Both orientations exist because the square format works better as a LinkedIn
+carousel and the wide format works better as a traditional slide deck or
+screen presentation.
 
 ---
 
@@ -19,31 +23,36 @@ This PDF is the public-safe distribution version.
 
 18 slides structured as follows:
 
-- **Round 1 title slide** — competition framing
-- **6 model slides** — one per council member, V1 diagram + evaluation notes
+- **Round 1 title slide** — competition framing and brief summary
+- **6 model slides** (V1 round) — one per model: ChatGPT, Claude, Copilot,
+  Perplexity, Gemini, Notion. Each slide shows the diagram with evaluation notes.
+  Replit was not part of the initial V1 round slide deck.
 - **Round 2 title slide** — "same brief, better instincts"
-- **7 redesign slides** — one per model, V2 diagram + what changed
-- **Final Read slide** — winner declarations, scoring rationale
+- **7 redesign slides** (V2 round) — one per model. Each shows the V2 diagram
+  with what changed from V1 and why.
+- **Final Read slide** — winner declarations and scoring rationale
 
-Judge callouts for winners appear in OverKill Hill P³™ amber.
+Round 1 and Round 2 winner callouts appear in OverKill Hill P³™ amber.
 
 ---
 
 ## How the Deck Was Built
 
-The deck was produced using PptxGenJS — generated programmatically from
-the council outputs rather than manually assembled in PowerPoint. This was
-consistent with the broader methodology: use code and structured generation
-where manual layout would introduce friction.
+Built using PptxGenJS — generated programmatically from the council outputs
+rather than manually assembled in PowerPoint. Consistent with the broader
+methodology: use structured generation where manual layout would create friction.
 
 ---
 
 ## Using the Deck
 
-The PDF is available for:
-- Reference when working with the Mermaid source files
+The PDFs are the public distribution format. Use them for:
+- Reviewing all six V1 and V2 diagrams in a single presentation context
 - Understanding the scoring rationale for each round
-- Seeing all six V1 and V2 diagrams in a single presentation format
+- Sharing the full competition results as a self-contained document
 
-For the live rendered diagrams, see `../diagrams/` and the Mermaid.ai links
-in `../diagrams/README.md`.
+For interactive diagram viewing, use the Mermaid.ai links in
+`../diagrams/README.md`.
+
+For the individual source `.mmd` files, use `../diagrams/v1/` and
+`../diagrams/v2/`.

@@ -42,9 +42,9 @@ etch-ai-sketch-vibe-diagramming-shootout/
 ├── README.md               ← shootout context and methodology
 ├── council-brief.md        ← the governing brief sent to all council members
 ├── prompts/                ← all 8 prompts, lightly cleaned, with context
-├── diagrams/               ← Mermaid source files, V1 and V2, all models
-├── images/                 ← rendered PNGs used in the article and post
-└── slides/                 ← the ETCH-AI-SKETCH deck (PDF)
+├── diagrams/               ← Mermaid source files (.mmd), V1 and V2, all models
+├── images/                 ← rendered PNGs (full and lo-res) + cover image
+└── slides/                 ← the ETCH-AI-SKETCH deck (PPTX + PDF, square + wide)
 ```
 
 ---
@@ -69,17 +69,17 @@ the game.
 
 ## The Council
 
-Six models. Same brief. Two rounds. One human orchestrator.
+Seven models participated across two rounds.
 
-| Model | Role | Notes |
-|---|---|---|
-| ChatGPT | Core competitor | Strongest all-around scaffolding |
-| Claude | Core competitor | Best narrative architecture, Round 2 winner |
-| Copilot | Core competitor | Cleanest renderer-level config, Round 1 winner |
-| Perplexity | Core competitor | Tightest ROY framing |
-| Gemini | Core competitor | Free tier — capability ceiling noted |
-| Notion | Archivist / synthesizer | Different role — not a voting peer |
-| Replit | Late entry | Not part of initial apples-to-apples round |
+| Model | V1 | V2 | Notes |
+|---|---|---|---|
+| ChatGPT | ✓ | ✓ + V2pro | Strongest all-around scaffolding; V2pro is an enhanced variant |
+| Claude | ✓ | ✓ | Best narrative architecture — **Round 2 winner** |
+| Copilot | ✓ | ✓ | Cleanest renderer-level config — **Round 1 winner** |
+| Perplexity | ✓ | ✓ | Tightest ROY framing |
+| Gemini | ✓ | ✓ | Free tier — capability ceiling noted in council-brief.md |
+| Notion | ✓ | ✓ | Archivist/synthesizer role — "quietly effective" V1 |
+| Replit | ✓ | ✓ | Late entry — different context than core five |
 
 ---
 
@@ -88,11 +88,12 @@ Six models. Same brief. Two rounds. One human orchestrator.
 **Round 1 — Copilot V1**
 Earned it by configuring Mermaid at the renderer level via YAML front matter —
 not just styling nodes, but operating on the theme engine itself.
+[View on Mermaid.ai ↗](https://mermaid.ai/d/8fe5c9ae-c8ac-4754-98fd-268ae3ceeef7)
 
 **Round 2 — Claude V2**
 Earned it by making the revision loops visible. Solid arrows for forward motion.
-Dashed arrows for the loops everyone always wants to hide. The diagram stopped
-performing certainty and started showing honest recursion.
+Dashed arrows for the loops everyone always wants to hide.
+[View on Mermaid.ai ↗](https://mermaid.ai/d/2e9a4321-6302-44ca-82cc-e2020479fdf5)
 
 ---
 

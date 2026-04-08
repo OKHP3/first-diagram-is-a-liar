@@ -33,8 +33,8 @@ and surface structure — the priority is forward motion, not perfect inputs.
 These prompts were lightly edited for readability only:
 - Grammar corrected
 - Duplicate phrasing from live dictation removed
-- Word overhead trimmed where the same idea appeared three times
-  in immediate succession with no additional meaning
+- Word overhead trimmed where the same idea appeared multiple times
+  in immediate succession with no additional meaning on subsequent passes
 
 The original shape, intent, and strategic choices were preserved.
 
@@ -54,7 +54,7 @@ This is what that actually looks like.
 | [05-the-council-becomes-formal.md](05-the-council-becomes-formal.md) | Competitive judging | One sentence ran a comparative evaluation |
 | [06-the-hybrid-request.md](06-the-hybrid-request.md) | Synthesis | Stop drafting, start building |
 | [07-the-comment-origin-story.md](07-the-comment-origin-story.md) | Personal addendum | Raw autobiographical input, model does editorial work |
-| [08-the-diagram-competition.md](08-the-diagram-competition.md) | Art contest | Five models, one judge, one pun in the brief |
+| [08-the-diagram-competition.md](08-the-diagram-competition.md) | Art contest | Seven models, one judge, one pun in the brief |
 
 ---
 
@@ -62,7 +62,7 @@ This is what that actually looks like.
 
 Prompt 01 didn't mention LinkedIn or Mermaid.
 Prompt 03 corrected a structural lie in a single paragraph.
-Prompt 05 ran a five-model competitive evaluation in one sentence.
+Prompt 05 ran a multi-model competitive evaluation in one sentence.
 Prompt 08 turned the council into a judged art contest with a pun in the brief.
 
 None of them were polished before sending. All of them worked.
@@ -70,3 +70,13 @@ None of them were polished before sending. All of them worked.
 That's not an argument against precision. It's an argument for knowing when
 velocity is the right tool — and when the diagram you need is cheap enough
 to draft twice rather than plan once.
+
+---
+
+## A Note on Coverage
+
+These 8 prompts drove the initial session with the core council members.
+Replit's prompting context was slightly different — it entered later in
+the session with additional context already loaded. The prompts here
+represent the cold-start sequence delivered to the five core models
+(ChatGPT, Claude, Copilot, Perplexity, Gemini) and Notion.

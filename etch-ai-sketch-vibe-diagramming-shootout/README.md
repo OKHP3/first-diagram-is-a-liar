@@ -1,6 +1,6 @@
 # ETCH-AI-SKETCH — Vibe Diagramming Shootout
 
-**Six models. Same brief. Two rounds. One human orchestrator.**
+**Seven models. Same brief. Two rounds. One human orchestrator.**
 
 ---
 
@@ -12,10 +12,24 @@ article *The First Diagram Is Usually a Liar*.
 ```
 ├── council-brief.md        ← the governing brief, fairness notes, methodology
 ├── prompts/                ← the 8 prompts that drove the session
-├── diagrams/               ← Mermaid source files for all V1 and V2 outputs
-├── images/                 ← rendered PNGs used in the article and LinkedIn post
-└── slides/                 ← the ETCH-AI-SKETCH presentation deck (PDF)
+├── diagrams/               ← Mermaid source files (.mmd) for all V1 and V2 outputs
+├── images/                 ← rendered PNGs (full-res and lo-res) for all diagrams
+├── slides/                 ← the ETCH-AI-SKETCH presentation deck
+└── etch-ai-sketch-using-a-council-to-design-at-velocity-when-diagrams-stopped-being-drawing.mp4
+    ← original Sora-generated video; see note below
 ```
+
+---
+
+## The MP4 File
+
+The video in this folder was generated using Sora during the project.
+It was not used in the final published article or LinkedIn posts — the
+static PNG cover image was used instead. Sora has since been discontinued
+by OpenAI. The file is preserved here as a project artifact but carries
+platform watermarks from a discontinued product. Use the PNG from
+`images/etch-ai-sketch-using-a-council-to-design-at-velocity.png` for
+any publication or sharing purpose.
 
 ---
 
@@ -28,49 +42,45 @@ way. The cost of a wrong diagram collapsed to near zero. That's the whole point.
 
 ---
 
-## The Brief
-
-All five core council members received materially the same brief.
-See `council-brief.md` for the full text, the fairness disclosure, and the
-exact deliverables expected from each model.
-
----
-
 ## The Rounds
 
 ### Round 1 — V1 Diagrams
 
-Each model received the brief cold and produced an initial Mermaid diagram
+Seven models received the brief and produced an initial Mermaid diagram
 depicting the ideation process behind a LinkedIn post about visual ROI.
+Models did not see each other's work at this stage.
 
-**Winner: Copilot V1**
+**Round 1 Winner: Copilot V1**
 The only model that configured Mermaid at the renderer level using YAML
 front matter — operating on the theme engine itself, not just styling nodes.
+[View on Mermaid.ai ↗](https://mermaid.ai/d/8fe5c9ae-c8ac-4754-98fd-268ae3ceeef7)
 
-All V1 source files are in `diagrams/v1/`.
+All V1 source files: `diagrams/v1/`
 
 ### Round 2 — V2 Diagrams
 
 Each model saw the full set of V1 outputs, evaluated the field, and produced
-a revised diagram that improved on its own first draft.
+a revised diagram that improved on its own first draft. ChatGPT additionally
+produced a V2pro variant.
 
-**Winner: Claude V2**
+**Round 2 Winner: Claude V2**
 Made the revision loops visible. Five swim lanes. Dashed arrows for the
 loopbacks everyone always wants to hide. Stopped performing certainty
 and started showing honest recursion.
+[View on Mermaid.ai ↗](https://mermaid.ai/d/2e9a4321-6302-44ca-82cc-e2020479fdf5)
 
-All V2 source files are in `diagrams/v2/`.
+All V2 source files: `diagrams/v2/`
 
 ---
 
 ## Using the Mermaid Files
 
-Any `.mermaid` file in this repo can be:
+Any `.mmd` file in this repo can be:
 
-- Pasted directly into [mermaid.live](https://mermaid.live) to render
-- Pasted into any LLM prompt to request iteration or adaptation
-- Used as a starting point for your own process diagrams
+- Pasted into [mermaid.live](https://mermaid.live) to render immediately
+- Pasted into any LLM as a starting point for iteration or adaptation
+- Used as a reference for Mermaid syntax and styling patterns
 
-The Copilot V1 file uses YAML front matter for theme configuration —
-paste it into a Mermaid renderer that supports configuration blocks.
-The Claude V2 file uses the OKH dark theme token set.
+The Copilot V1 file uses YAML front matter for renderer-level theme
+configuration. Paste it into a Mermaid renderer that supports config
+blocks, or strip the front matter if your renderer doesn't.
