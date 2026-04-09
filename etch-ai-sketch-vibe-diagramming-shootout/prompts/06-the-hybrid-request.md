@@ -2,22 +2,19 @@
 
 **Stage:** Synthesis — stop drafting, start building
 **Sent to:** All five core council members
-**Session position:** Sixth prompt — judging round complete
+**Session position:** Sixth — judging round complete
 
 ---
 
 ## Strategic Note
 
 Every preceding prompt was a draft. This one is the instruction to stop
-drafting and build. The phrase "pulling every useful feature from Mermaid's
-toolbox" signals that this output will be shown publicly and judged on craft,
-not just clarity.
-
-Two different registers operate in this prompt simultaneously: creative
-direction ("best-of hybridization," "every useful feature") and production
-constraints (character limit, link requirements, image plan). Both were
-necessary. Neither crowded out the other. That's a well-formed brief —
-it tells the model what to build and what it has to work within.
+drafting and build. Two different registers operate simultaneously:
+creative direction ("best-of hybridization," "every useful feature from
+Mermaid's toolbox") and production constraints (character limit, links,
+image plan). Both were necessary. Neither crowded out the other.
+That's a well-formed brief — it tells the model what to build and what
+it has to work within.
 
 ---
 
@@ -40,9 +37,10 @@ and minimize rendering issues.
 
 ## What Happened Next
 
-The hybrid outputs from this round became the material for the final published
-LinkedIn post. The Claude hybrid provided the structural foundation. ChatGPT's
-hook language was incorporated. Perplexity's ROY framing tightened the thesis.
-Copilot's technical Mermaid approach influenced the final diagram configuration.
+The hybrid outputs became the material for the final published LinkedIn post.
+The Claude hybrid provided the structural foundation. ChatGPT's hook language
+was incorporated. Perplexity's ROY framing tightened the thesis. Copilot's
+technical Mermaid approach influenced the final diagram configuration.
+
 
 ---

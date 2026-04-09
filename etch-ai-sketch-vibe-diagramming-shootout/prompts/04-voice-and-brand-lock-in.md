@@ -2,23 +2,21 @@
 
 **Stage:** Tone calibration — style through example, not description
 **Sent to:** All five core council members
-**Session position:** Fourth prompt — structure was established, voice needed matching
+**Session position:** Fourth — structure established, voice needed matching
 
 ---
 
 ## Strategic Note
 
-Rather than describing the desired voice — "professional but not stuffy,
-snarky but not mean, confident but not arrogant" — the brief provided examples
-of it. An 8-part LinkedIn article series was pasted in as raw context. Not
-summarized. Not formatted. Just dropped in as: this is my voice, learn from it.
+Rather than describing the desired voice, the brief provided examples of it.
+A LinkedIn article series was pasted in as raw context — not summarized, not
+formatted. Just dropped in as: this is the voice, learn from it.
 
-This is the most efficient form of style transfer available in natural-language
-prompting. Description approximates. Example demonstrates. When you describe
-a voice, the model interpolates. When you show a voice, the model matches.
-
-The reference material wasn't cleaned or edited before pasting. The rough edges
-and real cadence were part of the signal.
+This is the most efficient form of style transfer in natural-language
+prompting. Description approximates. Example demonstrates. When you
+describe a voice, the model interpolates. When you show a voice, the
+model matches. The reference material wasn't cleaned before pasting.
+The rough edges and real cadence were part of the signal.
 
 ---
 

@@ -2,24 +2,23 @@
 
 **Stage:** Personal addendum — raw autobiographical input, model does editorial work
 **Sent to:** Primary model only
-**Session position:** Seventh prompt — post was finalized, comment needed
+**Session position:** Seventh — post finalized, comment needed
 
 ---
 
 ## Strategic Note
 
-This prompt is the cleanest example in the sequence of treating the model as
-a writing partner rather than a content generator. The content is entirely the
-author's. The model's job was editorial, not creative: take a stream-of-consciousness
-personal story and shape it into a LinkedIn comment that matches the post's voice.
+The cleanest example in the sequence of treating the model as a writing
+partner rather than a content generator. The content is entirely the
+author's. The model's job was editorial, not creative: take a stream-of-
+consciousness personal story and shape it into a LinkedIn comment that
+matches the post's voice.
 
-The original input contained live-dictation markers — the "1991-ish," the ellipsis
-thought bubble, the double exclamation. The model's task was to clean these without
-sanitizing them. The rough texture of "I asked what the hell it was" needed to
-survive. The emoji thought bubble didn't.
-
-Style calibration through example plus editorial instruction is one of the highest-
-ROY prompting patterns available. You supply the story. The model makes it usable.
+The input contained live-dictation markers. The model's task was to clean
+these without sanitizing them. The rough texture needed to survive.
+Style calibration through example plus editorial instruction is one of the
+highest-ROY prompting patterns available: you supply the story, the model
+makes it usable.
 
 ---
 
@@ -51,8 +50,8 @@ minimal drag.
 
 ## What Happened Next
 
-The model produced the first comment used on the LinkedIn post. The "AutoCAD 10,
-around 1991" origin story, the Visio Survivors Group framing, and the spaghetti
-metaphor all survived into the published version. The emoji thought bubble did not.
+The model produced the first comment used on the LinkedIn post. The
+AutoCAD 10 origin story, the Visio framing, and the spaghetti metaphor
+all survived into the published version.
 
 ---

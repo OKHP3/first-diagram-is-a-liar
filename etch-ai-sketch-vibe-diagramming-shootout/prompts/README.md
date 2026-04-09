@@ -34,7 +34,7 @@ These prompts were lightly edited for readability only:
 - Grammar corrected
 - Duplicate phrasing from live dictation removed
 - Word overhead trimmed where the same idea appeared multiple times
-  in immediate succession with no additional meaning on subsequent passes
+  in immediate succession with no additional meaning
 
 The original shape, intent, and strategic choices were preserved.
 
@@ -75,8 +75,7 @@ to draft twice rather than plan once.
 
 ## A Note on Coverage
 
-These 8 prompts drove the initial session with the core council members.
-Replit's prompting context was slightly different — it entered later in
-the session with additional context already loaded. The prompts here
-represent the cold-start sequence delivered to the five core models
-(ChatGPT, Claude, Copilot, Perplexity, Gemini) and Notion.
+These 8 prompts drove the initial session with the Core Five and Notion.
+Replit's context was different — it entered later in the session with
+additional context already loaded. The prompts here represent the
+cold-start sequence as delivered to the five core models plus Notion.

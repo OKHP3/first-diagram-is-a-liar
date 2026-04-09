@@ -14,7 +14,7 @@ Any `.mmd` file can be:
 
 The Copilot V1 file uses YAML front matter for renderer-level theme
 configuration. Paste it into a Mermaid renderer that supports config
-blocks, or strip the front matter block if yours doesn't.
+blocks, or strip the front matter if yours doesn't.
 
 Rendered PNG versions of all diagrams (full-res and lo-res) are in `../images/`.
 
@@ -22,19 +22,28 @@ Rendered PNG versions of all diagrams (full-res and lo-res) are in `../images/`.
 
 ## Round 1 — V1 Diagrams
 
-All models received the brief cold. No model saw another's output at this stage.
+### Core Five
 
-| Model | Source File | Mermaid.ai | Round Notes |
+All five received the brief cold. No model saw another's output at this stage.
+
+| Model | Source File | Mermaid.ai | Notes |
 |---|---|---|---|
-| **Copilot** | [copilot-v1.mmd](v1/etch-ai-sketch-using-a-council-to-design-at-velocity-copilot-v1.mmd) | [View ↗](https://mermaid.ai/d/8fe5c9ae-c8ac-4754-98fd-268ae3ceeef7) | 🏆 **Round 1 winner** — renderer-level YAML config |
+| **Copilot** | [copilot-v1.mmd](v1/etch-ai-sketch-using-a-council-to-design-at-velocity-copilot-v1.mmd) | [View ↗](https://mermaid.ai/d/8fe5c9ae-c8ac-4754-98fd-268ae3ceeef7) | 🏆 Round 1 top performer — renderer-level YAML config |
 | Claude | [claude-v1.mmd](v1/etch-ai-sketch-using-a-council-to-design-at-velocity-claude-v1.mmd) | [View ↗](https://mermaid.ai/d/fade689d-cfd2-47d9-b316-86a21a0533fb) | Strong subgraph structure, color discipline |
 | ChatGPT | [chatgpt-v1.mmd](v1/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v1.mmd) | [View ↗](https://mermaid.ai/d/b49cf4f6-5071-4207-8673-0ae56d328ed6) | Best all-around scaffolding |
 | Perplexity | [perplexity-v1.mmd](v1/etch-ai-sketch-using-a-council-to-design-at-velocity-perplexity-v1.mmd) | [View ↗](https://mermaid.ai/d/2f015a7f-4589-4a27-8cc4-5b2d7bcd9d83) | Tightest ROY framing |
 | Gemini | [gemini-v1.mmd](v1/etch-ai-sketch-using-a-council-to-design-at-velocity-gemini-v1.mmd) | [View ↗](https://mermaid.ai/d/d93b0060-2743-40de-869e-a84dc07553f2) | Free tier — see council-brief.md |
+
+### Specialty Roles
+
+| Model | Source File | Mermaid.ai | Notes |
+|---|---|---|---|
 | Notion | [notion-v1.mmd](v1/etch-ai-sketch-using-a-council-to-design-at-velocity-notion-v1.mmd) | [View ↗](https://mermaid.ai/d/fb3557e2-df35-46f8-a8cd-4abe56c82ed5) | ⭐ Notable mention — "quietly effective" |
 | Replit | [replit-v1.mmd](v1/etch-ai-sketch-using-a-council-to-design-at-velocity-replit-v1.mmd) | [View ↗](https://mermaid.ai/d/90d988cd-3af8-4fcf-b42e-4bd3da3da29a) | Late entry — different context, see council-brief.md |
 
-### Round 1 Winner — Copilot V1
+---
+
+### Round 1 Top Performer — Copilot V1
 
 Copilot earned Round 1 by configuring the Mermaid theme engine via YAML
 front matter — setting the foundational color and typography tokens that
@@ -46,21 +55,34 @@ the engine.
 
 ## Round 2 — V2 Diagrams
 
-Each model saw the full set of V1 outputs, evaluated the field, and revised.
-ChatGPT produced two V2 variants — standard and an enhanced V2pro pass.
+### Core Five
 
-| Model | Source File | Mermaid.ai | Round Notes |
+Each model saw the full set of V1 outputs, evaluated the field, and revised.
+
+| Model | Source File | Mermaid.ai | Notes |
 |---|---|---|---|
-| **Claude** | [claude-v2.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-claude-v2.mmd) | [View ↗](https://mermaid.ai/d/2e9a4321-6302-44ca-82cc-e2020479fdf5) | 🏆 **Round 2 winner** — five lanes, honest recursion |
+| **Claude** | [claude-v2.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-claude-v2.mmd) | [View ↗](https://mermaid.ai/d/2e9a4321-6302-44ca-82cc-e2020479fdf5) | 🏆 Round 2 top performer — five lanes, honest recursion |
 | Copilot | [copilot-v2.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-copilot-v2.mmd) | [View ↗](https://mermaid.ai/d/ea1ba020-7f26-483d-9892-3d98b5b6db23) | Retained renderer discipline, tightened flow |
 | ChatGPT | [chatgpt-v2.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2.mmd) | [View ↗](https://mermaid.ai/d/18c4c328-bef3-4d80-bebf-d9127c39fe43) | Strongest packaging and labeling |
-| ChatGPT V2pro | [chatgpt-v2pro.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2pro.mmd) | [View ↗](https://mermaid.ai/d/e2a6df7d-dbbe-40d6-bdae-967ac33737be) | Enhanced second pass — ChatGPT only |
 | Perplexity | [perplexity-v2.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-perplexity-v2.mmd) | [View ↗](https://mermaid.ai/d/1e77a8a7-ec42-47ea-8cc6-8fe03204785c) | Most precise ROY annotation |
 | Gemini | [gemini-v2.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-gemini-v2.mmd) | [View ↗](https://mermaid.ai/d/54541ba0-3c57-4065-bf53-c698123747bc) | Most maximalist; memorable coinage |
+
+### Exhibition
+
+| Model | Source File | Mermaid.ai | Notes |
+|---|---|---|---|
+| ChatGPT V2pro | [chatgpt-v2pro.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2pro.mmd) | [View ↗](https://mermaid.ai/d/e2a6df7d-dbbe-40d6-bdae-967ac33737be) | Pro-tier reasoning — unmatched access, not directly comparable |
+
+### Specialty Roles
+
+| Model | Source File | Mermaid.ai | Notes |
+|---|---|---|---|
 | Notion | [notion-v2.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-notion-v2.mmd) | [View ↗](https://mermaid.ai/d/b40280fd-8ef3-4992-bbe3-9dbfce6fe603) | Retained horizontal lane clarity |
 | Replit | [replit-v2.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-replit-v2.mmd) | [View ↗](https://mermaid.ai/d/478c63dc-47c1-419a-b4a9-dac33707fc55) | Late entry — different context, see council-brief.md |
 
-### Round 2 Winner — Claude V2
+---
+
+### Round 2 Top Performer — Claude V2
 
 Claude earned Round 2 by making the loops visible and honest. Five swim
 lanes — Ignition, Strategy, Craft, Proof, Ship — with dashed revision

@@ -2,22 +2,21 @@
 
 **Stage:** Project revealed — the work becomes self-demonstrating
 **Sent to:** All five core council members
-**Session position:** Second prompt — ROI frame already loaded
+**Session position:** Second — ROI frame already loaded
 
 ---
 
 ## Strategic Note
 
 Prompt 01 was the frame. Prompt 02 is where the actual project appears.
-Notice what didn't happen: there was no reset, no "ignore everything above,"
-no context wipe. The ROI frame from Prompt 01 was already loaded. Prompt 02
-built on it directly.
+No reset. No "ignore everything above." The ROI frame was already loaded
+and Prompt 02 built on it directly.
 
 The recursive idea — using the post's own creation process as the diagram
 subject — was stated here as a deliberate intention, not discovered later.
-The strategy was present from the beginning. The model didn't need to be told
-this was clever or meta. It was given a clear structural goal and it understood
-the recursive element immediately.
+The strategy was present from the beginning. The model didn't need to be
+told this was clever. It was given a clear structural goal and it
+understood the recursive element immediately from context.
 
 ---
 
@@ -45,8 +44,8 @@ thousand words?
 
 ## What Happened Next
 
-The models produced their first draft flowcharts of the LinkedIn post ideation
-process. Most came back as clean, linear, sequential paths — which is exactly
-what Prompt 03 was written to correct.
+The models produced their first draft flowcharts. Most came back as clean,
+linear, sequential paths — which is exactly what Prompt 03 was written to
+correct.
 
 ---

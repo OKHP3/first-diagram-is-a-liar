@@ -23,7 +23,7 @@ This repo is the receipt stack.
 The article argues that the first diagram almost always lies — it shows the
 happy path instead of the honest path. It introduces ROY (Return on Your Words)
 as the real metric for visual communication, and documents what happened when
-six AI models competed to diagram the same idea.
+seven AI models competed to diagram the same idea.
 
 The prompts that drove the experiment were not polished. They were not
 lab-grade. They were natural language, spoken at speed, and fired without
@@ -69,21 +69,25 @@ the game.
 
 ## The Council
 
-Seven models participated across two rounds.
+Seven models participated across two rounds, organized into four tiers.
 
-| Model | V1 | V2 | Notes |
-|---|---|---|---|
-| ChatGPT | ✓ | ✓ + V2pro | Strongest all-around scaffolding; V2pro is an enhanced variant |
-| Claude | ✓ | ✓ | Best narrative architecture — **Round 2 winner** |
-| Copilot | ✓ | ✓ | Cleanest renderer-level config — **Round 1 winner** |
-| Perplexity | ✓ | ✓ | Tightest ROY framing |
-| Gemini | ✓ | ✓ | Free tier — capability ceiling noted in council-brief.md |
-| Notion | ✓ | ✓ | Archivist/synthesizer role — "quietly effective" V1 |
-| Replit | ✓ | ✓ | Late entry — different context than core five |
+| Model | Tier | V1 | V2 | Notes |
+|---|---|---|---|---|
+| ChatGPT | Core Five | ✓ | ✓ | Strongest all-around scaffolding |
+| Claude | Core Five | ✓ | ✓ | Best narrative architecture — Round 2 top performer |
+| Copilot | Core Five | ✓ | ✓ | Cleanest renderer-level config — Round 1 top performer |
+| Perplexity | Core Five | ✓ | ✓ | Tightest ROY framing |
+| Gemini | Core Five | ✓ | ✓ | Free tier — capability ceiling noted |
+| ChatGPT V2pro | Exhibition | — | ✓ | Pro-tier reasoning — unmatched access |
+| Notion | Specialty | ✓ | ✓ | Archivist and synthesizer role |
+| Replit | Specialty | ✓ | ✓ | Late entry — different context |
+| Mermaid AI | Attempted | — | — | Excluded — context-blind |
+
+Full taxonomy and fairness disclosure in `council-brief.md`.
 
 ---
 
-## Round Winners
+## Round Top Performers
 
 **Round 1 — Copilot V1**
 Earned it by configuring Mermaid at the renderer level via YAML front matter —
@@ -99,7 +103,9 @@ Dashed arrows for the loops everyone always wants to hide.
 
 ## Author
 
-**Jamie Hill** — Lead Enterprise Architect, OverKill Hill P³™
+**Jamie Hill** — Enterprise architect by day, systems builder by night.
+OverKill Hill P³™ is the personal brand where the nighttime work lives.
+
 [LinkedIn](https://www.linkedin.com/in/jamiehill75) ·
 [OverKill Hill P³™](https://overkillhill.com) ·
 [LinkedIn Company Page](https://www.linkedin.com/company/overkillhillp3)

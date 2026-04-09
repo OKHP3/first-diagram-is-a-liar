@@ -2,7 +2,7 @@
 
 **Stage:** ROI framing — finding the governing idea
 **Sent to:** All five core council members
-**Session position:** First prompt — nothing was loaded yet
+**Session position:** First — nothing loaded yet
 
 ---
 
@@ -14,11 +14,10 @@ indirect. Getting the model thinking in investment terms before pivoting to visu
 communication was a strategic choice, not an accident. The real destination was
 already in view. The approach was oblique.
 
-This is a common technique in natural-language prompting: seed the conceptual
-frame first, then reveal the specific application. The ROI vocabulary introduced
-here — "return on investment," "positive investment of time," "ratio of value to
-cost" — propagated forward through every subsequent prompt without needing to
-be re-established.
+The ROI vocabulary introduced here — "return on investment," "positive investment
+of time," "ratio of value to cost" — propagated forward through every subsequent
+prompt without needing to be re-established. That's sequential context doing its
+job before the project is even named.
 
 ---
 
