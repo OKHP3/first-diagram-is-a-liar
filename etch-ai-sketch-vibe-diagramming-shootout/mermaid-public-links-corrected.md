@@ -2,7 +2,6 @@
 
 This file tracks the public Mermaid.ai renders associated with the ETCH-AI-SKETCH project.
 
-> **Note:** This is the corrected version. The Notion V1 URL in the original `mermaid-public-links.md` contains a corrupted UUID — replace it with the correct link below.
 
 ## Round 1
 
