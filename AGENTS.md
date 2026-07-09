@@ -14,7 +14,7 @@ LinkedIn post and ROY x Mermaid diagram competition thread archive. Source mater
 [ TODO: Languages, frameworks, key dependencies ]
 
 ## Local Paths
-- **Windows**: `C:\Users\jamie\OKH-Local\Writings\first-diagram-is-a-liar`
+- **Windows**: `C:\Users\jamie\OKH-Local\04_GitHub_Mirrors\first-diagram-is-a-liar`
 - **Mac**: `/Volumes/OKH-Local/04_GitHub_Mirrors/first-diagram-is-a-liar`
 
 ## Key Conventions
