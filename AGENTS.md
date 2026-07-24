@@ -89,6 +89,11 @@ Out of scope:
     preferred publication asset because it carries discontinued-platform
     watermarks; use the cover PNG for publication.
 - `diagram-manifest.csv`: machine-readable index of 15 Mermaid public links.
+- `technology-inventory.md` and `.github/technology-inventory.json`:
+  authoring-technology baselines and review metadata.
+- `.github/workflows/technology-version-review.yml`: monthly or manually
+  triggered maintenance workflow that checks tracked npm release baselines and
+  opens a GitHub issue when review is needed.
 - `CHANGELOG.md`: public-facing release history and planned additions.
 - `ROADMAP.md`: future content milestones from v0.1 through v1.0.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `LICENSE`: project
@@ -151,13 +156,19 @@ matter for a renderer that does not.
 
 ## Validation and deployment
 
-No package manager, build command, test suite, linter, CI workflow, deployment
-configuration, or local renderer is documented or present in the repository.
-Do not invent one. Validation is currently documentation and artifact focused:
+No package manager, build command, test suite, linter, application build,
+deployment configuration, or local renderer is documented or present in the
+repository. One GitHub Actions workflow exists for scheduled technology
+version review; it is repository maintenance, not an application build or
+deployment pipeline. Do not invent additional tooling. Validation is currently
+documentation and artifact focused:
 
 - `git status --short --branch` confirms working-tree scope.
 - `git diff --check` catches whitespace errors.
 - `git diff -- AGENTS.md` reviews guidance changes.
+- `.github/workflows/technology-version-review.yml` can be dispatched manually
+  or allowed to run on its monthly schedule; it checks the tracked Mermaid and
+  PptxGenJS baselines and may open a review issue.
 - Markdown paths and archive indexes should be checked when related files move.
 - Mermaid sources should be rendered manually when their syntax or layout
   changes.
