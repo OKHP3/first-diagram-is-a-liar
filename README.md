@@ -40,11 +40,15 @@ This repo makes all of that visible.
 ```
 etch-ai-sketch-vibe-diagramming-shootout/
 ├── README.md               ← shootout context and methodology
+├── diagram-manifest.csv    ← machine-readable Mermaid link index
 ├── council-brief.md        ← the governing brief sent to all council members
 ├── prompts/                ← all 8 prompts, lightly cleaned, with context
 ├── diagrams/               ← Mermaid source files (.mmd), V1 and V2, all models
 ├── images/                 ← rendered PNGs (full and lo-res) + cover image
 └── slides/                 ← the ETCH-AI-SKETCH deck (PPTX + PDF, square + wide)
+docs/
+├── roadmap.md              ← planned and completed project milestones
+└── technology-inventory.md ← authoring and artifact technology baselines
 ```
 
 ---
@@ -78,7 +82,7 @@ Seven models participated across two rounds, organized into four tiers.
 | Copilot | Core Five | ✓ | ✓ | Cleanest renderer-level config — Round 1 top performer |
 | Perplexity | Core Five | ✓ | ✓ | Tightest ROY framing |
 | Gemini | Core Five | ✓ | ✓ | Free tier — capability ceiling noted |
-| ChatGPT V2pro | Exhibition | — | ✓ | Pro-tier reasoning — unmatched access |
+| ChatGPT V2 Pro | Exhibition | — | ✓ | Pro-tier reasoning — unmatched access |
 | Notion | Specialty | ✓ | ✓ | Archivist and synthesizer role |
 | Replit | Specialty | ✓ | ✓ | Late entry — different context |
 | Mermaid AI | Attempted | — | — | Excluded — context-blind |

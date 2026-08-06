@@ -93,13 +93,13 @@ on equal terms — the ceiling is simply part of the record.
 
 ### Tier 2 — Exhibition Entry (Unmatched Capability)
 
-ChatGPT V2pro was produced using access to a Pro-tier reasoning model —
+ChatGPT V2 Pro was produced using access to a Pro-tier reasoning model —
 a capability level that no other council member had available at any point
 during this session.
 
 | Model | Tier | Notes |
 |---|---|---|
-| ChatGPT V2pro | **Pro-tier reasoning** | Exhibition only — not directly comparable to Tier 1 |
+| ChatGPT V2 Pro | **Pro-tier reasoning** | Exhibition only — not directly comparable to Tier 1 |
 
 This output is included in the competition record for transparency and
 completeness. It is interesting. It is instructive. It is not a fair

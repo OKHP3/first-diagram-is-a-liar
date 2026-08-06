@@ -21,7 +21,7 @@ This file tracks the public Mermaid.ai renders associated with the ETCH-AI-SKETC
 | Claude V2 👑 | https://mermaid.ai/d/2e9a4321-6302-44ca-82cc-e2020479fdf5 |
 | Copilot V2 | https://mermaid.ai/d/ea1ba020-7f26-483d-9892-3d98b5b6db23 |
 | ChatGPT V2 | https://mermaid.ai/d/18c4c328-bef3-4d80-bebf-d9127c39fe43 |
-| ChatGPT V2pro | https://mermaid.ai/d/e2a6df7d-dbbe-40d6-bdae-967ac33737be |
+| ChatGPT V2 Pro | https://mermaid.ai/d/e2a6df7d-dbbe-40d6-bdae-967ac33737be |
 | Perplexity V2 | https://mermaid.ai/d/1e77a8a7-ec42-47ea-8cc6-8fe03204785c |
 | Gemini V2 | https://mermaid.ai/d/54541ba0-3c57-4065-bf53-c698123747bc |
 | Notion V2 | https://mermaid.ai/d/b40280fd-8ef3-4992-bbe3-9dbfce6fe603 |

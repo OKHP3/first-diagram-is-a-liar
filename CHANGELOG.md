@@ -6,9 +6,13 @@ This changelog tracks the evolution of the article, supporting artifacts, and th
 
 ## [Unreleased]
 
-### Planned
-- Add a machine-readable diagram manifest
-- Publish broader diagram gallery notes
+### Recorded
+- Recorded the machine-readable diagram manifest at
+  `etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv`.
+- Preserved the broader diagram gallery notes in the archive's diagrams and
+  images indexes.
+
+### Remaining planned work
 - Add article revision notes for v0.2+
 - Add poll-result summaries and council interview links
 

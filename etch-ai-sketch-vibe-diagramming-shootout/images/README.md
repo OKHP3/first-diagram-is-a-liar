@@ -9,6 +9,7 @@
 | File | Notes |
 |---|---|
 | `etch-ai-sketch-using-a-council-to-design-at-velocity.png` | Chrome Etch A Sketch graphic — PROMPT/INTENT knobs, GENERATE/REFINE/RESET buttons. Used as article cover and LinkedIn post cover. |
+| `etch-ai-sketch-mermaid.ai-contextual.png` | Context-before-rendering diagram showing the difference between structured synthesis and premature rendering. Preserved as an archive reference asset. |
 
 Originally created as a Sora video. The static PNG was used in all published
 contexts instead. The MP4 is preserved in the parent folder as a project
@@ -54,7 +55,7 @@ this PNG for any publication or sharing purpose.
 
 | Model | Full-res | Lo-res | Mermaid.ai |
 |---|---|---|---|
-| ChatGPT V2pro | [chatgpt-v2pro.png](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2pro.png) | [lores](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2pro-lores.png) | [View ↗](https://mermaid.ai/d/e2a6df7d-dbbe-40d6-bdae-967ac33737be) |
+| ChatGPT V2 Pro | [chatgpt-v2pro.png](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2pro.png) | [lores](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2pro-lores.png) | [View ↗](https://mermaid.ai/d/e2a6df7d-dbbe-40d6-bdae-967ac33737be) |
 
 ### Specialty Roles
 

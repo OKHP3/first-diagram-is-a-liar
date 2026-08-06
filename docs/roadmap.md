@@ -9,9 +9,9 @@ This roadmap describes planned updates, public milestones, and content releases 
 - Capture Council brief and prompt documentation
 
 ## V0.2
-- Integrate slide deck PDF and PPTX
-- Add Round 2 diagram analysis
-- Annotate and caption diagrams for clarity
+- [x] Integrate slide deck PDF and PPTX
+- [x] Add Round 2 diagram analysis
+- [x] Annotate and caption diagrams for clarity
 - Prepare poll summaries and voting links
 
 ## V0.3

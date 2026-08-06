@@ -71,7 +71,7 @@ Each model saw the full set of V1 outputs, evaluated the field, and revised.
 
 | Model | Source File | Mermaid.ai | Notes |
 |---|---|---|---|
-| ChatGPT V2pro | [chatgpt-v2pro.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2pro.mmd) | [View ↗](https://mermaid.ai/d/e2a6df7d-dbbe-40d6-bdae-967ac33737be) | Pro-tier reasoning — unmatched access, not directly comparable |
+| ChatGPT V2 Pro | [chatgpt-v2pro.mmd](v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2pro.mmd) | [View ↗](https://mermaid.ai/d/e2a6df7d-dbbe-40d6-bdae-967ac33737be) | Pro-tier reasoning — unmatched access, not directly comparable |
 
 ### Specialty Roles
 

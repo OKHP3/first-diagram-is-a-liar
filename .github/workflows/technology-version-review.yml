@@ -52,7 +52,7 @@ jobs:
               'Review the release notes and decide whether to re-render Mermaid images,' \
               'update hosted Mermaid diagrams, or regenerate the PPTX/PDF artifacts.' \
               'After review, update `.github/technology-inventory.json` and' \
-              '`technology-inventory.md` with the new reviewed baseline.')
+              '`docs/technology-inventory.md` with the new reviewed baseline.')
             gh issue create --title "${title}" --body "${body}"
           else
             echo 'An open technology version review issue already exists.'

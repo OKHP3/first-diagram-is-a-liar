@@ -11,6 +11,7 @@ article *The First Diagram Is Usually a Liar*.
 
 ```
 ├── council-brief.md        ← governing brief, four-tier taxonomy, fairness disclosure
+├── diagram-manifest.csv    ← machine-readable Mermaid link index
 ├── prompts/                ← the 8 prompts that drove the session
 ├── diagrams/               ← Mermaid source files (.mmd) for all V1 and V2 outputs
 ├── images/                 ← rendered PNGs (full-res and lo-res) for all diagrams
@@ -48,7 +49,7 @@ Full taxonomy and disclosure in `council-brief.md`.
 | Tier | Members |
 |---|---|
 | Core Five | ChatGPT, Claude, Copilot, Perplexity, Gemini |
-| Exhibition | ChatGPT V2pro (Pro-tier reasoning — unmatched access) |
+| Exhibition | ChatGPT V2 Pro (Pro-tier reasoning — unmatched access) |
 | Specialty Roles | Notion (archivist/synthesizer), Replit (late entry) |
 | Attempted | Mermaid AI (excluded — context-blind) |
 
@@ -71,7 +72,7 @@ All V1 source files: `diagrams/v1/`
 ### Round 2 — V2 Diagrams
 
 Each model saw the full set of V1 outputs and produced a revised diagram.
-ChatGPT additionally produced a V2pro variant using Pro-tier reasoning access.
+ChatGPT additionally produced a V2 Pro variant using Pro-tier reasoning access.
 
 **Round 2 Top Performer: Claude V2**
 Made the revision loops visible. Five swim lanes with dashed arrows threading

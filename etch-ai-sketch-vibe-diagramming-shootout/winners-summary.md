@@ -31,7 +31,7 @@ Claude V2 made the loops visible. Solid arrows = forward motion. Dashed arrows =
 | **Claude** 👑 | Made the loops visible. Dashed revision arrows as structural honesty. Round 2 winner. |
 | Copilot | Maintained renderer-level discipline from V1. Consistent and precise. |
 | ChatGPT | Improved loop representation from V1. More honest non-linear path. |
-| ChatGPT V2pro | Exhibition tier — explored structural depth beyond the standard brief. |
+| ChatGPT V2 Pro | Exhibition tier — explored structural depth beyond the standard brief. |
 | Perplexity | Tightened ROY framing from V1. Cleaner compression with fewer dead ends glossed over. |
 | Gemini | Increased visual complexity. Free tier ceiling still a noted constraint. |
 | Notion | Continued synthesizer role. More structural clarity in V2 than V1. |

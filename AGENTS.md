@@ -88,14 +88,15 @@ Out of scope:
   - `.mp4`: preserved video artifact. The folder README says it is not the
     preferred publication asset because it carries discontinued-platform
     watermarks; use the cover PNG for publication.
-- `diagram-manifest.csv`: machine-readable index of 15 Mermaid public links.
-- `technology-inventory.md` and `.github/technology-inventory.json`:
+- `etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv`:
+  machine-readable index of 15 Mermaid public links.
+- `docs/technology-inventory.md` and `.github/technology-inventory.json`:
   authoring-technology baselines and review metadata.
 - `.github/workflows/technology-version-review.yml`: monthly or manually
   triggered maintenance workflow that checks tracked npm release baselines and
   opens a GitHub issue when review is needed.
 - `CHANGELOG.md`: public-facing release history and planned additions.
-- `ROADMAP.md`: future content milestones from v0.1 through v1.0.
+- `docs/roadmap.md`: future content milestones from v0.1 through v1.0.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `LICENSE`: project
   participation, reporting, licensing, and conduct rules.
 - `CLAUDE.md`: pointer to this file. Keep it aligned with the canonical guide.
