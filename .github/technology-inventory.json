@@ -1,0 +1,19 @@
+{
+  "reviewedOn": "2026-07-20",
+  "technologies": [
+    {
+      "name": "Mermaid",
+      "package": "mermaid",
+      "ecosystem": "npm",
+      "inPlaceVersion": null,
+      "lastReviewedStableVersion": "11.15.0"
+    },
+    {
+      "name": "PptxGenJS",
+      "package": "pptxgenjs",
+      "ecosystem": "npm",
+      "inPlaceVersion": null,
+      "lastReviewedStableVersion": "4.0.1"
+    }
+  ]
+}
