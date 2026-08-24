@@ -11,6 +11,12 @@ They are intentionally saved as proto-posts rather than publication-final copy. 
 
 The four posts describe the projects as concept incubators that grew from firsthand use of AI-generated Mermaid diagrams, inconsistent rendering and styling, and the missing connection between written business processes and useful visual models.
 
+## Public source boundary
+
+This directory is the shareable Markdown record. It contains only public
+destinations and sources. Private Notion pages remain the author's working
+space and are intentionally not linked or reproduced here.
+
 ## Drafts
 
 - [v0.6: Notion](v0.6-notion.md)
