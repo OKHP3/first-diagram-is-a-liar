@@ -18,7 +18,9 @@ Also published on LinkedIn:
 ## What This Project Is
 
 A LinkedIn article became an experiment. The experiment became a methodology.
-This repo is the receipt stack.
+This repo is the receipt stack. The canonical release sequence and attribution
+rules are in
+[`etch-ai-sketch-vibe-diagramming-shootout/canonical-story.md`](etch-ai-sketch-vibe-diagramming-shootout/canonical-story.md).
 
 The article argues that the first diagram almost always lies — it shows the
 happy path instead of the honest path. It introduces ROY (Return on Your Words)
@@ -31,7 +33,8 @@ heavy pre-production. That's also part of the thesis: velocity has value.
 Over-engineering a prompt too early creates the same friction the workflow
 was built to escape.
 
-This repo makes all of that visible.
+This repo makes all of that visible. The current public page is **v1.0 —
+Editorial Cut**; v0.1 is retained as the historical theatrical release.
 
 ---
 

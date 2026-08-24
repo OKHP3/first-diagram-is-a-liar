@@ -4,6 +4,10 @@
 
 ---
 
+> **Canonical release:** the public article is **v1.0 — Editorial Cut**.
+> The release sequence, council taxonomy, results language, and attribution
+> rules live in [`canonical-story.md`](canonical-story.md).
+
 ## What This Folder Contains
 
 Everything generated during the Council of AIs experiment that became the
@@ -60,7 +64,8 @@ Full taxonomy and disclosure in `council-brief.md`.
 ### Round 1 — V1 Diagrams
 
 The Core Five received the brief cold. No model saw another's output.
-Notion and Replit also submitted V1 diagrams under their respective conditions.
+Notion and Replit also submitted V1 diagrams under their respective Specialty
+conditions; they are archived but are not direct Core Five comparisons.
 
 **Round 1 Top Performer: Copilot V1**
 The only model that configured Mermaid at the renderer level using YAML
