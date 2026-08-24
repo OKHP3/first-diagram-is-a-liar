@@ -166,6 +166,111 @@
   overflow-x: auto;
 }
 
+.diagram-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.diagram-heading h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+}
+
+.diagram-status {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+.diagram-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.diagram-actions a,
+.diagram-actions button {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-accent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.7rem;
+  text-decoration: none;
+}
+
+.diagram-actions a:hover,
+.diagram-actions button:hover,
+.diagram-actions a:focus-visible,
+.diagram-actions button:focus-visible {
+  background: var(--color-surface-soft);
+  text-decoration: underline;
+}
+
+.diagram-stage {
+  min-height: 8rem;
+  position: relative;
+}
+
+.diagram-fallback {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-height: 28rem;
+  max-width: 100%;
+  width: 100%;
+}
+
+.diagram-fallback[hidden] {
+  display: none;
+}
+
+.diagram-stage .mermaid {
+  overflow-x: auto;
+}
+
+.diagram-source {
+  border-top: 1px solid var(--color-border-subtle);
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+}
+
+.diagram-source summary {
+  color: var(--color-accent);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.diagram-source pre {
+  background: var(--color-surface-soft);
+  border-radius: var(--radius-md);
+  margin: 0.75rem 0 0;
+  overflow-x: auto;
+  padding: 1rem;
+  white-space: pre-wrap;
+}
+
+.diagram-archive {
+  border-top: 1px solid var(--color-border-subtle);
+  padding: 3.5rem min(2.5rem, 4vw);
+}
+
+.diagram-archive__inner {
+  margin: 0 auto;
+  max-width: 72ch;
+}
+
+.diagram-archive__inner > p:not(.article-hero__eyebrow) {
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
 .diagram-caption {
   font-size: 0.82rem;
   color: var(--color-muted);
@@ -318,4 +423,23 @@
   white-space: pre-wrap;
   word-break: break-word;
   border-left: 3px solid var(--color-accent, #c46a2c);
+}
+
+@media (max-width: 520px) {
+  .diagram-wrap {
+    padding: 1rem;
+  }
+
+  .diagram-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram-actions a,
+  .diagram-actions button {
+    transition: none;
+  }
 }

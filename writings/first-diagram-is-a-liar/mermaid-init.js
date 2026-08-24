@@ -1,86 +1,85 @@
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+const diagrams = () => Array.from(document.querySelectorAll("[data-diagram-id]"));
 
-const styles = getComputedStyle(document.body);
-
-const surface    = styles.getPropertyValue("--color-surface").trim()      || "#111827";
-const surfaceSoft= styles.getPropertyValue("--color-surface-soft").trim() || "#181f26";
-const fg         = styles.getPropertyValue("--color-fg").trim()           || "#e5e7eb";
-const accent     = styles.getPropertyValue("--color-accent").trim()       || "#c46a2c";
-const muted      = styles.getPropertyValue("--color-muted").trim()        || "#6b7280";
-const fontBody   = styles.getPropertyValue("--font-body").trim()          ||
-  '"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif';
-
-mermaid.initialize({
-  startOnLoad: false,
-  securityLevel: "loose",
-  theme: "base",
-  themeVariables: {
-    primaryColor:       surface,
-    primaryTextColor:   fg,
-    primaryBorderColor: accent,
-    lineColor:          accent,
-    secondaryColor:     surfaceSoft,
-    tertiaryColor:      surfaceSoft,
-    textColor:          fg,
-    fontFamily:         fontBody,
-    noteBkgColor:       surface,
-    noteTextColor:      muted
-  },
-  flowchart: {
-    curve:       "basis",
-    nodeSpacing: 60,
-    rankSpacing: 70
+function showFallback(card, error) {
+  const status = card.querySelector("[data-diagram-status]");
+  const fallback = card.querySelector(".diagram-fallback");
+  const block = card.querySelector(".mermaid");
+  if (status) status.textContent = "Live render unavailable — static fallback shown";
+  if (fallback) fallback.hidden = false;
+  if (block) {
+    block.classList.add("mermaid--fallback");
+    block.setAttribute("aria-hidden", "true");
   }
-});
-
-function showFallback(block, error) {
-  block.classList.add("mermaid--fallback");
-  block.setAttribute("role", "img");
-  block.setAttribute(
-    "aria-label",
-    "Diagram source is available below; the visual renderer could not load."
-  );
-
-  const notice = document.createElement("p");
-  notice.className = "mermaid-fallback__notice";
-  notice.textContent =
-    "The live diagram could not render in this browser. The Mermaid source is preserved below.";
-  block.parentNode.insertBefore(notice, block);
-
-  // Keep diagnostics in the console without exposing implementation details
-  // to readers or turning a renderer failure into a blank section.
   console.warn("Mermaid diagram fallback active", error);
 }
 
+function showLive(card) {
+  const status = card.querySelector("[data-diagram-status]");
+  const fallback = card.querySelector(".diagram-fallback");
+  if (status) status.textContent = "Live Mermaid render";
+  if (fallback) fallback.hidden = true;
+}
+
+function wireControls() {
+  diagrams().forEach((card) => {
+    const source = card.querySelector("[data-source]");
+    const copy = card.querySelector("[data-copy-diagram]");
+    if (!source || !copy) return;
+    copy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(source.textContent.trim());
+        copy.textContent = "Copied";
+        setTimeout(() => { copy.textContent = "Copy source"; }, 1600);
+      } catch (error) {
+        copy.textContent = "Copy unavailable";
+        console.warn("Diagram source copy unavailable", error);
+      }
+    });
+  });
+}
+
 async function renderDiagrams() {
-  const blocks = Array.from(document.querySelectorAll(".mermaid"));
+  const cards = diagrams();
+  const blocks = cards.map((card) => card.querySelector(".mermaid")).filter(Boolean);
   if (!blocks.length) return;
 
   try {
-    await mermaid.run({ nodes: blocks });
-    track("diagram_render", {
-      diagram_count: blocks.length,
-      content_version: "v1.0",
+    const { default: mermaid } = await import("https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs");
+    const styles = getComputedStyle(document.body);
+    const value = (name, fallback) => styles.getPropertyValue(name).trim() || fallback;
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "strict",
+      theme: "base",
+      themeVariables: {
+        primaryColor: value("--color-surface", "#111827"),
+        primaryTextColor: value("--color-fg", "#e5e7eb"),
+        primaryBorderColor: value("--color-accent", "#c46a2c"),
+        lineColor: value("--color-accent", "#c46a2c"),
+        secondaryColor: value("--color-surface-soft", "#181f26"),
+        tertiaryColor: value("--color-surface-soft", "#181f26"),
+        textColor: value("--color-fg", "#e5e7eb"),
+        fontFamily: value("--font-body", '"DM Sans", system-ui, sans-serif'),
+      },
+      flowchart: { curve: "basis", nodeSpacing: 60, rankSpacing: 70 },
     });
+    await mermaid.run({ nodes: blocks });
+    cards.forEach(showLive);
+    track("diagram_render", { diagram_count: blocks.length, content_version: "v1.0" });
   } catch (error) {
-    // A single malformed block should not erase the source for every diagram.
-    blocks.forEach((block) => showFallback(block, error));
+    cards.forEach((card) => showFallback(card, error));
   }
 }
 
 function track(name, parameters = {}) {
-  if (typeof window.gtag === "function") {
-    window.gtag("event", name, parameters);
-  }
+  if (typeof window.gtag === "function") window.gtag("event", name, parameters);
 }
 
 document.addEventListener("click", (event) => {
   const link = event.target.closest("a");
   if (!link || !link.href) return;
-
   const url = new URL(link.href, window.location.href);
-  const isExternal = url.origin !== window.location.origin;
-  track(isExternal ? "outbound_click" : "cta_click", {
+  track(url.origin !== window.location.origin ? "outbound_click" : "cta_click", {
     content_version: "v1.0",
     destination_host: url.host,
     destination_path: url.pathname,
@@ -88,8 +87,13 @@ document.addEventListener("click", (event) => {
   });
 });
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", renderDiagrams, { once: true });
-} else {
+function start() {
+  wireControls();
   renderDiagrams();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", start, { once: true });
+} else {
+  start();
 }
