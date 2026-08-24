@@ -1,52 +1,89 @@
 # Campaign Measurement Map
 
-The article is the primary v0.5 conversion surface. The local v1.0 editorial
-cut is not a campaign destination until it is externally published. Analytics
-identifies
-interaction patterns; it does not determine diagram quality.
+This is the operating map for the campaign, not a claim that engagement proves
+diagram quality. The article is the primary v0.5 conversion surface. The local
+v1.0 editorial cut is not a campaign destination until it is externally
+published.
 
-## Stable campaign fields
+## Campaign matrix
 
-| Field | Values |
+`content_id` is stable across releases; `content_version` identifies the
+published cut. Keep the destination visible and use the same values in links
+and GA4 event parameters.
+
+| Surface | Version | Source / medium | Content ID | Primary CTA and stable destination | Owner |
+|---|---|---|---|---|---|
+| LinkedIn article/post | v0.5 | `linkedin / organic-social` | `first-diagram-is-a-liar` | Read the article → `/writings/first-diagram-is-a-liar/` | Jamie Hill |
+| Public article | v0.5 | `article / owned` | `first-diagram-is-a-liar` | Read on LinkedIn → LinkedIn Pulse URL | Jamie Hill |
+| Council entries | round-1 / round-2 | `article / owned` | `etch-ai-sketch-council` | Open the selected Mermaid artifact → provider URL | Jamie Hill |
+| Mermaid artifact | round-2 | `mermaid / referral` | `etch-ai-sketch-council` | Read the article → article URL | Jamie Hill |
+| Replit V2 artifact | round-2 | `replit / referral` | `etch-ai-sketch-council` | Read the article → article URL | Jamie Hill |
+| Deck/PDF share | v0.5 | `deck / owned` | `etch-ai-sketch-council` | Read the article → article URL | Jamie Hill |
+| Ko-fi | v0.5 | `article / support` | `first-diagram-is-a-liar` | Support the forge → provider URL | Jamie Hill |
+| Homepage | campaign landing | `homepage / owned` | `first-diagram-is-a-liar` | Read the article → article URL | Jamie Hill |
+
+## UTM link register
+
+These are copy-ready examples. Replace only `utm_content` when creating a
+placement-specific link. Do not add UTM parameters to provider referral URLs:
+the provider path must remain visible and intact.
+
+| Placement | Copy-ready URL |
 |---|---|
-| `content_version` | `v0.1`, `v0.2`, `v0.3`, `v0.3.3`, `v0.4`, `v0.5`, `round-1`, `round-2`, `v1.0-prepared` |
-| `surface` | `linkedin`, `article`, `mermaid`, `deck`, `archive`, `homepage` |
-| `content_id` | `first-diagram-is-a-liar`, `etch-ai-sketch-council` |
-| `destination` | `article`, `linkedin`, `mermaid`, `replit`, `kofi`, `archive` |
+| LinkedIn post/article | `https://overkillhill.com/writings/first-diagram-is-a-liar/?utm_source=linkedin&utm_medium=organic-social&utm_campaign=first-diagram-is-a-liar&utm_content=v0-5-article` |
+| Article v0.5 → LinkedIn | `https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill?utm_source=overkillhill&utm_medium=owned&utm_campaign=first-diagram-is-a-liar&utm_content=v0-5-article` |
+| Council entry | `https://mermaid.ai/d/<artifact-id>?utm_source=overkillhill&utm_medium=owned&utm_campaign=first-diagram-is-a-liar&utm_content=round-1-copilot-v1` |
+| Mermaid referral | `https://mermaidchart.cello.so/UhVlNtC2MlS` |
+| Replit referral | `https://replit.com/refer/overkillhillp3` |
+| Ko-fi support | `https://ko-fi.com/T6T71HCY6A` |
+| Deck/PDF share | `https://overkillhill.com/writings/first-diagram-is-a-liar/?utm_source=deck&utm_medium=owned&utm_campaign=first-diagram-is-a-liar&utm_content=v0-5-pdf` |
+| Homepage CTA | `https://overkillhill.com/writings/first-diagram-is-a-liar/?utm_source=homepage&utm_medium=owned&utm_campaign=first-diagram-is-a-liar&utm_content=v0-5-article` |
 
-## UTM patterns
+Provider destinations are intentionally not wrapped in redirects or decorated
+with parameters that could invalidate referral attribution.
 
-Use these templates when publishing new campaign links. Keep the destination
-visible; do not use a redirect that hides referral intent.
+## Event contract
 
-```text
-https://overkillhill.com/writings/first-diagram-is-a-liar/
-  ?utm_source=linkedin&utm_medium=organic-social
-  &utm_campaign=first-diagram-is-a-liar&utm_content=v0-5-article
+The article sends only low-cardinality, non-personal metadata:
 
-https://overkillhill.com/writings/first-diagram-is-a-liar/
-  ?utm_source=mermaid&utm_medium=referral
-  &utm_campaign=first-diagram-is-a-liar&utm_content=replit-v2
-```
+| Event | When | Required parameters |
+|---|---|---|
+| `campaign_landing` | Page loads with a campaign parameter | `content_id`, `content_version`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content` |
+| `diagram_view` | A diagram enters the viewport | `diagram_id`, `content_version` |
+| `diagram_render` | Mermaid successfully renders | `diagram_count`, `content_version` |
+| `diagram_action` | View, source, copy, or SVG action | `diagram_id`, `action`, `content_version` |
+| `provider_click` | Mermaid/provider artifact link clicked | `provider`, `destination`, `content_version` |
+| `referral_click` | Replit, Mermaid, or Ko-fi referral clicked | `provider`, `destination`, `content_version` |
+| `cta_click` | A declared primary CTA clicked | `surface`, `destination`, `content_version` |
+| `outbound_click` | Other external link clicked | `destination_host`, `destination_path`, `content_version` |
 
-Remove whitespace and line breaks before publishing. Referral URLs supplied by
-providers remain unchanged; record their placement and the surrounding label.
+Do not send email addresses, query-string values beyond the four named UTM
+fields, cookies, user-entered text, or referral revenue. GA4's campaign
+parameters remain available in the landing URL for attribution; event payloads
+are allow-listed above.
 
-## Events
+## Debug procedure
 
-The article emits:
+1. Open the tagged article URL in a private browser window with DevTools
+   Network and Console visible. Confirm the URL contains only the expected
+   `utm_*` keys and no personal data.
+2. In GA4 Admin → DebugView, use the same browser and confirm
+   `campaign_landing`, `diagram_view`, and `cta_click` arrive with the expected
+   `content_version`, `content_id`, and destination values.
+3. Scroll each diagram into view; click View fallback, Download source, Copy
+   source, and Download SVG. Confirm one `diagram_action` per action and no
+   source text in the payload.
+4. Click one council/provider link and each referral link. Confirm
+   `provider_click` or `referral_click`, and confirm the browser navigates directly
+   to the visible provider/referral URL.
+5. Repeat with an untagged URL. No `campaign_landing` event should be emitted;
+   ordinary diagram and CTA events should still work.
+6. Record the date, GA4 property, release version, and observed event names in
+   the launch worksheet. Never paste DebugView screenshots containing user IDs.
 
-- `diagram_render` after Mermaid successfully renders the page diagrams;
-- `outbound_click` for external links, with destination host/path;
-- `cta_click` for internal links, with destination host/path.
-
-Events carry the deployed `content_version=v0.5` unless a later published
-release is explicitly named. No email addresses, query-string values,
-or user-entered text are sent.
-
-## Readout worksheet
+## Launch readout worksheet
 
 | Window | Baseline | Target | Owner | Interpretation |
-|---|---:|---:|---|---|
-| First 7 days | Record sessions, engaged sessions, `diagram_render`, outbound clicks, and primary CTA clicks | Establish baseline; no quality claim | Jamie Hill | Separate traffic acquisition from comprehension evidence |
-| First 30 days | Compare against 7-day mix and source/medium | Identify strongest surface and broken destinations | Jamie Hill | Provider reporting is required before claiming referral conversion |
+|---|---|---|---|---|
+| First 7 days | Record users, sessions, engaged sessions, campaign landings, `diagram_view`, `diagram_action` by action, provider clicks, referral clicks, and primary CTA clicks by source/medium | Establish baseline; no diagram-quality claim | Jamie Hill | Separate acquisition from interaction; investigate missing events or broken destinations first |
+| First 30 days | Compare the same measures with the 7-day mix, version, and destination; reconcile provider dashboards where available | Identify strongest surface and reliable CTA path; document variance from 7-day baseline | Jamie Hill | Provider reporting is required before claiming referral conversion or revenue |
