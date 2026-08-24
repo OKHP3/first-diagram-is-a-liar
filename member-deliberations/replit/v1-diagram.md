@@ -1,8 +1,12 @@
-# Replit V1 — Round 1 Submission
+# Replit V1 — Round 1 Submission (Archived)
 
 **Model:** Replit Auto
 **Judge verdict:** The builder's eye — does it ship, does it render, does it survive the IDE?
 **Tags:** Code-first thinking · Runtime honesty · Builder pragmatism
+
+**Canonical status:** Late-entry specialty-role archive; not part of the
+initial Core Five comparison. Editable source and rendered-artifact links are
+tracked in the [diagram manifest](../../etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv).
 
 ---
 

@@ -1,6 +1,8 @@
 # Winners Summary
 
-Seven models. Same brief. Two rounds. Evaluated on ROY — Return on Your Words.
+Seven named participants across four tiers. Same brief. Two rounds. Evaluated
+on ROY — Return on Your Words. These are round-specific top performers; there
+is no overall council winner.
 
 ---
 
@@ -40,5 +42,7 @@ Claude V2 made the loops visible. Solid arrows = forward motion. Dashed arrows =
 ---
 
 ## Source
+
+Canonical release sequence and attribution: [release manifest](release-manifest.md)
 
 Full article and diagram archive: [overkillhill.com/writings/first-diagram-is-a-liar](https://overkillhill.com/writings/first-diagram-is-a-liar/)
