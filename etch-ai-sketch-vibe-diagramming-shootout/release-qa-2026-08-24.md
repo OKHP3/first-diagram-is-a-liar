@@ -68,6 +68,18 @@ delivery, UTM propagation, CTA/referral paths, comments, and confusion signals
 after seven days. Use that evidence for a dated v1.0 changelog decision; do not
 backdate v1.0 publication.
 
+## Seven-day review status — 2026-08-24
+
+The observation window has not started. No GA4 export, DebugView capture,
+post-window UTM readout, CTA/referral outcome report, comment review, or
+confusion-signal sample can be attributed to 2026-08-25 through 2026-08-31
+today. The evidence review is therefore **NOT YET OBSERVABLE**, not a pass or
+failure.
+
+**Release decision:** keep v0.5 — Council-Assisted Scoring as the current public
+release. Do not publish or date v1.0 on 2026-08-24. The earliest defensible
+review date is **2026-09-01**, after the complete seven-day window closes.
+
 ## External-owner handoff
 
 The remaining publication action is external: deploy the prepared editorial

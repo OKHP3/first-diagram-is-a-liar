@@ -87,3 +87,11 @@ are allow-listed above.
 |---|---|---|---|---|
 | First 7 days | Record users, sessions, engaged sessions, campaign landings, `diagram_view`, `diagram_action` by action, provider clicks, referral clicks, and primary CTA clicks by source/medium | Establish baseline; no diagram-quality claim | Jamie Hill | Separate acquisition from interaction; investigate missing events or broken destinations first |
 | First 30 days | Compare the same measures with the 7-day mix, version, and destination; reconcile provider dashboards where available | Identify strongest surface and reliable CTA path; document variance from 7-day baseline | Jamie Hill | Provider reporting is required before claiming referral conversion or revenue |
+
+## Observation timing record
+
+As of 2026-08-24, the seven-day window scheduled for 2026-08-25 through
+2026-08-31 has not begun. GA4 events, UTM propagation, CTA/referral paths,
+comments, and confusion signals must remain **not yet observable** until the
+window closes. The first valid review date is 2026-09-01; do not fill the
+worksheet with projections or treat pre-window checks as campaign evidence.
