@@ -76,6 +76,27 @@ confusion-signal sample can be attributed to 2026-08-25 through 2026-08-31
 today. The evidence review is therefore **NOT YET OBSERVABLE**, not a pass or
 failure.
 
+### Required campaign evidence
+
+| Measure or check | 2026-08-24 status |
+|---|---|
+| GA4 users, sessions, engaged sessions | NOT YET OBSERVABLE — window has not started |
+| Campaign landings by source/medium | NOT YET OBSERVABLE — no post-window GA4 readout |
+| `diagram_view` events | NOT YET OBSERVABLE — no post-window GA4 readout |
+| `diagram_action` by action | NOT YET OBSERVABLE — no post-window GA4 readout |
+| `provider_click` events | NOT YET OBSERVABLE — no post-window GA4 readout |
+| `referral_click` events | NOT YET OBSERVABLE — no post-window GA4 readout |
+| Primary `cta_click` events by source/medium | NOT YET OBSERVABLE — no post-window GA4 readout |
+| UTM propagation and direct CTA/referral navigation | NOT YET REVIEWED — pre-window link checks are not campaign evidence |
+| Comments and confusion signals | NOT YET OBSERVABLE — qualitative telemetry sample does not exist |
+
+### Deployment gate result
+
+**NOT SATISFIED / NOT RUN for v1.0.** The prepared editorial cut has no
+recorded external deployment identifier, canonical/social verification, or
+rollback target. The existing v0.5 public checks do not authorize dating the
+unpublished v1.0 cut.
+
 **Release decision:** keep v0.5 — Council-Assisted Scoring as the current public
 release. Do not publish or date v1.0 on 2026-08-24. The earliest defensible
 review date is **2026-09-01**, after the complete seven-day window closes.
