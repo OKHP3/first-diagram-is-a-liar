@@ -41,3 +41,28 @@ Verified 2026-08-24:
   failure; the reduced-motion media query disables control transitions. A
   manual release pass should still exercise Chrome, Firefox, Safari, and a
   narrow mobile viewport.
+
+## Hosted-document browser regression check
+
+The four routes that were previously blank are covered by the checked-in
+`scripts/check-hosted-mermaid-browser.mjs` harness:
+
+```text
+pnpm add -Dw playwright
+pnpm exec playwright install chromium
+pnpm run health:mermaid:browser
+```
+
+Use `HEADED=1` for a visible browser session. Set `SCREENSHOT_DIR` to retain
+one full-page capture per route and `RESULT_FILE` to write a JSON result:
+
+```text
+HEADED=1 SCREENSHOT_DIR=tmp/mermaid-captures \
+RESULT_FILE=tmp/mermaid-browser.json pnpm run health:mermaid:browser
+```
+
+The check passes only when each expected provider/version title is present and
+at least one sufficiently sized SVG or canvas has non-empty content. It reports
+navigation status and `authorizationLimited` independently; HTTP 401/403
+cannot be mistaken for a render failure. A missing Playwright dependency is
+reported as `NOT RUN`, not as a false pass.
