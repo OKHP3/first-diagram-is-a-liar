@@ -1,8 +1,20 @@
 # ETCH-AI-SKETCH — Vibe Diagramming Shootout
 
-**Seven models. Same brief. Two rounds. One human orchestrator.**
+**Seven named participants across four tiers. Same brief. Two rounds. One human orchestrator.**
+
+The canonical sequence is **Article v0.1 → Council Round 1 / V1 → Council
+Round 2 / V2 → Article v1.0**. Article v1.0 names the edited public article,
+not a winning diagram or a separate production artifact. See the
+[release manifest](release-manifest.md) and [provenance and credits](provenance-and-credits.md)
+before changing labels in any derivative.
 
 ---
+
+> **Canonical release:** the deployed public article is **v0.5 —
+> Council-Assisted Scoring**. A later editorial cut is preserved locally as
+> prepared, unpublished work.
+> The release sequence, council taxonomy, results language, and attribution
+> rules live in [`canonical-story.md`](canonical-story.md).
 
 ## What This Folder Contains
 
@@ -11,6 +23,9 @@ article *The First Diagram Is Usually a Liar*.
 
 ```
 ├── council-brief.md        ← governing brief, four-tier taxonomy, fairness disclosure
+├── release-manifest.md     ← canonical sequence, IDs, statuses, and result language
+├── provenance-and-credits.md ← authorship, model roles, assets, and reproducibility
+├── editorial-acceptance-checklist.md ← gate for future v1.x updates
 ├── diagram-manifest.csv    ← machine-readable Mermaid link index
 ├── prompts/                ← the 8 prompts that drove the session
 ├── diagrams/               ← Mermaid source files (.mmd) for all V1 and V2 outputs
@@ -60,9 +75,10 @@ Full taxonomy and disclosure in `council-brief.md`.
 ### Round 1 — V1 Diagrams
 
 The Core Five received the brief cold. No model saw another's output.
-Notion and Replit also submitted V1 diagrams under their respective conditions.
+Notion and Replit also submitted V1 diagrams under their respective Specialty
+conditions; they are archived but are not direct Core Five comparisons.
 
-**Round 1 Top Performer: Copilot V1**
+**Round 1 top performer: Copilot V1** (round-specific result; no overall winner)
 The only model that configured Mermaid at the renderer level using YAML
 front matter — operating on the theme engine itself, not just styling nodes.
 [View on Mermaid.ai ↗](https://mermaid.ai/d/8fe5c9ae-c8ac-4754-98fd-268ae3ceeef7)
@@ -74,7 +90,7 @@ All V1 source files: `diagrams/v1/`
 Each model saw the full set of V1 outputs and produced a revised diagram.
 ChatGPT additionally produced a V2 Pro variant using Pro-tier reasoning access.
 
-**Round 2 Top Performer: Claude V2**
+**Round 2 top performer: Claude V2** (round-specific result; no overall winner)
 Made the revision loops visible. Five swim lanes with dashed arrows threading
 back through all of them. Stopped performing certainty. Started showing truth.
 [View on Mermaid.ai ↗](https://mermaid.ai/d/2e9a4321-6302-44ca-82cc-e2020479fdf5)

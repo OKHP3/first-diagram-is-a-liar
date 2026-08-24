@@ -11,12 +11,26 @@ This changelog tracks the evolution of the article, supporting artifacts, and th
   `etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv`.
 - Preserved the broader diagram gallery notes in the archive's diagrams and
   images indexes.
+- Established the canonical sequence in
+  `etch-ai-sketch-vibe-diagramming-shootout/release-manifest.md`:
+  Article v0.1 → Round 1 / V1 → Round 2 / V2 → Article v1.0.
+- Added provenance, third-party asset notes, stable diagram source/render
+  references, and an editorial acceptance checklist.
+- Standardized the result language to Round 1 top performer (Copilot V1) and
+  Round 2 top performer (Claude V2), with no overall council winner.
+- Preserved the prepared editorial-cut record, Mermaid fallback behavior, and
+  privacy-safe interaction events from the delivery work; these do not change
+  the canonical article version declared in the release manifest.
 
 ### Remaining planned work
 - Add article revision notes for v0.2+
 - Add poll-result summaries and council interview links
 
 ## [v0.1] - 2026-04
+
+> This is the archive packaging release date. The public Article v1.0
+> publication date is 2026-03-17; the source materials do not record exact
+> dates for the Article v0.1 draft or either council round.
 
 ### Added
 - Public repo scaffold and primary README
