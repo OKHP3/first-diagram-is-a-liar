@@ -37,10 +37,11 @@ more complete public archive with interviews, poll results, updated diagrams,
 and a refined ROY framework, but those are future work rather than current
 capabilities.
 
-**Current status:** Maintained public archive. The changelog records a v0.1
-release in April 2026. An Unreleased section and the roadmap describe v0.2+
-follow-up work, so the archive is active and incomplete. There is no evidence
-of a deployed service or executable product.
+**Current status:** Maintained public archive. The public article is now
+labelled v1.0 — Editorial Cut in the canonical story record, while the
+changelog and roadmap retain the historical v0.1 milestone and later follow-up
+work. The archive is active and still has release-QA gaps. There is no
+evidence of a deployed service or executable product from this repository.
 
 ## Audience, scope, and non-goals
 
@@ -96,6 +97,9 @@ Out of scope:
   triggered maintenance workflow that checks tracked npm release baselines and
   opens a GitHub issue when review is needed.
 - `CHANGELOG.md`: public-facing release history and planned additions.
+- `etch-ai-sketch-vibe-diagramming-shootout/canonical-story.md`,
+  `provenance-and-credits.md`, and `archive-and-publish-governance.md`: release
+  authority, attribution, and archive/production boundary.
 - `docs/roadmap.md`: future content milestones from v0.1 through v1.0.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `LICENSE`: project
   participation, reporting, licensing, and conduct rules.

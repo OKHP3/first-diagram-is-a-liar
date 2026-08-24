@@ -11,6 +11,10 @@ This changelog tracks the evolution of the article, supporting artifacts, and th
   `etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv`.
 - Preserved the broader diagram gallery notes in the archive's diagrams and
   images indexes.
+- Established the v1.0 Editorial Cut release record, provenance rules, and
+  archive/production boundary.
+- Added explicit Mermaid fallback behavior and privacy-safe interaction events
+  to the article source.
 
 ### Remaining planned work
 - Add article revision notes for v0.2+

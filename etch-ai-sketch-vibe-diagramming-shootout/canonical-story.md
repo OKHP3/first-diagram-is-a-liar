@@ -58,3 +58,10 @@ as direct competitors.
 
 AutoCAD 12 belongs to the author's historical framing about learning tools. It
 is not a council participant and must not appear in participant counts.
+
+## Delivery fallback
+
+The public article may render diagrams client-side, but the Mermaid source
+must remain readable when the CDN, renderer, or a diagram definition fails.
+The fallback is an explicit notice plus the preserved source—not a blank
+container and not a silently substituted image.
