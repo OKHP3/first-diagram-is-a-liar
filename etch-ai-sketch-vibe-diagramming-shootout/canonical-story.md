@@ -2,16 +2,22 @@
 
 This is the source of truth for the public story. Derivative pages, decks,
 posts, and member notes may preserve their original voice, but their labels
-must not contradict this sequence.
+must not contradict this sequence. The external production page was checked
+on 2026-08-24 and is currently v0.5; the local editorial HTML is not evidence
+of a deployed v1.0 release.
 
 ## The release sequence
 
 | Identifier | Meaning | Evidence | Status |
 |---|---|---|---|
 | **v0.1 — Theatrical Cut** | The first public LinkedIn post/article treatment: a fast, deliberately imperfect statement of the ROY thesis. | LinkedIn article and the original prompt captures in `attached_assets/`. | Historical release; do not present as the final archive. |
+| **v0.2 — Council Introduction** | The article expanded from the initial thesis into the Council of AIs experiment and its comparison frame. | The production page's version history and preserved campaign material. | Historical production release; exact source snapshot is not present locally. |
+| **v0.3 / v0.3.3 — Scoring Debrief** | Audience and architect scoring were added, including the Round 1 and Round 2 top-performer findings. | The production page's version history and campaign material. | Historical production release; exact source snapshot is not present locally. |
+| **v0.4 — Story Behind the Story** | The Council's purpose, disagreement, and manual human-in-the-loop method were made explicit. | The production page's version history and preserved campaign material. | Historical production release; exact source snapshot is not present locally. |
+| **v0.5 — Council-Assisted Scoring** | Council-assisted scoring and model self-interviews became part of the public article. | The deployed public article and its version history, checked 2026-08-24. | **Current canonical public release.** |
 | **Round 1 — V1** | The Core Five answered the brief independently from a cold start. Notion and Replit are preserved as specialty entries, not apples-to-apples Core Five competitors. | `prompts/`, `diagrams/v1/`, `diagram-manifest.csv`. | Complete archive. Copilot V1 is the Round 1 top performer. |
 | **Round 2 — V2** | Participants revised after seeing the V1 set. ChatGPT V2 Pro is an exhibition variant; Replit entered with accumulated context. | `diagrams/v2/`, `diagram-manifest.csv`, `winners-summary.md`. | Complete archive. Claude V2 is the Round 2 top performer. |
-| **v1.0 — Editorial Cut** | The current public article: Jamie Hill's editorial synthesis of the thesis, the council evidence, and the selected lessons. It is not a model-generated diagram and not a claim that every participant had identical conditions. | `writings/first-diagram-is-a-liar/index.html` and the linked public article. | Current canonical public release. |
+| **v1.0 — Editorial Cut (prepared)** | A local editorial synthesis of the thesis, council evidence, and selected lessons. It is not a model-generated diagram and not a claim that every participant had identical conditions. | `writings/first-diagram-is-a-liar/index.html`. | Prepared locally; **not verified or published externally**. |
 
 ## Council status
 
@@ -58,3 +64,10 @@ as direct competitors.
 
 AutoCAD 12 belongs to the author's historical framing about learning tools. It
 is not a council participant and must not appear in participant counts.
+
+## Delivery fallback
+
+The public article may render diagrams client-side, but the Mermaid source
+must remain readable when the CDN, renderer, or a diagram definition fails.
+The fallback is an explicit notice plus the preserved source—not a blank
+container and not a silently substituted image.

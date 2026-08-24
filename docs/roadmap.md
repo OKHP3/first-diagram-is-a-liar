@@ -12,18 +12,24 @@ This roadmap describes planned updates, public milestones, and content releases 
 - [x] Integrate slide deck PDF and PPTX
 - [x] Add Round 2 diagram analysis
 - [x] Annotate and caption diagrams for clarity
-- Prepare poll summaries and voting links
+- [x] Prepare poll summaries and voting links
 
 ## V0.3
-- Include Council interview snippets
-- Add supplementary diagrams and updated artifacts
-- Refine ROY framework explanations
-- Update article narrative with new insights
+- [x] Include Council interview snippets
+- [x] Add supplementary diagrams and updated artifacts
+- [x] Refine ROY framework explanations
+- [x] Update article narrative with new insights
 
-## V1.0
-- Full publication including all council interviews, final diagram evaluations, and ROY framework summary
-- Public repository finalized and documented
-- Finalized slide decks, poll results, and artifact index
+## V0.4–V0.5
+- [x] Publish the story-behind-the-story expansion
+- [x] Publish Council-assisted scoring and model self-interviews
+- [x] Record the deployed v0.5 state separately from local editorial material
+
+## V1.0 (prepared, unpublished)
+- [ ] Verify and publish the full editorial cut
+- [ ] Capture the deployed source snapshot and release evidence
+- [x] Public repository finalized and documented
+- [x] Finalized slide decks, poll results, and artifact index
 
 ## Ongoing
 - Maintain diagram archive with updated Mermaid sources

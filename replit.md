@@ -4,6 +4,15 @@
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
 
+## Project boundary
+
+The ETCH-AI-SKETCH council archive and the OverKill Hill article source are
+preserved in this repository for evidence and editing. The configured API and
+mockup workflows are development artifacts, not the production deployment for
+`overkillhill.com`. See
+`etch-ai-sketch-vibe-diagramming-shootout/archive-and-publish-governance.md`
+for the release boundary and verification record.
+
 ## Stack
 
 - **Monorepo tool**: pnpm workspaces

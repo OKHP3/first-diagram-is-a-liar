@@ -54,7 +54,7 @@ flowchart TD
   subgraph SHIP["🚀 Ship"]
     J[["Post + Article v0.1 — Theatrical Cut"]]:::ship
     K(["Comments = confusion telemetry"]):::telemetry
-    L[["Article v1.0 — Snyder Cut"]]:::ship
+    L[["Prepared v1.0 — Editorial Cut"]]:::ship
   end
 
   subgraph REPLIT["🔧 Replit — past the page"]
@@ -85,7 +85,7 @@ flowchart TD
   click O "https://replit.com/refer/overkillhillp3" "Fork this on Replit — referral link"
   click A "https://overkillhill.com/writings/first-diagram-is-a-liar/" "Read the full article"
   click J "https://www.linkedin.com/company/overkillhillp3" "LinkedIn Post"
-  click L "https://overkillhill.com/writings/first-diagram-is-a-liar/" "Article v1.0"
+  click L "https://overkillhill.com/writings/first-diagram-is-a-liar/" "Prepared editorial cut"
   click N "https://overkillhill.com/writings/first-diagram-is-a-liar/" "Open the live page"
   click Z "https://ko-fi.com/T6T71HCY6A" "Support the forge on Ko-fi"
 ```
