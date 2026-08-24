@@ -1,13 +1,15 @@
 # Campaign Measurement Map
 
-The article is the primary v1.0 conversion surface. Analytics identifies
+The article is the primary v0.5 conversion surface. The local v1.0 editorial
+cut is not a campaign destination until it is externally published. Analytics
+identifies
 interaction patterns; it does not determine diagram quality.
 
 ## Stable campaign fields
 
 | Field | Values |
 |---|---|
-| `content_version` | `v0.1`, `round-1`, `round-2`, `v1.0` |
+| `content_version` | `v0.1`, `v0.2`, `v0.3`, `v0.3.3`, `v0.4`, `v0.5`, `round-1`, `round-2`, `v1.0-prepared` |
 | `surface` | `linkedin`, `article`, `mermaid`, `deck`, `archive`, `homepage` |
 | `content_id` | `first-diagram-is-a-liar`, `etch-ai-sketch-council` |
 | `destination` | `article`, `linkedin`, `mermaid`, `replit`, `kofi`, `archive` |
@@ -20,7 +22,7 @@ visible; do not use a redirect that hides referral intent.
 ```text
 https://overkillhill.com/writings/first-diagram-is-a-liar/
   ?utm_source=linkedin&utm_medium=organic-social
-  &utm_campaign=first-diagram-is-a-liar&utm_content=v1-0-article
+  &utm_campaign=first-diagram-is-a-liar&utm_content=v0-5-article
 
 https://overkillhill.com/writings/first-diagram-is-a-liar/
   ?utm_source=mermaid&utm_medium=referral
@@ -38,7 +40,8 @@ The article emits:
 - `outbound_click` for external links, with destination host/path;
 - `cta_click` for internal links, with destination host/path.
 
-Events carry `content_version=v1.0`. No email addresses, query-string values,
+Events carry the deployed `content_version=v0.5` unless a later published
+release is explicitly named. No email addresses, query-string values,
 or user-entered text are sent.
 
 ## Readout worksheet

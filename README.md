@@ -33,8 +33,10 @@ heavy pre-production. That's also part of the thesis: velocity has value.
 Over-engineering a prompt too early creates the same friction the workflow
 was built to escape.
 
-This repo makes all of that visible. The current public page is **v1.0 —
-Editorial Cut**; v0.1 is retained as the historical theatrical release.
+This repo makes all of that visible. The current public page is **v0.5 —
+Council-Assisted Scoring**. The local editorial-cut material is preserved as
+prepared, unpublished work; v0.1 is retained as the historical theatrical
+release.
 
 ---
 

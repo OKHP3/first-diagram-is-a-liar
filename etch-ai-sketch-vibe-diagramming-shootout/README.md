@@ -4,7 +4,9 @@
 
 ---
 
-> **Canonical release:** the public article is **v1.0 — Editorial Cut**.
+> **Canonical release:** the deployed public article is **v0.5 —
+> Council-Assisted Scoring**. A later editorial cut is preserved locally as
+> prepared, unpublished work.
 > The release sequence, council taxonomy, results language, and attribution
 > rules live in [`canonical-story.md`](canonical-story.md).
 

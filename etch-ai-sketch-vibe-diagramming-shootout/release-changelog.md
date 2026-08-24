@@ -2,15 +2,37 @@
 
 This changelog tracks public-facing story states, not every file operation.
 
-## v1.0 — Editorial Cut
+## v1.0 — Editorial Cut (prepared, unpublished)
 
-- Established the article as the current public synthesis.
+- Prepared a local editorial synthesis; it is not the deployed public page.
 - Preserved the v0.1 theatrical release as historical context.
 - Reconciled the Core Five, Exhibition, Specialty, and excluded tiers.
 - Named Copilot V1 and Claude V2 as round-specific top performers.
 - Distinguished human authorship and editorial adjudication from model-generated
   source material.
 - Added archive-level provenance and reproducibility rules.
+
+## v0.5 — Council-Assisted Scoring (current public release)
+
+- Added Council-assisted scoring and model self-interviews to the public
+  article.
+- Recorded the public page as v0.5 after checking the deployed HTML on
+  2026-08-24.
+- Kept the prepared v1.0 editorial cut separate from the deployed release.
+
+## v0.4 — Story Behind the Story
+
+- Expanded the public article with the Council's purpose, disagreement, and
+  human-in-the-loop method.
+
+## v0.3 / v0.3.3 — Scoring Debrief
+
+- Added audience and architect scoring context and the round-specific results.
+
+## v0.2 — Council Introduction
+
+- Expanded the initial thesis into the Council of AIs experiment and its
+  comparison frame.
 
 ## Round 2 — V2 archive
 

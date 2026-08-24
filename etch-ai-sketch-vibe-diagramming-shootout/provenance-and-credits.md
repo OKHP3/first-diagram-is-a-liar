@@ -35,7 +35,10 @@ of third-party marks or images.
 
 ## Version policy
 
-The public article is **v1.0 — Editorial Cut**. Future edits that change the
-story, roster, results, or evidence must update `canonical-story.md`, this
-credits record, and the release changelog in the same change. Cosmetic fixes
-that do not alter claims may use a patch note in the changelog.
+The deployed public article is **v0.5 — Council-Assisted Scoring**, verified
+against the external page on 2026-08-24. The local v1.0 Editorial Cut is
+prepared but unpublished and must not be cited as the current public release.
+Future edits that change the story, roster, results, or evidence must update
+`canonical-story.md`, this credits record, and the release changelog in the
+same change. Cosmetic fixes that do not alter claims may use a patch note in
+the changelog.

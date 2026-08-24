@@ -38,6 +38,8 @@ Before a public release, record:
 
 The release is ready only when source preparation, external deployment,
 canonical verification, social preview, and rollback evidence are all present.
+An archive-only preparation is not a public release: label it as prepared or
+unpublished until the external page, metadata, and link checks are verified.
 
 ## Rollback
 

@@ -37,11 +37,11 @@ more complete public archive with interviews, poll results, updated diagrams,
 and a refined ROY framework, but those are future work rather than current
 capabilities.
 
-**Current status:** Maintained public archive. The public article is now
-labelled v1.0 — Editorial Cut in the canonical story record, while the
-changelog and roadmap retain the historical v0.1 milestone and later follow-up
-work. The archive is active and still has release-QA gaps. There is no
-evidence of a deployed service or executable product from this repository.
+**Current status:** Maintained public archive. The externally deployed article
+is v0.5 — Council-Assisted Scoring, verified on 2026-08-24. A v1.0 Editorial
+Cut is prepared locally but is not verified or published. The archive is active
+and still has release-QA gaps. There is no evidence of a deployed service or
+executable product from this repository.
 
 ## Audience, scope, and non-goals
 
