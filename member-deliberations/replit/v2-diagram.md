@@ -1,6 +1,12 @@
 # Replit V2 — Round 2 Submission (Archived)
 
 **Model:** Replit Auto
+**Member folder:** `member-deliberations/replit/`
+**Round:** Round 2 / V2
+**Conditions:** Late-entry specialty revision; exact session date is not recorded
+**Contribution:** Interactive builder-focused revision preserved by the human editor
+**Source:** This Markdown record; matching source/render are indexed in the [diagram manifest](../../etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv)
+**Archive status:** Archived submission; not a public article, product, or deployment
 **Judge verdict:** The outsider's revision — sharper code sense, same honest question.
 **Tags:** Iteration from outside · Render-tested · Builder's restraint or limitation?
 
@@ -16,8 +22,9 @@ manifest](../../etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv).
 - Only entry with **embedded brand logos** inside diagram nodes (Mermaid HTML label support)
 - Only entry with **clickable hyperlink nodes** (8 total, using Mermaid `click` directive)
 - Only entry that **monetizes** — referral links for Replit + Mermaid, Ko-fi in brand footer
-- Only entry that **connects to a deployment** — the Replit project hosted the
-  live article the diagram links to; this submission is not itself the publisher
+- Only entry that **links to a deployment** — the diagram links to the live
+  article, while this workspace is not the production host and this submission
+  is not itself the publisher
 
 Requires `securityLevel: "loose"` — already configured on overkillhill.com.
 
@@ -65,7 +72,7 @@ flowchart TD
 
   subgraph REPLIT["🔧 Replit — past the page"]
     M{"Is the insight runnable?"}:::gate
-    REP["<img src='https://avatars.githubusercontent.com/u/983879?s=60&v=4' width='60' height='60'/><br/>Built and deployed on Replit"]:::live
+    REP["<img src='https://avatars.githubusercontent.com/u/983879?s=60&v=4' width='60' height='60'/><br/>Built with Replit"]:::live
     N[["Live article — overkillhill.com — click to read"]]:::live
     O[["Fork this. Build your own council."]]:::live
   end
