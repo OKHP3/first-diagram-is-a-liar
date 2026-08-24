@@ -1,6 +1,12 @@
 # Diagrams — ETCH-AI-SKETCH Shootout
 
-**Mermaid source files (.mmd) for all V1 and V2 submissions.**
+**Mermaid source files (.mmd) for all V1 and V2 submissions.** The source is
+the reproducible record; PNGs are the checked-in render fallback and Mermaid.ai
+links are third-party public views.
+
+See the [release manifest](../release-manifest.md) for canonical version and
+result language and [`../diagram-manifest.csv`](../diagram-manifest.csv) for
+the machine-readable source/render/link index.
 
 ---
 
