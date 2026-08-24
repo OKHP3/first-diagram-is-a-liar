@@ -1,8 +1,19 @@
-# Replit V2 — Round 2 Submission
+# Replit V2 — Round 2 Submission (Archived)
 
 **Model:** Replit Auto
+**Member folder:** `member-deliberations/replit/`
+**Round:** Round 2 / V2
+**Conditions:** Late-entry specialty revision; exact session date is not recorded
+**Contribution:** Interactive builder-focused revision preserved by the human editor
+**Source:** This Markdown record; matching source/render are indexed in the [diagram manifest](../../etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv)
+**Archive status:** Archived submission; not a public article, product, or deployment
 **Judge verdict:** The outsider's revision — sharper code sense, same honest question.
 **Tags:** Iteration from outside · Render-tested · Builder's restraint or limitation?
+
+**Canonical status:** Archived late-entry specialty-role submission. This is
+not the article v1.0, a separate production artifact, or an overall winner.
+Editable source and rendered-artifact links are tracked in the [diagram
+manifest](../../etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv).
 
 ---
 
@@ -11,7 +22,9 @@
 - Only entry with **embedded brand logos** inside diagram nodes (Mermaid HTML label support)
 - Only entry with **clickable hyperlink nodes** (8 total, using Mermaid `click` directive)
 - Only entry that **monetizes** — referral links for Replit + Mermaid, Ko-fi in brand footer
-- Only entry that **deploys** — Replit built and hosts the live article the diagram links to
+- Only entry that **links to a deployment** — the diagram links to the live
+  article, while this workspace is not the production host and this submission
+  is not itself the publisher
 
 Requires `securityLevel: "loose"` — already configured on overkillhill.com.
 
@@ -46,7 +59,7 @@ flowchart TD
   end
 
   subgraph COUNCIL["🏛️ Council — disagreement as method"]
-    G["6 models. Same brief. No peeking."]:::think
+    G["7 named participants. Same brief."]:::think
     H{"Does conflict reveal structure?"}:::gate
     I(["Adjudicate, synthesize, extract load-bearing lines only"]):::think
   end
@@ -54,12 +67,12 @@ flowchart TD
   subgraph SHIP["🚀 Ship"]
     J[["Post + Article v0.1 — Theatrical Cut"]]:::ship
     K(["Comments = confusion telemetry"]):::telemetry
-    L[["Prepared v1.0 — Editorial Cut"]]:::ship
+    L[["Edited article release"]]:::ship
   end
 
   subgraph REPLIT["🔧 Replit — past the page"]
     M{"Is the insight runnable?"}:::gate
-    REP["<img src='https://avatars.githubusercontent.com/u/983879?s=60&v=4' width='60' height='60'/><br/>Built and deployed on Replit"]:::live
+    REP["<img src='https://avatars.githubusercontent.com/u/983879?s=60&v=4' width='60' height='60'/><br/>Built with Replit"]:::live
     N[["Live article — overkillhill.com — click to read"]]:::live
     O[["Fork this. Build your own council."]]:::live
   end
@@ -85,7 +98,7 @@ flowchart TD
   click O "https://replit.com/refer/overkillhillp3" "Fork this on Replit — referral link"
   click A "https://overkillhill.com/writings/first-diagram-is-a-liar/" "Read the full article"
   click J "https://www.linkedin.com/company/overkillhillp3" "LinkedIn Post"
-  click L "https://overkillhill.com/writings/first-diagram-is-a-liar/" "Prepared editorial cut"
+  click L "https://overkillhill.com/writings/first-diagram-is-a-liar/" "Edited article release"
   click N "https://overkillhill.com/writings/first-diagram-is-a-liar/" "Open the live page"
   click Z "https://ko-fi.com/T6T71HCY6A" "Support the forge on Ko-fi"
 ```
@@ -116,7 +129,9 @@ V2 asked one question V1 didn't: *what else can the medium actually do?*
 
 The answer was HTML labels and click directives — features in Mermaid's toolbox that every other council entry ignored. Embedding logos turns the diagram into a branded artifact. Clickable nodes turn it into a conversion surface. Referral links mean the diagram earns money while it sits on the page.
 
-The article's thesis is ROY — Return on Your Words. The V2 diagram earns referral revenue, drives Ko-fi support, and deploys a live webpage. The words that generated it are still working.
+The article's thesis is ROY — Return on Your Words. The V2 diagram is an
+interactive archived submission with referral and support links; its existence
+does not change the article's authorship or publication status.
 
 ---
 

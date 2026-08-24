@@ -1,2 +1,3 @@
 - [Git sync boundary](git-sync-boundary.md) — unrelated local and remote histories require a non-force merge and authenticated Git transport for complete publication.
 - [Public release verification](public-release-verification.md) — deployed content is authoritative when it diverges from newer local editorial material.
+- [Mermaid delivery health](mermaid-delivery-health.md) — public diagrams need local fallbacks; protected referral probes are reachable, not automatically broken.

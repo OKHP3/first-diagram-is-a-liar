@@ -2,6 +2,11 @@
 
 **The ETCH-AI-SKETCH presentation deck in all available formats.**
 
+The deck is an archival derivative of the canonical sequence
+**Article v0.1 → Round 1 / V1 → Round 2 / V2 → Article v1.0**. Its “winner”
+callouts are round-specific: Copilot V1 is the Round 1 top performer and
+Claude V2 is the Round 2 top performer. It does not declare an overall winner.
+
 ---
 
 ## Files in This Folder
@@ -55,3 +60,7 @@ For interactive diagram viewing, use the Mermaid.ai links in
 
 For the individual source `.mmd` files, use `../diagrams/v1/` and
 `../diagrams/v2/`.
+
+The source of truth for authorship, tier conditions, dates, and publication
+status is [`../release-manifest.md`](../release-manifest.md), not a title or
+callout embedded in an exported deck.
