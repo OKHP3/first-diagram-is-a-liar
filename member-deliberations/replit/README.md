@@ -1,7 +1,11 @@
 # Replit — Council Member Deliberations
 
-**Role:** The Builder. A late-entry specialty participant whose archived
-submissions explore whether the process can run as an interactive artifact.
+**Member/provider:** Replit Auto
+**Role/tier:** The Builder · late-entry specialty participant
+**Archive status:** Specialty-role archive; not part of the Core Five comparison
+**Contribution:** Archived V1 and V2 Mermaid submissions exploring whether the
+process can run as an interactive artifact. Jamie Hill retained and indexed the
+records; no separate Replit authorship or publication is implied.
 
 Canonical status: Replit V1 and V2 are archived council submissions. They are
 not the public article, an overall winning entry, or proof that Replit V2
@@ -29,9 +33,9 @@ Replit V2 was documented as the only council entry that:
 1. **Embeds live brand logos** inside diagram nodes using Mermaid's HTML label support (`securityLevel: "loose"`) — Replit logo, Mermaid logo, and the OverKill Hill P³ mascot
 2. **Makes eight nodes clickable hyperlinks** — no other council member used Mermaid's `click` directive
 3. **Monetizes the diagram** — referral links for Replit and Mermaid embedded directly in the nodes, Ko-fi in the brand footer
-4. **Connects to the article deployment** — the Replit project hosted the live
-   overkillhill.com subpage linked by the diagram; the model itself is not the
-   publisher or deployer
+4. **Links to the article deployment** — the submission points to the live
+   `overkillhill.com` page, but this workspace is not the production host and
+   the model is not the publisher or deployer
 
 The diagram demonstrates the article's thesis by being an interactive artifact, not just a picture of one.
 
@@ -47,13 +51,27 @@ The diagram demonstrates the article's thesis by being an interactive artifact, 
 Reproducible Mermaid sources and rendered PNGs are indexed in the [diagram
 manifest](../../etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv).
 
+## Round inventory and provenance
+
+| Record | Round label | Conditions | Source of record | Status |
+|---|---|---|---|---|
+| [`v1-diagram.md`](v1-diagram.md) | Round 1 / V1 | Late-entry specialty submission; exact session date is not recorded here | This repository plus the matching [manifest row](../../etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv) | Archived |
+| [`v2-diagram.md`](v2-diagram.md) | Round 2 / V2 | Late-entry specialty revision; exact session date is not recorded here | This repository plus the matching [manifest row](../../etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv) | Archived |
+
+The editable source and rendered PNG are authoritative local fallbacks. Mermaid
+links, provider avatars, referral destinations, and the live article are
+external resources captured for provenance; they are not owned or deployed by
+this archive. Corrections must preserve the original record, state what
+changed, and update the manifest or release record when a link or label changes.
+
 ---
 
-## Working Environment
+## Related external destinations
 
-Artifacts for overkillhill.com built in: [Replit Project](https://replit.com/refer/overkillhillp3)
+Development environment reference: [Replit Project](https://replit.com/refer/overkillhillp3)
 
-Live article: [overkillhill.com/writings/first-diagram-is-a-liar/](https://overkillhill.com/writings/first-diagram-is-a-liar/)
+External canonical article (verify before relying on it):
+[overkillhill.com/writings/first-diagram-is-a-liar/](https://overkillhill.com/writings/first-diagram-is-a-liar/)
 
 ---
 

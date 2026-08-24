@@ -1,6 +1,12 @@
 # Replit V1 — Round 1 Submission (Archived)
 
 **Model:** Replit Auto
+**Member folder:** `member-deliberations/replit/`
+**Round:** Round 1 / V1
+**Conditions:** Late-entry specialty submission; exact session date is not recorded
+**Contribution:** First builder-focused Mermaid draft preserved by the human editor
+**Source:** This Markdown record; matching source/render are indexed in the [diagram manifest](../../etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv)
+**Archive status:** Archived submission; not a public article or deployment
 **Judge verdict:** The builder's eye — does it ship, does it render, does it survive the IDE?
 **Tags:** Code-first thinking · Runtime honesty · Builder pragmatism
 
