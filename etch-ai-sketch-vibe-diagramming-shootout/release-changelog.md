@@ -24,8 +24,13 @@ This changelog tracks public-facing story states, not every file operation.
 
 - The planned evidence window is 2026-08-25 through 2026-08-31 and had not
   started at review time.
-- No GA4, UTM, CTA/referral, comment, or confusion-signal findings were
-  fabricated or inferred.
+- Users, sessions, engaged sessions, campaign landings, diagram views/actions,
+  provider clicks, referral clicks, and primary CTA clicks by source/medium
+  were all **not yet observable**; no GA4, UTM, CTA/referral, comment, or
+  confusion-signal findings were fabricated or inferred.
+- The v1.0 external deployment gate was **not satisfied / not run**: no
+  deployment identifier, canonical/social verification, or rollback target was
+  recorded for the prepared cut.
 - v0.5 remains the current public release; the earliest defensible v1.0
   decision date is 2026-09-01.
 
