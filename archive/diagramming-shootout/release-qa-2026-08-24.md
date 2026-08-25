@@ -26,6 +26,7 @@ destinations; those source references now use the verified v0.5 destinations.
 | Accessibility signals | PASS | Document language, one `h1`, ordered `h2` sections, skip link, labelled navigation, labelled diagram actions, meaningful image alt text, keyboard buttons, visible focus styles, and reduced-motion handling are present in source/CSS. |
 | Referral probes | CONDITIONAL PASS | Human browser checks on 2026-08-24 reached the intended Replit account-creation page (including the referral-bonus notice), the OverKill Hill P³ Ko-fi profile/tip form, and Mermaid's account-creation page (including the referral offer). Automated probes remain crawler-blocked or authorization-limited. |
 | Mermaid hosted documents | PASS | Human browser checks on 2026-08-24 reached all 13 linked `mermaid.ai/d/` routes. The four routes previously recorded as blank were reopened and visibly rendered with the expected document title; all 13 now have a visible hosted diagram in the checked session. Automated requests still return an authorization-limited API response (HTTP 401), which is not render evidence; local `.mmd` and checked-in PNG fallbacks remain authoritative. |
+| Repeatable hosted-render harness | NOT RUN | `pnpm run health:mermaid:browser` is checked in but requires Playwright and Chromium, which are not installed in this workspace. The command reports this as `NOT RUN`; it does not classify missing tooling as a render pass or failure. |
 
 ## Human browser checks — provider destinations
 
@@ -66,6 +67,12 @@ return an authorization-limited API response (HTTP 401); that response is not
 treated as evidence that a hosted diagram renders or fails. The repository's
 `.mmd` sources and checked-in PNG fallbacks remain authoritative if a hosted
 canvas later becomes unavailable.
+
+The repeatable harness is
+`scripts/check-hosted-mermaid-browser.mjs`. It checks the four formerly blank
+routes for the expected provider/version title and non-empty SVG/canvas content,
+while reporting navigation HTTP status and authorization-limited responses
+separately. Setup and capture instructions are in `docs/mermaid-delivery.md`.
 
 ## Measurement and observation
 
