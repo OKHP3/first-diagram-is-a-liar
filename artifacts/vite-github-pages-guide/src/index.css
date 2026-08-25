@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
@@ -46,9 +45,9 @@
   --accent-foreground: 223 33% 18%;
   --destructive: 3 63% 48%;
   --destructive-foreground: 40 36% 96%;
-  --app-font-sans: 'DM Sans', sans-serif;
-  --app-font-serif: 'Playfair Display', serif;
-  --app-font-mono: 'DM Mono', monospace;
+  --app-font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --app-font-serif: Georgia, "Times New Roman", serif;
+  --app-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius: 0.75rem;
   --shadow: 0 10px 30px hsl(223 33% 18% / 0.08);
   --shadow-heavy: 0 22px 60px hsl(223 33% 18% / 0.14);
@@ -157,6 +156,10 @@
   color: hsl(var(--primary)); font-family: var(--app-font-mono); font-size: .76rem;
 }
 .check-row { transition: background-color .2s ease, border-color .2s ease; }
+.check-row:focus-within {
+  outline: 3px solid hsl(var(--accent));
+  outline-offset: 3px;
+}
 .check-row:has(input:checked) { background: hsl(var(--primary) / .07); border-color: hsl(var(--primary) / .32); }
 .check-row:has(input:checked) .check-label { color: hsl(var(--muted-foreground)); text-decoration: line-through; text-decoration-thickness: 1px; }
 .progress-track { background: hsl(var(--primary-foreground) / .2); }

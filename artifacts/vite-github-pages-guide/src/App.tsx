@@ -98,7 +98,7 @@ function CopyBlock({
           aria-label={`Copy ${label}`}
         >
           {copied ? <Check size={14} /> : <Clipboard size={14} />}
-          {copied ? 'Copied' : 'Copy'}
+          <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
         </button>
       </div>
       <pre className="overflow-x-auto px-4 py-5 text-[13px] leading-7 sm:px-6" data-testid={`text-code-${testId}`}>
@@ -147,6 +147,8 @@ function Sidebar({
 }) {
   return (
     <aside
+      id="guide-navigation"
+      aria-label="Guide navigation"
       className={`guide-sidebar fixed inset-y-0 left-0 z-40 w-[286px] overflow-hidden px-6 py-7 transition-transform duration-300 md:translate-x-0 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}
       data-testid="navigation-sidebar"
     >
@@ -171,7 +173,7 @@ function Sidebar({
             <span className="eyebrow">Read progress</span>
             <span className="font-mono-ui" data-testid="text-progress-percentage">{progress}%</span>
           </div>
-          <div className="progress-track h-1.5 overflow-hidden rounded-full" aria-label={`${progress}% read`}>
+          <div className="progress-track h-1.5 overflow-hidden rounded-full" role="progressbar" aria-label="Guide read progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress}>
             <div className="progress-fill h-full rounded-full" style={{ width: `${progress}%` }} />
           </div>
         </div>
@@ -206,10 +208,10 @@ function Sidebar({
   );
 }
 
-function MobileHeader({ onOpen }: { onOpen: () => void }) {
+function MobileHeader({ onOpen, open }: { onOpen: () => void; open: boolean }) {
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between border-b border-[hsl(var(--foreground)/.12)] bg-[hsl(var(--background)/.9)] px-5 py-4 backdrop-blur-md md:hidden">
-      <button type="button" onClick={onOpen} className="inline-flex items-center gap-2 text-sm font-semibold" data-testid="button-open-navigation">
+      <button type="button" onClick={onOpen} aria-expanded={open} aria-controls="guide-navigation" className="inline-flex items-center gap-2 text-sm font-semibold" data-testid="button-open-navigation">
         <Menu size={18} />
         Guide index
       </button>
@@ -278,7 +280,7 @@ function Home() {
     <div className="guide-shell">
       <Sidebar activeSection={activeSection} progress={progress} mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
       {mobileOpen && <button type="button" aria-label="Close navigation overlay" onClick={() => setMobileOpen(false)} className="fixed inset-0 z-30 bg-[hsl(var(--foreground)/.28)] md:hidden" data-testid="button-navigation-overlay" />}
-      <MobileHeader onOpen={() => setMobileOpen(true)} />
+          <MobileHeader onOpen={() => setMobileOpen(true)} open={mobileOpen} />
 
       <main className="md:pl-[286px]">
         <div className="mx-auto max-w-[1160px] px-5 pb-20 sm:px-9 lg:px-16">
@@ -326,9 +328,9 @@ function Home() {
             <SectionHeading number="01" kicker="The contract" title="Write down the rules before you write the fix.">
               GitHub Pages is not serving your Vite project from the same root as localhost. Make the path contract explicit, then make every layer agree with it. This is the part you can inspect without a network connection.
             </SectionHeading>
-            <div className="overflow-hidden rounded-xl border border-[hsl(var(--foreground)/.15)] bg-[hsl(var(--card)/.72)]" data-testid="contract-table">
-              <div className="grid grid-cols-[minmax(110px,.7fr)_minmax(180px,1fr)_1.3fr] border-b border-[hsl(var(--foreground)/.13)] bg-[hsl(var(--primary)/.08)] px-4 py-3 text-[11px] font-semibold uppercase tracking-[.14em] text-[hsl(var(--muted-foreground))] sm:px-6">
-                <span>Surface</span><span>Value</span><span>Why it matters</span>
+              <div className="overflow-hidden rounded-xl border border-[hsl(var(--foreground)/.15)] bg-[hsl(var(--card)/.72)]" role="table" aria-label="GitHub Pages deployment contract" data-testid="contract-table">
+              <div className="grid grid-cols-[minmax(110px,.7fr)_minmax(180px,1fr)_1.3fr] border-b border-[hsl(var(--foreground)/.13)] bg-[hsl(var(--primary)/.08)] px-4 py-3 text-[11px] font-semibold uppercase tracking-[.14em] text-[hsl(var(--muted-foreground))] sm:px-6" role="row">
+                <span role="columnheader">Surface</span><span role="columnheader">Value</span><span role="columnheader">Why it matters</span>
               </div>
               {[
                 ['Production base', '/kierans-lifetrkr/', 'The repository name is part of the URL.'],
@@ -338,10 +340,10 @@ function Home() {
                 ['Fallback', 'dist/404.html', 'A static fallback preserves the shell on misses.'],
                 ['Not in this guide', 'gh-pages workaround', 'Do not push a generated branch to paper over the pipeline.'],
               ].map(([surface, value, why], index) => (
-                <div key={surface} className="grid grid-cols-[minmax(110px,.7fr)_minmax(180px,1fr)_1.3fr] gap-3 border-b border-[hsl(var(--foreground)/.1)] px-4 py-4 text-sm last:border-0 sm:px-6">
-                  <span className="font-semibold">{surface}</span>
-                  <code className="font-mono-ui text-[hsl(var(--primary))]" data-testid={`text-contract-value-${index}`}>{value}</code>
-                  <span className="text-[hsl(var(--muted-foreground))]">{why}</span>
+                <div key={surface} className="grid grid-cols-[minmax(110px,.7fr)_minmax(180px,1fr)_1.3fr] gap-3 border-b border-[hsl(var(--foreground)/.1)] px-4 py-4 text-sm last:border-0 sm:px-6" role="row">
+                  <span className="font-semibold" role="cell">{surface}</span>
+                  <code className="font-mono-ui text-[hsl(var(--primary))]" role="cell" data-testid={`text-contract-value-${index}`}>{value}</code>
+                  <span className="text-[hsl(var(--muted-foreground))]" role="cell">{why}</span>
                 </div>
               ))}
             </div>
@@ -506,16 +508,16 @@ createRoot(document.getElementById('root')!).render(
                   const isChecked = checked.includes(item.id);
                   return (
                     <label key={item.id} className="check-row flex cursor-pointer items-start gap-3 rounded-lg border border-transparent p-3.5 text-sm leading-6" data-testid={`checklist-item-${item.id}`}>
-                      <input type="checkbox" checked={isChecked} onChange={() => toggleCheck(item.id)} className="sr-only" data-testid={`checkbox-${item.id}`} />
+                      <input id={`check-${item.id}`} type="checkbox" checked={isChecked} onChange={() => toggleCheck(item.id)} className="sr-only" aria-labelledby={`check-label-${item.id}`} data-testid={`checkbox-${item.id}`} />
                       <span className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border ${isChecked ? 'border-[hsl(var(--primary))] bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]' : 'border-[hsl(var(--foreground)/.28)]'}`} aria-hidden="true">
                         {isChecked && <Check size={14} strokeWidth={3} />}
                       </span>
-                      <span className="check-label">{item.label}</span>
+                      <span id={`check-label-${item.id}`} className="check-label">{item.label}</span>
                     </label>
                   );
                 })}
               </div>
-              <div className="mt-6 h-2 overflow-hidden rounded-full bg-[hsl(var(--secondary))]" aria-label={`${completion}% checklist complete`}>
+              <div className="mt-6 h-2 overflow-hidden rounded-full bg-[hsl(var(--secondary))]" role="progressbar" aria-label="Checklist completion" aria-valuemin={0} aria-valuemax={100} aria-valuenow={completion}>
                 <div className="h-full rounded-full bg-[hsl(var(--accent))] transition-[width] duration-500" style={{ width: `${completion}%` }} />
               </div>
             </div>
