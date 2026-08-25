@@ -1,31 +1,19 @@
 {
-  "name": "first-diagram-is-a-liar",
-  "private": true,
-  "version": "1.0.0",
-  "type": "module",
+  "name": "workspace",
+  "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "check": "tsc --noEmit",
-    "build": "npm run check && vite build",
-    "preview": "vite preview",
-    "check:archive": "node scripts/check-archive.mjs",
-    "health:mermaid": "node scripts/check-mermaid-delivery.mjs",
-    "health:mermaid:browser": "node scripts/check-hosted-mermaid-browser.mjs"
+    "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
+    "build": "pnpm run typecheck && pnpm -r --if-present run build",
+    "typecheck:libs": "tsc --build",
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
   },
+  "private": true,
   "dependencies": {
-    "@tailwindcss/vite": "4.3.3",
-    "@vitejs/plugin-react": "6.1.0",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "tailwindcss": "4.3.3",
-    "vite": "8.2.2"
+    "@replit/connectors-sdk": "^0.4.1"
   },
   "devDependencies": {
-    "@types/node": "26.3.0",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.5",
-    "playwright": "^1.62.1",
-    "prettier": "^3.8.1",
-    "typescript": "7.0.2"
+    "prettier": "^3.9.6",
+    "typescript": "~5.9.3"
   }
 }
