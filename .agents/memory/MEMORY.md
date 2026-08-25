@@ -1,0 +1,1 @@
+- [Generated runtime metadata](generated-runtime-metadata.md) — Replit may recreate ignored runtime metadata outside the product’s source-controlled configuration.

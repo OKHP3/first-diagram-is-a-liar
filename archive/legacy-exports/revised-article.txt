@@ -1,0 +1,149 @@
+## LinkedIn Article (revised)
+
+### The first diagram is usually a liar
+
+I’ve been drawing pictures on computers since the early 1990s. Back then it was AutoCAD 12: black screens, command lines, coordinates instead of a cursor. If you wanted to express an idea visually, you didn’t “sketch”. You constructed it, line by line, with the same kind of concentration you’d use writing a careful spec.
+
+That early experience baked in a bias I still carry. A diagram isn’t decoration. It’s a claim about how reality is structured. And the first claim is almost always wrong.
+
+Over the decades I’ve used every diagramming flavor I could get my hands on: house plans, network diagrams, process flows, mind maps, org charts, UML, crow’s‑foot schemas. Some tools were elegant, many were painful, and nearly all of them charged the same tax: the cost of translating meaning into visuals.
+
+That tax is why people default to text, even when text is a lousy medium for structure.
+
+And that’s how we ended up with the modern classics: the 47‑bullet Slack message, the “quick summary” that reads like a novella, and the doc everyone bookmarks and nobody finishes. We didn’t lack expertise. We lacked compression.
+
+<aside>
+🖼️
+
+**Insert Image 1 (anchor diagram) here**
+
+Purpose: show “first diagram is usually a liar” as structure, not prose.
+
+Suggested diagram: Copilot winner render
+
+- https://mermaid.ai/d/8fe5c9ae-c8ac-4754-98fd-268ae3ceeef7
+- https://mermaid.ai/d/ea1ba020-7f26-483d-9892-3d98b5b6db23
+</aside>
+
+<aside>
+🧾
+
+**Optional Insert: Code Block 1 (receipts) immediately after Image 1**
+
+Purpose: make the point that the picture was “purchased” with words.
+
+</aside>
+
+```mermaid
+graph LR
+A[Words] --> B[Structure]
+B --> C[Understanding]
+```
+
+### Comprehension bandwidth is the constraint
+
+People don’t fail to read because they’re lazy. They fail to read because their capacity to absorb meaning is finite, and the workday is an attention shredder.
+
+Text is excellent for nuance and precision, but it’s inefficient at showing flow. It hides forks and dead ends. It forces the reader to reconstruct a system in their head, one sentence at a time, without ever seeing the shape of it.
+
+When structure matters, reconstruction is the expensive part. You can watch it happen in real time: someone nods through the explanation, then asks a question that proves they assembled a completely different machine in their mind. Nobody’s stupid. The medium just didn’t carry the structure.
+
+This is where diagrams earn their keep, when they’re honest. Not pretty. Not “executive-ready”. Honest.
+
+A lot of diagrams are not honest. They’re optimism with arrows. They erase the messy edges, exceptions, feedback loops, hidden dependencies, because the author wants to look decisive, or because the tool makes messiness feel like failure.
+
+That’s why the first diagram is usually a liar. It’s not malicious. It’s premature. It shows what we hope is true before we’ve paid the cost to find out what is.
+
+### ROY: Return on Your Words
+
+I’ve started thinking about this as ROY, Return on Your Words.
+
+Not how many words you wrote. Not how good they sounded. ROY is the amount of understanding produced per unit of explanation invested.
+
+<aside>
+🖼️
+
+**Insert Image 2 (ROY moment) here**
+
+Place: right after the ROY definition (this spot).
+
+Purpose: show ROY as a simple trade, not a slogan.
+
+Suggested diagram: Notion “scribe” lane model (portable, low-gimmick)
+
+- https://mermaid.ai/d/fb3557e2-df35-46f8-a8cd-4abe56c82ed5
+- https://mermaid.ai/d/b40280fd-8ef3-4992-bbe3-9dbfce6fe603
+</aside>
+
+If you write 800 words and the reader still needs a meeting to understand the system, the ROY is poor. If you write 80 words that generate a picture which makes the system obvious, the ROY can be excellent, even if the picture isn’t “beautiful”.
+
+The core thesis is simple: a picture can be worth more than the words that prompted it if it produces more understanding than prose alone.
+
+The catch is that for most of my career, the price of producing a useful picture was high. Visio (and its cousins) made diagrams possible, but it also created friction: you weren’t just thinking about the system, you were wrestling the canvas. Alignment, spacing, connectors, swimlanes, the weird moment when you’re ten minutes deep into nudging boxes and have forgotten what you were trying to explain.
+
+The tool didn’t just cost time. It pulled you out of the mental mode required to do the work. So diagrams became “presentation artifacts”, something you created at the end, after the thinking was supposedly finished.
+
+But the thinking was never finished. That’s the point.
+
+### When diagrams stopped being “drawing”
+
+About eight months ago, ChatGPT casually generated a clean visual for a simple process I was describing. My first reaction wasn’t awe. It was suspicion, the same feeling you get when something looks too tidy. Then I asked what it was and it answered: “A Mermaid diagram.”
+
+Mermaid is a text-based diagramming language. You describe structure in plain language and it renders a diagram. No canvas anxiety. No toolbar archaeology. You’re not arranging shapes. You’re declaring relationships.
+
+Then I discovered that tools like Microsoft Loop render Mermaid natively, and that changed the economics in a way I didn’t expect. Suddenly the cost curve collapsed. Diagramming stopped feeling like a separate task and started feeling like a mode of thought, structural thinking, expressed in text.
+
+That shift matters because it changes what the diagram is for. When the diagram is cheap to create, it can be wrong on purpose. You can draft the lie quickly, spot the lie quickly, and iterate toward something truer.
+
+In practice, the loop looks like this.
+
+### The Council of AIs (and why it works)
+
+This is where my experiment escalated. Instead of asking one model for “the answer,” I started asking several: ChatGPT, Claude, Copilot, Perplexity, Gemini, Notion. Same prompt, same goal, independent outputs. Then I pulled them back together and compared the differences.
+
+I call it the Council of AIs, and it’s less about outsourcing intelligence and more about manufacturing perspective. The value isn’t that one model is correct. The value is that disagreement reveals structure.
+
+<aside>
+🖼️
+
+**Insert Image 3 (Council loop) here**
+
+Place: after “difference reveals structure” (this spot), before “the diagram is the scoreboard”.
+
+Purpose: show parallel ideation, adjudication, and synthesis as an explicit loop.
+
+Suggested diagram: Claude V2
+
+- https://mermaid.ai/d/2e9a4321-6302-44ca-82cc-e2020479fdf5
+</aside>
+
+<aside>
+🧾
+
+**Optional Insert: Code Block 2 (council pattern) here**
+
+Purpose: show the pattern, not the whole prompt. Keep it short enough to feel like a practitioner note.
+
+</aside>
+
+```
+Same brief to 5 models.
+Do not read each other.
+Deliver:
+1) a 3-part thesis
+2) a Mermaid diagram (first draft)
+3) 3 failure modes (where the diagram lies)
+Then: compare, adjudicate, synthesize.
+```
+
+One model will assume a clean pipeline. Another will introduce feedback loops. Another will highlight ambiguous handoffs. Another will quietly invent an actor you forgot to name. When you line those outputs up, you get a form of critique that feels a lot like a room of experienced architects, each with their own bias, each making different parts of the system visible.
+
+And the diagram is the scoreboard. You can tell immediately whether the idea has shape or whether it’s still fog with confident nouns.
+
+This ties back to OverKill Hill P³, Precision, Protocol, Promptcraft, because it’s the same discipline applied to communication: treat structure as the product, not the ornament. The words are not the deliverable. The understanding is.
+
+If a paragraph is the best way to carry nuance, write the paragraph. If a diagram kills ambiguity faster than prose, generate the diagram. If you need both, use both, but don’t pretend the reader will reconstruct a system from text just because you used complete sentences.
+
+So here’s the field-tested conclusion I didn’t expect to land on: the future isn’t “more visuals”. It’s cheaper iteration on structure, until the output earns its space.
+
+If ROY is the metric, and diagrams are suddenly affordable again, what would you stop writing long-form explanations for, and start rendering as structure instead?
