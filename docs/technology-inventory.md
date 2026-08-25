@@ -1,19 +1,26 @@
 # Technology Inventory
 
-Reviewed: 2026-07-20
+Reviewed: 2026-08-24
 
 ## Scope
 
-This repository is a public writing and methodology archive, not an application
-with a checked-in runtime. The inventory covers technologies used to author,
-render, or package the archive. The `.agents/skills/` directory is repository
-metadata for agent workflows and is not part of the archive's production
-toolchain.
+This repository now has a small TypeScript tutorial application at the root,
+with the original writing and methodology archive preserved under `archive/`.
+The inventory covers both the tutorial runtime and the technologies used to
+author, render, or package the preserved archive. The `.agents/skills/`
+directory is repository metadata for agent workflows and is not part of the
+application bundle.
 
 ## Technologies in the archive
 
-| Technology | Role in this repository | In-place version | Latest stable checked on 2026-07-20 | Version source | Tracking status |
+| Technology | Role in this repository | In-place version | Latest stable checked on 2026-08-24 | Version source | Tracking status |
 |---|---|---:|---:|---|---|
+| TypeScript | Strict application language and type checking | 7.0.2 | 7.0.2 | [TypeScript releases](https://github.com/microsoft/TypeScript/releases) | Pinned in `package.json` and `package-lock.json` |
+| React | Tutorial application UI runtime | 19.2.8 | 19.2.8 | [React releases](https://github.com/facebook/react/releases) | Pinned in `package.json` and `package-lock.json` |
+| Vite | Local development server and production bundler | 8.2.2 | 8.2.2 | [Vite releases](https://github.com/vitejs/vite/releases) | Pinned in `package.json` and `package-lock.json` |
+| Tailwind CSS | Utility CSS integration through the Vite plugin | 4.3.3 | 4.3.3 | [Tailwind CSS releases](https://github.com/tailwindlabs/tailwindcss/releases) | Pinned in `package.json` and `package-lock.json` |
+| npm | Dependency installation and scripted validation | npm 11.x in the local validation environment | Platform-managed | [npm documentation](https://docs.npmjs.com/) | Lockfile committed; npm major is selected by the workflow's Node 22 setup |
+| GitHub Pages | Static hosting target for the tutorial bundle | Workflow-managed | Platform-managed | [GitHub Pages documentation](https://docs.github.com/en/pages) | Deployment workflow checked in under `.github/workflows/` |
 | Mermaid | `.mmd` diagram source language and external rendering workflow | Not pinned or disclosed | 11.15.0 | [Mermaid releases](https://github.com/mermaid-js/mermaid/releases) | Tracked by the scheduled technology review workflow |
 | PptxGenJS | Tool named by the slide documentation as the generator for the PPTX decks | Not pinned or disclosed; generator source is not present | 4.0.1 | [PptxGenJS releases](https://github.com/gitbrent/PptxGenJS/releases) | Tracked by the scheduled technology review workflow |
 | JavaScript | Language used by PptxGenJS, according to its project documentation; no source is checked in here | Not pinned or disclosed | Not applicable to this archive | [PptxGenJS project](https://github.com/gitbrent/PptxGenJS) | Informational only |
@@ -32,16 +39,15 @@ frontmatter configuration as available from Mermaid 10.5.0 onward, but that
 does not establish which Mermaid release rendered the checked-in images or
 hosted diagrams.
 
-## Technologies explicitly not used by the checked-in solution
+## Technologies intentionally not used by the checked-in application
 
-There is no evidence of TypeScript, Vite, Tailwind CSS, a JavaScript source
-project, Python application code, a package manager, a package manifest, a
-lockfile, a container definition, a local Mermaid renderer, or a build system.
-The GitHub Actions workflow added for version review is repository maintenance,
-not an application runtime.
+The tutorial has no backend, database, authentication layer, API, or local
+Mermaid renderer. The preserved archive continues to use Markdown, CSV,
+Mermaid source, PNG, PPTX, PDF, and MP4 artifacts.
 
 ## Update policy
 
+The tutorial dependencies are pinned and installed from `package-lock.json`.
 The repository cannot automatically upgrade Mermaid or PptxGenJS because their
 source project and dependency manifest are not present. Instead, the scheduled
 workflow compares the latest stable registry release with the last reviewed
