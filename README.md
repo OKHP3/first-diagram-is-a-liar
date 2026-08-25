@@ -37,7 +37,12 @@ backend, database, API, or server-side user data is required.
 
 - [Live article](https://overkillhill.com/writings/first-diagram-is-a-liar/)
 - [LinkedIn article](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)
-- [GitHub repository](https://github.com/OKHP3/first-diagram-is-a-liar)
+- [GitHub repository and application source](https://github.com/OKHP3/first-diagram-is-a-liar)
+- [GitHub Pages application](https://okhp3.github.io/first-diagram-is-a-liar/)
+
+The GitHub repository is public. The Pages URL is the canonical public
+application address; it will become live after GitHub Pages is enabled and the
+deployment workflow completes successfully.
 
 The canonical story, result language, attribution, and fairness rules live in
 [`archive/diagramming-shootout/canonical-story.md`](archive/diagramming-shootout/canonical-story.md)
