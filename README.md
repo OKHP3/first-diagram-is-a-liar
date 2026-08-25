@@ -6,7 +6,7 @@ their words.
 ## Start here
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -57,6 +57,7 @@ and [`archive/diagramming-shootout/council-brief.md`](archive/diagramming-shooto
 npm run check
 npm run build
 npm run check:archive
+npm run health:mermaid
 ```
 
 The GitHub Pages workflow builds the root app with the production base

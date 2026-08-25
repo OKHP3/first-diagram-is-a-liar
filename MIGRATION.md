@@ -27,3 +27,18 @@ Tailwind, Vite tutorial application with a retained evidence archive.
 
 Unreachable Git objects were observed during the janitor pass and intentionally
 left untouched as recovery material.
+
+## Follow-up cleanup
+
+The remote Replit integration later reintroduced workspace-only metadata after
+the original migration. The npm-based Pages application does not consume it,
+so the following tracked leftovers were removed again:
+
+- `.replit`
+- `pnpm-lock.yaml`
+- `pnpm-workspace.yaml`
+
+The working tree also contained generated `dist/` and `node_modules/` folders;
+both are ignored build/install outputs and were removed before validation.
+The root governance files use the GitHub-recognized names `LICENSE`,
+`CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md`.
