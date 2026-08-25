@@ -53,8 +53,8 @@ Mermaid Theme Builder, and BPMN for Mermaid; they do not create
 The 2026-08-25 source reconciliation confirmed that the v0.6 Notion post is a
 review-only companion draft, not an approved or published LinkedIn release.
 See [`../../docs/v0.6-source-reconciliation-2026-08-25.md`](../../docs/v0.6-source-reconciliation-2026-08-25.md)
-for the dated evidence matrix, unresolved editorial choice, and required
-publication record.
+for the dated evidence matrix, the verification attempt and LinkedIn access
+limitation, unresolved editorial choice, and required publication record.
 
 The four focused chapter packets are indexed in
 [`../specialist-chapters/README.md`](../specialist-chapters/README.md).
