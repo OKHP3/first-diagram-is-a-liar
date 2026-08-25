@@ -20,6 +20,15 @@ This changelog tracks public-facing story states, not every file operation.
   2026-08-24.
 - Kept the prepared v1.0 editorial cut separate from the deployed release.
 
+## 2026-08-24 — Seven-day observation not yet available
+
+- The planned evidence window is 2026-08-25 through 2026-08-31 and had not
+  started at review time.
+- No GA4, UTM, CTA/referral, comment, or confusion-signal findings were
+  fabricated or inferred.
+- v0.5 remains the current public release; the earliest defensible v1.0
+  decision date is 2026-09-01.
+
 ## v0.4 — Story Behind the Story
 
 - Expanded the public article with the Council's purpose, disagreement, and
