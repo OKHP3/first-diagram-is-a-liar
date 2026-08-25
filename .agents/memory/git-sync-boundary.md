@@ -17,4 +17,4 @@ repository.
 **How to apply:** Confirm the live ref, merge with
 `--allow-unrelated-histories`, keep the merge commit locally, and only publish
 through an authenticated Git transport that can carry the complete object
-graph.
+graph. Do not prune the recovery branch until that publication succeeds.
