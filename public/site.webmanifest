@@ -1,0 +1,18 @@
+{
+  "name": "The First Diagram Is Usually a Liar",
+  "short_name": "First Diagram",
+  "description": "An interactive field guide for turning messy thinking into diagrams that earn their words.",
+  "start_url": "/first-diagram-is-a-liar/",
+  "scope": "/first-diagram-is-a-liar/",
+  "display": "standalone",
+  "background_color": "#111714",
+  "theme_color": "#111714",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
