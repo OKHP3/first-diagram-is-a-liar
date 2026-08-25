@@ -23,36 +23,18 @@ import {
   Terminal,
   X,
 } from 'lucide-react';
+import { GuideStep } from '@/components/guide-step';
+import {
+  checklistItems,
+  contractRows,
+  orientationFacts,
+  preflightSteps,
+  sections,
+  troubleshootingSteps,
+  validationSteps,
+} from '@/data/guide-content';
 
 const queryClient = new QueryClient();
-
-type Section = {
-  id: string;
-  number: string;
-  label: string;
-};
-
-const sections: Section[] = [
-  { id: 'orientation', number: '00', label: 'Orientation' },
-  { id: 'contract', number: '01', label: 'The contract' },
-  { id: 'preflight', number: '02', label: 'Preflight' },
-  { id: 'implementation', number: '03', label: 'Implementation' },
-  { id: 'validation', number: '04', label: 'Validation' },
-  { id: 'troubleshooting', number: '05', label: 'Troubleshooting' },
-  { id: 'boundaries', number: '06', label: 'Live boundaries' },
-  { id: 'checklist', number: '07', label: 'Final checklist' },
-];
-
-const checklistItems = [
-  { id: 'base', label: 'Production base is /kierans-lifetrkr/ and dev base is /.' },
-  { id: 'router', label: 'The app uses HashRouter for client-side routes.' },
-  { id: 'scripts', label: 'package.json exposes build: vite build.' },
-  { id: 'ci', label: 'The Pages workflow runs npm ci, then npm run build.' },
-  { id: 'artifact', label: 'dist/404.html exists after the production build.' },
-  { id: 'pages', label: 'GitHub Pages is configured to deploy from GitHub Actions.' },
-  { id: 'proof', label: 'The deployed URL was checked in a fresh, signed-out browser.' },
-  { id: 'no-gh-pages', label: 'No gh-pages package or branch-push workaround is involved.' },
-];
 
 function scrollToSection(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -284,7 +266,7 @@ function Home() {
 
       <main className="md:pl-[286px]">
         <div className="mx-auto max-w-[1160px] px-5 pb-20 sm:px-9 lg:px-16">
-          <section id="orientation" className="relative scroll-mt-8 pb-24 pt-16 sm:pt-24 lg:pb-32 lg:pt-32" data-testid="section-orientation">
+          <GuideStep id="orientation" testId="section-orientation" className="relative pb-24 pt-16 sm:pt-24 lg:pb-32 lg:pt-32">
             <div className="pointer-events-none absolute -right-10 top-10 hidden select-none font-display text-[17rem] leading-none text-[hsl(var(--primary)/.055)] lg:block">↗</div>
             <div className="animate-rise relative">
               <div className="eyebrow flex items-center gap-3 text-[hsl(var(--primary))]">
@@ -310,11 +292,7 @@ function Home() {
             </div>
 
             <div className="mt-24 grid gap-3 sm:grid-cols-3" data-testid="orientation-facts">
-              {[
-                ['01', 'One repository', 'Source, workflow, and artifact stay legible.'],
-                ['02', 'One base rule', 'Production lives under /kierans-lifetrkr/.'],
-                ['03', 'One honest proof', 'Test the deployed shell, not just dist/.'],
-              ].map(([number, title, copy]) => (
+              {orientationFacts.map(([number, title, copy]) => (
                 <div key={number} className="principle-card rounded-xl border border-[hsl(var(--foreground)/.13)] bg-[hsl(var(--card)/.74)] p-5" data-testid={`card-orientation-${number}`}>
                   <span className="font-mono-ui text-xs text-[hsl(var(--accent))]">{number}</span>
                   <h2 className="mt-7 font-display text-2xl tracking-[-.03em]">{title}</h2>
@@ -322,9 +300,9 @@ function Home() {
                 </div>
               ))}
             </div>
-          </section>
+          </GuideStep>
 
-          <section id="contract" className="section-rule scroll-mt-8 py-24 lg:py-32" data-testid="section-contract">
+          <GuideStep id="contract" testId="section-contract">
             <SectionHeading number="01" kicker="The contract" title="Write down the rules before you write the fix.">
               GitHub Pages is not serving your Vite project from the same root as localhost. Make the path contract explicit, then make every layer agree with it. This is the part you can inspect without a network connection.
             </SectionHeading>
@@ -332,14 +310,7 @@ function Home() {
               <div className="grid grid-cols-[minmax(110px,.7fr)_minmax(180px,1fr)_1.3fr] border-b border-[hsl(var(--foreground)/.13)] bg-[hsl(var(--primary)/.08)] px-4 py-3 text-[11px] font-semibold uppercase tracking-[.14em] text-[hsl(var(--muted-foreground))] sm:px-6" role="row">
                 <span role="columnheader">Surface</span><span role="columnheader">Value</span><span role="columnheader">Why it matters</span>
               </div>
-              {[
-                ['Production base', '/kierans-lifetrkr/', 'The repository name is part of the URL.'],
-                ['Development base', '/', 'Vite dev server still serves from the root.'],
-                ['Router', 'HashRouter', 'Routes survive Pages without server rewrites.'],
-                ['Deployment', 'GitHub Actions → Pages', 'The workflow uploads dist as the artifact.'],
-                ['Fallback', 'dist/404.html', 'A static fallback preserves the shell on misses.'],
-                ['Not in this guide', 'gh-pages workaround', 'Do not push a generated branch to paper over the pipeline.'],
-              ].map(([surface, value, why], index) => (
+              {contractRows.map(([surface, value, why], index) => (
                 <div key={surface} className="grid grid-cols-[minmax(110px,.7fr)_minmax(180px,1fr)_1.3fr] gap-3 border-b border-[hsl(var(--foreground)/.1)] px-4 py-4 text-sm last:border-0 sm:px-6" role="row">
                   <span className="font-semibold" role="cell">{surface}</span>
                   <code className="font-mono-ui text-[hsl(var(--primary))]" role="cell" data-testid={`text-contract-value-${index}`}>{value}</code>
@@ -350,9 +321,9 @@ function Home() {
             <Note icon={<Hash size={19} />} title="Why HashRouter belongs here">
               A hash route keeps the client-side location after the server has returned the one static document it knows. BrowserRouter can work with a server rewrite; GitHub Pages does not give this project one by default.
             </Note>
-          </section>
+          </GuideStep>
 
-          <section id="preflight" className="section-rule scroll-mt-8 py-24 lg:py-32" data-testid="section-preflight">
+          <GuideStep id="preflight" testId="section-preflight">
             <SectionHeading number="02" kicker="Preflight" title="Ask the repository three boring questions.">
               Before touching configuration, establish what is actually true. These checks are fast, deterministic, and much cheaper than debugging a green workflow that uploaded the wrong folder.
             </SectionHeading>
@@ -364,11 +335,7 @@ npm ci
 npm run build
 test -f dist/404.html && echo "fallback present"`} />
                 <div className="mt-9 space-y-5">
-                  {[
-                    ['A', 'The lockfile is real', 'npm ci must be able to reproduce the dependency tree. If it cannot, fix the lockfile or the workflow before thinking about Pages.'],
-                    ['B', 'The build has a target', 'vite build should create dist. No “works in dev” interpretation belongs in this step.'],
-                    ['C', 'The fallback is visible', '404.html must be in the artifact that Actions uploads, not merely somewhere in the source tree.'],
-                  ].map(([letter, title, copy]) => (
+                  {preflightSteps.map(([letter, title, copy]) => (
                     <article key={letter} className="flex gap-4" data-testid={`article-preflight-${letter}`}>
                       <span className="step-number shrink-0">{letter}</span>
                       <div><h3 className="font-semibold">{title}</h3><p className="mt-1 text-sm leading-6 text-[hsl(var(--muted-foreground))]">{copy}</p></div>
@@ -382,9 +349,9 @@ test -f dist/404.html && echo "fallback present"`} />
                 <p className="mt-4 text-sm leading-6 text-[hsl(var(--muted-foreground))]">Name the output directory. Inspect it. Then give it to the Pages action.</p>
               </aside>
             </div>
-          </section>
+          </GuideStep>
 
-          <section id="implementation" className="section-rule scroll-mt-8 py-24 lg:py-32" data-testid="section-implementation">
+          <GuideStep id="implementation" testId="section-implementation">
             <SectionHeading number="03" kicker="Implementation" title="Make the path boring in every file.">
               The smallest reliable implementation is explicit: a production base in Vite, a root base during development, HashRouter in the app, and an Actions workflow that uploads the build output. Avoid cleverness that only your laptop understands.
             </SectionHeading>
@@ -417,19 +384,14 @@ createRoot(document.getElementById('root')!).render(
             <Note tone="coral" icon={<FileCode2 size={19} />} title="The 404 copy is an artifact step, not a browser trick.">
               Create or copy <code className="font-mono-ui text-[hsl(var(--foreground))]">dist/404.html</code> as part of the build process before upload. It belongs beside <code className="font-mono-ui text-[hsl(var(--foreground))]">index.html</code> in the published artifact.
             </Note>
-          </section>
+          </GuideStep>
 
-          <section id="validation" className="section-rule scroll-mt-8 py-24 lg:py-32" data-testid="section-validation">
+          <GuideStep id="validation" testId="section-validation">
             <SectionHeading number="04" kicker="Validation" title="Separate the four moments people call “deployed.”">
               A workflow can pass while the site is wrong. Validation is a ladder: each rung proves something different. Do not use the confidence from one rung to skip the next.
             </SectionHeading>
             <div className="space-y-3" data-testid="validation-ladder">
-              {[
-                ['01', 'Source', 'The config and router express the contract.', 'Static review'],
-                ['02', 'Artifact', 'npm run build emits the expected files.', 'Local shell'],
-                ['03', 'Workflow', 'Actions installs, builds, and uploads dist.', 'GitHub run'],
-                ['04', 'Live site', 'A fresh browser can load the published shell and route.', 'Pages URL'],
-              ].map(([number, title, description, proof]) => (
+              {validationSteps.map(([number, title, description, proof]) => (
                 <article key={number} className="group grid gap-4 rounded-xl border border-[hsl(var(--foreground)/.13)] bg-[hsl(var(--card)/.58)] p-5 transition-transform hover:-translate-y-0.5 sm:grid-cols-[56px_1fr_auto] sm:items-center sm:p-6" data-testid={`card-validation-${number}`}>
                   <span className="font-mono-ui text-sm text-[hsl(var(--accent))]">{number}</span>
                   <div><h3 className="font-display text-2xl tracking-[-.03em]">{title}</h3><p className="mt-1 text-sm text-[hsl(var(--muted-foreground))]">{description}</p></div>
@@ -440,20 +402,14 @@ createRoot(document.getElementById('root')!).render(
             <Note tone="ink" icon={<Compass size={19} />} title="Fresh means fresh.">
               Validate in a private window or a separate browser profile. This catches stale service workers, cached bundles, and assumptions smuggled in by an already-open tab.
             </Note>
-          </section>
+          </GuideStep>
 
-          <section id="troubleshooting" className="section-rule scroll-mt-8 py-24 lg:py-32" data-testid="section-troubleshooting">
+          <GuideStep id="troubleshooting" testId="section-troubleshooting">
             <SectionHeading number="05" kicker="Troubleshooting" title="Read the symptom, then check the layer.">
               Resist the urge to change three things at once. Start with the visible symptom, locate the layer that owns it, and change only the smallest relevant input.
             </SectionHeading>
             <div className="space-y-3">
-              {[
-                ['The page is blank on Pages', 'Deployment / base', 'Open DevTools and inspect asset requests. If they point at /assets instead of /kierans-lifetrkr/assets, the production base is wrong.'],
-                ['A deep link is a 404', 'Router / fallback', 'Confirm the app uses HashRouter and that dist/404.html was uploaded with the artifact. A server-side rewrite is not implied.'],
-                ['Actions is green, site is old', 'Pages settings / cache', 'Confirm the Pages source is GitHub Actions, inspect the workflow run SHA, then test in a fresh browser before changing application code.'],
-                ['npm ci fails in Actions', 'Reproducibility', 'Run npm ci from the same commit locally. The lockfile, Node version, or package registry assumptions must agree.'],
-                ['A gh-pages branch appeared', 'Deployment strategy', 'Stop and remove the workaround from the plan. This guide uses the official Pages artifact flow; branch pushes obscure the actual output.'],
-              ].map(([symptom, layer, fix], index) => (
+              {troubleshootingSteps.map(([symptom, layer, fix], index) => (
                 <details key={symptom} className="group rounded-xl border border-[hsl(var(--foreground)/.13)] bg-[hsl(var(--card)/.58)]" data-testid={`details-troubleshooting-${index}`}>
                   <summary className="flex cursor-pointer list-none items-center gap-4 p-5 sm:p-6">
                     <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[hsl(var(--accent)/.15)] text-[hsl(var(--accent))]"><ChevronDown size={17} className="transition-transform group-open:rotate-180" /></span>
@@ -463,9 +419,9 @@ createRoot(document.getElementById('root')!).render(
                 </details>
               ))}
             </div>
-          </section>
+          </GuideStep>
 
-          <section id="boundaries" className="section-rule scroll-mt-8 py-24 lg:py-32" data-testid="section-boundaries">
+          <GuideStep id="boundaries" testId="section-boundaries">
             <SectionHeading number="06" kicker="Live boundaries" title="Know what this guide can—and cannot—prove.">
               A runbook can make the path observable. It cannot manufacture a successful workflow, inspect your repository, or claim a URL it has not visited. Precision about the boundary is part of the deployment.
             </SectionHeading>
@@ -487,9 +443,9 @@ createRoot(document.getElementById('root')!).render(
               <div><span className="eyebrow text-[hsl(var(--accent))]">The only honest live claim</span><p className="mt-3 font-display text-2xl leading-tight sm:text-3xl">“I opened the deployed site and checked it.”</p></div>
               <ExternalLink className="hidden shrink-0 text-[hsl(var(--accent))] sm:block" size={28} />
             </div>
-          </section>
+          </GuideStep>
 
-          <section id="checklist" className="section-rule scroll-mt-8 py-24 lg:py-32" data-testid="section-checklist">
+          <GuideStep id="checklist" testId="section-checklist">
             <SectionHeading number="07" kicker="Final checklist" title="Leave the terminal with a clean yes.">
               Check each line against the repository and the deployed experience. This list is intentionally plain: the last five minutes of a deploy deserve less ceremony and more signal.
             </SectionHeading>
@@ -529,7 +485,7 @@ createRoot(document.getElementById('root')!).render(
                 <ArrowRight size={16} className="rotate-180" /> Read from the top
               </button>
             </div>
-          </section>
+          </GuideStep>
         </div>
         <footer className="border-t border-[hsl(var(--foreground)/.13)] px-5 py-8 sm:px-9 lg:px-16" data-testid="footer-guide">
           <div className="mx-auto flex max-w-[1160px] flex-col gap-3 text-xs text-[hsl(var(--muted-foreground))] sm:flex-row sm:items-center sm:justify-between">
