@@ -2,3 +2,4 @@
 - [Public release verification](public-release-verification.md) — deployed content is authoritative when it diverges from newer local editorial material.
 - [Mermaid delivery health](mermaid-delivery-health.md) — public diagrams need local fallbacks; protected referral probes are reachable, not automatically broken.
 - [Blitz release ladder](release-ladder.md) — v0.6 Notion, v0.7 Replit, v0.8 Mermaid Theme Builder, v0.9 BPMN for Mermaid, v1.0 synthesis.
+- [Replit auto-commit behavior](replit-auto-commit.md) — workspace configuration changes may be committed automatically during maintenance; verify before publishing.
