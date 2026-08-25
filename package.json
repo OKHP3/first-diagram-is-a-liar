@@ -9,7 +9,8 @@
     "build": "npm run check && vite build",
     "preview": "vite preview",
     "check:archive": "node scripts/check-archive.mjs",
-    "health:mermaid": "node scripts/check-mermaid-delivery.mjs"
+    "health:mermaid": "node scripts/check-mermaid-delivery.mjs",
+    "health:mermaid:browser": "node scripts/check-hosted-mermaid-browser.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.3.3",
@@ -23,6 +24,8 @@
     "@types/node": "26.3.0",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
+    "playwright": "^1.62.1",
+    "prettier": "^3.8.1",
     "typescript": "7.0.2"
   }
 }

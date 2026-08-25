@@ -26,7 +26,7 @@ destinations; those source references now use the verified v0.5 destinations.
 | Accessibility signals | PASS | Document language, one `h1`, ordered `h2` sections, skip link, labelled navigation, labelled diagram actions, meaningful image alt text, keyboard buttons, visible focus styles, and reduced-motion handling are present in source/CSS. |
 | Referral probes | CONDITIONAL PASS | Human browser checks on 2026-08-24 reached the intended Replit account-creation page (including the referral-bonus notice), the OverKill Hill P³ Ko-fi profile/tip form, and Mermaid's account-creation page (including the referral offer). Automated probes remain crawler-blocked or authorization-limited. |
 | Mermaid hosted documents | PASS | Human browser checks on 2026-08-24 reached all 13 linked `mermaid.ai/d/` routes. The four routes previously recorded as blank were reopened and visibly rendered with the expected document title; all 13 now have a visible hosted diagram in the checked session. Automated requests still return an authorization-limited API response (HTTP 401), which is not render evidence; local `.mmd` and checked-in PNG fallbacks remain authoritative. |
-| Repeatable hosted-render harness | NOT RUN | `pnpm run health:mermaid:browser` is checked in but requires Playwright and Chromium, which are not installed in this workspace. The command reports this as `NOT RUN`; it does not classify missing tooling as a render pass or failure. |
+| Repeatable hosted-render harness | FAIL | Run on 2026-08-25 after installing the documented Playwright and Chromium prerequisites: 3 of 4 routes render-verified; ChatGPT V2 matched its title but had no non-empty SVG/canvas. All four navigation responses were HTTP 200 and none were authorization-limited. |
 
 ## Human browser checks — provider destinations
 
@@ -73,6 +73,27 @@ The repeatable harness is
 routes for the expected provider/version title and non-empty SVG/canvas content,
 while reporting navigation HTTP status and authorization-limited responses
 separately. Setup and capture instructions are in `docs/mermaid-delivery.md`.
+
+
+### Repeatable harness run — 2026-08-25
+
+The documented prerequisites were installed (`playwright` and the Chromium
+runtime). `pnpm run health:mermaid:browser` was then run with full-page captures
+and a JSON result file:
+
+| Provider/version | Navigation status | Authorization-limited | Expected title | Non-empty canvas | Result |
+|---|---:|---:|---:|---:|---|
+| ChatGPT V2 | 200 | No | Yes | No | RENDER-FAILED |
+| Gemini V2 | 200 | No | Yes | Yes | RENDER-VERIFIED |
+| Copilot V1 | 200 | No | Yes | Yes | RENDER-VERIFIED |
+| ChatGPT V1 | 200 | No | Yes | Yes | RENDER-VERIFIED |
+
+The command correctly failed the release gate because ChatGPT V2 remained
+without a sufficiently sized, non-empty SVG/canvas after the harness wait and
+an additional 20-second observation. The result is not attributable to an
+authorization-limited response: navigation succeeded with HTTP 200. The
+captured JSON and PNG files are local run evidence; checked-in `.mmd` sources
+and PNG fallbacks remain the authoritative release fallback.
 
 ## Measurement and observation
 
