@@ -42,3 +42,16 @@ diagram and not a separate production artifact. The current deployed page is
 published page may display and link to council work, but those diagrams remain
 attributed submissions. “Synthesis” describes a method or a member's output; it
 does not transfer authorship to a model.
+
+## Companion-post labels
+
+The planned v0.6 through v0.9 LinkedIn companion series is separate from the
+article release sequence. Its labels identify draft posts about Notion, Replit,
+Mermaid Theme Builder, and BPMN for Mermaid; they do not create
+`ARTICLE-0.6` through `ARTICLE-0.9` releases.
+
+The 2026-08-25 source reconciliation confirmed that the v0.6 Notion post is a
+review-only companion draft, not an approved or published LinkedIn release.
+See [`../../docs/v0.6-source-reconciliation-2026-08-25.md`](../../docs/v0.6-source-reconciliation-2026-08-25.md)
+for the dated evidence matrix, unresolved editorial choice, and required
+publication record.
