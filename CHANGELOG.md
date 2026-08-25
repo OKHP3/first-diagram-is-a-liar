@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.0 - 2026-08-24
+
+- Reframed the repository as a TypeScript, Tailwind, Vite tutorial application.
+- Added an interactive ROY meter, non-linear diagram workbench, Council
+  fairness view, and shipping checklist.
+- Moved preserved article, prompt, Mermaid, member, and export material under
+  `archive/` with a migration ledger.
+- Removed Replit-only scaffolding, connector metadata, exact duplicate
+  captures, and obsolete workspace hooks.
+- Added a GitHub Pages Actions workflow and archive integrity check.
+
 All notable public-facing changes to **The First Diagram Is Usually a Liar** project should be recorded here.
 
 This changelog tracks the evolution of the article, supporting artifacts, and the ETCH-AI-SKETCH methodology archive.
@@ -8,11 +19,11 @@ This changelog tracks the evolution of the article, supporting artifacts, and th
 
 ### Recorded
 - Recorded the machine-readable diagram manifest at
-  `etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv`.
+  `archive/diagramming-shootout/diagram-manifest.csv`.
 - Preserved the broader diagram gallery notes in the archive's diagrams and
   images indexes.
 - Established the canonical sequence in
-  `etch-ai-sketch-vibe-diagramming-shootout/release-manifest.md`:
+  `archive/diagramming-shootout/release-manifest.md`:
   Article v0.1 → Round 1 / V1 → Round 2 / V2 → Article v1.0.
 - Added provenance, third-party asset notes, stable diagram source/render
   references, and an editorial acceptance checklist.

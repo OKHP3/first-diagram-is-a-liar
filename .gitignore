@@ -44,12 +44,10 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
-# Replit
+# local caches
 .cache/
 .local/
-
-# Vite preview cache
-artifacts/*/.vite/
+.vite/
 
 # Python
 __pycache__/
