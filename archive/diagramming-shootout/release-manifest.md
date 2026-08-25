@@ -55,3 +55,8 @@ review-only companion draft, not an approved or published LinkedIn release.
 See [`../../docs/v0.6-source-reconciliation-2026-08-25.md`](../../docs/v0.6-source-reconciliation-2026-08-25.md)
 for the dated evidence matrix, unresolved editorial choice, and required
 publication record.
+
+The four focused chapter packets are indexed in
+[`../specialist-chapters/README.md`](../specialist-chapters/README.md).
+They preserve the same companion-post labels and canonical-link boundaries for
+v0.6 Notion, v0.7 Replit, v0.8 Mermaid Theme Builder, and v0.9 BPMN for Mermaid.

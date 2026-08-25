@@ -2,6 +2,11 @@
 
 These are review drafts for the next four releases of **The First Diagram Is Usually a Liar**.
 
+The corresponding evidence-backed packet is in
+[`archive/specialist-chapters/`](../../../archive/specialist-chapters/). It keeps
+each chapter to one claim, source, proof artifact, lesson, article update, and
+companion post.
+
 They are intentionally saved as proto-posts rather than publication-final copy. The drafts use the current release spine:
 
 - v0.6: Notion as the writer's room and consolidation layer
