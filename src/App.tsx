@@ -62,9 +62,10 @@ function App() {
   const [showLoops, setShowLoops] = useState(true);
   const [copied, setCopied] = useState(false);
   const [checked, setChecked] = useState<Record<string, boolean>>({});
+  const trackedCampaign = useRef(false);
   const lastTrackedStep = useRef(-1);
 
-  useEffect(() => { trackCampaignLanding(); }, []);
+  useEffect(() => { if (trackedCampaign.current) return; trackedCampaign.current = true; trackCampaignLanding(); }, []);
   useEffect(() => { const saved = window.localStorage.getItem("first-diagram-progress"); if (!saved) return; try { const parsed = JSON.parse(saved) as unknown; if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) setChecked(parsed as Record<string, boolean>); } catch { window.localStorage.removeItem("first-diagram-progress"); } }, []);
   useEffect(() => { window.localStorage.setItem("first-diagram-progress", JSON.stringify(checked)); }, [checked]);
   useEffect(() => { if (lastTrackedStep.current === activeStep) return; lastTrackedStep.current = activeStep; trackStep(activeStep); }, [activeStep]);
