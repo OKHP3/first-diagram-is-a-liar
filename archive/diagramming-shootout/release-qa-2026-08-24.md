@@ -25,7 +25,7 @@ destinations; those source references now use the verified v0.5 destinations.
 | Archive/deck sources | PASS | Council manifest, prompts, provenance, member archive, square/wide PDFs, and PPTX files are present and identified as valid file types. |
 | Accessibility signals | PASS | Document language, one `h1`, ordered `h2` sections, skip link, labelled navigation, labelled diagram actions, meaningful image alt text, keyboard buttons, visible focus styles, and reduced-motion handling are present in source/CSS. |
 | Referral probes | CONDITIONAL PASS | Human browser checks on 2026-08-24 reached the intended Replit account-creation page (including the referral-bonus notice), the OverKill Hill P³ Ko-fi profile/tip form, and Mermaid's account-creation page (including the referral offer). Automated probes remain crawler-blocked or authorization-limited. |
-| Mermaid hosted documents | CONDITIONAL PASS | Human browser checks on 2026-08-24 reached all 13 linked `mermaid.ai/d/` routes. Ten visibly rendered a diagram with the expected document title; four showed the Mermaid shell/title but a blank canvas in this session. Automated requests still return an authorization-limited API response (HTTP 401); local `.mmd` and SVG fallbacks remain authoritative. |
+| Mermaid hosted documents | PASS | Human browser checks on 2026-08-24 reached all 13 linked `mermaid.ai/d/` routes. The four routes previously recorded as blank were reopened and visibly rendered with the expected document title; all 13 now have a visible hosted diagram in the checked session. Automated requests still return an authorization-limited API response (HTTP 401), which is not render evidence; local `.mmd` and checked-in PNG fallbacks remain authoritative. |
 
 ## Human browser checks — provider destinations
 
@@ -48,12 +48,24 @@ provider/version title. Ten displayed a visible diagram canvas:
 `ChatGPT V2pro`, `Notion V2`, `Claude V1`, and `Notion V1` (the
 article’s featured `Replit V2` document also rendered visibly).
 
-Four routes showed the Mermaid shell and title but no visible diagram in the
-browser session: `ChatGPT V2`, `Gemini V2`, `Copilot V1`, and `ChatGPT V1`.
-These are recorded as **NOT RENDER-VERIFIED**, not treated as broken provider
-links, because the route itself loaded and the repository retains local
-`.mmd` sources and SVG fallbacks for every featured diagram. The featured
-Replit V2 route was visibly rendered and usable.
+### Reverification of previously blank routes — 2026-08-24
+
+The four routes previously recorded as **NOT RENDER-VERIFIED** were reopened
+after provider-side changes. Each route displayed a non-empty diagram canvas,
+and each matched the linked provider/version title:
+
+| Provider/version | Hosted route title | Checked-in source | Checked-in fallback | Outcome |
+|---|---|---|---|---|
+| ChatGPT V2 | `ChatGPT V2` | `diagrams/v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2.mmd` | `images/v2/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v2.png` | RENDER-VERIFIED |
+| Gemini V2 | `Gemini V2` | `diagrams/v2/etch-ai-sketch-using-a-council-to-design-at-velocity-gemini-v2.mmd` | `images/v2/etch-ai-sketch-using-a-council-to-design-at-velocity-gemini-v2.png` | RENDER-VERIFIED |
+| Copilot V1 | `Copilot V1` | `diagrams/v1/etch-ai-sketch-using-a-council-to-design-at-velocity-copilot-v1.mmd` | `images/v1/etch-ai-sketch-using-a-council-to-design-at-velocity-copilot-v1.png` | RENDER-VERIFIED |
+| ChatGPT V1 | `ChatGPT V1` | `diagrams/v1/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v1.mmd` | `images/v1/etch-ai-sketch-using-a-council-to-design-at-velocity-chatgpt-v1.png` | RENDER-VERIFIED |
+
+The fresh browser captures are the render proof. Automated requests still
+return an authorization-limited API response (HTTP 401); that response is not
+treated as evidence that a hosted diagram renders or fails. The repository's
+`.mmd` sources and checked-in PNG fallbacks remain authoritative if a hosted
+canvas later becomes unavailable.
 
 ## Measurement and observation
 
