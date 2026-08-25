@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/vite-github-pages-guide/"
+title = "Vite → GitHub Pages Field Guide"
+description = "An approachable interactive field guide for shipping a client-only Vite app to GitHub Pages with the correct base path, router, Actions workflow, fallbacks, and verification boundaries."
+version = "1.0.0"
+id = "artifacts/vite-github-pages-guide"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/vite-github-pages-guide/" ]
+localPort = 24822
+
+[services.development]
+run = "pnpm --filter @workspace/vite-github-pages-guide run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/vite-github-pages-guide", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/vite-github-pages-guide/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24822"
+BASE_PATH = "/vite-github-pages-guide/"
