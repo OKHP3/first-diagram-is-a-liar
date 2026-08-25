@@ -60,3 +60,9 @@ The four focused chapter packets are indexed in
 [`../specialist-chapters/README.md`](../specialist-chapters/README.md).
 They preserve the same companion-post labels and canonical-link boundaries for
 v0.6 Notion, v0.7 Replit, v0.8 Mermaid Theme Builder, and v0.9 BPMN for Mermaid.
+
+The prepared final article, evidence map, preflight ledger, and review-only
+final LinkedIn copy are connected in
+[`v1.0-synthesis-handoff.md`](v1.0-synthesis-handoff.md). This handoff does not
+change the `ARTICLE-1.0` publication status or the current public `ARTICLE-0.5`
+record.

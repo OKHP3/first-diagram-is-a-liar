@@ -1,6 +1,7 @@
-# LinkedIn Proto-Posts: v0.6 through v0.9
+# LinkedIn Proto-Posts: v0.6 through v1.0
 
-These are review drafts for the next four releases of **The First Diagram Is Usually a Liar**.
+These are review drafts for the four specialist companion chapters and the
+prepared final synthesis of **The First Diagram Is Usually a Liar**.
 
 The corresponding evidence-backed packet is in
 [`archive/specialist-chapters/`](../../../archive/specialist-chapters/). It keeps
@@ -13,8 +14,13 @@ They are intentionally saved as proto-posts rather than publication-final copy. 
 - v0.7: Replit as the build partner and execution environment
 - v0.8: Mermaid Theme Builder as the visual-governance response
 - v0.9: BPMN for Mermaid as the process-semantics response
+- v1.0: the final “Zac Snyder Cut” synthesis of the lessons and receipts
 
-The four posts describe the projects as concept incubators that grew from firsthand use of AI-generated Mermaid diagrams, inconsistent rendering and styling, and the missing connection between written business processes and useful visual models.
+The v0.6 through v0.9 posts describe the projects as concept incubators that
+grew from firsthand use of AI-generated Mermaid diagrams, inconsistent rendering
+and styling, and the missing connection between written business processes and
+useful visual models. The v1.0 post connects those lessons without creating an
+overall council winner or changing the public article's release status.
 
 ## Public source boundary
 
@@ -28,6 +34,7 @@ space and are intentionally not linked or reproduced here.
 - [v0.7: Replit](v0.7-replit.md)
 - [v0.8: Mermaid Theme Builder](v0.8-mermaid-theme-builder.md)
 - [v0.9: BPMN for Mermaid](v0.9-bpmn-for-mermaid.md)
+- [v1.0: Final synthesis](v1.0-zac-snyder-synthesis.md)
 
 ## Review status
 

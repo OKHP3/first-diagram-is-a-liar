@@ -2,6 +2,15 @@
 
 This changelog tracks public-facing story states, not every file operation.
 
+## 2026-08-25 — v1.0 synthesis handoff prepared
+
+- Assembled the prepared local editorial cut, evidence index, four specialist
+  chapter packets, and review-only final LinkedIn companion copy into one
+  public-safe handoff.
+- Recorded 2026-09-10 as a target readiness date, not a publication date.
+- Left all external deployment, canonical, social-preview, provider, analytics,
+  and rollback gates pending. `ARTICLE-0.5` remains the current public release.
+
 ## v1.0 — Editorial Cut (prepared, unpublished)
 
 - Prepared a local editorial synthesis; it is not the deployed public page.

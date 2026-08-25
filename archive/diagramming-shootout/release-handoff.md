@@ -17,6 +17,14 @@ editorial cut is live. The release coordinator must replace the source
 snapshot placeholder with the immutable full commit hash before handing the
 source to the external deployment owner.
 
+## ARTICLE-1.0 synthesis package
+
+The prepared final copy, evidence route, final LinkedIn companion draft, and
+preflight decision ledger are assembled in
+[`v1.0-synthesis-handoff.md`](v1.0-synthesis-handoff.md). That package names
+2026-09-10 as a target readiness date only. It does not assign a publication
+date or satisfy any external gate.
+
 ## Handoff sequence
 
 ### 1. Prepare source
