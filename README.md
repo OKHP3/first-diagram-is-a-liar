@@ -112,6 +112,16 @@ production build. A successful workflow is necessary but not sufficient for a
 release; verify the deployed Pages URL and representative tutorial
 interactions after deployment.
 
+## Traffic measurement
+
+The public editorial page and the tutorial SPA use the same GA4 property
+(`G-VJ1BKXS27H`) for aggregate traffic and campaign measurement. The page and
+application retain the four documented UTM fields for attribution, while event
+payloads use stable content identifiers and do not include email addresses,
+user-entered text, or referral revenue. See
+[`archive/diagramming-shootout/campaign-measurement.md`](archive/diagramming-shootout/campaign-measurement.md)
+for the event contract and DebugView procedure.
+
 ## License and provenance
 
 The Mermaid source files are provided for reference, learning, and adaptation.

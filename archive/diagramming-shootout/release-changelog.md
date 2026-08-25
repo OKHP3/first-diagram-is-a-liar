@@ -34,6 +34,20 @@ This changelog tracks public-facing story states, not every file operation.
 - v0.5 remains the current public release; the earliest defensible v1.0
   decision date is 2026-09-01.
 
+## 2026-08-25 — Seven-day window in progress
+
+- The scheduled observation window has opened but is not complete; the first
+  valid readout remains 2026-09-01.
+- No GA4 export or DebugView readout is available in this workspace. Users,
+  sessions, engaged sessions, campaign landings, diagram views/actions,
+  provider/referral clicks, and primary CTA clicks by source/medium remain
+  **not yet observable**, not zero.
+- Tagged and untagged UTM behavior, direct CTA/referral navigation, comments,
+  and confusion signals remain unreviewed as campaign evidence until the
+  window closes.
+- The v1.0 deployment gate remains **not satisfied / not run**. v0.5 remains
+  the current public release; no v1.0 date is assigned.
+
 ## v0.4 — Story Behind the Story
 
 - Expanded the public article with the Council's purpose, disagreement, and

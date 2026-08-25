@@ -127,3 +127,29 @@ cut only after editorial approval, then record its immutable source reference,
 deployment identifier, timestamp, canonical response, social preview response,
 and rollback target in `release-handoff.md`. This workspace does not infer
 production publication from its API or component-preview workflows.
+
+## Seven-day window checkpoint — 2026-08-25
+
+The scheduled window is now in progress, not complete. The first valid
+seven-day review date remains **2026-09-01**, after the 2026-08-25 through
+2026-08-31 window closes. This workspace has no GA4 export or DebugView
+readout available, so no numerical campaign values have been entered.
+
+| Required evidence | 2026-08-25 checkpoint |
+|---|---|
+| Users, sessions, engaged sessions | NOT YET OBSERVABLE — window incomplete; no GA4 readout |
+| Campaign landings by source/medium | NOT YET OBSERVABLE — window incomplete; no GA4 readout |
+| `diagram_view` and `diagram_action` by action | NOT YET OBSERVABLE — window incomplete; no GA4 readout |
+| Provider, referral, and primary CTA clicks | NOT YET OBSERVABLE — window incomplete; no GA4 readout |
+| Tagged/untagged UTM behavior and direct navigation | NOT YET REVIEWED AS CAMPAIGN EVIDENCE — partial-window checks are insufficient |
+| Comments and confusion signals | NOT YET OBSERVABLE — qualitative sample not closed |
+
+**Deployment-gate result:** still **NOT SATISFIED / NOT RUN for v1.0**. The
+GitHub Pages application is a separate SPA surface and does not establish
+external publication of the prepared v1.0 editorial cut. No v1.0 deployment
+identifier, canonical/social verification, or rollback target has been
+recorded for that cut.
+
+**Dated release decision:** keep v0.5 — Council-Assisted Scoring as the current
+public release. Do not date v1.0 before the complete readout and deployment
+gates are reviewed on or after 2026-09-01.

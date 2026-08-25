@@ -62,6 +62,21 @@ fields, cookies, user-entered text, or referral revenue. GA4's campaign
 parameters remain available in the landing URL for attribution; event payloads
 are allow-listed above.
 
+The React/Vite tutorial application uses the same GA4 property and stable
+`content_id`, with `content_version=spa-v1`. GA4's automatic page view captures
+application visits; the SPA additionally sends:
+
+| Event | When | Required parameters |
+|---|---|---|
+| `campaign_landing` | SPA loads with all four campaign parameters | `content_id`, `content_version`, the four named UTM fields |
+| `tutorial_step_view` | A tutorial step becomes active | `content_id`, `content_version`, `step` |
+| `cta_click` | Hero, handoff, or primary action is used | `content_id`, `content_version`, `surface`, `destination` |
+| `outbound_click` | A receipt/archive link is opened | `content_id`, `content_version`, `destination_host`, `destination_path` |
+
+The SPA never sends slider values, checklist text, copied brief text, or other
+user-entered content. An untagged SPA visit does not emit `campaign_landing`,
+but still records ordinary page, step, CTA, and outbound activity.
+
 ## Debug procedure
 
 1. Open the tagged article URL in a private browser window with DevTools
@@ -95,3 +110,18 @@ As of 2026-08-24, the seven-day window scheduled for 2026-08-25 through
 comments, and confusion signals must remain **not yet observable** until the
 window closes. The first valid review date is 2026-09-01; do not fill the
 worksheet with projections or treat pre-window checks as campaign evidence.
+
+## In-window checkpoint — 2026-08-25
+
+The observation window has opened but is not complete. The first valid
+seven-day readout remains **2026-09-01**, after the 2026-08-31 close. No GA4
+export or DebugView readout is available in this workspace, so users, sessions,
+engaged sessions, campaign landings, diagram views/actions, provider clicks,
+referral clicks, and primary CTA clicks by source/medium remain **not yet
+observable** rather than zero.
+
+Tagged and untagged UTM behavior, direct CTA/referral navigation, comments, and
+confusion signals are also **not yet reviewed as campaign evidence**. Any
+pre-window or partial-window link check must remain a contract check only. Keep
+v0.5 current until the complete readout and the external v1.0 deployment gates
+are recorded.
