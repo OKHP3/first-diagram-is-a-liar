@@ -19,7 +19,7 @@
 | Council V1/V2 source files | The named model/provider, preserved by the human editor | `diagrams/v1/` and `diagrams/v2/` |
 | Replit deliberations | Replit entry plus human archive notes | `member-deliberations/replit/` |
 | Public Mermaid renders | Mermaid-hosted links, indexed by the archive | `diagram-manifest.csv` |
-| Slide decks and exports | Human-assembled project artifacts using the archived source material | `slides/` and `attached_assets/` |
+| Slide decks and exports | Human-assembled project artifacts using the archived source material | `slides/` and `../archive/source-captures/presentation-imports/` |
 
 ## Reproducibility rule
 

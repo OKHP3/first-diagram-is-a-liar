@@ -1,7 +1,7 @@
 # Replit V1 — Round 1 Submission (Archived)
 
 **Model:** Replit Auto
-**Member folder:** `member-deliberations/replit/`
+**Member folder:** `etch-ai-sketch-vibe-diagramming-shootout/member-deliberations/replit/`
 **Round:** Round 1 / V1
 **Conditions:** Late-entry specialty submission; exact session date is not recorded
 **Contribution:** First builder-focused Mermaid draft preserved by the human editor

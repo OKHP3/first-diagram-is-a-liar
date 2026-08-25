@@ -1,7 +1,7 @@
 # Replit V2 — Round 2 Submission (Archived)
 
 **Model:** Replit Auto
-**Member folder:** `member-deliberations/replit/`
+**Member folder:** `etch-ai-sketch-vibe-diagramming-shootout/member-deliberations/replit/`
 **Round:** Round 2 / V2
 **Conditions:** Late-entry specialty revision; exact session date is not recorded
 **Contribution:** Interactive builder-focused revision preserved by the human editor

@@ -1,129 +1,61 @@
-# The First Diagram Is Usually a Liar
+# First Diagram Field Guide
 
-**A public methodology archive for the article, the Council of AIs shootout,
-and the prompts that started it all.**
+An interactive tutorial for the idea behind *The First Diagram Is Usually a
+Liar*: use a cheap first sketch to surface assumptions, reveal the loopbacks,
+and create a diagram brief another person can actually use.
 
----
+The published article remains at
+[overkillhill.com/writings/first-diagram-is-a-liar](https://overkillhill.com/writings/first-diagram-is-a-liar/).
+This repository now pairs that evidence archive with a client-side learning
+application. The app is prepared for GitHub Pages, but no live Pages release is
+claimed until its workflow has run successfully.
 
-## The Article
+## Run the guide
 
-Live at:
-**[overkillhill.com/writings/first-diagram-is-a-liar](https://overkillhill.com/writings/first-diagram-is-a-liar/)**
-
-Also published on LinkedIn:
-**[The First Diagram Is Usually a Liar — LinkedIn Pulse](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)**
-
----
-
-## What This Project Is
-
-A LinkedIn article became an experiment. The experiment became a methodology.
-This repo is the receipt stack. The canonical release sequence and attribution
-rules are in
-[`etch-ai-sketch-vibe-diagramming-shootout/canonical-story.md`](etch-ai-sketch-vibe-diagramming-shootout/canonical-story.md).
-
-The article argues that the first diagram almost always lies — it shows the
-happy path instead of the honest path. It introduces ROY (Return on Your Words)
-as the real metric for visual communication, and documents what happened when
-seven AI models competed to diagram the same idea.
-
-The prompts that drove the experiment were not polished. They were not
-lab-grade. They were natural language, spoken at speed, and fired without
-heavy pre-production. That's also part of the thesis: velocity has value.
-Over-engineering a prompt too early creates the same friction the workflow
-was built to escape.
-
-This repo makes all of that visible. The current public page is **v0.5 —
-Council-Assisted Scoring**. The local editorial-cut material is preserved as
-prepared, unpublished work; v0.1 is retained as the historical theatrical
-release.
-
----
-
-## What's in Here
-
-```
-etch-ai-sketch-vibe-diagramming-shootout/
-├── README.md               ← shootout context and methodology
-├── diagram-manifest.csv    ← machine-readable Mermaid link index
-├── council-brief.md        ← the governing brief sent to all council members
-├── prompts/                ← all 8 prompts, lightly cleaned, with context
-├── diagrams/               ← Mermaid source files (.mmd), V1 and V2, all models
-├── images/                 ← rendered PNGs (full and lo-res) + cover image
-└── slides/                 ← the ETCH-AI-SKETCH deck (PPTX + PDF, square + wide)
-docs/
-├── roadmap.md              ← planned and completed project milestones
-└── technology-inventory.md ← authoring and artifact technology baselines
+```bash
+pnpm install --frozen-lockfile
+pnpm dev
 ```
 
----
+For a production-shaped GitHub Pages build:
 
-## The Short Version of the Argument
+```bash
+VITE_BASE_PATH=/first-diagram-is-a-liar/ pnpm build
+```
 
-A picture is not automatically worth 1,000 words.
+## What the application does
 
-The real question is ROY — Return on Your Words:
+1. Captures the reader's plain-language explanation.
+2. Makes them choose a hidden interruption: handoff, decision, or feedback.
+3. Generates a loop-aware Mermaid starter rather than a happy-path-only flow.
+4. Copies a reusable diagram brief or downloads the Mermaid source.
 
-> Understanding produced ÷ Explanation invested
+The guide is static and runs entirely in the browser. It does not call an API,
+store reader input, or claim to generate a finished diagram automatically.
 
-If it costs more to make the diagram than the diagram saves in comprehension,
-the ROI is negative. If a rough prompt generates a diagram that replaces three
-meetings worth of explanation, the ROI is extraordinary.
+## Repository map
 
-Mermaid plus LLMs collapsed the production cost of diagrams enough to make
-them cheap to draft, cheap to revise, and cheap to throw away. That changes
-the game.
+```text
+src/                                      the React, TypeScript, Tailwind guide
+etch-ai-sketch-vibe-diagramming-shootout/ public council evidence and sources
+archive/source-captures/                  named historical imports and raw prompts
+archive/editorial-cut/                    prepared article source, not a live release
+archive/replit-workspace/                 superseded generic Replit API/preview scaffold
+docs/                                     project and technology documentation
+scripts/                                  narrow archive validation helpers
+.agents/                                  repository-local agent skills and metadata
+```
 
----
+## Evidence boundary
 
-## The Council
-
-Seven models participated across two rounds, organized into four tiers.
-
-| Model | Tier | V1 | V2 | Notes |
-|---|---|---|---|---|
-| ChatGPT | Core Five | ✓ | ✓ | Strongest all-around scaffolding |
-| Claude | Core Five | ✓ | ✓ | Best narrative architecture — Round 2 top performer |
-| Copilot | Core Five | ✓ | ✓ | Cleanest renderer-level config — Round 1 top performer |
-| Perplexity | Core Five | ✓ | ✓ | Tightest ROY framing |
-| Gemini | Core Five | ✓ | ✓ | Free tier — capability ceiling noted |
-| ChatGPT V2 Pro | Exhibition | — | ✓ | Pro-tier reasoning — unmatched access |
-| Notion | Specialty | ✓ | ✓ | Archivist and synthesizer role |
-| Replit | Specialty | ✓ | ✓ | Late entry — different context |
-| Mermaid AI | Attempted | — | — | Excluded — context-blind |
-
-Full taxonomy and fairness disclosure in `council-brief.md`.
-
----
-
-## Round Top Performers
-
-**Round 1 — Copilot V1**
-Earned it by configuring Mermaid at the renderer level via YAML front matter —
-not just styling nodes, but operating on the theme engine itself.
-[View on Mermaid.ai ↗](https://mermaid.ai/d/8fe5c9ae-c8ac-4754-98fd-268ae3ceeef7)
-
-**Round 2 — Claude V2**
-Earned it by making the revision loops visible. Solid arrows for forward motion.
-Dashed arrows for the loops everyone always wants to hide.
-[View on Mermaid.ai ↗](https://mermaid.ai/d/2e9a4321-6302-44ca-82cc-e2020479fdf5)
-
----
-
-## Author
-
-**Jamie Hill** — Enterprise architect by day, systems builder by night.
-OverKill Hill P³™ is the personal brand where the nighttime work lives.
-
-[LinkedIn](https://www.linkedin.com/in/jamiehill75) ·
-[OverKill Hill P³™](https://overkillhill.com) ·
-[LinkedIn Company Page](https://www.linkedin.com/company/overkillhillp3)
-
----
+The ETCH-AI-SKETCH archive contains the eight prompt sequence, Mermaid source,
+rendered assets, the tiered council record, and release evidence. Round 1's top
+performer was Copilot V1; Round 2's was Claude V2. Those are round-specific
+results, not a universal model ranking. See
+[`etch-ai-sketch-vibe-diagramming-shootout/canonical-story.md`](etch-ai-sketch-vibe-diagramming-shootout/canonical-story.md)
+for the source-of-truth language.
 
 ## License
 
-The Mermaid source files in `diagrams/` are provided for reference, learning,
-and adaptation. The article text, brand assets, and slide deck content are
-© OverKill Hill P³™. If you adapt the diagrams or methodology, attribution
-is appreciated but not required.
+Mermaid source files are provided for reference, learning, and adaptation. The
+article text, brand assets, and deck content are © OverKill Hill P³™.

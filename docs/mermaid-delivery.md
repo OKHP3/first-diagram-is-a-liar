@@ -4,9 +4,9 @@ The article's featured set is intentionally small and stable:
 
 | ID | Source | Local fallback | Canonical status |
 | --- | --- | --- | --- |
-| `words-structure-understanding` | `writings/first-diagram-is-a-liar/assets/words-structure-understanding.mmd` | matching SVG | article diagram |
-| `feedback-loop` | `writings/first-diagram-is-a-liar/assets/feedback-loop.mmd` | matching SVG | article diagram |
-| `replit-v2` | `writings/first-diagram-is-a-liar/assets/replit-v2.mmd` | matching SVG | safe-mode view; full canonical record is `member-deliberations/replit/v2-diagram.md` |
+| `words-structure-understanding` | `archive/editorial-cut/first-diagram-is-a-liar/assets/words-structure-understanding.mmd` | matching SVG | article diagram |
+| `feedback-loop` | `archive/editorial-cut/first-diagram-is-a-liar/assets/feedback-loop.mmd` | matching SVG | article diagram |
+| `replit-v2` | `archive/editorial-cut/first-diagram-is-a-liar/assets/replit-v2.mmd` | matching SVG | safe-mode view; full canonical record is `etch-ai-sketch-vibe-diagramming-shootout/member-deliberations/replit/v2-diagram.md` |
 
 Each card exposes a view link, source download, copy action, and SVG download.
 The SVG is present in the HTML before JavaScript runs and remains visible if the

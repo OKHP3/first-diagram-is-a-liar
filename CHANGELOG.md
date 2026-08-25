@@ -6,6 +6,20 @@ This changelog tracks the evolution of the article, supporting artifacts, and th
 
 ## [Unreleased]
 
+### Added
+- Added the First Diagram Field Guide, a client-only TypeScript, Vite, and
+  Tailwind tutorial that creates a copyable and downloadable loop-aware Mermaid
+  starter from a reader's explanation.
+- Added a GitHub Pages Actions workflow. Deployment remains unverified until a
+  remote workflow run succeeds.
+
+### Changed
+- Reorganized imported source material under `archive/`, moved Replit member
+  deliberations beside the ETCH archive, and preserved the prepared editorial
+  cut as non-deployed source.
+- Retired the generic Replit API and component-preview scaffold from the active
+  runtime while retaining it under `archive/replit-workspace/`.
+
 ### Recorded
 - Recorded the machine-readable diagram manifest at
   `etch-ai-sketch-vibe-diagramming-shootout/diagram-manifest.csv`.

@@ -3,7 +3,7 @@ import { access } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = process.cwd();
-const page = await readFile(resolve(root, "writings/first-diagram-is-a-liar/index.html"), "utf8");
+const page = await readFile(resolve(root, "archive/editorial-cut/first-diagram-is-a-liar/index.html"), "utf8");
 const diagrams = ["words-structure-understanding", "feedback-loop", "replit-v2"];
 const failures = [];
 const canonical = page.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
@@ -13,16 +13,16 @@ if (canonical !== "https://overkillhill.com/writings/first-diagram-is-a-liar/") 
 
 for (const id of diagrams) {
   for (const ext of ["mmd", "svg"]) {
-    const path = resolve(root, `writings/first-diagram-is-a-liar/assets/${id}.${ext}`);
+    const path = resolve(root, `archive/editorial-cut/first-diagram-is-a-liar/assets/${id}.${ext}`);
     try { await access(path); } catch { failures.push(`missing ${id}.${ext}`); }
   }
   if (!page.includes(`data-diagram-id="${id}"`)) failures.push(`page missing ${id}`);
 }
 
 const requiredLocal = [
-  "writings/first-diagram-is-a-liar/mermaid-init.js",
-  "writings/first-diagram-is-a-liar/theme-additions.css",
-  "member-deliberations/replit/v2-diagram.md",
+  "archive/editorial-cut/first-diagram-is-a-liar/mermaid-init.js",
+  "archive/editorial-cut/first-diagram-is-a-liar/theme-additions.css",
+  "etch-ai-sketch-vibe-diagramming-shootout/member-deliberations/replit/v2-diagram.md",
 ];
 for (const relative of requiredLocal) {
   try { await access(resolve(root, relative)); } catch { failures.push(`missing ${relative}`); }

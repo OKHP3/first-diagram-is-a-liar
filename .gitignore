@@ -49,7 +49,7 @@ Thumbs.db
 .local/
 
 # Vite preview cache
-artifacts/*/.vite/
+.vite/
 
 # Python
 __pycache__/

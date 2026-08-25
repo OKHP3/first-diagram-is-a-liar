@@ -1,4 +1,15 @@
-# Workspace
+# Superseded Replit Workspace Scaffold
+
+This directory preserves the imported Replit API and component-preview
+workspace that was present before the Field Guide application migration. It is
+historical source, not a runnable package in the active root configuration.
+The current application is the client-only Vite guide in `src/`.
+
+The remaining notes describe the preserved scaffold as it was captured. Do not
+use its commands, deployment settings, or architecture as current project
+guidance.
+
+## Captured Workspace Notes
 
 ## Overview
 

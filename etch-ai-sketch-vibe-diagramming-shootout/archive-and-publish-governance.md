@@ -6,15 +6,16 @@ This repository has two intentionally separate responsibilities:
 
 | Surface | Owner | Responsibility | Deployment status |
 |---|---|---|---|
-| `member-deliberations/` and `etch-ai-sketch-vibe-diagramming-shootout/` | Jamie Hill / OverKill Hill P³™ | Evidence archive: prompts, member submissions, rendered artifacts, provenance, and release records | Archive in this workspace; not the public host |
-| `writings/first-diagram-is-a-liar/` | Jamie Hill / OverKill Hill P³™ | Reproducible static source prepared for the external public article | Source only; external deployment is managed and verified outside this workspace |
-| `artifacts/api-server/` and `artifacts/mockup-sandbox/` | Workspace development owner | API and component-preview infrastructure | Development workflows only; not `overkillhill.com` |
+| `etch-ai-sketch-vibe-diagramming-shootout/` | Jamie Hill / OverKill Hill P³™ | Evidence archive: prompts, member submissions, rendered artifacts, provenance, and release records | Archive in this workspace; not the public host |
+| `archive/editorial-cut/first-diagram-is-a-liar/` | Jamie Hill / OverKill Hill P³™ | Reproducible static source prepared for the external public article | Prepared source only; external deployment is managed and verified outside this workspace |
+| `src/` and the Vite root configuration | Workspace development owner | Client-side First Diagram Field Guide tutorial | Prepared for GitHub Pages; live deployment is unverified |
+| `archive/replit-workspace/` | Workspace development owner | Superseded API and component-preview infrastructure | Preserved source; not the active application runtime |
 
 The public production repository and hosting account are external to this
 workspace. A file being present here, or a workflow being healthy here, does
 not mean that it has been deployed to `overkillhill.com`.
 
-Do not imply that a running API or mockup workflow publishes
+Do not imply that a local tutorial build, API, or mockup workflow publishes
 `overkillhill.com`. The production URL is canonical only after external
 deployment has been verified.
 
