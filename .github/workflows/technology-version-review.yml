@@ -1,0 +1,59 @@
+name: Technology version review
+
+on:
+  schedule:
+    - cron: '17 14 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out inventory
+        uses: actions/checkout@v7
+
+      - name: Compare npm stable releases with reviewed baselines
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          inventory='.github/technology-inventory.json'
+          changes=''
+
+          while IFS=$'\t' read -r name package baseline; do
+            latest=$(curl --fail --silent --show-error \
+              "https://registry.npmjs.org/${package}/latest" | jq -r '.version')
+
+            if [[ "${latest}" != "${baseline}" ]]; then
+              changes+="| ${name} | ${baseline} | ${latest} |"$'\n'
+            fi
+          done < <(jq -r '.technologies[] | [.name, .package, .lastReviewedStableVersion] | @tsv' "${inventory}")
+
+          if [[ -z "${changes}" ]]; then
+            echo 'No technology baseline changes found.'
+            exit 0
+          fi
+
+          title='Technology version review required'
+          if gh issue list --state open --search "${title} in:title" --json title --jq 'length' | grep -q '^0$'; then
+            body=$(printf '%s\n' \
+              'A tracked authoring technology has a newer npm stable release.' \
+              '' \
+              '| Technology | Last reviewed baseline | Latest stable |' \
+              '|---|---:|---:|' \
+              "${changes}" \
+              '' \
+              'Review the release notes and decide whether to re-render Mermaid images,' \
+              'update hosted Mermaid diagrams, or regenerate the PPTX/PDF artifacts.' \
+              'After review, update `.github/technology-inventory.json` and' \
+              '`docs/technology-inventory.md` with the new reviewed baseline.')
+            gh issue create --title "${title}" --body "${body}"
+          else
+            echo 'An open technology version review issue already exists.'
+          fi

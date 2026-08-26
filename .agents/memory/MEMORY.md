@@ -1,0 +1,2 @@
+- [Generated runtime metadata](generated-runtime-metadata.md) — Replit may recreate ignored runtime metadata outside the product’s source-controlled configuration.
+- [GitHub workflow pushes](github-workflow-pushes.md) — GitHub PAT scope is not enough until the secret is bound to the current Repl environment.

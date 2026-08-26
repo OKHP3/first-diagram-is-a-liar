@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ----------------------------------------
+       METADATA: Core Document & Character Set
+       ---------------------------------------- -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- ----------------------------------------
+       METADATA: Primary Title & Description
+       ---------------------------------------- -->
+    <title>The First Diagram Is Usually a Liar — OverKill Hill P³™</title>
+    <meta name="description" content="A picture is worth a thousand words — but only if it earns them. On ROY (Return on Your Words), Mermaid diagrams, and why the first diagram is almost always wrong." />
+    <meta name="keywords" content="Mermaid diagrams, visual communication, ROI, ROY, Return on Your Words, LLM prompts, Council of AIs, OverKill Hill, diagramming, Visio, Microsoft Loop" />
+    <meta name="author" content="Jamie Hill" />
+    <!--
+      Release record:
+      - ARTICLE-1.0: prepared local editorial cut, unpublished
+      - Prepared date: 2026-08-24
+      - Source snapshot: committed source tree; see
+        ../diagramming-shootout/release-handoff.md
+      - ARTICLE-0.5 remains the externally verified public release until the
+        external deployment, canonical URL, social preview, and rollback gates pass.
+    -->
+
+    <!-- ----------------------------------------
+       METADATA: Open Graph (Social Sharing)
+       ---------------------------------------- -->
+    <meta property="og:title" content="The First Diagram Is Usually a Liar — OverKill Hill P³™" />
+    <meta property="og:description" content="A picture is worth a thousand words — but only if it earns them. On ROY (Return on Your Words), Mermaid diagrams, and why the first diagram is almost always wrong." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://overkillhill.com/writings/first-diagram-is-a-liar/" />
+    <meta property="og:image" content="https://overkillhill.com/assets/img/etch-ai-sketch-using-a-council-to-design-at-velocity.png" />
+    <meta property="og:image:alt" content="ETCH-AI-SKETCH: seven AI models, two rounds, one Mermaid diagramming shootout" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ----------------------------------------
+       METADATA: Twitter Card (X Social)
+       ---------------------------------------- -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The First Diagram Is Usually a Liar — OverKill Hill P³™" />
+    <meta name="twitter:description" content="On ROY (Return on Your Words), Mermaid diagrams, and why the first diagram is almost always wrong." />
+    <meta name="twitter:image" content="https://overkillhill.com/assets/img/etch-ai-sketch-using-a-council-to-design-at-velocity.png" />
+    <meta name="twitter:image:alt" content="ETCH-AI-SKETCH: seven AI models, two rounds, one Mermaid diagramming shootout" />
+    <meta name="twitter:site" content="@OverKillHillP3" />
+    <meta name="twitter:creator" content="@OverKillHillP3" />
+
+    <!-- ----------------------------------------
+       METADATA: Search & Crawling
+       ---------------------------------------- -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://overkillhill.com/writings/first-diagram-is-a-liar/" />
+
+    <!-- ----------------------------------------
+       METADATA: Color Scheme & Theme
+       ---------------------------------------- -->
+    <meta name="theme-color" content="#111827" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- ----------------------------------------
+       FAVICONS
+       ---------------------------------------- -->
+    <link rel="icon" href="/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- ----------------------------------------
+       STYLESHEETS & FONTS
+       ---------------------------------------- -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=DM+Sans:wght@400;500;600&display=swap" />
+    <link rel="stylesheet" href="/assets/css/theme.css" />
+  </head>
+
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <!-- ----------------------------------------
+       HEADER & NAV
+       ---------------------------------------- -->
+    <header class="site-header" id="top">
+      <div class="container">
+        <div class="logo">
+          <a href="/">
+            <img src="/assets/img/OverKillHillP³-Sentinel-Warning-Square-256.png" alt="OverKill Hill P³ logo" width="40" height="40" />
+            <span class="sr-only">OverKill Hill P³™ Home</span>
+          </a>
+        </div>
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary">
+          <ul>
+            <li><a href="/#forge">The Forge</a></li>
+            <li><a href="/projects/">Our Projects</a></li>
+            <li><a href="/manifesto/">The Manifesto</a></li>
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About OKHP³™</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ----------------------------------------
+       MAIN
+       ---------------------------------------- -->
+    <main id="main">
+
+      <!-- HERO -->
+      <section class="article-hero" aria-labelledby="article-title">
+        <div class="article-hero__inner">
+          <div>
+            <p class="article-hero__eyebrow">
+              <a href="/writings/">Writings</a> · OverKill Hill P³™
+            </p>
+            <h1 class="article-hero__title" id="article-title">
+              The First Diagram Is Usually a Liar
+            </h1>
+            <p class="article-hero__meta">
+              By Jamie Hill · Current public release v0.5 · Verified August 24, 2026 ·
+              <a href="https://www.linkedin.com/company/overkillhillp3" target="_blank" rel="noopener">OverKill Hill P³™</a>
+              · Also on
+              <a href="https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc/?utm_source=overkillhill&amp;utm_medium=owned&amp;utm_campaign=first-diagram-is-a-liar&amp;utm_content=v0-5-article" target="_blank" rel="noopener" data-primary-cta="article" data-surface="article">LinkedIn</a>
+            </p>
+            <p class="article-hero__tagline">
+              A picture is worth a thousand words — but only if it earns them.
+              On ROY (Return on Your Words), Mermaid diagrams, and what happens
+              when you run the same brief through a Council of AIs.
+            </p>
+          </div>
+
+          <!-- Social/hero image is hosted at the verified public asset path. -->
+          <img
+            class="article-hero__image reveal-on-scroll"
+            src="/assets/img/etch-ai-sketch-using-a-council-to-design-at-velocity.png"
+            alt="ETCH-AI-SKETCH — a reimagined Etch-A-Sketch with Prompt and Intent knobs replacing the originals"
+            width="340"
+            height="260"
+            loading="eager"
+          />
+        </div>
+      </section>
+
+      <!-- ARTICLE BODY -->
+      <article class="article-body reveal-on-scroll">
+
+        <p>
+          I've been drawing pictures on computers since the early 1990s. Back then it was
+          <strong>AutoCAD</strong>: black screens, command lines, coordinates instead of a cursor.
+          If you wanted to express an idea visually, you didn't "sketch." You constructed it —
+          line by line — with the same kind of concentration you'd use writing a careful spec.
+        </p>
+
+        <p>
+          That early experience baked in a bias I still carry. A diagram isn't decoration.
+          It's a claim about how reality is structured. And the first claim is almost always wrong.
+        </p>
+
+        <p>
+          Over the decades I've used every diagramming flavor I could get my hands on: house plans,
+          network diagrams, process flows, mind maps, org charts, UML, crow's-foot schemas.
+          Some tools were elegant, many were painful, and nearly all of them charged the same tax —
+          the cost of translating meaning into visuals.
+        </p>
+
+        <p>
+          That tax is why people default to text, even when text is a lousy medium for structure.
+          And that's how we ended up with the modern classics: the 47-bullet Slack message, the
+          "quick summary" that reads like a novella, and the doc everyone bookmarks and nobody finishes.
+          We didn't lack expertise. We lacked compression.
+        </p>
+
+        <figure class="diagram-wrap" data-diagram-id="words-structure-understanding">
+          <div class="diagram-heading">
+            <h3>The compression trade</h3>
+            <span class="diagram-status" data-diagram-status>Static fallback ready</span>
+          </div>
+          <div class="diagram-actions" aria-label="Compression trade diagram actions">
+            <a href="assets/words-structure-understanding.svg" target="_blank" rel="noopener">View fallback</a>
+            <a href="assets/words-structure-understanding.mmd" download>Download source</a>
+            <button type="button" data-copy-diagram>Copy source</button>
+            <a href="assets/words-structure-understanding.svg" download>Download SVG</a>
+          </div>
+          <div class="diagram-stage">
+            <img class="diagram-fallback" src="assets/words-structure-understanding.svg" alt="Words become structure, and structure becomes understanding." />
+            <pre class="mermaid" data-source-url="assets/words-structure-understanding.mmd">
+graph LR
+  A[Words] --> B[Structure]
+  B --> C[Understanding]
+            </pre>
+          </div>
+          <details class="diagram-source">
+            <summary>Read Mermaid source</summary>
+            <pre data-source>graph LR
+  A[Words] --> B[Structure]
+  B --> C[Understanding]</pre>
+          </details>
+          <figcaption class="diagram-caption">The basic trade. Words buy structure. Structure buys understanding.</figcaption>
+        </figure>
+
+        <h2>Comprehension bandwidth is the constraint</h2>
+
+        <p>
+          People don't fail to read because they're lazy. They fail to read because their capacity
+          to absorb meaning is finite, and the workday is an attention shredder.
+        </p>
+
+        <p>
+          Text is excellent for nuance and precision, but it's inefficient at showing flow.
+          It hides forks and dead ends. It forces the reader to reconstruct a system in their head,
+          one sentence at a time, without ever seeing the shape of it.
+        </p>
+
+        <p>
+          When structure matters, reconstruction is the expensive part. You can watch it happen
+          in real time: someone nods through the explanation, then asks a question that proves
+          they assembled a completely different machine in their mind. Nobody's stupid.
+          The medium just didn't carry the structure.
+        </p>
+
+        <blockquote class="article-pullquote">
+          A lot of diagrams are not honest. They're optimism with arrows. They erase the messy
+          edges, exceptions, feedback loops, hidden dependencies — because the author wants to
+          look decisive, or because the tool makes messiness feel like failure.
+        </blockquote>
+
+        <p>
+          That's why the first diagram is usually a liar. Not malicious. <em>Premature.</em>
+          It shows what we hope is true before we've paid the cost to find out what is.
+        </p>
+
+        <h2>ROY: Return on Your Words</h2>
+
+        <p>
+          I've started thinking about this as <strong>ROY — Return on Your Words</strong>.
+        </p>
+
+        <p>
+          Not how many words you wrote. Not how good they sounded. ROY is the amount of
+          understanding produced per unit of explanation invested.
+        </p>
+
+        <p>
+          If you write 800 words and the reader still needs a meeting to understand the system,
+          the ROY is poor. If you write 80 words that generate a picture which makes the system
+          obvious, the ROY can be excellent — even if the picture isn't "beautiful."
+        </p>
+
+        <p>
+          The core thesis: a picture can be worth more than the words that prompted it, if it
+          produces more understanding than prose alone.
+        </p>
+
+        <p>
+          The catch is that for most of my career, the price of producing a useful picture was high.
+          Visio and its cousins made diagrams possible, but they also created friction: you weren't
+          just thinking about the system — you were wrestling the canvas. Alignment, spacing,
+          connectors, swimlanes, the weird moment when you're ten minutes deep into nudging boxes
+          and have forgotten what you were trying to explain.
+        </p>
+
+        <p>
+          The tool didn't just cost time. It pulled you out of the mental mode required to do
+          the work. So diagrams became "presentation artifacts" — something you created at the end,
+          after the thinking was supposedly finished. But the thinking was never finished.
+          That's the point.
+        </p>
+
+        <h2>When diagrams stopped being "drawing"</h2>
+
+        <p>
+          About eight months ago, ChatGPT casually generated a clean visual for a simple process
+          I was describing. My first reaction wasn't awe. It was suspicion — the same feeling you
+          get when something looks too tidy. Then I asked what it was: <strong>a Mermaid diagram</strong>.
+        </p>
+
+        <p>
+          Mermaid is a text-based diagramming language. You describe structure in plain language
+          and it renders a diagram. No canvas anxiety. No toolbar archaeology. You're not arranging
+          shapes — you're declaring relationships.
+        </p>
+
+        <p>
+          Then I discovered that tools like <strong>Microsoft Loop</strong> render Mermaid natively,
+          and that changed the economics in a way I didn't expect. Suddenly the cost curve collapsed.
+          Diagramming stopped feeling like a separate task and started feeling like a mode of thought —
+          structural thinking, expressed in text.
+        </p>
+
+        <p>
+          That shift matters because it changes what the diagram is for. When the diagram is cheap
+          to create, it can be wrong on purpose. You can draft the lie quickly, spot the lie quickly,
+          and iterate toward something truer.
+        </p>
+
+        <figure class="diagram-wrap" data-diagram-id="feedback-loop">
+          <div class="diagram-heading">
+            <h3>The feedback loop</h3>
+            <span class="diagram-status" data-diagram-status>Static fallback ready</span>
+          </div>
+          <div class="diagram-actions" aria-label="Feedback loop diagram actions">
+            <a href="assets/feedback-loop.svg" target="_blank" rel="noopener">View fallback</a>
+            <a href="assets/feedback-loop.mmd" download>Download source</a>
+            <button type="button" data-copy-diagram>Copy source</button>
+            <a href="assets/feedback-loop.svg" download>Download SVG</a>
+          </div>
+          <div class="diagram-stage">
+            <img class="diagram-fallback" src="assets/feedback-loop.svg" alt="Words lead to structure, then understanding, with confusion telemetry feeding back into structure." />
+            <pre class="mermaid" data-source-url="assets/feedback-loop.mmd">
+flowchart LR
+  A[Words] --> B[Structure]
+  B --> C[Understanding]
+  C -->|Confusion telemetry| B
+            </pre>
+          </div>
+          <details class="diagram-source">
+            <summary>Read Mermaid source</summary>
+            <pre data-source>flowchart LR
+  A[Words] --> B[Structure]
+  B --> C[Understanding]
+  C -->|Confusion telemetry| B</pre>
+          </details>
+          <figcaption class="diagram-caption">
+            The real loop. Understanding feeds back into structure. The feedback is not failure —
+            it's the mechanism.
+          </figcaption>
+        </figure>
+
+        <h2>The Council of AIs — and why it works</h2>
+
+        <p>
+          This is where the experiment escalated. Instead of asking one model for "the answer,"
+          I started asking several: ChatGPT, Claude, Copilot, Perplexity, Gemini, Notion.
+          Same prompt, same goal, independent outputs. Then I pulled them back together and
+          compared the differences.
+        </p>
+
+        <p>
+          I call it the <strong>Council of AIs</strong> — and it's less about outsourcing intelligence
+          and more about manufacturing perspective. The value isn't that one model is correct.
+          The value is that disagreement reveals structure.
+        </p>
+
+        <p>
+          One model will assume a clean pipeline. Another will introduce feedback loops.
+          Another will highlight ambiguous handoffs. Another will quietly invent an actor you forgot
+          to name. When you line those outputs up, you get a form of critique that feels a lot like
+          a room of experienced architects — each with their own bias, each making different parts
+          of the system visible.
+        </p>
+
+        <blockquote class="article-pullquote">
+          One prompt to one model is the 47-bullet Slack message.
+          A council is the diagram.
+        </blockquote>
+
+        <p>And the diagram is the scoreboard.</p>
+
+        <p>
+          You can tell immediately whether the idea has shape — or whether it's still fog with
+          confident nouns.
+        </p>
+
+        <h2>The council pattern (steal this)</h2>
+
+        <pre class="article-codeblock">Same brief to all models.
+Do not read each other.
+
+Deliver:
+  1) A 3-part thesis
+  2) A Mermaid diagram (first draft)
+  3) 3 failure modes — where the diagram lies
+
+Then: compare, adjudicate, synthesize.</pre>
+
+        <p>
+          This ties back to <strong>OverKill Hill P³™ — Precision · Protocol · Promptcraft</strong> —
+          because it's the same discipline applied to communication: treat structure as the product,
+          not the ornament. The words are not the deliverable. The understanding is.
+        </p>
+
+        <p>
+          If a paragraph is the best way to carry nuance, write the paragraph. If a diagram kills
+          ambiguity faster than prose, generate the diagram. If you need both, use both — but don't
+          pretend the reader will reconstruct a system from text just because you used complete sentences.
+        </p>
+
+        <p>
+          The field-tested conclusion I didn't expect to land on: the future isn't "more visuals."
+          It's <em>cheaper iteration on structure</em> — until the output earns its space.
+        </p>
+
+        <blockquote class="article-pullquote">
+          If the tool is heavier than the thought, the diagram is already lying.
+        </blockquote>
+
+        <p>
+          If ROY is the metric, and diagrams are suddenly affordable again — what would you stop
+          writing long-form explanations for, and start rendering as structure instead?
+        </p>
+
+        <p>
+          <a href="https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc/?utm_source=overkillhill&amp;utm_medium=owned&amp;utm_campaign=first-diagram-is-a-liar&amp;utm_content=v0-5-article" target="_blank" rel="noopener" data-primary-cta="article" data-surface="article">
+            Join the conversation on LinkedIn →
+          </a>
+        </p>
+
+      </article>
+
+      <!-- CANONICAL RECORD -->
+      <section class="article-body article-record" aria-labelledby="record-heading">
+        <h2 id="record-heading">The canonical record</h2>
+        <p>
+          This local file is the prepared <strong>Article v1.0 Editorial
+          Cut</strong>; the current deployed public edition is
+          <strong>Article v0.5</strong>, verified August 24, 2026. The story it
+          records is intentionally separate from the diagram rounds:
+          <strong>Article v0.1 → Council Round 1 / V1 → Council Round 2 / V2 →
+          Article v0.5 → Article v1.0 Editorial Cut</strong>.
+        </p>
+        <p>
+          Round 1's top performer was <strong>Copilot V1</strong> for
+          renderer-level Mermaid configuration. Round 2's top performer was
+          <strong>Claude V2</strong> for honest revision loops. These are
+          round-specific results; there is no overall council winner.
+        </p>
+        <p>
+          Jamie Hill is the human author, orchestrator, and final editor.
+          OverKill Hill P³™ is the publishing identity. The council members
+          generated drafts and diagrams under different disclosed conditions;
+          their provider names identify contributions, not authorship. Replit
+          V1 and V2 are archived late-entry submissions, not a separate shipped
+          v1.0 product or article. This local editorial cut is not evidence of
+          an externally published v1.0.
+        </p>
+        <p>
+          <a href="https://github.com/OKHP3/first-diagram-is-a-liar" target="_blank" rel="noopener">
+            Read the public repository and provenance record →
+          </a>
+        </p>
+      </section>
+
+      <!-- COUNCIL GALLERY -->
+      <section class="council-gallery" aria-labelledby="council-heading">
+        <div class="council-gallery__inner">
+          <h2 class="council-gallery__heading" id="council-heading">
+            The Council — Round 1 &amp; Round 2 Archive
+          </h2>
+          <p class="council-gallery__subhead">
+            The Core Five received the same brief cold. Notion and Replit are
+            archived specialty entries with different conditions; ChatGPT V2 Pro
+            is an exhibition variant. Round 1 top performer:
+            <strong>Copilot V1</strong> (renderer-level configuration).
+            Round 2 top performer: <strong>Claude V2</strong>
+            (honest, visible revision loops). There is no overall council
+            winner.
+          </p>
+
+          <div class="council-grid">
+
+            <div class="council-card">
+              <span class="council-card__label">Copilot · Round 1 Top Performer</span>
+              <h3 class="council-card__title">Technical Achievement</h3>
+              <p class="council-card__note">
+                Strong architectural framing, clear phase separation. Feels the most like a
+                deliverable, not just an answer. Used the Mermaid theme engine at the renderer
+                level — the difference between painting a wall and designing the room.
+              </p>
+              <div class="council-card__links">
+                <a class="council-card__link" href="https://mermaid.ai/d/8fe5c9ae-c8ac-4754-98fd-268ae3ceeef7" target="_blank" rel="noopener">V1 →</a>
+                <a class="council-card__link" href="https://mermaid.ai/d/ea1ba020-7f26-483d-9892-3d98b5b6db23" target="_blank" rel="noopener">V2 →</a>
+              </div>
+            </div>
+
+            <div class="council-card">
+              <span class="council-card__label">Claude · Round 2 Top Performer</span>
+              <h3 class="council-card__title">Narrative Intelligence</h3>
+              <p class="council-card__note">
+                Often the most elegant storyteller — rich in reasoning. V2 synthesised across
+                the comparable entries and added what none of them had: semantic node shapes, labelled
+                loopback arrows, and a brand layer that makes the diagram a deliverable rather
+                than an illustration.
+              </p>
+              <div class="council-card__links">
+                <a class="council-card__link" href="https://mermaid.ai/d/fade689d-cfd2-47d9-b316-86a21a0533fb" target="_blank" rel="noopener">V1 →</a>
+                <a class="council-card__link" href="https://mermaid.ai/d/2e9a4321-6302-44ca-82cc-e2020479fdf5" target="_blank" rel="noopener">V2 →</a>
+              </div>
+            </div>
+
+            <div class="council-card">
+              <span class="council-card__label">ChatGPT · Synthesis Engine</span>
+              <h3 class="council-card__title">Balanced Composition</h3>
+              <p class="council-card__note">
+                Strong loop logic, good blend of branding and structure. V2 (Heavy Thinking)
+                is more deliberate, less merely clever. The most complete translation of the
+                argument into diagram form.
+              </p>
+              <div class="council-card__links">
+                <a class="council-card__link" href="https://mermaid.ai/d/b49cf4f6-5071-4207-8673-0ae56d328ed6" target="_blank" rel="noopener">V1 →</a>
+                <a class="council-card__link" href="https://mermaid.ai/d/18c4c328-bef3-4d80-bebf-d9127c39fe43" target="_blank" rel="noopener">V2 →</a>
+                <a class="council-card__link" href="https://mermaid.ai/d/e2a6df7d-dbbe-40d6-bdae-967ac33737be" target="_blank" rel="noopener">V2 PRO →</a>
+              </div>
+            </div>
+
+            <div class="council-card">
+              <span class="council-card__label">Perplexity · Research Lead</span>
+              <h3 class="council-card__title">ROY Heuristics &amp; Decision Gates</h3>
+              <p class="council-card__note">
+                Efficient, grounded, and useful — less theater, more utility. The ROY gate
+                nodes are the spine: visuals don't deserve space by default, they pass an
+                investment test. Closest to a runbook you'd pin above the workbench.
+              </p>
+              <div class="council-card__links">
+                <a class="council-card__link" href="https://mermaid.ai/d/2f015a7f-4589-4a27-8cc4-5b2d7bcd9d83" target="_blank" rel="noopener">V1 →</a>
+                <a class="council-card__link" href="https://mermaid.ai/d/1e77a8a7-ec42-47ea-8cc6-8fe03204785c" target="_blank" rel="noopener">V2 →</a>
+              </div>
+            </div>
+
+            <div class="council-card">
+              <span class="council-card__label">Gemini · Auditor</span>
+              <h3 class="council-card__title">Semantic Symmetry</h3>
+              <p class="council-card__note">
+                Prioritises the logic of containment. Subgraphs as strict logical boundaries.
+                "Claude built a masterpiece; I built a machine." V2 uses mixed flow directions
+                intentionally — top-to-bottom for deep thought, left-to-right for progress.
+              </p>
+              <div class="council-card__links">
+                <a class="council-card__link" href="https://mermaid.ai/d/d93b0060-2743-40de-869e-a84dc07553f2" target="_blank" rel="noopener">V1 →</a>
+                <a class="council-card__link" href="https://mermaid.ai/d/54541ba0-3c57-4065-bf53-c698123747bc" target="_blank" rel="noopener">V2 →</a>
+              </div>
+            </div>
+
+            <div class="council-card">
+              <span class="council-card__label">Notion · Scribe &amp; Canon</span>
+              <h3 class="council-card__title">Scannability &amp; Archival Integrity</h3>
+              <p class="council-card__note">
+                Continuity over competition — here to preserve the thread, not win the room.
+                Lane model: Prose → Visual → Ship. Optimised for the diagram a team will still
+                understand six months from now. Quietly effective.
+              </p>
+              <div class="council-card__links">
+                <a class="council-card__link" href="https://mermaid.ai/d/fb3557e2-df35-46f8-a8cd-4abe56c82ed5" target="_blank" rel="noopener">V1 →</a>
+                <a class="council-card__link" href="https://mermaid.ai/d/b40280fd-8ef3-4992-bbe3-9dbfce6fe603" target="_blank" rel="noopener">V2 →</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED ARCHIVE DIAGRAM -->
+      <section class="diagram-archive" aria-labelledby="diagram-archive-heading">
+        <div class="diagram-archive__inner">
+          <p class="article-hero__eyebrow">Featured archive artifact</p>
+          <h2 id="diagram-archive-heading">Replit V2 — the external canonical artifact</h2>
+          <p>
+            Replit V2 is an archived late-entry submission, not the article or an overall winner.
+            Its canonical source and rendered artifact remain in the repository archive; this local
+            safe-mode view preserves the structure without depending on HTML labels, remote images,
+            loose Mermaid security, or click directives.
+          </p>
+          <p class="diagram-archive__links">
+            <a href="https://mermaidchart.cello.so/UhVlNtC2MlS" target="_blank" rel="noopener" data-referral-provider="mermaid">Try Mermaid (referral)</a>
+            <a href="https://replit.com/refer/overkillhillp3" target="_blank" rel="noopener" data-referral-provider="replit">Build on Replit (referral)</a>
+            <a href="https://ko-fi.com/T6T71HCY6A" target="_blank" rel="noopener" data-referral-provider="ko-fi">Support the forge on Ko-fi</a>
+          </p>
+          <figure class="diagram-wrap" data-diagram-id="replit-v2">
+            <div class="diagram-heading">
+              <h3>Replit V2 — archived safe-mode view</h3>
+              <span class="diagram-status">External canonical source</span>
+            </div>
+            <div class="diagram-actions" aria-label="Replit V2 diagram actions">
+              <a href="assets/replit-v2.svg" target="_blank" rel="noopener">View fallback</a>
+              <a href="../member-deliberations/replit/v2-diagram.md" target="_blank" rel="noopener">View canonical artifact</a>
+              <a href="assets/replit-v2.mmd" download>Download source</a>
+              <button type="button" data-copy-diagram>Copy source</button>
+              <a href="assets/replit-v2.svg" download>Download SVG</a>
+            </div>
+            <div class="diagram-stage">
+              <img class="diagram-fallback" src="assets/replit-v2.svg" alt="Replit V2 moves from spark through honest revision and council disagreement to an edited release." />
+              <pre class="mermaid" data-source-url="assets/replit-v2.mmd">flowchart LR
+  A[Spark] --> B[Structure]
+  B --> C{Honest?}
+  C -->|Revise| B
+  C --> D[Council]
+  D --> E[Edited release]</pre>
+            </div>
+            <details class="diagram-source">
+              <summary>Read Mermaid source</summary>
+              <pre data-source>flowchart LR
+  A[Spark] --> B[Structure]
+  B --> C{Honest?}
+  C -->|Revise| B
+  C --> D[Council]
+  D --> E[Edited release]</pre>
+            </details>
+            <figcaption class="diagram-caption">
+              Safe-mode local rendering. The <a href="../member-deliberations/replit/v2-diagram.md">archived V2 record</a>
+              documents the original HTML-label, image, security, and click-directive features.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="article-cta" aria-label="Continue the conversation">
+        <div class="article-cta__inner">
+          <h2 class="article-cta__heading">What's your worst ROY offender?</h2>
+          <p class="article-cta__body">
+            The thing that takes the most words to explain and lands the least shared understanding.
+            Join the conversation on LinkedIn, or explore more from OverKill Hill P³™.
+          </p>
+          <div class="article-cta__actions">
+            <a
+              class="btn btn-primary"
+              href="https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc/?utm_source=overkillhill&amp;utm_medium=owned&amp;utm_campaign=first-diagram-is-a-liar&amp;utm_content=v0-5-article"
+              target="_blank"
+              rel="noopener"
+              data-primary-cta="article"
+              data-surface="article"
+            >
+              Read on LinkedIn
+            </a>
+            <a class="btn btn-quiet" href="/writings/">More writings</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ----------------------------------------
+       FOOTER
+       ---------------------------------------- -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-column">
+          <h3>OverKill Hill P³™</h3>
+          <p>The digital forge for protocol-driven power prompts and custom GPT systems that can withstand real-world complexity.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="/#forge">The Forge</a></li>
+            <li><a href="/universe/">P³ Universe</a></li>
+            <li><a href="/manifesto/">The Manifesto</a></li>
+            <li><a href="/projects/">Our Projects</a></li>
+            <li><a href="/about/">About OKH P³</a></li>
+            <li><a href="/contact/">Contact OKH P³</a></li>
+            <li><a href="/legal/">Legal</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="mailto:contact@overkillhill.com">contact@overkillhill.com</a></li>
+            <li><a href="https://ko-fi.com/T6T71HCY6A" target="_blank" rel="noopener" data-referral-provider="ko-fi">Ko-fi</a></li>
+            <li><a href="https://pro.fiverr.com/s/VYKPpoB" target="_blank" rel="noopener">Fiverr</a></li>
+            <li><a href="https://www.linkedin.com/company/overkillhillp3" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://facebook.com/OverKillHillP3/" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://x.com/OverKillHillP3" target="_blank" rel="noopener">X (Twitter)</a></li>
+            <li><a href="https://www.youtube.com/@OverKillHillP3" target="_blank" rel="noopener">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="current-year"></span> OverKill Hill P³. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- ----------------------------------------
+       SCRIPTS
+       ---------------------------------------- -->
+    <script src="/assets/js/app.js"></script>
+    <script type="module" src="mermaid-init.js"></script>
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The First Diagram Is Usually a Liar",
+        "description": "A picture is worth a thousand words — but only if it earns them. On ROY (Return on Your Words), Mermaid diagrams, and why the first diagram is almost always wrong.",
+        "author": {
+          "@type": "Person",
+          "name": "Jamie Hill",
+          "url": "https://overkillhill.com/about/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "OverKill Hill P³™",
+          "url": "https://overkillhill.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://overkillhill.com/assets/img/OverKillHillP³-Sentinel-Waiting-Square-1024.png"
+          }
+        },
+        "datePublished": "2026-03-17",
+        "dateModified": "2026-08-24",
+        "url": "https://overkillhill.com/writings/first-diagram-is-a-liar/",
+        "image": "https://overkillhill.com/assets/img/etch-ai-sketch-using-a-council-to-design-at-velocity.png",
+        "keywords": "Mermaid diagrams, visual communication, ROI, ROY, Return on Your Words, LLM, Council of AIs, OverKill Hill"
+      }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VJ1BKXS27H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VJ1BKXS27H');
+    </script>
+
+  </body>
+</html>
