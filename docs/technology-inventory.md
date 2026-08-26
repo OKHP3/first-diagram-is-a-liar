@@ -1,6 +1,6 @@
 # Technology Inventory
 
-Reviewed: 2026-08-24
+Reviewed: 2026-08-26
 
 ## Scope
 
@@ -31,7 +31,7 @@ application bundle.
 | Markdown | Editable format for the article archive, prompts, evaluations, and guidance | No version pinned | Not applicable | N/A | Repository content format |
 | CSV | Machine-readable diagram manifest | No dialect or version pinned | Not applicable | N/A | Repository content format |
 | GitHub Actions | Monthly maintenance workflow that checks external authoring-tool releases | Workflow syntax version not pinned | Platform-managed | [GitHub Actions documentation](https://docs.github.com/en/actions) | Repository maintenance |
-| `actions/checkout` | Checks out the repository for the maintenance workflow | `v6` major tag | 6.0.2 | [checkout releases](https://github.com/actions/checkout/releases) | Tracked weekly by Dependabot |
+| `actions/checkout` | Checks out source for GitHub Actions workflows | `v4` in Pages deployment, `v7` in technology review | Not rechecked in this inventory pass | [checkout releases](https://github.com/actions/checkout/releases) | Workflow majors are explicit; tracked by Dependabot |
 | Dependabot | Opens update pull requests for the workflow action | Configuration schema version 2 | Platform-managed | [GitHub Dependabot documentation](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/auto-update-actions) | Tracks GitHub Actions only |
 
 Mermaid frontmatter is present in the Copilot V1 source. Mermaid documents

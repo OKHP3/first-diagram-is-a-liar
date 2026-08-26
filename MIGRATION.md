@@ -15,7 +15,7 @@ Tailwind, Vite tutorial application with a retained evidence archive.
 | `attached_assets/` | `archive/legacy-exports/` | Replace the Replit attachment buffer with a provenance-labelled holding area. |
 | `artifacts/`, `lib/` | removed | Replit API and component-preview scaffold had no role in the tutorial. |
 | `skills/okhp3-skill-promotion/` | removed | Stale publication mirror; `.agents/skills/` remains the local runtime skill source. |
-| Replit workspace files and pnpm metadata | removed | No longer matches the application boundary. |
+| Replit workspace files and pnpm metadata | removed, except the tracked `.replit` workflow shell | The application boundary is root-only; `.replit` supplies only local preview and post-merge orchestration. |
 
 ## Detritus removed
 
@@ -28,15 +28,17 @@ Tailwind, Vite tutorial application with a retained evidence archive.
 Unreachable Git objects were observed during the janitor pass and intentionally
 left untouched as recovery material.
 
-## Follow-up cleanup
+## Current runtime metadata
 
-The remote Replit integration later reintroduced workspace-only metadata after
-the original migration. The npm-based Pages application does not consume it,
-so the following tracked leftovers were removed again:
+The tracked `.replit` file is retained only for the `Start application`
+workflow and the `scripts/post-merge.sh` hook path. It contains no application
+API, database, authentication, or artifact routing. The generated artifact
+directories, API/database libraries, and pnpm workspace metadata remain
+removed.
 
-- `.replit`
-- `pnpm-lock.yaml`
-- `pnpm-workspace.yaml`
+The post-merge script installs from `package-lock.json`, runs the root checks,
+and exits without migrations or external service mutations. This keeps merge
+reconciliation aligned with the root client-only application.
 
 The working tree also contained generated `dist/` and `node_modules/` folders;
 both are ignored build/install outputs and were removed before validation.

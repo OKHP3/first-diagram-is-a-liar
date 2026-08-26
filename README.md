@@ -43,7 +43,7 @@ archive/
   editorial-cut/             prepared local HTML article cut
   legacy-exports/            selected preserved source captures
 docs/                        roadmap, technology inventory, proto-posts
-scripts/                     archive integrity check
+scripts/                     archive, Mermaid, and post-merge validation
 .github/workflows/           GitHub Pages build and deploy
 ```
 
@@ -58,11 +58,17 @@ npm run check
 npm run build
 npm run check:archive
 npm run health:mermaid
+git diff --check
 ```
 
 The GitHub Pages workflow builds the root app with the production base
 `/first-diagram-is-a-liar/`. Live deployment still requires a successful
 Actions run and a Pages smoke test.
+
+After a task merge, the environment runs `scripts/post-merge.sh`. It installs
+from the committed npm lockfile, typechecks, builds, and reruns the archive and
+Mermaid checks. The hook is root-only because this repository has no backend,
+database, or secondary artifact.
 
 ## License and provenance
 

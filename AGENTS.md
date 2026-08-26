@@ -42,8 +42,12 @@ live smoke test succeed.
 - `archive/member-deliberations/`: specialty-role records.
 - `archive/editorial-cut/`: prepared local HTML article cut, not a deployment.
 - `archive/legacy-exports/`: selected historical captures and exports.
-- `docs/`: roadmap, technology inventory, and LinkedIn proto-posts.
+- `docs/`: roadmap, technology inventory, recovery ledger, and LinkedIn
+  proto-posts.
 - `scripts/check-archive.mjs`: archive authority-anchor check.
+- `scripts/check-mermaid-delivery.mjs`: Mermaid source and canonical-link check.
+- `scripts/post-merge.sh`: root-only dependency and validation setup after a
+  task merge.
 - `.github/workflows/deploy-pages.yml`: root Vite build and Pages deployment.
 
 ## Working conventions
@@ -68,6 +72,7 @@ live smoke test succeed.
 npm run check
 npm run build
 npm run check:archive
+npm run health:mermaid
 git diff --check
 git status --short --branch
 ```
@@ -75,7 +80,8 @@ git status --short --branch
 The production Vite base is `/first-diagram-is-a-liar/`; local development
 uses `/`. The app is a client-only SPA with no backend, secrets, OAuth, or
 database. The Pages workflow copies `dist/index.html` to `dist/404.html` for
-fallback behavior.
+fallback behavior. The tracked `.replit` file only provides the local preview
+workflow and the post-merge hook path; application code does not depend on it.
 
 ## Evidence boundaries
 
