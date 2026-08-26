@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 230" role="img" aria-labelledby="title desc">
-  <title id="title">Replit V2 safe-mode archive diagram</title><desc id="desc">A spark becomes structure, is checked for honesty, returns for revision, then goes to council and an edited release.</desc>
-  <rect width="1000" height="230" rx="18" fill="#111827"/>
-  <g font-family="Arial,sans-serif" font-size="21" text-anchor="middle" fill="#e5e7eb" stroke="#c46a2c" stroke-width="3"><rect x="30" y="85" width="140" height="60" rx="12"/><rect x="225" y="85" width="170" height="60" rx="12"/><path d="M490 75l55 40-55 40-55-40z"/><rect x="640" y="85" width="140" height="60" rx="12"/><rect x="835" y="85" width="135" height="60" rx="12"/><text x="100" y="122" stroke="none">Spark</text><text x="310" y="122" stroke="none">Structure</text><text x="490" y="122" stroke="none">Honest?</text><text x="710" y="122" stroke="none">Council</text><text x="902" y="122" stroke="none">Edited</text></g>
-  <g fill="none" stroke="#c46a2c" stroke-width="4"><path d="M170 115h55m-12-10 12 10-12 10M395 115h38m-12-10 12 10-12 10M545 115h95m-12-10 12 10-12 10M780 115h55m-12-10 12 10-12 10M490 75V30H310V85m-12-12 12 12 12-12"/></g><text x="400" y="23" fill="#9ca3af" font-family="Arial,sans-serif" font-size="17" text-anchor="middle">Revise</text>
-</svg>

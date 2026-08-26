@@ -43,6 +43,7 @@ archive/
   editorial-cut/             prepared local HTML article cut
   legacy-exports/            selected preserved source captures
 docs/                        roadmap, technology inventory, proto-posts
+public/                      static icons and social-preview assets
 scripts/                     archive, Mermaid, and post-merge validation
 .github/workflows/           GitHub Pages build and deploy
 ```

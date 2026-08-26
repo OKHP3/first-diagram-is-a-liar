@@ -12,7 +12,8 @@ historical evidence.
 - **Known-good application baseline:** Git commit `a5d7c86`.
 - **Canonical runtime:** the root TypeScript, React, Tailwind, and Vite app.
 - **Canonical evidence surface:** `archive/`.
-- **Historical recovery evidence:** `.migration-backup/` and Git history.
+- **Historical recovery evidence:** the canonical root tree, `archive/`, and Git
+  history.
 
 ## Recovery map
 
@@ -20,7 +21,7 @@ historical evidence.
 | --- | --- | --- |
 | Restored | Root app, npm package contract, lockfile, Vite configuration, public assets, scripts, documentation, and Pages workflow from the known-good baseline | Returned to the repository root as the active tutorial. |
 | Carried forward | Updated archive README, campaign/release records, v1.0 evidence and synthesis handoffs, and v0.6–v0.9 specialist chapters | Restored under `archive/` because they are evidence, not a runtime surface. |
-| Preserved | `.migration-backup/`, including the full migration-era archive and generated source | Left intact and unmodified as recovery evidence. It is not an active app source. |
+| Consolidated | The unique project content from `.migration-backup/`, including agent support, release documents, and public visual assets | Moved up to its matching root-relative paths. The nested mirror is no longer an active or archival surface. |
 | Retired from the active tree | Artifact applications, API/database libraries, pnpm workspace files, Replit runtime configuration, and the generic GitHub Pages guide | Removed from the active repository shape. Their commits remain recoverable through Git history. |
 | Preserved historical input | `attached_assets/` | Retained as source material; it does not define the active product. |
 
@@ -43,11 +44,14 @@ historical evidence.
   they extend release provenance without changing the tutorial’s claimed public
   publication state.
 
-### Proposed
+### Consolidated
 
-- Keep `.migration-backup/` until a later, separately approved archival
-  retention or removal decision. No cleanup of that preserved recovery record
-  is part of this recovery.
+- The tracked `.migration-backup/` mirror was removed after its unique
+  project-relevant files were moved to their matching root-relative paths.
+- The current root versions won all shared-path collisions; historical
+  migration versions remain recoverable through Git history.
+
+### Proposed
 
 ### Unknown
 

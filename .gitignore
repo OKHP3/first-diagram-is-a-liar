@@ -49,6 +49,9 @@ Thumbs.db
 .local/
 .vite/
 
+# migration recovery mirrors
+.migration-backup/
+
 # Vite preview cache
 artifacts/*/.vite/
 
