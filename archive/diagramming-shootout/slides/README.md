@@ -29,12 +29,19 @@ screen presentation.
 18 slides structured as follows:
 
 - **Round 1 title slide** — competition framing and brief summary
-- **6 model slides** (V1 round) — one per Core Five model plus Notion.
-  Each slide shows the diagram with evaluation notes. Replit was not
-  part of the original 18-slide deck.
+- **7 diagram slides** (V1 round) — one per archived V1 record: the Core Five,
+  Notion, and Replit
 - **Round 2 title slide** — same brief, better instincts
-- **7 redesign slides** (V2 round) — one per model, what changed and why
+- **8 diagram slides** (V2 round) — one per archived V2 record, including the
+  ChatGPT V2 Pro exhibition variant, Notion, and Replit
 - **Final Read slide** — top performer declarations and scoring rationale
+
+The deck therefore contains **15 distinct diagram records** across 18 slides.
+The two title slides and the Final Read slide are framing/result slides, not
+additional diagrams. The deck's `2/18`-style labels are slide positions and
+must not be read as an 18-diagram count. See the dated
+[count reconciliation](../../../docs/diagram-count-reconciliation-2026-08-27.md)
+for the evidence boundary.
 
 Top performer callouts appear in OverKill Hill P³™ amber.
 

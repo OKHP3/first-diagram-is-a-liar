@@ -34,6 +34,22 @@ and the local editorial cut are intentionally recorded separately.
 - **No overall council winner is declared.** The rounds had different
   conditions and criteria; the records above are the complete result language.
 
+## Count boundary
+
+The archive's `diagram-manifest.csv` contains **15 distinct diagram records**:
+7 V1 records and 8 V2 records. The square and wide exported decks each contain
+18 slides: 15 diagram-bearing slides, two round-title slides, and one Final Read
+slide. The deck count is therefore not an 18-diagram record count. Full- and
+lo-resolution PNGs are alternate renditions of those same 15 records.
+
+The currently published v0.5 article historically says “All 18 diagrams” in
+its deck section. That wording is preserved in the external source and is not
+silently rewritten here. The supported wording for a future editorial release
+is **15 diagram records across V1 and V2, presented in an 18-slide deck**;
+owner/editorial approval remains required before changing public copy. See
+[`../../docs/diagram-count-reconciliation-2026-08-27.md`](../../docs/diagram-count-reconciliation-2026-08-27.md)
+for the evidence matrix and claim classifications.
+
 ## Version rule
 
 `ARTICLE-1.0` names the prepared edited article release, not a selected “winning”
