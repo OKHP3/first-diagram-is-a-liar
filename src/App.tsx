@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { notionSourceDigest } from "./notion-sourced";
+import registrySnapshot from "../archive/notion-captures/visual-language-diagram-types.json";
 
 type CouncilTier = "Core Five" | "Exhibition" | "Specialty" | "Attempted";
 
@@ -19,6 +21,60 @@ const council: Array<{ name: string; tier: CouncilTier; role: string; result: st
   { name: "ChatGPT V2 Pro", tier: "Exhibition", role: "Raised capability ceiling", result: "Exhibition only", note: "Interesting and instructive, but not a direct comparison with the Core Five." },
   { name: "Notion + Replit", tier: "Specialty", role: "Archivist and builder", result: "Different brief", note: "Useful specialty perspectives. Neither entered the same cold-start contest." },
   { name: "Mermaid AI", tier: "Attempted", role: "Context-blind attempt", result: "Excluded", note: "Jumped to drawing before it understood the argument. That failure is part of the lesson." },
+];
+
+const sourceCaptures = [
+  { label: "ROY × Mermaid competition", tag: "Experiment spine", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/roy-mermaid-competition.md", note: "The thesis, ROY gate, and hybrid synthesis." },
+  { label: "Public Hub working copy", tag: "v0.3 baseline", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/public-hub-working-copy.md", note: "The eight-prompt sequence and launch logic." },
+  { label: "Article v0.1", tag: "Compressed cut", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.1.md", note: "The origin story and first council brief." },
+  { label: "Article v0.4", tag: "Method cut", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.4.md", note: "The clearest fan out, compare, adjudicate, synthesize method." },
+  { label: "Article v0.5", tag: "Current lineage", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.5.md", note: "Council interviews, scoring dimensions, and the current release boundary." },
+  { label: "Article v0.6", tag: "Notion deep dive", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.6.md", note: "The writer's room, PRD, consolidation, and documentarian role." },
+  { label: "Article v0.8", tag: "Rematch outline", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.8.md", note: "Preserved separately from the repository Theme Builder packet." },
+  { label: "Article v0.9", tag: "Theme Builder gap", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.9.md", note: "Preserved separately from the repository BPMN packet." },
+  { label: "Article v1.0 source vault", tag: "Receipt structure", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v1.0-source-vault.md", note: "Case-study receipts and reusable method, clearly marked incomplete." },
+];
+
+type DiagramRegistryRecord = {
+  diagramType: string;
+  family: string | null;
+  purpose: string | null;
+  definition: string | null;
+  mermaidSupport: string | null;
+  mermaidClosestMatch: string | null;
+  themeConfidence: string | null;
+  notationCompliance: string | null;
+  examplePriority: string | null;
+  themeBuilderImportance: string | null;
+  supportWarningNeeded: boolean | null;
+  actionLane: string | null;
+  exampleFile: string | null;
+  notes: string | null;
+  originBegan: string | null;
+  domainSpecificity: string | null;
+  stillUsed: string | null;
+  regionSpecificity: string | null;
+  researchPriority: string | null;
+  semanticFidelityRisk: string | null;
+  newTypeCandidate: boolean | null;
+  commonShapes: string | null;
+  primaryRoles: string[];
+  createdTime: string | null;
+};
+
+const diagramRegistry = registrySnapshot.records as DiagramRegistryRecord[];
+const registrySupportCounts = diagramRegistry.reduce<Record<string, number>>((counts, record) => {
+  const support = record.mermaidSupport ?? "Unclassified";
+  counts[support] = (counts[support] ?? 0) + 1;
+  return counts;
+}, {});
+const registryHighlights = diagramRegistry.filter((record) => record.examplePriority === "Tier 1").slice(0, 6);
+
+const councilMethod = [
+  ["01", "Fan out", "Same brief, independent runs, no cross-contamination."],
+  ["02", "Compare", "Look for divergence, not just the most confident answer."],
+  ["03", "Adjudicate", "Separate structural signal from decorative noise."],
+  ["04", "Synthesize", "Build the hybrid that none of the originals contained."],
 ];
 
 const checklist = [
@@ -126,6 +182,39 @@ function DiagramWorkbench({ showLoops, onToggleLoops }: { showLoops: boolean; on
     </div>
   </div>;
 }
+function SourceLibrary() {
+  return <div className="source-library panel">
+    <div className="source-library-head"><div><div className="panel-kicker">PUBLIC-SAFE SOURCE COPIES</div><h3>The writer's room, left inspectable.</h3></div><a className="source-library-index" href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/notion-captures" target="_blank" rel="noreferrer">Open the source library ↗</a></div>
+    <p className="source-library-intro">The captured Notion pages add the editorial memory behind the council. These normalized copies keep the method, history, and open version questions in the repository without exposing private workspace links or signed attachments.</p>
+    <div className="source-method-grid">{councilMethod.map(([number, label, note]) => <div className="source-method" key={number}><span className="note-number">{number}</span><strong>{label}</strong><p>{note}</p></div>)}</div>
+    <div className="source-capture-grid">{sourceCaptures.map((capture) => <a className="source-capture" href={capture.href} target="_blank" rel="noreferrer" key={capture.label}><span className="mono-label">{capture.tag}</span><strong>{capture.label} ↗</strong><span>{capture.note}</span></a>)}</div>
+  </div>;
+}
+
+function DiagramRegistrySnapshot() {
+  return <div className="registry-snapshot panel">
+    <div className="registry-heading"><div><div className="panel-kicker">ADJACENT NOTION DATABASE / PUBLIC-SAFE SNAPSHOT</div><h3>Diagram support is part of the truth.</h3></div><span className="registry-count">{diagramRegistry.length} records</span></div>
+    <p className="registry-intro">The connected workspace also contains a diagram taxonomy registry. It is maintained for the adjacent Mermaid Theme Builder effort, but its support vocabulary sharpens this tutorial's warning: native, partial, emulatable, gap, and external are not interchangeable claims.</p>
+    <div className="registry-summary">{["Native", "Partial", "Emulatable", "Gap", "External"].map((support) => <div className="registry-stat" key={support}><strong>{registrySupportCounts[support] ?? 0}</strong><span>{support}</span></div>)}</div>
+    <div className="registry-highlights">{registryHighlights.map((record, index) => <article className="registry-highlight" key={`${record.diagramType}-${index}`}><span className="mono-label">{record.family ?? "Unclassified"}</span><h4>{record.diagramType}</h4><p>{record.mermaidSupport ?? "Unclassified"} / {record.themeConfidence ?? "confidence not set"}</p><small>{record.exampleFile ?? "No example file recorded"}</small></article>)}</div>
+    <details className="registry-details"><summary>Open the copied registry record set</summary><div className="registry-table-wrap"><table className="registry-table"><caption>Public-safe snapshot of the Notion Visual Language Diagram Types database</caption><thead><tr><th>Diagram type</th><th>Family</th><th>Mermaid support</th><th>Theme confidence</th><th>Notation</th><th>Priority</th><th>Example</th><th>Action</th></tr></thead><tbody>{diagramRegistry.map((record, index) => <tr key={`${record.diagramType}-${index}`}><td><strong>{record.diagramType}</strong><small>{record.purpose ?? record.definition ?? ""}</small></td><td>{record.family ?? "-"}</td><td>{record.mermaidSupport ?? "-"}</td><td>{record.themeConfidence ?? "-"}</td><td>{record.notationCompliance ?? "-"}</td><td>{record.examplePriority ?? "-"}</td><td>{record.exampleFile ?? "-"}</td><td>{record.actionLane ?? "-"}</td></tr>)}</tbody></table></div></details>
+    <p className="registry-note">This snapshot omits Notion record IDs, URLs, workspace structure, and private links. The complete normalized record data is checked into the repository with the source captures.</p>
+  </div>;
+}
+
+function SourceRoom() {
+  return <section className="source-room" aria-labelledby="source-room-title">
+    <div className="source-room-heading"><div><p className="eyebrow"><span className="eyebrow-mark">↳</span>{notionSourceDigest.eyebrow}</p><h3 id="source-room-title">{notionSourceDigest.title}</h3></div><span className="source-room-stamp">PUBLIC-SAFE COPY / 9 PAGES + 1 DB</span></div>
+    <p className="source-room-intro">{notionSourceDigest.intro}</p>
+    <div className="source-stage-grid">{notionSourceDigest.stages.map((stage) => <article className="source-stage" key={stage.label}><span className="source-stage-label">{stage.label}</span><h4>{stage.title}</h4><p>{stage.copy}</p></article>)}</div>
+    <div className="source-receipt-wrap"><div className="panel-kicker">THE PUBLIC RECEIPT STACK</div><div className="source-receipt-grid">{notionSourceDigest.receipts.map((receipt) => <article className="source-receipt" key={receipt.label}><span className="source-stage-label">{receipt.label}</span><h4>{receipt.title}</h4><p>{receipt.copy}</p></article>)}</div></div>
+    <div className="source-cycle-wrap"><div className="panel-kicker">THE COUNCIL LOOP</div><div className="source-cycle-grid">{notionSourceDigest.cycle.map((cycle, index) => <article className="source-cycle" key={cycle.label}><span className="source-cycle-number">{String(index + 1).padStart(2, "0")}</span><h4>{cycle.label}</h4><p>{cycle.copy}</p></article>)}</div></div>
+    <div className="source-release-wrap"><div className="panel-kicker">THE LINEAGE / STATUS STAYS VISIBLE</div><div className="source-release-grid">{notionSourceDigest.releases.map((release) => <article className={`source-release source-release-${release.status}`} key={release.version}><div className="source-release-top"><span>{release.version}</span><small>{release.status}</small></div><h4>{release.label}</h4><p>{release.copy}</p></article>)}</div></div>
+    <SourceLibrary />
+    <DiagramRegistrySnapshot />
+    <p className="source-room-note">{notionSourceDigest.sourceNote}</p>
+  </section>;
+}
 
 function App() {
   const [activeStep, setActiveStep] = useState(0);
@@ -205,7 +294,11 @@ function App() {
       {activeStep === 1 && <section className="content-width step-section"><SectionIntro eyebrow="02 / THE EXCHANGE RATE" title="Measure what the picture bought." copy="ROY is not a beauty score. It is a pressure test: how much shared understanding did the visual return for the words and effort invested?" /><div className="roy-layout"><div className="panel control-panel"><div className="panel-kicker">YOUR DRAFT INPUT</div><label htmlFor="words">Words invested <output>{words}</output></label><input id="words" type="range" min="20" max="200" step="5" value={words} onChange={(event) => setWords(Number(event.target.value))} /><div className="range-notes"><span>quick sketch</span><span>over-explained</span></div><label htmlFor="clarity">Clarity delivered <output>{clarity}/10</output></label><input id="clarity" type="range" min="1" max="10" value={clarity} onChange={(event) => setClarity(Number(event.target.value))} /><div className="range-notes"><span>muddy</span><span>shared model</span></div><div className="control-callout">A high score is not permission to stop thinking. It is a signal to inspect the assumptions before you ship.</div></div><div className="roy-meter"><div className="meter-head"><span className="panel-kicker">LIVE ROY READOUT</span><span className="meter-status">{royScore >= 5 ? "EARNING SPACE" : "NEEDS WORK"}</span></div><div className="roy-number" aria-live="polite">{royScore}<span>x</span></div><div className="formula"><span>clarity delivered</span><strong>÷</strong><span>words invested</span></div><div className="meter-bar"><span style={{ width: `${Math.min(100, royScore * 10)}%` }} /></div><p>{royScore >= 5 ? "The diagram is starting to pay rent. Now ask what it hides." : "The words are doing too much work. Reduce friction before adding decoration."}</p></div></div><div className="quote-strip"><span className="quote-mark">“</span><p>A picture is not automatically worth 1,000 words. The real metric is the clarity, compression, and shared understanding extracted per word invested.</p><span className="quote-source">LIVE ARTICLE / v0.5</span></div><StepNav previous={0} next={2} onSelect={goToStep} /></section>}
       {activeStep === 2 && <section className="content-width step-section"><SectionIntro eyebrow="03 / THE WORKBENCH" title="Draw the truth, not the brochure." copy="A first pass is allowed to be wrong. The useful correction is to make the wrong turn, doubt, and return path part of the model." /><DiagramWorkbench showLoops={showLoops} onToggleLoops={() => setShowLoops((current) => !current)} /><div className="two-column-notes"><div><span className="note-number">01</span><h3>Start ugly.</h3><p>Get the shape out of your head before you spend time styling it. The first draft is diagnostic equipment.</p></div><div><span className="note-number">02</span><h3>Make revision visible.</h3><p>Solid arrows show what happened. Dashed arrows show what it took to get there. Both are part of the story.</p></div></div><StepNav previous={1} next={3} onSelect={goToStep} /></section>}
       {activeStep === 3 && <section className="content-width step-section"><SectionIntro eyebrow="04 / THE COUNCIL" title="Use disagreement as a variance engine." copy="Multiple models do not magically produce truth. They expose different instincts. The human work is to compare, question, borrow, reject, and synthesize." /><div className="council-grid">{council.map((member, index) => <article className={`council-card tier-${member.tier.toLowerCase()}`} key={member.name}><div className="council-card-top"><span className="tier-pill">{member.tier}</span><span className="card-index">{String(index + 1).padStart(2, "0")}</span></div><h3>{member.name}</h3><p className="member-role">{member.role}</p><p className="member-result">{member.result}</p><p className="member-note">{member.note}</p></article>)}</div><div className="fairness-note"><span className="fairness-icon">!</span><div><strong>Fairness is part of the artifact.</strong><p>Core Five means direct comparison. Exhibition and Specialty entries stay visible, but their different access or context is not flattened into a fake leaderboard.</p></div></div><StepNav previous={2} next={4} onSelect={goToStep} /></section>}
+<<<<<<< HEAD
        {activeStep === 4 && <section className="content-width step-section"><SectionIntro eyebrow="05 / THE HANDOFF" title="Ship the proof someone else can use." copy="A tutorial is only useful when it changes the next move. Run the checklist, copy the compact brief, and keep the receipts attached." /><div className="handoff-layout"><div className="panel checklist-panel"><div className="panel-kicker">SHIP CHECK / {readyCount} OF {checklist.length}</div>{checklist.map((item) => <label className={`check-row ${checked[item.id] ? "is-checked" : ""}`} key={item.id}><input type="checkbox" checked={Boolean(checked[item.id])} onChange={() => toggleCheck(item.id)} /><span className="check-box" aria-hidden="true">✓</span><span>{item.label}</span></label>)}</div><div className="panel brief-panel"><div className="panel-kicker">THE COMPACT BRIEF</div><p className="brief-copy">{compactBrief}</p><div className="handoff-actions"><button className="button button-primary download-handoff-button" onClick={downloadHandoff}>{handoffDownloaded ? "Handoff downloaded" : "Download Markdown handoff"} <span>{handoffDownloaded ? "✓" : "↓"}</span></button><button className="button button-quiet copy-brief-button" onClick={copyBrief}>{copied ? "Copied to clipboard" : copyFailed ? "Try copying again" : "Copy the brief"} <span>{copied ? "✓" : "↗"}</span></button></div><p className="handoff-note">Local working file only — no cloud backup, account, or server storage. The handoff records this browser’s current tutorial state; it is not a verdict.</p><p className="copy-status" role="status" aria-live="polite">{handoffDownloadFailed ? "The browser could not start a local download. You can still copy the brief above." : copyFailed ? "Clipboard access is unavailable. Select the brief above to copy it manually, or download the full Markdown handoff." : copied ? "Brief copied to your clipboard." : handoffDownloaded ? `Saved locally as ${handoffFilename}.` : ""}</p></div></div><div className="final-card"><div><p className="eyebrow"><span className="eyebrow-mark">↳</span>THE POINT</p><h3>The winning diagram did not exist in any single output.</h3><p>It emerged from comparing the field. That is the method: make the disagreement inspectable, then make a human decision.</p></div><div className="final-mark">ROY<br /><span>∞</span></div></div><div className="source-links"><span className="panel-kicker">KEEP GOING</span>{publicSourceLinks.slice(3).map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>{source.label} ↗</a>)}</div><StepNav previous={3} next={0} onSelect={goToStep} last /></section>}
+=======
+       {activeStep === 4 && <section className="content-width step-section"><SectionIntro eyebrow="05 / THE HANDOFF" title="Ship the proof someone else can use." copy="A tutorial is only useful when it changes the next move. Run the checklist, copy the compact brief, and keep the receipts attached." /><div className="handoff-layout"><div className="panel checklist-panel"><div className="panel-kicker">SHIP CHECK / {readyCount} OF {checklist.length}</div>{checklist.map((item) => <label className={`check-row ${checked[item.id] ? "is-checked" : ""}`} key={item.id}><input type="checkbox" checked={Boolean(checked[item.id])} onChange={() => toggleCheck(item.id)} /><span className="check-box" aria-hidden="true">✓</span><span>{item.label}</span></label>)}</div><div className="panel brief-panel"><div className="panel-kicker">THE COMPACT BRIEF</div><p>Show the real thinking path. Include the decision that could fail, the revision loop, and the test that proves the diagram earns its words. Keep only shapes that remove confusion.</p><button className="button button-primary" onClick={copyBrief}>{copied ? "Copied to clipboard" : copyFailed ? "Try copying again" : "Copy the brief"} <span>{copied ? "✓" : "↗"}</span></button><p className="copy-status" role="status" aria-live="polite">{copyFailed ? "Clipboard access is unavailable. Select the brief above to copy it manually." : copied ? "Brief copied to your clipboard." : ""}</p></div></div><div className="final-card"><div><p className="eyebrow"><span className="eyebrow-mark">↳</span>THE POINT</p><h3>The winning diagram did not exist in any single output.</h3><p>It emerged from comparing the field. That is the method: make the disagreement inspectable, then make a human decision.</p></div><div className="final-mark">ROY<br /><span>∞</span></div></div><SourceRoom /><div className="source-links"><span className="panel-kicker">KEEP GOING</span><a href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout" target="_blank" rel="noreferrer">Browse the preserved experiment ↗</a><a href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout/prompts" target="_blank" rel="noreferrer">Read all eight prompts ↗</a><a href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut" target="_blank" rel="noreferrer">Inspect the editorial cut ↗</a><a href="https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/docs/notion-source-reconciliation-2026-08-27.md" target="_blank" rel="noreferrer">Read the source map ↗</a></div><StepNav previous={3} next={0} onSelect={goToStep} last /></section>}
+>>>>>>> origin/main
       <footer className="site-footer"><span><BrandMark /> / Precision · Protocol · Promptcraft</span><span>Built as a working tutorial, not a written exercise in hypocrisy.</span></footer>
      </main>
    </div></>;
