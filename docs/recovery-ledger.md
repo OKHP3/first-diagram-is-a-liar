@@ -37,6 +37,10 @@ historical evidence.
   copies `dist/index.html` to `dist/404.html`.
 - The Council taxonomy remains visible as Core Five, Exhibition, Specialty,
   and Attempted rather than a flattened leaderboard.
+- The external GitHub Actions run and GitHub Pages browser smoke test passed;
+  the dated evidence is recorded in
+  [`final-evidence-gate-2026-08-27.md`](final-evidence-gate-2026-08-27.md) and
+  [`github-pages-delivery.md`](github-pages-delivery.md).
 
 ### Inferred
 
@@ -55,10 +59,12 @@ historical evidence.
 
 ### Unknown
 
-- GitHub Actions and the public GitHub Pages site have not been verified by this
-  local recovery.
+- This local recovery ledger does not by itself prove that its checkout equals
+  the externally deployed Pages artifact; the two source commits are recorded
+  separately in the final evidence gate.
 - No live publication, campaign metric, or v1.0 release is claimed by this
   ledger.
+- No Replit-hosted publication URL is verified or claimed.
 - The Replit environment may regenerate an ignored `.replit` file containing
   only its Node runtime module declaration after workspace reconciliation. It
   is not source-controlled, has no run command or product configuration, and

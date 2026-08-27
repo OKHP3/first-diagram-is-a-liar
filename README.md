@@ -86,8 +86,10 @@ This is a local acceptance check, not a GitHub Pages or hosted-renderer smoke
 test.
 
 The GitHub Pages workflow builds the root app with the production base
-`/first-diagram-is-a-liar/`. Live deployment still requires a successful
-Actions run and a Pages smoke test.
+`/first-diagram-is-a-liar/`. The successful Actions run and Pages smoke test
+are recorded in the dated final evidence gate and current hosted evidence:
+[`docs/final-evidence-gate-2026-08-27.md`](docs/final-evidence-gate-2026-08-27.md);
+this repository makes no claim of `.replit.app` publication.
 
 After a task merge, the environment runs `scripts/post-merge.sh`. It installs
 from the committed npm lockfile, typechecks, builds, and reruns the archive and
