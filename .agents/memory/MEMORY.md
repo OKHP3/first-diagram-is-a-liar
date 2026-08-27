@@ -1,2 +1,3 @@
 - [Generated runtime metadata](generated-runtime-metadata.md) — Replit may recreate ignored runtime metadata outside the product’s source-controlled configuration.
 - [GitHub workflow pushes](github-workflow-pushes.md) — GitHub PAT scope is not enough until the secret is bound to the current Repl environment.
+- [Local browser acceptance](browser-acceptance.md) — Reuse the managed preview before starting another Vite watcher to avoid inotify exhaustion.

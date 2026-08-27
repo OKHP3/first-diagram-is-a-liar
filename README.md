@@ -59,8 +59,24 @@ npm run check
 npm run build
 npm run check:archive
 npm run health:mermaid
+npm run test:acceptance
 git diff --check
 ```
+
+### Local browser acceptance
+
+`npm run test:acceptance` starts a temporary local Vite server and drives the
+actual tutorial in headless Chromium. It covers the five-step journey, ROY
+recalculation, revision-loop visibility, Council condition labels, checklist
+completion and reload persistence, clipboard failure feedback, keyboard-facing
+semantics, and the 390px narrow viewport.
+
+The command needs a locally installed Chromium or Chrome executable. Chromium
+is available in the Replit development environment; on another machine, set
+`CHROMIUM_PATH` to the executable path when it is not on `PATH`. It uses no
+credentials, analytics, private sources, hosted test service, or deployment.
+This is a local acceptance check, not a GitHub Pages or hosted-renderer smoke
+test.
 
 The GitHub Pages workflow builds the root app with the production base
 `/first-diagram-is-a-liar/`. Live deployment still requires a successful
