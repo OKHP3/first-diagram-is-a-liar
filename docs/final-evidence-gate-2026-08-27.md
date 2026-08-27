@@ -9,6 +9,13 @@ also have a successful externally verified smoke test, recorded separately from
 the local checkout. This record makes no claim that the application was
 published through Replit and does not claim a `.replit.app` publication.
 
+**Release authority decision:** Future GitHub Pages publications from `main`
+require explicit approval from the repository owner or a maintainer explicitly
+delegated by the owner. That approval must identify the release candidate and
+be recorded before the merge/push that triggers publication, or before a manual
+dispatch from `main`. The current workflow remains unchanged: a successful
+deployment is technical evidence and is not, by itself, release authorization.
+
 ## Evidence boundary
 
 The local matrix was run on local commit
@@ -68,6 +75,9 @@ the current application.
   the first interactive transition.
 - Council result language remains round-specific. No overall winner is claimed,
   and Specialty entries are not presented as direct competitors.
+- Future Pages release authority is owner-controlled: the repository owner or
+  an explicitly delegated maintainer must approve each publication before its
+  triggering merge/push or manual dispatch.
 
 ### Inferred
 
@@ -83,6 +93,11 @@ the current application.
 - A maintainer should use the successful Pages run and public route as the
   external review baseline, while retaining the local matrix as reproducible
   source evidence.
+- For each future release, the evidence record should include the approver,
+  approval time and durable GitHub approval record, exact `main` commit, Actions
+  run details, public route retrieval, and browser smoke results. Missing
+  approval means the run is technically observed but not authorized for
+  release.
 - Keep the prepared article and companion-post material subject to their
   existing owner approval and publication gates.
 
@@ -92,8 +107,6 @@ the current application.
   different evidence units or require an editorial correction.
 - Whether a real analytics identifier should ever be configured and who owns
   that decision. No analytics was added by this task.
-- Whether future Pages publication from `main` requires a separate release
-  approval, despite the successful current workflow run.
 - Which local handoff filename convention, if any, should become a long-term
   public support contract.
 - The current body/version of the legacy LinkedIn Pulse page and the final
@@ -119,5 +132,9 @@ For the hosted check, dispatch the checked-in
 `main`, then request
 `https://okhp3.github.io/first-diagram-is-a-liar/` in a browser. Confirm the
 document title, rendered five-step rail, loaded CSS/JavaScript, and the hero
-transition to step 2. Record the workflow run, source commit, route, and
-retrieval time alongside any future review.
+transition to step 2. Before dispatching, obtain and record the repository
+owner’s or explicitly delegated maintainer’s approval for the exact source
+commit. Record the approver, approval time, durable GitHub approval record,
+workflow run, source commit, route, and retrieval time alongside any future
+review. A `push` to `main` follows the same procedure; the approval must
+precede the push.
