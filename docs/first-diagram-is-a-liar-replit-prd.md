@@ -101,8 +101,12 @@ Confirmed in the current main branch:
 - A five-item checklist is stored in browser local storage.
 - The handoff action currently copies a compact brief and marks the checklist
   state; it does not yet create a durable file.
-- The repository contains public-safe normalized captures of the six requested
-  Notion source pages. Private Notion URLs must not be added to public copy.
+- The repository contains public-safe normalized captures of nine relevant
+  Notion source pages, including the six requested pages plus v0.5, v0.6, and
+  v1.0 source-vault material. Private Notion URLs must not be added to public
+  copy. The adjacent Visual Language Diagram Types database is represented by
+  a public-safe 80-row snapshot, but it remains reference material rather than
+  a claim that the tutorial implements every diagram family.
 
 ### 4.2 Archive
 
