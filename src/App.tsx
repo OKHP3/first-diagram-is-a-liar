@@ -29,6 +29,78 @@ const checklist = [
   { id: "handoff", label: "The artifact tells the next person what to do." },
 ];
 const progressStorageKey = "first-diagram-progress";
+const handoffFilename = "first-diagram-is-a-liar-handoff.md";
+const compactBrief = "Show the real thinking path. Include the decision that could fail, the revision loop, and the test that proves the diagram earns its words. Keep only shapes that remove confusion.";
+const publicSourceLinks = [
+  { label: "GitHub repository / receipts", url: "https://github.com/OKHP3/first-diagram-is-a-liar" },
+  { label: "Live long-form article", url: "https://overkillhill.com/writings/first-diagram-is-a-liar/" },
+  { label: "LinkedIn article", url: "https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc" },
+  { label: "Preserved experiment", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout" },
+  { label: "All eight prompts", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout/prompts" },
+  { label: "Editorial cut", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut" },
+];
+
+function buildHandoffMarkdown({ activeStep, words, clarity, royScore, showLoops, checked }: { activeStep: number; words: number; clarity: number; royScore: number; showLoops: boolean; checked: Record<string, boolean> }) {
+  const step = steps[activeStep] ?? steps[0];
+  const checklistState = checklist.map((item) => `- [${checked[item.id] ? "x" : " "}] ${item.label}`).join("\n");
+  const sourceList = publicSourceLinks.map((source) => `- [${source.label}](${source.url})`).join("\n");
+
+  return `# Local Working Handoff
+
+> Browser-generated Markdown for local working continuity. This is a downloaded snapshot, not a cloud backup, durable server storage, or a verdict.
+
+## Project / export context
+
+- **Project:** The First Diagram Is Usually a Liar
+- **Export type:** Local working handoff
+- **Filename:** \`${handoffFilename}\`
+- **Privacy boundary:** This content is assembled in the browser. It is not transmitted or stored by the application unless you explicitly download this file.
+- **Verdict:** None. This handoff records a current working state for the next person or next session to inspect.
+
+## Current tutorial step
+
+- **Step:** ${step.number} / ${step.kicker}
+- **Title:** ${step.label}
+- **Active step index:** ${activeStep + 1} of ${steps.length}
+
+## ROY framing
+
+ROY means **Return on Your Words**: understanding produced divided by explanation invested.
+
+- **Words invested:** ${words}
+- **Clarity delivered:** ${clarity}/10
+- **Current ROY readout:** ${royScore}x
+- **Interpretation:** ${royScore >= 5 ? "EARNING SPACE — the diagram is starting to pay rent; inspect what it hides." : "NEEDS WORK — the words are doing too much work; reduce friction before adding decoration."}
+
+## Checklist state
+
+${checklistState}
+
+## Current workbench state
+
+- **Model:** LIVE MODEL / REVISION 02
+- **Revision loopbacks:** ${showLoops ? "Visible — doubt / revise / try again" : "Hidden — happy path only"}
+- **Diagram:** Spark → rough draft → ROY check → ship the proof
+- **State note:** The workbench captures the selected loopback view in this browser session. No diagram content or private source locator has been sent anywhere.
+
+## Compact brief
+
+> ${compactBrief}
+
+## Open questions
+
+These are intentionally unresolved because the tutorial has not collected user-specific answers:
+
+- **What decision could fail in the real context?** — Unknown; no user-specific decision was entered.
+- **Who is the audience for the diagram?** — Unknown; an audience was not specified in this tutorial state.
+- **What evidence will prove the diagram earned its words?** — Unknown; no external test evidence was recorded.
+- **Which assumptions does the current draft hide?** — Open; inspect the revision loop before treating the diagram as resolved.
+
+## Available public source links
+
+${sourceList}
+`;
+}
 
 function BrandMark() { return <span className="brand-lock">OverKill&nbsp;Hill&nbsp;P³™</span>; }
 
@@ -62,6 +134,8 @@ function App() {
   const [showLoops, setShowLoops] = useState(true);
   const [copied, setCopied] = useState(false);
   const [copyFailed, setCopyFailed] = useState(false);
+  const [handoffDownloaded, setHandoffDownloaded] = useState(false);
+  const [handoffDownloadFailed, setHandoffDownloadFailed] = useState(false);
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [storageReady, setStorageReady] = useState(false);
   const hasNavigated = useRef(false);
@@ -95,7 +169,32 @@ function App() {
   const readyCount = Object.values(checked).filter(Boolean).length;
   const completedSteps = [0, 1, 2, 3, 4].filter((step) => step < activeStep || (step === 4 && readyCount === checklist.length));
   function goToStep(step: number) { setActiveStep(step); window.scrollTo({ top: 0, behavior: "smooth" }); }
-  async function copyBrief() { const brief = "Show the real thinking path. Include the decision that could fail, the revision loop, and the test that proves the diagram earns its words. Keep only shapes that remove confusion."; setCopyFailed(false); try { if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable"); await navigator.clipboard.writeText(brief); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setCopied(false); setCopyFailed(true); } }
+  async function copyBrief() { setCopyFailed(false); try { if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable"); await navigator.clipboard.writeText(compactBrief); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setCopied(false); setCopyFailed(true); } }
+  function downloadHandoff() {
+    setCopied(false);
+    setCopyFailed(false);
+    setHandoffDownloadFailed(false);
+    try {
+      if (!window.URL?.createObjectURL || !document.body) throw new Error("Local downloads are unavailable");
+      const content = buildHandoffMarkdown({ activeStep, words, clarity, royScore, showLoops, checked });
+      const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = handoffFilename;
+      link.rel = "noopener";
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => window.URL.revokeObjectURL(url), 0);
+      setHandoffDownloaded(true);
+      window.setTimeout(() => setHandoffDownloaded(false), 2200);
+    } catch {
+      setHandoffDownloaded(false);
+      setHandoffDownloadFailed(true);
+    }
+  }
   function toggleCheck(id: string) { setChecked((current) => ({ ...current, [id]: !current[id] })); }
 
   return <><a className="skip-link" href="#main-content">Skip to content</a><div className="app-shell">
@@ -106,7 +205,7 @@ function App() {
       {activeStep === 1 && <section className="content-width step-section"><SectionIntro eyebrow="02 / THE EXCHANGE RATE" title="Measure what the picture bought." copy="ROY is not a beauty score. It is a pressure test: how much shared understanding did the visual return for the words and effort invested?" /><div className="roy-layout"><div className="panel control-panel"><div className="panel-kicker">YOUR DRAFT INPUT</div><label htmlFor="words">Words invested <output>{words}</output></label><input id="words" type="range" min="20" max="200" step="5" value={words} onChange={(event) => setWords(Number(event.target.value))} /><div className="range-notes"><span>quick sketch</span><span>over-explained</span></div><label htmlFor="clarity">Clarity delivered <output>{clarity}/10</output></label><input id="clarity" type="range" min="1" max="10" value={clarity} onChange={(event) => setClarity(Number(event.target.value))} /><div className="range-notes"><span>muddy</span><span>shared model</span></div><div className="control-callout">A high score is not permission to stop thinking. It is a signal to inspect the assumptions before you ship.</div></div><div className="roy-meter"><div className="meter-head"><span className="panel-kicker">LIVE ROY READOUT</span><span className="meter-status">{royScore >= 5 ? "EARNING SPACE" : "NEEDS WORK"}</span></div><div className="roy-number" aria-live="polite">{royScore}<span>x</span></div><div className="formula"><span>clarity delivered</span><strong>÷</strong><span>words invested</span></div><div className="meter-bar"><span style={{ width: `${Math.min(100, royScore * 10)}%` }} /></div><p>{royScore >= 5 ? "The diagram is starting to pay rent. Now ask what it hides." : "The words are doing too much work. Reduce friction before adding decoration."}</p></div></div><div className="quote-strip"><span className="quote-mark">“</span><p>A picture is not automatically worth 1,000 words. The real metric is the clarity, compression, and shared understanding extracted per word invested.</p><span className="quote-source">LIVE ARTICLE / v0.5</span></div><StepNav previous={0} next={2} onSelect={goToStep} /></section>}
       {activeStep === 2 && <section className="content-width step-section"><SectionIntro eyebrow="03 / THE WORKBENCH" title="Draw the truth, not the brochure." copy="A first pass is allowed to be wrong. The useful correction is to make the wrong turn, doubt, and return path part of the model." /><DiagramWorkbench showLoops={showLoops} onToggleLoops={() => setShowLoops((current) => !current)} /><div className="two-column-notes"><div><span className="note-number">01</span><h3>Start ugly.</h3><p>Get the shape out of your head before you spend time styling it. The first draft is diagnostic equipment.</p></div><div><span className="note-number">02</span><h3>Make revision visible.</h3><p>Solid arrows show what happened. Dashed arrows show what it took to get there. Both are part of the story.</p></div></div><StepNav previous={1} next={3} onSelect={goToStep} /></section>}
       {activeStep === 3 && <section className="content-width step-section"><SectionIntro eyebrow="04 / THE COUNCIL" title="Use disagreement as a variance engine." copy="Multiple models do not magically produce truth. They expose different instincts. The human work is to compare, question, borrow, reject, and synthesize." /><div className="council-grid">{council.map((member, index) => <article className={`council-card tier-${member.tier.toLowerCase()}`} key={member.name}><div className="council-card-top"><span className="tier-pill">{member.tier}</span><span className="card-index">{String(index + 1).padStart(2, "0")}</span></div><h3>{member.name}</h3><p className="member-role">{member.role}</p><p className="member-result">{member.result}</p><p className="member-note">{member.note}</p></article>)}</div><div className="fairness-note"><span className="fairness-icon">!</span><div><strong>Fairness is part of the artifact.</strong><p>Core Five means direct comparison. Exhibition and Specialty entries stay visible, but their different access or context is not flattened into a fake leaderboard.</p></div></div><StepNav previous={2} next={4} onSelect={goToStep} /></section>}
-       {activeStep === 4 && <section className="content-width step-section"><SectionIntro eyebrow="05 / THE HANDOFF" title="Ship the proof someone else can use." copy="A tutorial is only useful when it changes the next move. Run the checklist, copy the compact brief, and keep the receipts attached." /><div className="handoff-layout"><div className="panel checklist-panel"><div className="panel-kicker">SHIP CHECK / {readyCount} OF {checklist.length}</div>{checklist.map((item) => <label className={`check-row ${checked[item.id] ? "is-checked" : ""}`} key={item.id}><input type="checkbox" checked={Boolean(checked[item.id])} onChange={() => toggleCheck(item.id)} /><span className="check-box" aria-hidden="true">✓</span><span>{item.label}</span></label>)}</div><div className="panel brief-panel"><div className="panel-kicker">THE COMPACT BRIEF</div><p>Show the real thinking path. Include the decision that could fail, the revision loop, and the test that proves the diagram earns its words. Keep only shapes that remove confusion.</p><button className="button button-primary" onClick={copyBrief}>{copied ? "Copied to clipboard" : copyFailed ? "Try copying again" : "Copy the brief"} <span>{copied ? "✓" : "↗"}</span></button><p className="copy-status" role="status" aria-live="polite">{copyFailed ? "Clipboard access is unavailable. Select the brief above to copy it manually." : copied ? "Brief copied to your clipboard." : ""}</p></div></div><div className="final-card"><div><p className="eyebrow"><span className="eyebrow-mark">↳</span>THE POINT</p><h3>The winning diagram did not exist in any single output.</h3><p>It emerged from comparing the field. That is the method: make the disagreement inspectable, then make a human decision.</p></div><div className="final-mark">ROY<br /><span>∞</span></div></div><div className="source-links"><span className="panel-kicker">KEEP GOING</span><a href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout" target="_blank" rel="noreferrer">Browse the preserved experiment ↗</a><a href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout/prompts" target="_blank" rel="noreferrer">Read all eight prompts ↗</a><a href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut" target="_blank" rel="noreferrer">Inspect the editorial cut ↗</a></div><StepNav previous={3} next={0} onSelect={goToStep} last /></section>}
+       {activeStep === 4 && <section className="content-width step-section"><SectionIntro eyebrow="05 / THE HANDOFF" title="Ship the proof someone else can use." copy="A tutorial is only useful when it changes the next move. Run the checklist, copy the compact brief, and keep the receipts attached." /><div className="handoff-layout"><div className="panel checklist-panel"><div className="panel-kicker">SHIP CHECK / {readyCount} OF {checklist.length}</div>{checklist.map((item) => <label className={`check-row ${checked[item.id] ? "is-checked" : ""}`} key={item.id}><input type="checkbox" checked={Boolean(checked[item.id])} onChange={() => toggleCheck(item.id)} /><span className="check-box" aria-hidden="true">✓</span><span>{item.label}</span></label>)}</div><div className="panel brief-panel"><div className="panel-kicker">THE COMPACT BRIEF</div><p className="brief-copy">{compactBrief}</p><div className="handoff-actions"><button className="button button-primary download-handoff-button" onClick={downloadHandoff}>{handoffDownloaded ? "Handoff downloaded" : "Download Markdown handoff"} <span>{handoffDownloaded ? "✓" : "↓"}</span></button><button className="button button-quiet copy-brief-button" onClick={copyBrief}>{copied ? "Copied to clipboard" : copyFailed ? "Try copying again" : "Copy the brief"} <span>{copied ? "✓" : "↗"}</span></button></div><p className="handoff-note">Local working file only — no cloud backup, account, or server storage. The handoff records this browser’s current tutorial state; it is not a verdict.</p><p className="copy-status" role="status" aria-live="polite">{handoffDownloadFailed ? "The browser could not start a local download. You can still copy the brief above." : copyFailed ? "Clipboard access is unavailable. Select the brief above to copy it manually, or download the full Markdown handoff." : copied ? "Brief copied to your clipboard." : handoffDownloaded ? `Saved locally as ${handoffFilename}.` : ""}</p></div></div><div className="final-card"><div><p className="eyebrow"><span className="eyebrow-mark">↳</span>THE POINT</p><h3>The winning diagram did not exist in any single output.</h3><p>It emerged from comparing the field. That is the method: make the disagreement inspectable, then make a human decision.</p></div><div className="final-mark">ROY<br /><span>∞</span></div></div><div className="source-links"><span className="panel-kicker">KEEP GOING</span>{publicSourceLinks.slice(3).map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>{source.label} ↗</a>)}</div><StepNav previous={3} next={0} onSelect={goToStep} last /></section>}
       <footer className="site-footer"><span><BrandMark /> / Precision · Protocol · Promptcraft</span><span>Built as a working tutorial, not a written exercise in hypocrisy.</span></footer>
      </main>
    </div></>;

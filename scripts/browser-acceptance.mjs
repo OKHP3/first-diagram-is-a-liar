@@ -8,6 +8,7 @@ import { createServer } from "node:net";
 const root = resolve(dirname(new URL(import.meta.url).pathname), "..");
 const mobileWidth = 390;
 const briefStorageKey = "first-diagram-progress";
+const handoffFilename = "first-diagram-is-a-liar-handoff.md";
 
 async function hasExecutable(command) {
   if (command.includes("/")) {
@@ -385,11 +386,48 @@ async function runAcceptance() {
       Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined });
       return navigator.clipboard === undefined;
     })()`, "step 5 clipboard fallback setup");
-    await click(client, ".brief-panel .button-primary", "step 5 copy control");
+    await click(client, ".copy-brief-button", "step 5 copy control");
     await waitFor(client, 'document.querySelector(".copy-status")?.textContent.includes("Clipboard access is unavailable")', "step 5 clipboard fallback feedback");
-    const retryLabel = await client.evaluate('document.querySelector(".brief-panel .button-primary")?.textContent.includes("Try copying again")', "step 5 clipboard fallback feedback");
+    const retryLabel = await client.evaluate('document.querySelector(".copy-brief-button")?.textContent.includes("Try copying again")', "step 5 clipboard fallback feedback");
     assert(retryLabel, "step 5 clipboard fallback feedback", "copy control did not expose its retry state");
     passed.push("clipboard failure feedback");
+
+    await client.evaluate(`(() => {
+      window.__handoffCapture = { download: "", textPromise: null };
+      URL.createObjectURL = (blob) => {
+        window.__handoffCapture.textPromise = blob.text();
+        return "blob:acceptance-capture";
+      };
+      HTMLAnchorElement.prototype.click = function () {
+        window.__handoffCapture.download = this.download;
+      };
+      return true;
+    })()`, "step 5 local handoff capture setup");
+    await click(client, ".download-handoff-button", "step 5 Markdown handoff download");
+    const firstHandoff = await client.evaluate(`(async () => ({
+      filename: window.__handoffCapture.download,
+      content: await window.__handoffCapture.textPromise,
+    }))()`, "step 5 Markdown handoff content");
+    assert(firstHandoff.filename === handoffFilename, "step 5 Markdown handoff filename", `expected deterministic filename ${handoffFilename}, got ${firstHandoff.filename}`);
+    for (const expected of [
+      "# Local Working Handoff",
+      "- **Step:** 05 / The handoff",
+      "Current ROY readout:** 5x",
+      "- [x] The claim is clear before the diagram appears.",
+      "Revision loopbacks:** Visible",
+      "What decision could fail in the real context?",
+      "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut",
+    ]) {
+      assert(firstHandoff.content.includes(expected), "step 5 Markdown handoff content", `export is missing ${expected}`);
+    }
+    await waitFor(client, `document.querySelector(".copy-status")?.textContent.includes("Saved locally as ${handoffFilename}.")`, "step 5 local handoff feedback");
+    await click(client, ".download-handoff-button", "step 5 deterministic Markdown handoff download");
+    const secondHandoff = await client.evaluate(`(async () => ({
+      filename: window.__handoffCapture.download,
+      content: await window.__handoffCapture.textPromise,
+    }))()`, "step 5 deterministic Markdown handoff content");
+    assert(secondHandoff.filename === firstHandoff.filename && secondHandoff.content === firstHandoff.content, "step 5 deterministic Markdown handoff", "repeated exports did not produce the same filename and content");
+    passed.push("local Markdown handoff download and deterministic content");
 
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 100));
     await client.send("Page.reload", { ignoreCache: true });

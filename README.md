@@ -13,6 +13,11 @@ npm run dev
 The application walks through the premise, the ROY exchange rate, a live
 non-linear diagram workbench, the Council fairness model, and a shipping
 checklist. It is the solution surface. The archive is the receipt stack.
+The handoff step can download a deterministic
+`first-diagram-is-a-liar-handoff.md` working snapshot containing the current
+local tutorial state. It is deliberately not cloud backup, durable server
+storage, or a verdict; clipboard copy remains available as a separate
+compact-brief action.
 
 ## The article
 
@@ -68,8 +73,10 @@ git diff --check
 `npm run test:acceptance` starts a temporary local Vite server and drives the
 actual tutorial in headless Chromium. It covers the five-step journey, ROY
 recalculation, revision-loop visibility, Council condition labels, checklist
-completion and reload persistence, clipboard failure feedback, keyboard-facing
-semantics, and the 390px narrow viewport.
+completion and reload persistence, clipboard failure feedback, local Markdown
+handoff content and deterministic naming, keyboard-facing semantics, and the
+390px narrow viewport. The handoff assertions capture the browser-generated
+Blob locally; they do not upload handoff text or diagram state.
 
 The command needs a locally installed Chromium or Chrome executable. Chromium
 is available in the Replit development environment; on another machine, set
