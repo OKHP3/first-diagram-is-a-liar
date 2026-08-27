@@ -14,6 +14,17 @@ The application walks through the premise, the ROY exchange rate, a live
 non-linear diagram workbench, the Council fairness model, and a shipping
 checklist. It is the solution surface. The archive is the receipt stack.
 
+## Try the application
+
+- [Open the interactive tutorial](https://okhp3.github.io/first-diagram-is-a-liar/)
+- [Read the long-form article](https://overkillhill.com/writings/first-diagram-is-a-liar/)
+
+The tutorial is implemented at the repository root as a client-only React,
+TypeScript, Vite, and Tailwind application. The GitHub Pages workflow is
+configured for the application URL above, but that URL returned HTTP 404 during
+this review. Treat it as the intended destination until a successful Actions
+run and live smoke test confirm the deployment.
+
 ## The article
 
 - [Live article](https://overkillhill.com/writings/first-diagram-is-a-liar/)
