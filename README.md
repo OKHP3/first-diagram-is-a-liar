@@ -30,6 +30,8 @@ run and live smoke test confirm the deployment.
 - [Live article](https://overkillhill.com/writings/first-diagram-is-a-liar/)
 - [LinkedIn article](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)
 - [GitHub repository](https://github.com/OKHP3/first-diagram-is-a-liar)
+- **Live tutorial application:** [okhp3.github.io/first-diagram-is-a-liar](https://okhp3.github.io/first-diagram-is-a-liar/)
+  - not live yet. The Pages deploy workflow is wired up but has not completed a successful run against this URL; it currently 404s. Run the app locally with `npm run dev` until a deployment lands.
 
 ## The core idea
 
@@ -73,9 +75,12 @@ npm run health:mermaid
 git diff --check
 ```
 
-The GitHub Pages workflow builds the root app with the production base
-`/first-diagram-is-a-liar/`. Live deployment still requires a successful
-Actions run and a Pages smoke test.
+The GitHub Pages workflow (`.github/workflows/deploy-pages.yml`) builds the
+root app with the production base `/first-diagram-is-a-liar/` on every push
+to `main` or manual dispatch. Live deployment still requires a successful
+Actions run and a Pages smoke test. Until then, treat the hosted URL above
+as not yet available and use local `npm run dev` as the current way to walk
+the tutorial.
 
 After a task merge, the environment runs `scripts/post-merge.sh`. It installs
 from the committed npm lockfile, typechecks, builds, and reruns the archive and
@@ -87,3 +92,4 @@ database, or secondary artifact.
 The Mermaid source files are provided for reference, learning, and adaptation.
 Article text, brand assets, and slide deck content remain © OverKill Hill P³™.
 See the archive provenance notes before reusing material.
+
