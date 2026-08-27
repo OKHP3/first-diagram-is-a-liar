@@ -104,6 +104,12 @@ export const notionSourceDigest = {
       status: "current",
     },
     {
+      version: "v0.6",
+      label: "Notion deep dive",
+      copy: "The writer's room, PRD, consolidation surface, and documentarian role kept separate from direct model competition.",
+      status: "review-only",
+    },
+    {
       version: "v0.8",
       label: "The rematch",
       copy: "A proposed review cut about cleaner conditions, updated models, and better prompts.",
@@ -115,7 +121,13 @@ export const notionSourceDigest = {
       copy: "A proposed review cut about style governance and the Theme Builder response.",
       status: "review-only",
     },
+    {
+      version: "v1.0",
+      label: "Source vault",
+      copy: "An incomplete long-form receipt structure for the case study, rubric, council interviews, and reusable method.",
+      status: "review-only",
+    },
   ] satisfies SourceRelease[],
   sourceNote:
-    "This public copy synthesizes six historical Notion pages captured on 2026-08-27. The pages were source material, not a replacement for the repository's canonical archive. Private workspace links, IDs, temporary signed assets, and internal page structure are intentionally omitted.",
+    "This public copy synthesizes nine relevant Notion pages captured on 2026-08-27. The pages were source material, not a replacement for the repository's canonical archive. No database rows were available from the supplied project links. Private workspace links, IDs, temporary signed assets, and internal page structure are intentionally omitted.",
 };

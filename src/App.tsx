@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { notionSourceDigest } from "./notion-sourced";
+import registrySnapshot from "../archive/notion-captures/visual-language-diagram-types.json";
 
 type CouncilTier = "Core Five" | "Exhibition" | "Specialty" | "Attempted";
 
@@ -20,6 +21,60 @@ const council: Array<{ name: string; tier: CouncilTier; role: string; result: st
   { name: "ChatGPT V2 Pro", tier: "Exhibition", role: "Raised capability ceiling", result: "Exhibition only", note: "Interesting and instructive, but not a direct comparison with the Core Five." },
   { name: "Notion + Replit", tier: "Specialty", role: "Archivist and builder", result: "Different brief", note: "Useful specialty perspectives. Neither entered the same cold-start contest." },
   { name: "Mermaid AI", tier: "Attempted", role: "Context-blind attempt", result: "Excluded", note: "Jumped to drawing before it understood the argument. That failure is part of the lesson." },
+];
+
+const sourceCaptures = [
+  { label: "ROY × Mermaid competition", tag: "Experiment spine", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/roy-mermaid-competition.md", note: "The thesis, ROY gate, and hybrid synthesis." },
+  { label: "Public Hub working copy", tag: "v0.3 baseline", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/public-hub-working-copy.md", note: "The eight-prompt sequence and launch logic." },
+  { label: "Article v0.1", tag: "Compressed cut", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.1.md", note: "The origin story and first council brief." },
+  { label: "Article v0.4", tag: "Method cut", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.4.md", note: "The clearest fan out, compare, adjudicate, synthesize method." },
+  { label: "Article v0.5", tag: "Current lineage", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.5.md", note: "Council interviews, scoring dimensions, and the current release boundary." },
+  { label: "Article v0.6", tag: "Notion deep dive", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.6.md", note: "The writer's room, PRD, consolidation, and documentarian role." },
+  { label: "Article v0.8", tag: "Rematch outline", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.8.md", note: "Preserved separately from the repository Theme Builder packet." },
+  { label: "Article v0.9", tag: "Theme Builder gap", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.9.md", note: "Preserved separately from the repository BPMN packet." },
+  { label: "Article v1.0 source vault", tag: "Receipt structure", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v1.0-source-vault.md", note: "Case-study receipts and reusable method, clearly marked incomplete." },
+];
+
+type DiagramRegistryRecord = {
+  diagramType: string;
+  family: string | null;
+  purpose: string | null;
+  definition: string | null;
+  mermaidSupport: string | null;
+  mermaidClosestMatch: string | null;
+  themeConfidence: string | null;
+  notationCompliance: string | null;
+  examplePriority: string | null;
+  themeBuilderImportance: string | null;
+  supportWarningNeeded: boolean | null;
+  actionLane: string | null;
+  exampleFile: string | null;
+  notes: string | null;
+  originBegan: string | null;
+  domainSpecificity: string | null;
+  stillUsed: string | null;
+  regionSpecificity: string | null;
+  researchPriority: string | null;
+  semanticFidelityRisk: string | null;
+  newTypeCandidate: boolean | null;
+  commonShapes: string | null;
+  primaryRoles: string[];
+  createdTime: string | null;
+};
+
+const diagramRegistry = registrySnapshot.records as DiagramRegistryRecord[];
+const registrySupportCounts = diagramRegistry.reduce<Record<string, number>>((counts, record) => {
+  const support = record.mermaidSupport ?? "Unclassified";
+  counts[support] = (counts[support] ?? 0) + 1;
+  return counts;
+}, {});
+const registryHighlights = diagramRegistry.filter((record) => record.examplePriority === "Tier 1").slice(0, 6);
+
+const councilMethod = [
+  ["01", "Fan out", "Same brief, independent runs, no cross-contamination."],
+  ["02", "Compare", "Look for divergence, not just the most confident answer."],
+  ["03", "Adjudicate", "Separate structural signal from decorative noise."],
+  ["04", "Synthesize", "Build the hybrid that none of the originals contained."],
 ];
 
 const checklist = [
@@ -55,15 +110,36 @@ function DiagramWorkbench({ showLoops, onToggleLoops }: { showLoops: boolean; on
     </div>
   </div>;
 }
+function SourceLibrary() {
+  return <div className="source-library panel">
+    <div className="source-library-head"><div><div className="panel-kicker">PUBLIC-SAFE SOURCE COPIES</div><h3>The writer's room, left inspectable.</h3></div><a className="source-library-index" href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/notion-captures" target="_blank" rel="noreferrer">Open the source library ↗</a></div>
+    <p className="source-library-intro">The captured Notion pages add the editorial memory behind the council. These normalized copies keep the method, history, and open version questions in the repository without exposing private workspace links or signed attachments.</p>
+    <div className="source-method-grid">{councilMethod.map(([number, label, note]) => <div className="source-method" key={number}><span className="note-number">{number}</span><strong>{label}</strong><p>{note}</p></div>)}</div>
+    <div className="source-capture-grid">{sourceCaptures.map((capture) => <a className="source-capture" href={capture.href} target="_blank" rel="noreferrer" key={capture.label}><span className="mono-label">{capture.tag}</span><strong>{capture.label} ↗</strong><span>{capture.note}</span></a>)}</div>
+  </div>;
+}
+
+function DiagramRegistrySnapshot() {
+  return <div className="registry-snapshot panel">
+    <div className="registry-heading"><div><div className="panel-kicker">ADJACENT NOTION DATABASE / PUBLIC-SAFE SNAPSHOT</div><h3>Diagram support is part of the truth.</h3></div><span className="registry-count">{diagramRegistry.length} records</span></div>
+    <p className="registry-intro">The connected workspace also contains a diagram taxonomy registry. It is maintained for the adjacent Mermaid Theme Builder effort, but its support vocabulary sharpens this tutorial's warning: native, partial, emulatable, gap, and external are not interchangeable claims.</p>
+    <div className="registry-summary">{["Native", "Partial", "Emulatable", "Gap", "External"].map((support) => <div className="registry-stat" key={support}><strong>{registrySupportCounts[support] ?? 0}</strong><span>{support}</span></div>)}</div>
+    <div className="registry-highlights">{registryHighlights.map((record, index) => <article className="registry-highlight" key={`${record.diagramType}-${index}`}><span className="mono-label">{record.family ?? "Unclassified"}</span><h4>{record.diagramType}</h4><p>{record.mermaidSupport ?? "Unclassified"} / {record.themeConfidence ?? "confidence not set"}</p><small>{record.exampleFile ?? "No example file recorded"}</small></article>)}</div>
+    <details className="registry-details"><summary>Open the copied registry record set</summary><div className="registry-table-wrap"><table className="registry-table"><caption>Public-safe snapshot of the Notion Visual Language Diagram Types database</caption><thead><tr><th>Diagram type</th><th>Family</th><th>Mermaid support</th><th>Theme confidence</th><th>Notation</th><th>Priority</th><th>Example</th><th>Action</th></tr></thead><tbody>{diagramRegistry.map((record, index) => <tr key={`${record.diagramType}-${index}`}><td><strong>{record.diagramType}</strong><small>{record.purpose ?? record.definition ?? ""}</small></td><td>{record.family ?? "-"}</td><td>{record.mermaidSupport ?? "-"}</td><td>{record.themeConfidence ?? "-"}</td><td>{record.notationCompliance ?? "-"}</td><td>{record.examplePriority ?? "-"}</td><td>{record.exampleFile ?? "-"}</td><td>{record.actionLane ?? "-"}</td></tr>)}</tbody></table></div></details>
+    <p className="registry-note">This snapshot omits Notion record IDs, URLs, workspace structure, and private links. The complete normalized record data is checked into the repository with the source captures.</p>
+  </div>;
+}
 
 function SourceRoom() {
   return <section className="source-room" aria-labelledby="source-room-title">
-    <div className="source-room-heading"><div><p className="eyebrow"><span className="eyebrow-mark">↳</span>{notionSourceDigest.eyebrow}</p><h3 id="source-room-title">{notionSourceDigest.title}</h3></div><span className="source-room-stamp">PUBLIC-SAFE COPY / 6 PAGES</span></div>
+    <div className="source-room-heading"><div><p className="eyebrow"><span className="eyebrow-mark">↳</span>{notionSourceDigest.eyebrow}</p><h3 id="source-room-title">{notionSourceDigest.title}</h3></div><span className="source-room-stamp">PUBLIC-SAFE COPY / 9 PAGES + 1 DB</span></div>
     <p className="source-room-intro">{notionSourceDigest.intro}</p>
     <div className="source-stage-grid">{notionSourceDigest.stages.map((stage) => <article className="source-stage" key={stage.label}><span className="source-stage-label">{stage.label}</span><h4>{stage.title}</h4><p>{stage.copy}</p></article>)}</div>
     <div className="source-receipt-wrap"><div className="panel-kicker">THE PUBLIC RECEIPT STACK</div><div className="source-receipt-grid">{notionSourceDigest.receipts.map((receipt) => <article className="source-receipt" key={receipt.label}><span className="source-stage-label">{receipt.label}</span><h4>{receipt.title}</h4><p>{receipt.copy}</p></article>)}</div></div>
     <div className="source-cycle-wrap"><div className="panel-kicker">THE COUNCIL LOOP</div><div className="source-cycle-grid">{notionSourceDigest.cycle.map((cycle, index) => <article className="source-cycle" key={cycle.label}><span className="source-cycle-number">{String(index + 1).padStart(2, "0")}</span><h4>{cycle.label}</h4><p>{cycle.copy}</p></article>)}</div></div>
     <div className="source-release-wrap"><div className="panel-kicker">THE LINEAGE / STATUS STAYS VISIBLE</div><div className="source-release-grid">{notionSourceDigest.releases.map((release) => <article className={`source-release source-release-${release.status}`} key={release.version}><div className="source-release-top"><span>{release.version}</span><small>{release.status}</small></div><h4>{release.label}</h4><p>{release.copy}</p></article>)}</div></div>
+    <SourceLibrary />
+    <DiagramRegistrySnapshot />
     <p className="source-room-note">{notionSourceDigest.sourceNote}</p>
   </section>;
 }
