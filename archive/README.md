@@ -8,6 +8,8 @@ holds the source material that makes the tutorial inspectable.
 - `specialist-chapters/` is the compact blitz-release packet for the v0.6
   Notion, v0.7 Replit, v0.8 Mermaid Theme Builder, and v0.9 BPMN for Mermaid
   companion chapters.
+- `notion-captures/` is a public-safe normalized copy of the six supplied
+  Notion sources, including the v0.8 and v0.9 label reconciliation.
 - `member-deliberations/` holds the Replit specialty-role records.
 - `editorial-cut/` is the prepared local HTML article cut. It is not evidence
   of a deployed v1.0 publication.
