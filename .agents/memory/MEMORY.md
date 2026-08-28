@@ -2,3 +2,4 @@
 - [GitHub workflow pushes](github-workflow-pushes.md) — GitHub PAT scope is not enough until the secret is bound to the current Repl environment.
 - [Local browser acceptance](browser-acceptance.md) — Reuse the managed preview before starting another Vite watcher to avoid inotify exhaustion.
 - [Local handoff exports](local-handoff-exports.md) — Keep downloaded working snapshots deterministic, browser-only, and explicitly separate from verdicts or cloud storage.
+- [Merge marker validation](merge-marker-validation.md) — A clean merge commit can still contain committed conflict markers; scan the resulting tree before trusting it.
