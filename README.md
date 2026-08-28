@@ -73,7 +73,6 @@ npm run test:acceptance
 git diff --check
 ```
 
-<<<<<<< HEAD
 ### Local browser acceptance
 
 `npm run test:acceptance` starts a temporary local Vite server and drives the
@@ -91,19 +90,12 @@ credentials, analytics, private sources, hosted test service, or deployment.
 This is a local acceptance check, not a GitHub Pages or hosted-renderer smoke
 test.
 
-The GitHub Pages workflow builds the root app with the production base
-`/first-diagram-is-a-liar/`. The successful Actions run and Pages smoke test
+The GitHub Pages workflow (`.github/workflows/deploy-pages.yml`) builds the
+root app with the production base `/first-diagram-is-a-liar/` on every push
+to `main` or manual dispatch. The successful Actions run and Pages smoke test
 are recorded in the dated final evidence gate and current hosted evidence:
 [`docs/final-evidence-gate-2026-08-27.md`](docs/final-evidence-gate-2026-08-27.md);
 this repository makes no claim of `.replit.app` publication.
-=======
-The GitHub Pages workflow (`.github/workflows/deploy-pages.yml`) builds the
-root app with the production base `/first-diagram-is-a-liar/` on every push
-to `main` or manual dispatch. Live deployment still requires a successful
-Actions run and a Pages smoke test — until then, treat the hosted URL above
-as not yet available and use local `npm run dev` as the current way to walk
-the tutorial.
->>>>>>> origin/main
 
 After a task merge, the environment runs `scripts/post-merge.sh`. It installs
 from the committed npm lockfile, typechecks, builds, and reruns the archive and
