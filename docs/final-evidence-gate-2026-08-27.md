@@ -75,12 +75,15 @@ the current application.
   the first interactive transition.
 - Council result language remains round-specific. No overall winner is claimed,
   and Specialty entries are not presented as direct competitors.
+- The archive contains 15 distinct diagram records: 7 V1 and 8 V2. Each
+  exported deck contains 18 slides: those 15 diagram slides plus two
+  round-title slides and one Final Read slide.
+- The approved count language for the next article release is “15 diagram
+  records across V1 and V2, presented in an 18-slide deck.” “18 diagrams” is
+  not supported as a literal count of distinct submissions.
 - Future Pages release authority is owner-controlled: the repository owner or
   an explicitly delegated maintainer must approve each publication before its
   triggering merge/push or manual dispatch.
-- The archive contains 15 distinct diagram records: 7 V1 and 8 V2. The
-  exported square and wide decks each contain 18 slides, made up of those 15
-  diagram slides plus two round-title slides and one Final Read slide.
 - The live v0.5 article's “18 diagrams” wording is a historical public claim;
   it is not supported as a literal distinct-diagram count by the archive.
 
@@ -98,8 +101,6 @@ the current application.
 - A maintainer should use the successful Pages run and public route as the
   external review baseline, while retaining the local matrix as reproducible
   source evidence.
-- A future article release should use “15 diagram records across V1 and V2,
-  presented in an 18-slide deck,” subject to owner/editorial approval.
 - For each future release, the evidence record should include the approver,
   approval time and durable GitHub approval record, exact `main` commit, Actions
   run details, public route retrieval, and browser smoke results. Missing
@@ -107,13 +108,12 @@ the current application.
   release.
 - Keep the prepared article and companion-post material subject to their
   existing owner approval and publication gates.
+- Apply the approved diagram/deck count language when the public writing is
+  next edited and released; preserve the deployed v0.5 wording as historical
+  copy until that approved release occurs.
 
 ### Unknown / owner-controlled
 
-- Whether the already-published article should be corrected, and whether its
-  next release should say “15 diagrams,” “15 diagram records,” or the fuller
-  “15 diagram records across an 18-slide deck.” See the dated reconciliation
-  record for the confirmed evidence.
 - Whether a real analytics identifier should ever be configured and who owns
   that decision. No analytics was added by this task.
 - Which local handoff filename convention, if any, should become a long-term

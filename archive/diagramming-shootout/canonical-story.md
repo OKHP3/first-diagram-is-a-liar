@@ -51,6 +51,18 @@ Use these exact labels:
 ChatGPT V2 Pro the overall winner, and do not describe the Specialty entries
 as direct competitors.
 
+## Count language
+
+Use **15 diagram records across V1 and V2, presented in an 18-slide deck**.
+The 15 records are the 7 V1 and 8 V2 rows in `diagram-manifest.csv`. Each
+archived deck contains those 15 diagram slides plus two round-title slides and
+one Final Read slide.
+
+Do not use “18 diagrams” as a literal count of distinct submissions. The
+deployed v0.5 article's existing wording is a historical public claim and is
+not silently rewritten by this archive decision; apply the approved count
+language when the public writing is next edited and released.
+
 ## Editorial boundaries
 
 - **Jamie Hill** is the human author, orchestrator, editor, and adjudicator.

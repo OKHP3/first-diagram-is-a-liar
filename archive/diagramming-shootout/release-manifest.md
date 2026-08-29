@@ -34,6 +34,21 @@ and the local editorial cut are intentionally recorded separately.
 - **No overall council winner is declared.** The rounds had different
   conditions and criteria; the records above are the complete result language.
 
+
+## Canonical count language
+
+The archive contains **15 distinct diagram records**: 7 V1 records and 8 V2
+records in `diagram-manifest.csv`. The square and wide presentation exports
+each contain **18 slides**: the 15 diagram slides, two round-title slides, and
+one Final Read slide. Full- and lo-resolution renders are alternate renditions
+of the same diagram records, not additional diagrams.
+
+For the next article release, use **15 diagram records across V1 and V2,
+presented in an 18-slide deck**. Do not describe the deck as containing 18
+distinct diagrams. The deployed v0.5 article's existing “18 diagrams” wording
+remains part of the historical public release until an approved editorial
+release replaces it; this manifest does not silently rewrite external copy.
+
 ## Count boundary
 
 The archive's `diagram-manifest.csv` contains **15 distinct diagram records**:
