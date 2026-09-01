@@ -1,5 +1,6 @@
 - [Generated runtime metadata](generated-runtime-metadata.md) — Replit may recreate ignored runtime metadata outside the product’s source-controlled configuration.
 - [GitHub workflow pushes](github-workflow-pushes.md) — GitHub PAT scope is not enough until the secret is bound to the current Repl environment.
+- [GitHub production writes](github-production-writes.md) — The GitHub connector can read production repositories while its write proxy is blocked; use the bound secret without logging it.
 - [Local browser acceptance](browser-acceptance.md) — Reuse the managed preview before starting another Vite watcher to avoid inotify exhaustion.
 - [Local handoff exports](local-handoff-exports.md) — Keep downloaded working snapshots deterministic, browser-only, and explicitly separate from verdicts or cloud storage.
 - [Merge marker validation](merge-marker-validation.md) — A clean merge commit can still contain committed conflict markers; scan the resulting tree before trusting it.

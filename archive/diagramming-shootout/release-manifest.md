@@ -17,7 +17,7 @@ and the local editorial cut are intentionally recorded separately.
 | `ROUND-1` | Council Round 1 / V1 | Session date not recorded | Cold-start submissions and first-pass comparison | Council members; Jamie Hill chaired | [V1 Mermaid sources](diagrams/v1/) | [V1 rendered PNGs](images/v1/) and [public links](mermaid-public-links.md#round-1) | Archived competition round |
 | `ROUND-2` | Council Round 2 / V2 | Session date not recorded | Revision after peer-output review | Council members; Jamie Hill chaired | [V2 Mermaid sources](diagrams/v2/) | [V2 rendered PNGs](images/v2/) and [public links](mermaid-public-links.md#round-2) | Archived competition round |
 | `ARTICLE-0.5` | Article v0.5, Council-Assisted Scoring | 2026-08-24 (verified public state) | Publish the council-assisted scoring and model self-interviews | Jamie Hill; OverKill Hill P³™ editorial work | [Production history](release-changelog.md) | [Live article](https://overkillhill.com/writings/first-diagram-is-a-liar/) | Current canonical public release |
-| `ARTICLE-1.0` | Article v1.0, Editorial Cut | Date not recorded; prepared locally | Synthesize the thesis, council evidence, and selected lessons for a future release | Jamie Hill; OverKill Hill P³™ editorial work | [Local editorial source](../editorial-cut/index.html) | [Local HTML](../editorial-cut/index.html) | Prepared; not verified or published externally |
+| `ARTICLE-1.0` | Article v1.0, Editorial Cut | Prepared locally; targeted count-label correction deployed 2026-09-01 | Synthesize the thesis, council evidence, and selected lessons for a future release; the approved count correction was released separately through the external production source | Jamie Hill; OverKill Hill P³™ editorial work | [Local editorial source](../editorial-cut/index.html) | [External count-label release](https://overkillhill.com/writings/first-diagram-is-a-liar/) and [local HTML](../editorial-cut/index.html) | Count-label correction externally deployed and verified; full local editorial cut remains prepared |
 
 ## Canonical result language
 
@@ -43,12 +43,12 @@ each contain **18 slides**: the 15 diagram slides, two round-title slides, and
 one Final Read slide. Full- and lo-resolution renders are alternate renditions
 of the same diagram records, not additional diagrams.
 
-For the next article release, use **15 diagram records across V1 and V2,
-presented in an 18-slide deck**. Do not describe the deck as containing 18
-distinct diagrams. The deployed v0.5 article's existing “18 diagrams” wording
-remains part of the historical public release until the approved editorial
-release replaces it and the external deployment is verified; this manifest does
-not silently rewrite external copy.
+For the article release, use **15 diagram records across V1 and V2, presented
+in an 18-slide deck**. Do not describe the deck as containing 18 distinct
+diagrams. This wording was deployed and verified externally on 2026-09-01 as a
+targeted count-label correction. The public page remains labelled v0.5, and
+the prior v0.5 source/deployment is retained as the rollback target; this
+manifest does not rewrite historical release records.
 
 ## Count boundary
 
@@ -58,12 +58,11 @@ The archive's `diagram-manifest.csv` contains **15 distinct diagram records**:
 slide. The deck count is therefore not an 18-diagram record count. Full- and
 lo-resolution PNGs are alternate renditions of those same 15 records.
 
-The currently published v0.5 article historically says “All 18 diagrams” in
-its deck section. That wording is preserved in the external source and is not
-silently rewritten here. The supported wording for the approved future
-editorial release is **15 diagram records across V1 and V2, presented in an
-18-slide deck**. External deployment and canonical verification remain required
-before changing public copy. See
+Before the 2026-09-01 correction, the published v0.5 article said “All 18
+diagrams” in its deck section and that both formats contained “the same 18
+diagrams.” The approved wording, now present in the externally verified page,
+is **15 diagram records across V1 and V2, presented in an 18-slide deck**.
+See
 [`../../docs/diagram-count-reconciliation-2026-08-27.md`](../../docs/diagram-count-reconciliation-2026-08-27.md)
 for the evidence matrix and claim classifications.
 

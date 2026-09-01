@@ -50,8 +50,10 @@ on 2026-08-27.
   title/result slides.
 - The archive's full-resolution and lo-resolution PNG pairs are alternate
   renditions of the same 15 records.
-- The live v0.5 article currently says “All 18 diagrams” and says both deck
-  formats contain “the same 18 diagrams.”
+- Before the 2026-09-01 targeted count-label release, the live v0.5 article
+  said “All 18 diagrams” and said both deck formats contained “the same 18
+  diagrams.” The direct post-release check found the approved wording once and
+  found neither old phrase.
 
 ### Inferred
 
@@ -72,13 +74,32 @@ on 2026-08-27.
 - Cite this reconciliation from any future release or content review so the
   count distinction is not reopened from memory.
 
+### External release verification — 2026-09-01
+
+- The approved wording was deployed from `OKHP3/OverKill-Hill` production
+  commit `d509a4343753476557fc761ffcea251312282a86`.
+- GitHub Pages deployment `6192155562` and workflow run `33455326456`
+  completed successfully at 2026-09-01T00:35:27Z.
+- The final external `Site Validation` run `33455326569` passed at
+  2026-09-01T00:36:52Z after the generated search index was refreshed.
+- The canonical URL returned HTTP 200 with no redirect at 2026-09-01T00:36:56Z.
+  The title and v0.5 release label remained intact, the canonical tag matched,
+  and the approved wording appeared once.
+- Open Graph and Twitter metadata were present. The social image returned HTTP
+  200 as a PNG at 1536 × 1024.
+- The repository root link returned HTTP 200. Four historical deck download
+  links and three deep archive links returned HTTP 404 and remain a known
+  production-link limitation outside this count correction.
+
 ### Unknown / owner-controlled
 
 - Whether the already-published v0.5 article will receive the approved
   correction through an external release, or remain historical copy.
-- The external deployment identifier, canonical verification, and rollback
-  confirmation for the authorized release remain pending.
+- The external production owner controls whether the full local ARTICLE-1.0
+  editorial cut should replace the still-v0.5-labelled page in a later release.
 
-No public article, external deck, or historical release text was rewritten by
-this reconciliation. The approved wording remains subject to the external
-deployment and canonical-verification gates recorded in the release handoff.
+The local reconciliation did not rewrite the historical ARTICLE-0.5 source
+snapshot. The targeted external count-label release changed the public article
+only after the recorded approval and external deployment gates passed. The
+previously verified ARTICLE-0.5 source and production deployment remain the
+explicit rollback target in the release handoff.

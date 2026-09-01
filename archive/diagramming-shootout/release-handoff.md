@@ -22,7 +22,7 @@ workspace workflow from being mistaken for production publication.
 | Release | Source snapshot | Prepared/released date | External deployment | Canonical verification | Social preview | Rollback |
 |---|---|---|---|---|---|---|
 | `ARTICLE-0.5` | `c02f0662944e3b950fdcc659b18f19f5b2826c60` (committed source snapshot) | 2026-08-24 | Verified public state; deployment system is external to this workspace | Verified 2026-08-24 at the canonical URL; see `release-manifest.md` | Metadata is present in the source; re-check at the canonical URL before republishing | Restore the last externally verified `ARTICLE-0.5` source/deployment |
-| `ARTICLE-1.0` | `fa4ed2f7348c15a164dbb529b8a4e162fc51da7c` (accepted local source snapshot) | 2026-08-24; count label approved 2026-08-31 | Pending external deployment; do not describe as published | Pending external canonical verification | Pending external social-preview verification | Keep `ARTICLE-0.5` as the rollback target until all external gates pass |
+| `ARTICLE-1.0` | `fa4ed2f7348c15a164dbb529b8a4e162fc51da7c` (accepted local source snapshot; targeted count-label release deployed from the external production source) | 2026-08-24; count label approved 2026-08-31; deployed 2026-09-01 | **PASS** — GitHub Pages deployment `6192155562`, production commit `d509a4343753476557fc761ffcea251312282a86`, workflow run `33455326456` completed successfully at 2026-09-01T00:35:27Z | **PASS WITH LINK LIMITATION** — HTTP 200 at the canonical URL, no redirect, approved count present once, old count absent; verified 2026-09-01T00:36:56Z | **PASS** — Open Graph and Twitter fields present; image returned HTTP 200 as PNG, 1536 × 1024; verified 2026-09-01T00:33:20Z | Keep `ARTICLE-0.5` as the rollback target: archive snapshot `c02f0662944e3b950fdcc659b18f19f5b2826c60`, production commit `3d25419d700fe279bbdbd808e16bfbbd2d673e8b`, Pages deployment `6187760304` |
 
 The `ARTICLE-1.0` row is intentionally a handoff gate, not a claim that the
 editorial cut is live. Its immutable source snapshot is recorded above for the
@@ -35,9 +35,12 @@ external article changed.
 | Field | Recorded value |
 |---|---|
 | Accepted source snapshot | `fa4ed2f7348c15a164dbb529b8a4e162fc51da7c` |
-| External deployment identifier | Not recorded; the external deployment has not been run from this workspace |
-| Canonical verification | Not run for `ARTICLE-1.0`; the deployed v0.5 article remains the verified public state |
-| Rollback target | `ARTICLE-0.5`, source snapshot `c02f0662944e3b950fdcc659b18f19f5b2826c60`; external deployment identifier is not recorded in this workspace |
+| External deployment identifier | `OKHP3/OverKill-Hill` production commit `d509a4343753476557fc761ffcea251312282a86`; GitHub Pages deployment `6192155562`; workflow run `33455326456` (`Publish GitHub Pages`, run 14); deployment status `success` at 2026-09-01T00:35:27Z |
+| External validation | Final `Site Validation` run `33455326569` (run 861) passed for the same commit at 2026-09-01T00:36:52Z; the earlier run `33455101186` failed only because the generated search index was stale, and that artifact was regenerated before the final release commit |
+| Canonical verification | **PASS WITH LINK LIMITATION** — direct request to `https://overkillhill.com/writings/first-diagram-is-a-liar/` returned HTTP 200 with no redirect at 2026-09-01T00:36:56Z; title remained `The First Diagram Is Usually a Liar: v0.5 | OverKill Hill P³™`, one H1 was present, the canonical tag matched the URL, the approved wording appeared once, and both old `18 diagrams` phrasings were absent |
+| Social-preview verification | **PASS** — `og:title`, `og:description`, `og:url`, `og:image`, `twitter:card`, `twitter:title`, `twitter:description`, and `twitter:image` were present; the image returned HTTP 200 as PNG, 1536 × 1024, at 2026-09-01T00:33:20Z |
+| Link verification | The repository root link returned HTTP 200. Four deck download links and three deep archive links returned HTTP 404 because the production article still points at historical paths that are absent from the current archive repository; these are recorded as a limitation, not treated as deployment evidence |
+| Rollback target | `ARTICLE-0.5`: archive snapshot `c02f0662944e3b950fdcc659b18f19f5b2826c60`; last externally verified production commit `3d25419d700fe279bbdbd808e16bfbbd2d673e8b`; GitHub Pages deployment `6187760304` |
 
 ## ARTICLE-1.0 synthesis package
 

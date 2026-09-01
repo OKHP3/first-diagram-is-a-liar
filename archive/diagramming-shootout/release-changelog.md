@@ -2,6 +2,28 @@
 
 This changelog tracks public-facing story states, not every file operation.
 
+## 2026-09-01 — approved count-label correction deployed
+
+- Published the approved wording, **15 diagram records across V1 and V2,
+  presented in an 18-slide deck**, through the external `OKHP3/OverKill-Hill`
+  production repository.
+- Recorded production commit
+  `d509a4343753476557fc761ffcea251312282a86`, GitHub Pages deployment
+  `6192155562`, and successful workflow run `33455326456`, completed at
+  2026-09-01T00:35:27Z.
+- Verified the canonical URL directly at 2026-09-01T00:36:56Z: HTTP 200, no
+  redirect, matching canonical tag, one approved phrase, and no old count
+  phrases. Open Graph and Twitter metadata passed; the image returned HTTP 200
+  as a 1536 × 1024 PNG.
+- Final production `Site Validation` run `33455326569` passed after refreshing
+  the generated search index. ARTICLE-0.5 remains the explicit rollback target,
+  with archive snapshot `c02f0662944e3b950fdcc659b18f19f5b2826c60`, production
+  commit `3d25419d700fe279bbdbd808e16bfbbd2d673e8b`, and Pages deployment
+  `6187760304`.
+- The article still contains seven stale historical archive/deck links that
+  returned HTTP 404. This is recorded as a follow-up limitation and was not
+  treated as evidence that the new wording failed to publish.
+
 ## 2026-08-25 — v1.0 synthesis handoff prepared
 
 - Assembled the prepared local editorial cut, evidence index, four specialist
