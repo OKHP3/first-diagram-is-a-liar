@@ -5,17 +5,39 @@ This is the reproducible handoff record for the external article at
 source preparation from the external deployment and prevents a healthy
 workspace workflow from being mistaken for production publication.
 
+## Owner/editorial approval record — count label correction
+
+| Field | Value |
+|---|---|
+| Decision | Approved for the next authorized external editorial release |
+| Approver | Jamie Hill / OverKill Hill P³™ — owner/editorial authority |
+| Recorded | 2026-08-31 |
+| Release candidate | The count-label correction in the local `ARTICLE-1.0` editorial cut; this does not authorize an in-place rewrite of the deployed `ARTICLE-0.5` page |
+| Approved public wording | **15 diagram records across V1 and V2, presented in an 18-slide deck** |
+| Scope | Replace the literal “18 diagrams” wording only through the external release process; retain the deployed v0.5 wording as historical copy until that release is deployed and verified |
+| Approval evidence | Owner-approved project assignment for this release candidate, recorded before the source edit |
+
 ## Release records
 
 | Release | Source snapshot | Prepared/released date | External deployment | Canonical verification | Social preview | Rollback |
 |---|---|---|---|---|---|---|
 | `ARTICLE-0.5` | `c02f0662944e3b950fdcc659b18f19f5b2826c60` (committed source snapshot) | 2026-08-24 | Verified public state; deployment system is external to this workspace | Verified 2026-08-24 at the canonical URL; see `release-manifest.md` | Metadata is present in the source; re-check at the canonical URL before republishing | Restore the last externally verified `ARTICLE-0.5` source/deployment |
-| `ARTICLE-1.0` | The commit that contains the prepared source and this handoff record; record its immutable full hash before external deployment | 2026-08-24 | Pending; do not describe as published | Pending | Pending | Keep `ARTICLE-0.5` as the rollback target until all gates pass |
+| `ARTICLE-1.0` | `fa4ed2f7348c15a164dbb529b8a4e162fc51da7c` (accepted local source snapshot) | 2026-08-24; count label approved 2026-08-31 | Pending external deployment; do not describe as published | Pending external canonical verification | Pending external social-preview verification | Keep `ARTICLE-0.5` as the rollback target until all external gates pass |
 
 The `ARTICLE-1.0` row is intentionally a handoff gate, not a claim that the
-editorial cut is live. The release coordinator must replace the source
-snapshot placeholder with the immutable full commit hash before handing the
-source to the external deployment owner.
+editorial cut is live. Its immutable source snapshot is recorded above for the
+external deployment owner. The approval above authorizes the wording, not the
+deployment; no local validation or GitHub Pages run is evidence that the
+external article changed.
+
+## External release gate status
+
+| Field | Recorded value |
+|---|---|
+| Accepted source snapshot | `fa4ed2f7348c15a164dbb529b8a4e162fc51da7c` |
+| External deployment identifier | Not recorded; the external deployment has not been run from this workspace |
+| Canonical verification | Not run for `ARTICLE-1.0`; the deployed v0.5 article remains the verified public state |
+| Rollback target | `ARTICLE-0.5`, source snapshot `c02f0662944e3b950fdcc659b18f19f5b2826c60`; external deployment identifier is not recorded in this workspace |
 
 ## ARTICLE-1.0 synthesis package
 

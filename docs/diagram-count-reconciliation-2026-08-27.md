@@ -63,10 +63,10 @@ on 2026-08-27.
   manifest model, which includes exhibition and specialty entries even though
   they are not all part of the same Core Five comparison.
 
-### Proposed
+### Approved
 
-- For the next public editorial release, describe the evidence as **15 diagram
-  records across V1 and V2, presented in an 18-slide deck**.
+- For the next authorized public editorial release, describe the evidence as
+  **15 diagram records across V1 and V2, presented in an 18-slide deck**.
 - If the deck is mentioned separately, call it an **18-slide deck** rather than
   an 18-diagram deck.
 - Cite this reconciliation from any future release or content review so the
@@ -74,11 +74,11 @@ on 2026-08-27.
 
 ### Unknown / owner-controlled
 
-- Whether the already-published v0.5 article should receive a correction, or
-  whether its “18 diagrams” wording must remain as historical copy.
-- Whether the next external release will use “15 diagrams,” “15 diagram
-  records,” or the fuller “15 diagram records across an 18-slide deck.”
+- Whether the already-published v0.5 article will receive the approved
+  correction through an external release, or remain historical copy.
+- The external deployment identifier, canonical verification, and rollback
+  confirmation for the authorized release remain pending.
 
 No public article, external deck, or historical release text was rewritten by
-this reconciliation. The owner/editorial release authority must approve any
-public-copy change.
+this reconciliation. The approved wording remains subject to the external
+deployment and canonical-verification gates recorded in the release handoff.

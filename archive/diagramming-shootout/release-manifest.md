@@ -46,8 +46,9 @@ of the same diagram records, not additional diagrams.
 For the next article release, use **15 diagram records across V1 and V2,
 presented in an 18-slide deck**. Do not describe the deck as containing 18
 distinct diagrams. The deployed v0.5 article's existing “18 diagrams” wording
-remains part of the historical public release until an approved editorial
-release replaces it; this manifest does not silently rewrite external copy.
+remains part of the historical public release until the approved editorial
+release replaces it and the external deployment is verified; this manifest does
+not silently rewrite external copy.
 
 ## Count boundary
 
@@ -59,9 +60,10 @@ lo-resolution PNGs are alternate renditions of those same 15 records.
 
 The currently published v0.5 article historically says “All 18 diagrams” in
 its deck section. That wording is preserved in the external source and is not
-silently rewritten here. The supported wording for a future editorial release
-is **15 diagram records across V1 and V2, presented in an 18-slide deck**;
-owner/editorial approval remains required before changing public copy. See
+silently rewritten here. The supported wording for the approved future
+editorial release is **15 diagram records across V1 and V2, presented in an
+18-slide deck**. External deployment and canonical verification remain required
+before changing public copy. See
 [`../../docs/diagram-count-reconciliation-2026-08-27.md`](../../docs/diagram-count-reconciliation-2026-08-27.md)
 for the evidence matrix and claim classifications.
 
