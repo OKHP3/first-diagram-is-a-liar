@@ -93,8 +93,85 @@ but still records ordinary page, step, CTA, and outbound activity.
    to the visible provider/referral URL.
 5. Repeat with an untagged URL. No `campaign_landing` event should be emitted;
    ordinary diagram and CTA events should still work.
-6. Record the date, GA4 property, release version, and observed event names in
-   the launch worksheet. Never paste DebugView screenshots containing user IDs.
+6. Record the date, a non-sensitive GA4 property alias, release version, and
+   observed event names in the launch worksheet. Apply the evidence-handling
+   boundary below before saving any screenshot or export; never paste an
+   unredacted DebugView screenshot.
+
+## Evidence handling, redaction, and retention boundary
+
+The campaign archive may contain a **redacted aggregate readout**, but it is
+not a public analytics dump. Treat every owner-supplied GA4, DebugView, provider
+dashboard, CSV, JSON, or screenshot as restricted until it has been reviewed
+against this boundary.
+
+### What may be archived and shared
+
+Keep only a summary of aggregate, low-cardinality results needed to interpret
+the campaign:
+
+- retrieval date, observation window, release/content version, and a source
+  label or non-sensitive property alias;
+- totals and grouped counts for the allow-listed events and measures in this
+  map, such as users, sessions, engaged sessions, event counts, CTA/referral
+  counts, and source/medium/campaign/content aggregates;
+- the grouping dimensions, filters, thresholds, and known limitations needed to
+  reproduce the interpretation; and
+- a statement that the figures are aggregate campaign evidence, not a
+  user-level dataset.
+
+Suppress or combine small groups before archival where a breakdown could make
+an individual or tiny audience recognizable. Do not publish a cell merely
+because it is available in GA4; if the owner cannot confirm that a breakdown
+is safe to share, keep the breakdown restricted and retain only a broader
+aggregate.
+
+### What must remain restricted
+
+Do not commit, attach to a public release record, or send through a public
+archive any raw or user-level material, including:
+
+- `user_id`, `user_pseudo_id`, client/instance IDs, session IDs, device IDs,
+  advertising IDs, or any other per-user or per-device identifier;
+- event-level rows, raw timestamps that expose a person's activity pattern,
+  raw API responses, DebugView streams, user explorers, or exports that can be
+  joined back to a person;
+- email addresses, phone numbers, names, free-text parameters, cookies,
+  tokens, IP addresses, exact locations, demographics, audience membership,
+  Google Signals data, or other sensitive dimensions; and
+- full URLs or query strings containing personal or tracking identifiers,
+  including unapproved parameters beyond the four named UTM fields. A
+  `gclid`, click ID, or similar identifier is not an aggregate metric.
+
+Raw exports remain in the owner's access-controlled analytics storage and are
+not evidence that this repository or its public article may expose. If a
+temporary local copy is needed to calculate the summary, delete it after the
+redacted summary has been checked and do not place it in the repository,
+attachments, screenshots, or public hosting. The redacted aggregate summary
+may be retained with the campaign archive; the raw export follows the owner's
+existing restricted analytics retention policy rather than a new public
+retention commitment.
+
+### Screenshot and attachment checklist
+
+Before archival, crop or redact:
+
+1. the signed-in account name, email, avatar, notifications, open tabs, and
+   browser profile details;
+2. GA4 account/property identifiers when they are not needed for provenance,
+   plus user/device selectors and any DebugView user ID or device panel;
+3. event parameter panels, custom dimensions, audience/device/geo detail, raw
+   timestamps, and any value that is not in the aggregate summary;
+4. address bars, landing URLs, DevTools Network request URLs, cookies,
+   headers, payloads, and query strings that contain personal or unapproved
+   identifiers;
+5. provider-dashboard rows or screenshots that show account names, customer
+   details, order/revenue records, or other user-level activity.
+
+The attachment that enters the archive should be a redacted summary (or a
+table transcribed from one), labelled **aggregate campaign evidence —
+restricted raw source not attached**. Keep the source location and retrieval
+date in the handoff note without copying the restricted export itself.
 
 ## Launch readout worksheet
 
@@ -152,4 +229,6 @@ No tracking was added to the client-only tutorial as part of this closure, and
 this record does not claim `ARTICLE-1.0` publication. If the owner later
 supplies an approved readout, attach it with its retrieval date, property or
 source, observation window, release version, and observed measures before
-making any performance or campaign conclusion.
+making any performance or campaign conclusion. Apply the evidence-handling
+boundary first: attach only a redacted aggregate summary and record that any
+raw export remains restricted and is not public evidence.

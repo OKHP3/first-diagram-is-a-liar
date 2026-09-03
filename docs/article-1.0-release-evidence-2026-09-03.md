@@ -92,9 +92,31 @@ entered as zero, no performance or campaign conclusion is made, and no
 tracking was added to the client-only tutorial.
 
 If the owner later supplies a readout, it must be attached with its retrieval
-date, source or GA4 property, observation window, release version, and observed
-measures before it is used for a performance conclusion. This evidence update
-does not claim `ARTICLE-1.0` publication.
+date, source label or non-sensitive GA4 property alias, observation window,
+release version, and observed measures before it is used for a performance
+conclusion. The attachment must be a redacted aggregate summary, labelled
+**aggregate campaign evidence —
+restricted raw source not attached**. Do not attach or commit the raw CSV/JSON
+export, event-level rows, DebugView stream, user explorer, or provider
+dashboard export.
+
+Before archival, redact or crop user IDs (`user_id`, `user_pseudo_id`,
+client/instance, session, device, and advertising IDs), email/phone/name,
+free-text parameters, cookies/tokens/IP addresses, exact locations,
+demographics/audience membership, Google Signals, raw timestamps, and any
+unapproved query-string or click identifiers. Screenshots must also hide the
+signed-in account, avatar, notifications, open tabs, GA4 user/device selector,
+DebugView device panel, event-parameter panels, and DevTools URLs/headers/
+payloads. Keep only low-cardinality aggregate totals and grouped counts; merge
+or suppress small groups when a person or tiny audience could be recognized.
+
+The raw source stays in the owner's access-controlled analytics storage under
+the owner's existing restricted retention policy. A temporary local copy must
+be deleted after the redacted summary is checked and must never enter the
+repository, public release evidence, or hosted article. The archive may retain
+the redacted summary with its retrieval date and source label, but that does
+not make raw analytics public evidence. This evidence update does not claim
+`ARTICLE-1.0` publication.
 
 ## Rollback verification
 

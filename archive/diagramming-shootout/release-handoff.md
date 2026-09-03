@@ -94,6 +94,33 @@ source commit and deployment identifier in this record. A failed or superseded
 release is never erased from the archive; mark its result and retain the notes
 for diagnosis.
 
+### 6. Attach campaign evidence safely
+
+If an owner supplies a GA4, DebugView, or provider readout, use the
+[campaign measurement evidence boundary](campaign-measurement.md#evidence-handling-redaction-and-retention-boundary)
+before adding it to this handoff:
+
+- archive only a redacted, aggregate summary with its retrieval date, source
+  label/property alias, observation window, release version, measures, and
+  limitations;
+- redact `user_id`, `user_pseudo_id`, client/instance, session, device, and
+  advertising IDs; email, phone, name, free text; cookies, tokens, IPs, exact
+  locations, demographics, audience membership, Google Signals, raw timestamps,
+  and unapproved URL/query or click identifiers;
+- crop screenshots to remove signed-in account details, GA4 user/device
+  selectors, DebugView device panels, event-parameter panels, browser tabs,
+  address bars, and DevTools request URLs/headers/payloads; and
+- label the attachment **aggregate campaign evidence — restricted raw source
+  not attached**. Keep raw CSV/JSON, event-level exports, DebugView streams,
+  user explorers, and provider-dashboard rows in the owner's access-controlled
+  analytics storage. Delete any temporary local copy after checking the
+  summary; do not commit it or host it with the article.
+
+An aggregate summary is shareable evidence about campaign activity, not
+permission to disclose the underlying analytics. If a breakdown could identify
+an individual or tiny audience, suppress or combine it and retain only the
+broader aggregate.
+
 ## Ownership
 
 Jamie Hill / OverKill Hill P³™ owns editorial acceptance and publication
@@ -118,6 +145,9 @@ The current evidence packet records:
 - the unavailable 2026-08-25 through 2026-08-31 campaign readout, separated
   into acquisition, interactions, CTA/referral activity, qualitative
   observations, and separate technical diagram evidence; and
+- the redaction and retention boundary for a future owner-supplied analytics
+  readout: only aggregate campaign evidence may enter the archive, while raw
+  exports remain restricted and are not public evidence; and
 - the usable `ARTICLE-0.5` rollback snapshot, production commit, and Pages
   deployment identifier.
 
