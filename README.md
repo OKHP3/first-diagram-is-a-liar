@@ -10,14 +10,18 @@ npm ci
 npm run dev
 ```
 
-The application walks through the premise, the ROY exchange rate, a live
-non-linear diagram workbench, the Council fairness model, and a shipping
-checklist. It is the solution surface. The archive is the receipt stack.
+The application walks through the premise, the ROY exchange rate, a
+source-first V1/V2 diagram workbench, the Council fairness model, and a
+shipping checklist. It is the solution surface. The archive is the receipt
+stack. The local session remembers premise, controls, revision, synthesis,
+checklist, and handoff activity when browser storage is available.
+
 The handoff step can download a deterministic
 `first-diagram-is-a-liar-handoff.md` working snapshot containing the current
-local tutorial state. It is deliberately not cloud backup, durable server
-storage, or a verdict; clipboard copy remains available as a separate
-compact-brief action.
+local tutorial state, including the premise, ROY, workbench, Council, checklist,
+next test, receipts, generated date, and schema version. It is deliberately not
+cloud backup, durable server storage, or a verdict; clipboard copy remains
+available for the full packet as a separate convenience.
 
 ## The article and application
 
@@ -76,12 +80,14 @@ git diff --check
 ### Local browser acceptance
 
 `npm run test:acceptance` starts a temporary local Vite server and drives the
-actual tutorial in headless Chromium. It covers the five-step journey, ROY
-recalculation, revision-loop visibility, Council condition labels, checklist
-completion and reload persistence, clipboard failure feedback, local Markdown
-handoff content and deterministic naming, keyboard-facing semantics, and the
-390px narrow viewport. The handoff assertions capture the browser-generated
-Blob locally; they do not upload handoff text or diagram state.
+actual tutorial in headless Chromium. It covers the five-step journey, bounded
+premise capture, ROY recalculation, revision-loop visibility, source-first V1/V2
+comparison, Council condition labels and synthesis, checklist completion and
+reload persistence, malformed-state recovery, hash/history navigation,
+clipboard failure feedback, local Markdown handoff content and deterministic
+naming, keyboard-facing semantics, and the 390px narrow viewport. The handoff
+assertions capture the browser-generated Blob locally; they do not upload
+handoff text or diagram state.
 
 The command needs a locally installed Chromium or Chrome executable. Chromium
 is available in the Replit development environment; on another machine, set

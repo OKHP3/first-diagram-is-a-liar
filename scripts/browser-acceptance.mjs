@@ -8,6 +8,7 @@ import { createServer } from "node:net";
 const root = resolve(dirname(new URL(import.meta.url).pathname), "..");
 const mobileWidth = 390;
 const briefStorageKey = "first-diagram-progress";
+const sessionStorageKey = "first-diagram-session";
 const handoffFilename = "first-diagram-is-a-liar-handoff.md";
 
 async function hasExecutable(command) {
@@ -290,9 +291,18 @@ async function runAcceptance() {
     await client.send("Runtime.enable");
     await client.send("Page.navigate", { url: appUrl });
     await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "application startup");
-    await client.evaluate(`localStorage.removeItem(${JSON.stringify(briefStorageKey)})`, "clean acceptance state");
+    await client.evaluate(`localStorage.removeItem(${JSON.stringify(briefStorageKey)}); localStorage.removeItem(${JSON.stringify(sessionStorageKey)})`, "clean acceptance state");
     await client.send("Page.reload", { ignoreCache: true });
     await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "application startup");
+    await client.evaluate(`localStorage.setItem(${JSON.stringify(sessionStorageKey)}, "{malformed")`, "malformed session setup");
+    await client.send("Page.reload", { ignoreCache: true });
+    await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "malformed session recovery");
+    const malformedRecovery = await client.evaluate('({ active: document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent, status: document.querySelector(".session-status")?.textContent })', "malformed session recovery");
+    assert(malformedRecovery.active?.includes("Spot the lie") && malformedRecovery.status?.includes("Saved locally"), "malformed session recovery", `malformed local state did not safely fall back while preserving storage availability: ${JSON.stringify(malformedRecovery)}`);
+    await client.evaluate(`localStorage.removeItem(${JSON.stringify(sessionStorageKey)})`, "clean malformed session state");
+    await client.send("Page.reload", { ignoreCache: true });
+    await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "clean session recovery");
+    passed.push("malformed session recovery");
 
     const railCount = await client.evaluate('document.querySelectorAll(".rail-step").length', "step rail");
     assert(railCount === 5, "step rail", `expected five tutorial steps, found ${railCount}`);
@@ -315,6 +325,12 @@ async function runAcceptance() {
     assert(accessibility.labeledSteps, "step 1 keyboard semantics", "a tutorial step control has no accessible label");
     assert(accessibility.exactlyOneCurrent, "step 1 active semantics", "expected exactly one aria-current step");
     passed.push("keyboard-relevant labels and active-step semantics");
+
+    await click(client, '.pattern-choice input[value="hidden-loop"]', "step 1 premise pattern");
+    await client.evaluate(`(() => { const field = document.querySelector("#claim"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("claim field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, "The tidy line hides a retry."); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 1 bounded claim");
+    const premise = await client.evaluate('({ pattern: document.querySelector(\'.pattern-choice input:checked\')?.value, claim: document.querySelector("#claim")?.value })', "step 1 premise capture");
+    assert(premise.pattern === "hidden-loop" && premise.claim === "The tidy line hides a retry.", "step 1 premise capture", "pattern or bounded claim did not persist in the UI");
+    passed.push("bounded premise capture");
 
     await click(client, ".hero-actions .button-primary", "step 1 start control");
     await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Measure what the picture bought")', "step 2 navigation");
@@ -351,6 +367,13 @@ async function runAcceptance() {
     await click(client, ".toggle-button", "step 3 loopback toggle");
     await waitFor(client, 'document.querySelector(".toggle-button")?.getAttribute("aria-pressed") === "true"', "step 3 loopback toggle");
     passed.push("revision-loop visibility toggle");
+    await click(client, '.revision-tabs button[role="tab"]:first-child', "step 3 V1 revision");
+    const v1 = await client.evaluate('({ source: document.querySelector(".workbench-evidence pre")?.textContent, change: document.querySelector(".workbench-evidence p")?.textContent, selected: document.querySelector(\'.revision-tabs [aria-selected="true"]\')?.textContent })', "step 3 V1 source");
+    assert(v1.selected?.includes("V1") && v1.source?.includes("flowchart LR") && v1.change?.includes("V1 draws"), "step 3 V1 source", "V1 tab did not synchronize source and explanation");
+    await click(client, '.revision-tabs button[role="tab"]:last-child', "step 3 V2 revision");
+    const v2 = await client.evaluate('({ source: document.querySelector(".workbench-evidence pre")?.textContent, change: document.querySelector(".workbench-evidence p")?.textContent })', "step 3 V2 source");
+    assert(v2.source?.includes("doubt / revise") && v2.change?.includes("V2 keeps"), "step 3 V2 source", "V2 tab did not synchronize source and explanation");
+    passed.push("source-first V1/V2 comparison");
 
     await click(client, ".step-nav .button-primary", "step 3 next control");
     await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Use disagreement")', "step 4 navigation");
@@ -360,10 +383,16 @@ async function runAcceptance() {
       counts[tier] = (counts[tier] ?? 0) + 1;
       return counts;
     }, {}))()`, "step 4 Council condition labels");
-    for (const [tier, expected] of Object.entries({ "Core Five": 5, Exhibition: 1, Specialty: 1, Attempted: 1 })) {
+    for (const [tier, expected] of Object.entries({ "Core Five": 5, Exhibition: 1, "Specialty Notion": 1, "Specialty Replit": 1, Attempted: 1 })) {
       assert(tiers[tier] === expected, "step 4 Council condition labels", `expected ${expected} ${tier} label(s), found ${tiers[tier] ?? 0}`);
     }
     passed.push("Council taxonomy labels");
+    await click(client, 'input[name="criterion"][value="iteration"]', "step 4 criterion");
+    await click(client, 'input[name="outcome"][value="combine"]', "step 4 synthesis outcome");
+    await client.evaluate(`(() => { const field = document.querySelector("#synthesis-note"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("synthesis field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, "Borrow the loop and reject the decoration."); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 4 synthesis note");
+    const synthesis = await client.evaluate('({ criterion: document.querySelector(\'input[name="criterion"]:checked\')?.value, outcome: document.querySelector(\'input[name="outcome"]:checked\')?.value, note: document.querySelector("#synthesis-note")?.value })', "step 4 synthesis state");
+    assert(synthesis.criterion === "iteration" && synthesis.outcome === "combine" && synthesis.note?.includes("Borrow the loop"), "step 4 synthesis state", "criterion or synthesis did not persist");
+    passed.push("criterion and synthesis capture");
 
     await click(client, ".step-nav .button-primary", "step 4 next control");
     await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Ship the proof")', "step 5 navigation");
@@ -412,10 +441,15 @@ async function runAcceptance() {
     for (const expected of [
       "# Local Working Handoff",
       "- **Step:** 05 / The handoff",
+      "Bounded claim:** The tidy line hides a retry.",
+      "Selected revision:** V2 / honest revision",
+      "Selected criterion:",
+      "Synthesis outcome:** combine",
+      "Schema version:** 2",
       "Current ROY readout:** 5x",
       "- [x] The claim is clear before the diagram appears.",
       "Revision loopbacks:** Visible",
-      "What decision could fail in the real context?",
+      "## Next test",
       "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut",
     ]) {
       assert(firstHandoff.content.includes(expected), "step 5 Markdown handoff content", `export is missing ${expected}`);
@@ -441,6 +475,31 @@ async function runAcceptance() {
     assert(persisted.checked === 5, "step 5 checklist reload persistence", `expected five checked items after reload, found ${persisted.checked}`);
     assert(persisted.status === "SHIP CHECK / 5 OF 5", "step 5 checklist reload persistence", `unexpected checklist status after reload: ${persisted.status}`);
     passed.push("checklist reload persistence");
+
+    await client.evaluate('location.hash = "#step-3"', "deep-link setup");
+    await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent.includes("Draw the truth")', "deep-link navigation");
+    await client.evaluate('history.back()', "browser back navigation");
+    await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent.includes("Ship the proof")', "browser back navigation");
+    passed.push("hash deep link and history navigation");
+
+    await client.evaluate(`(() => {
+      Storage.prototype.__firstDiagramOriginalSetItem = Storage.prototype.setItem;
+      Storage.prototype.setItem = function () { throw new Error("storage blocked"); };
+      document.querySelector(".check-row input")?.click();
+      return true;
+    })()`, "storage blocked setup");
+    await waitFor(client, 'document.querySelector(".session-status")?.textContent.includes("This session only")', "storage blocked fallback");
+    await client.evaluate(`(() => {
+      if (Storage.prototype.__firstDiagramOriginalSetItem) Storage.prototype.setItem = Storage.prototype.__firstDiagramOriginalSetItem;
+      delete Storage.prototype.__firstDiagramOriginalSetItem;
+      return true;
+    })()`, "storage blocked cleanup");
+    passed.push("storage-blocked session-only fallback");
+
+    await client.send("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] });
+    const reducedMotion = await client.evaluate('getComputedStyle(document.querySelector(".button")).transitionDuration', "reduced-motion behavior");
+    assert(reducedMotion === "0.01ms" || reducedMotion === "1e-05s", "reduced-motion behavior", `expected reduced transition duration, got ${reducedMotion}`);
+    passed.push("reduced-motion preference");
 
     await client.send("Emulation.setDeviceMetricsOverride", {
       width: mobileWidth,

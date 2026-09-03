@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { notionSourceDigest } from "./notion-sourced";
 import registrySnapshot from "../archive/notion-captures/visual-language-diagram-types.json";
-
-type CouncilTier = "Core Five" | "Exhibition" | "Specialty" | "Attempted";
+import { council, councilCriteria } from "./council";
+import { buildHandoffMarkdown, HANDOFF_FILENAME, publicSourceLinks } from "./handoff";
+import { calculateRoy, getRoyBand, getRoyInterpretation, royPresets } from "./roy";
+import { CLAIM_MAX_LENGTH, createDefaultSession, loadSession, persistSession, resetSession, type LiePattern, type SessionState } from "./session";
+import { workbenchStates } from "./workbench";
 
 const steps = [
   { number: "01", label: "Spot the lie", kicker: "The premise" },
@@ -11,72 +14,12 @@ const steps = [
   { number: "04", label: "Use disagreement", kicker: "The council" },
   { number: "05", label: "Ship the proof", kicker: "The handoff" },
 ];
-
-const council: Array<{ name: string; tier: CouncilTier; role: string; result: string; note: string }> = [
-  { name: "Copilot V1", tier: "Core Five", role: "Renderer-level discipline", result: "Round 1 top performer", note: "Configured the Mermaid theme engine instead of decorating individual nodes." },
-  { name: "Claude V2", tier: "Core Five", role: "Narrative architecture", result: "Round 2 top performer", note: "Made revision loops visible. Dashed arrows carried the uncomfortable truth." },
-  { name: "ChatGPT", tier: "Core Five", role: "Scaffolding and synthesis", result: "Structural benchmark", note: "Strong loop logic and a useful first-pass scaffold." },
-  { name: "Perplexity", tier: "Core Five", role: "ROY framing", result: "Conceptual precision", note: "Compressed the argument tightly, with less patience for decorative noise." },
-  { name: "Gemini", tier: "Core Five", role: "Maximalist energy", result: "Free-tier ceiling noted", note: "Evaluated fairly, with the different access condition left visible." },
-  { name: "ChatGPT V2 Pro", tier: "Exhibition", role: "Raised capability ceiling", result: "Exhibition only", note: "Interesting and instructive, but not a direct comparison with the Core Five." },
-  { name: "Notion + Replit", tier: "Specialty", role: "Archivist and builder", result: "Different brief", note: "Useful specialty perspectives. Neither entered the same cold-start contest." },
-  { name: "Mermaid AI", tier: "Attempted", role: "Context-blind attempt", result: "Excluded", note: "Jumped to drawing before it understood the argument. That failure is part of the lesson." },
+const patterns: Array<{ id: LiePattern; label: string; note: string }> = [
+  { id: "hidden-loop", label: "Hidden loop", note: "The tidy line hides a return, retry, or revision." },
+  { id: "missing-exception", label: "Missing exception", note: "The happy path has a case that breaks its promise." },
+  { id: "false-certainty", label: "False certainty", note: "An unresolved choice is presented as settled." },
+  { id: "decorative-complexity", label: "Decorative complexity", note: "Extra shapes create work without removing confusion." },
 ];
-
-const sourceCaptures = [
-  { label: "ROY × Mermaid competition", tag: "Experiment spine", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/roy-mermaid-competition.md", note: "The thesis, ROY gate, and hybrid synthesis." },
-  { label: "Public Hub working copy", tag: "v0.3 baseline", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/public-hub-working-copy.md", note: "The eight-prompt sequence and launch logic." },
-  { label: "Article v0.1", tag: "Compressed cut", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.1.md", note: "The origin story and first council brief." },
-  { label: "Article v0.4", tag: "Method cut", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.4.md", note: "The clearest fan out, compare, adjudicate, synthesize method." },
-  { label: "Article v0.5", tag: "Current lineage", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.5.md", note: "Council interviews, scoring dimensions, and the current release boundary." },
-  { label: "Article v0.6", tag: "Notion deep dive", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.6.md", note: "The writer's room, PRD, consolidation, and documentarian role." },
-  { label: "Article v0.8", tag: "Rematch outline", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.8.md", note: "Preserved separately from the repository Theme Builder packet." },
-  { label: "Article v0.9", tag: "Theme Builder gap", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v0.9.md", note: "Preserved separately from the repository BPMN packet." },
-  { label: "Article v1.0 source vault", tag: "Receipt structure", href: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/notion-captures/article-v1.0-source-vault.md", note: "Case-study receipts and reusable method, clearly marked incomplete." },
-];
-
-type DiagramRegistryRecord = {
-  diagramType: string;
-  family: string | null;
-  purpose: string | null;
-  definition: string | null;
-  mermaidSupport: string | null;
-  mermaidClosestMatch: string | null;
-  themeConfidence: string | null;
-  notationCompliance: string | null;
-  examplePriority: string | null;
-  themeBuilderImportance: string | null;
-  supportWarningNeeded: boolean | null;
-  actionLane: string | null;
-  exampleFile: string | null;
-  notes: string | null;
-  originBegan: string | null;
-  domainSpecificity: string | null;
-  stillUsed: string | null;
-  regionSpecificity: string | null;
-  researchPriority: string | null;
-  semanticFidelityRisk: string | null;
-  newTypeCandidate: boolean | null;
-  commonShapes: string | null;
-  primaryRoles: string[];
-  createdTime: string | null;
-};
-
-const diagramRegistry = registrySnapshot.records as DiagramRegistryRecord[];
-const registrySupportCounts = diagramRegistry.reduce<Record<string, number>>((counts, record) => {
-  const support = record.mermaidSupport ?? "Unclassified";
-  counts[support] = (counts[support] ?? 0) + 1;
-  return counts;
-}, {});
-const registryHighlights = diagramRegistry.filter((record) => record.examplePriority === "Tier 1").slice(0, 6);
-
-const councilMethod = [
-  ["01", "Fan out", "Same brief, independent runs, no cross-contamination."],
-  ["02", "Compare", "Look for divergence, not just the most confident answer."],
-  ["03", "Adjudicate", "Separate structural signal from decorative noise."],
-  ["04", "Synthesize", "Build the hybrid that none of the originals contained."],
-];
-
 const checklist = [
   { id: "claim", label: "The claim is clear before the diagram appears." },
   { id: "loops", label: "The revision path is visible, not politely hidden." },
@@ -84,87 +27,16 @@ const checklist = [
   { id: "conditions", label: "Different conditions are labelled before comparison." },
   { id: "handoff", label: "The artifact tells the next person what to do." },
 ];
-const progressStorageKey = "first-diagram-progress";
-const handoffFilename = "first-diagram-is-a-liar-handoff.md";
 const compactBrief = "Show the real thinking path. Include the decision that could fail, the revision loop, and the test that proves the diagram earns its words. Keep only shapes that remove confusion.";
-const publicSourceLinks = [
-  { label: "GitHub repository / receipts", url: "https://github.com/OKHP3/first-diagram-is-a-liar" },
-  { label: "Live long-form article", url: "https://overkillhill.com/writings/first-diagram-is-a-liar/" },
-  { label: "LinkedIn article", url: "https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc" },
-  { label: "Preserved experiment", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout" },
-  { label: "All eight prompts", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout/prompts" },
-  { label: "Editorial cut", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut" },
-];
-
-function buildHandoffMarkdown({ activeStep, words, clarity, royScore, showLoops, checked }: { activeStep: number; words: number; clarity: number; royScore: number; showLoops: boolean; checked: Record<string, boolean> }) {
-  const step = steps[activeStep] ?? steps[0];
-  const checklistState = checklist.map((item) => `- [${checked[item.id] ? "x" : " "}] ${item.label}`).join("\n");
-  const sourceList = publicSourceLinks.map((source) => `- [${source.label}](${source.url})`).join("\n");
-
-  return `# Local Working Handoff
-
-> Browser-generated Markdown for local working continuity. This is a downloaded snapshot, not a cloud backup, durable server storage, or a verdict.
-
-## Project / export context
-
-- **Project:** The First Diagram Is Usually a Liar
-- **Export type:** Local working handoff
-- **Filename:** \`${handoffFilename}\`
-- **Privacy boundary:** This content is assembled in the browser. It is not transmitted or stored by the application unless you explicitly download this file.
-- **Verdict:** None. This handoff records a current working state for the next person or next session to inspect.
-
-## Current tutorial step
-
-- **Step:** ${step.number} / ${step.kicker}
-- **Title:** ${step.label}
-- **Active step index:** ${activeStep + 1} of ${steps.length}
-
-## ROY framing
-
-ROY means **Return on Your Words**: understanding produced divided by explanation invested.
-
-- **Words invested:** ${words}
-- **Clarity delivered:** ${clarity}/10
-- **Current ROY readout:** ${royScore}x
-- **Interpretation:** ${royScore >= 5 ? "EARNING SPACE — the diagram is starting to pay rent; inspect what it hides." : "NEEDS WORK — the words are doing too much work; reduce friction before adding decoration."}
-
-## Checklist state
-
-${checklistState}
-
-## Current workbench state
-
-- **Model:** LIVE MODEL / REVISION 02
-- **Revision loopbacks:** ${showLoops ? "Visible — doubt / revise / try again" : "Hidden — happy path only"}
-- **Diagram:** Spark → rough draft → ROY check → ship the proof
-- **State note:** The workbench captures the selected loopback view in this browser session. No diagram content or private source locator has been sent anywhere.
-
-## Compact brief
-
-> ${compactBrief}
-
-## Open questions
-
-These are intentionally unresolved because the tutorial has not collected user-specific answers:
-
-- **What decision could fail in the real context?** — Unknown; no user-specific decision was entered.
-- **Who is the audience for the diagram?** — Unknown; an audience was not specified in this tutorial state.
-- **What evidence will prove the diagram earned its words?** — Unknown; no external test evidence was recorded.
-- **Which assumptions does the current draft hide?** — Open; inspect the revision loop before treating the diagram as resolved.
-
-## Available public source links
-
-${sourceList}
-`;
-}
+const diagramRegistry = registrySnapshot.records as Array<{ diagramType: string; family: string | null; purpose: string | null; mermaidSupport: string | null; themeConfidence: string | null; examplePriority: string | null; exampleFile: string | null; actionLane: string | null }>;
+const registrySupportCounts = diagramRegistry.reduce<Record<string, number>>((counts, record) => { const support = record.mermaidSupport ?? "Unclassified"; counts[support] = (counts[support] ?? 0) + 1; return counts; }, {});
 
 function BrandMark() { return <span className="brand-lock">OverKill&nbsp;Hill&nbsp;P³™</span>; }
 
 function StepRail({ activeStep, completedSteps, onSelect }: { activeStep: number; completedSteps: number[]; onSelect: (step: number) => void }) {
   return <aside className="step-rail" aria-label="Tutorial steps">
-    <div className="rail-brand"><span className="signal-dot" /> FIELD GUIDE / 01</div>
-    <div className="rail-line" aria-hidden="true" />
-     <nav>{steps.map((step, index) => <button key={step.number} aria-label={`${step.number}. ${step.kicker}: ${step.label}`} aria-current={activeStep === index ? "step" : undefined} className={`rail-step ${activeStep === index ? "is-active" : ""} ${completedSteps.includes(index) ? "is-complete" : ""}`} onClick={() => onSelect(index)}><span className="rail-step-number" aria-hidden="true">{completedSteps.includes(index) ? "✓" : step.number}</span><span><small>{step.kicker}</small>{step.label}</span></button>)}</nav>
+    <div className="rail-brand"><span className="signal-dot" /> FIELD GUIDE / 01</div><div className="rail-line" aria-hidden="true" />
+    <nav>{steps.map((step, index) => <button key={step.number} aria-label={`${step.number}. ${step.kicker}: ${step.label}`} aria-current={activeStep === index ? "step" : undefined} className={`rail-step ${activeStep === index ? "is-active" : ""} ${completedSteps.includes(index) ? "is-complete" : ""}`} onClick={() => onSelect(index)}><span className="rail-step-number" aria-hidden="true">{completedSteps.includes(index) ? "✓" : step.number}</span><span><small>{step.kicker}</small>{step.label}</span></button>)}</nav>
     <div className="rail-footer"><span className="mono-label">ROY / 001</span><span>One honest diagram beats a polished lie.</span></div>
   </aside>;
 }
@@ -173,133 +45,119 @@ function SectionIntro({ eyebrow, title, copy }: { eyebrow: string; title: string
   return <div className="section-intro"><p className="eyebrow"><span className="eyebrow-mark">↳</span>{eyebrow}</p><h2>{title}</h2><p className="section-copy">{copy}</p></div>;
 }
 
-function DiagramWorkbench({ showLoops, onToggleLoops }: { showLoops: boolean; onToggleLoops: () => void }) {
-  return <div className="workbench-shell" id="workbench">
-    <div className="workbench-toolbar"><div><span className="status-light" /> LIVE MODEL / REVISION 02</div><button className={`toggle-button ${showLoops ? "is-on" : ""}`} onClick={onToggleLoops} aria-label={showLoops ? "Hide revision loopbacks" : "Show revision loopbacks"} aria-pressed={showLoops}><span className="toggle-track"><span /></span>{showLoops ? "Loopbacks visible" : "Happy path only"}</button></div>
-     <div className="diagram-stage" aria-label="Interactive diagram showing a non-linear ideation process">
-      <svg className="diagram-lines" viewBox="0 0 800 420" role="img" aria-label="Arrows connect a spark to a draft, through an honesty check, and back through revision loops"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="currentColor" /></marker></defs><path className="forward-line" d="M108 98 H260" markerEnd="url(#arrow)" /><path className="forward-line" d="M340 98 H500" markerEnd="url(#arrow)" /><path className="forward-line" d="M580 98 C650 98 688 140 688 212" markerEnd="url(#arrow)" /><path className={`loop-line ${showLoops ? "is-visible" : ""}`} d="M640 252 C640 364 432 378 398 248" markerEnd="url(#arrow)" /><path className={`loop-line secondary ${showLoops ? "is-visible" : ""}`} d="M300 248 C260 338 132 334 118 198" markerEnd="url(#arrow)" /></svg>
-      <div className="diagram-node node-spark"><span className="node-index">A</span><strong>SPARK</strong><small>Text is getting expensive.</small></div><div className="diagram-node node-draft"><span className="node-index">B</span><strong>ROUGH DRAFT</strong><small>Make the wrong answer visible.</small></div><div className="diagram-node node-check"><span className="node-index">C</span><strong>ROY CHECK</strong><small>Does the visual earn its words?</small></div><div className="diagram-node node-ship"><span className="node-index">D</span><strong>SHIP THE PROOF</strong><small>Clarity survives contact.</small></div><div className={`diagram-loop-label ${showLoops ? "is-visible" : ""}`}>doubt / revise / try again</div><div className="diagram-caption"><span className="legend-line" /> forward motion <span className="legend-dash" /> revision loop</div>
+function DiagramWorkbench({ revision, showLoops, onRevision, onToggleLoops }: { revision: "v1" | "v2"; showLoops: boolean; onRevision: (revision: "v1" | "v2") => void; onToggleLoops: () => void }) {
+  const model = workbenchStates[revision];
+  return <div className="workbench-wrap">
+    <div className="revision-tabs" role="tablist" aria-label="Workbench revision"><button role="tab" aria-selected={revision === "v1"} className={revision === "v1" ? "is-selected" : ""} onClick={() => onRevision("v1")}>V1 / tidy first pass</button><button role="tab" aria-selected={revision === "v2"} className={revision === "v2" ? "is-selected" : ""} onClick={() => onRevision("v2")}>V2 / honest revision</button></div>
+    <div className="workbench-shell" id="workbench">
+      <div className="workbench-toolbar"><div><span className="status-light" /> {model.label}</div><button className={`toggle-button ${showLoops ? "is-on" : ""}`} onClick={onToggleLoops} aria-label={showLoops ? "Hide revision loopbacks" : "Show revision loopbacks"} aria-pressed={showLoops}><span className="toggle-track"><span /></span>{showLoops ? "Loopbacks visible" : "Happy path only"}</button></div>
+      <div className="diagram-stage" aria-label={`Illustrative ${revision.toUpperCase()} diagram: ${model.visual}`}>
+        <svg className="diagram-lines" viewBox="0 0 800 420" role="img" aria-label={model.visual}><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="currentColor" /></marker></defs><path className="forward-line" d="M108 98 H260" markerEnd="url(#arrow)" /><path className="forward-line" d="M340 98 H500" markerEnd="url(#arrow)" /><path className="forward-line" d="M580 98 C650 98 688 140 688 212" markerEnd="url(#arrow)" />{revision === "v2" && <><path className={`loop-line ${showLoops ? "is-visible" : ""}`} d="M640 252 C640 364 432 378 398 248" markerEnd="url(#arrow)" /><path className={`loop-line secondary ${showLoops ? "is-visible" : ""}`} d="M300 248 C260 338 132 334 118 198" markerEnd="url(#arrow)" /></>}</svg>
+        <div className="diagram-node node-spark"><span className="node-index">A</span><strong>SPARK</strong><small>Text is getting expensive.</small></div><div className="diagram-node node-draft"><span className="node-index">B</span><strong>ROUGH DRAFT</strong><small>Make the wrong answer visible.</small></div><div className="diagram-node node-check"><span className="node-index">C</span><strong>ROY CHECK</strong><small>Does the visual earn its words?</small></div><div className="diagram-node node-ship"><span className="node-index">D</span><strong>SHIP THE PROOF</strong><small>Clarity survives contact.</small></div>{revision === "v2" && <div className={`diagram-loop-label ${showLoops ? "is-visible" : ""}`}>doubt / revise / try again</div>}<div className="diagram-caption"><span className="legend-line" /> forward motion <span className="legend-dash" /> revision loop</div>
+      </div>
     </div>
-  </div>;
-}
-function SourceLibrary() {
-  return <div className="source-library panel">
-    <div className="source-library-head"><div><div className="panel-kicker">PUBLIC-SAFE SOURCE COPIES</div><h3>The writer's room, left inspectable.</h3></div><a className="source-library-index" href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/notion-captures" target="_blank" rel="noreferrer">Open the source library ↗</a></div>
-    <p className="source-library-intro">The captured Notion pages add the editorial memory behind the council. These normalized copies keep the method, history, and open version questions in the repository without exposing private workspace links or signed attachments.</p>
-    <div className="source-method-grid">{councilMethod.map(([number, label, note]) => <div className="source-method" key={number}><span className="note-number">{number}</span><strong>{label}</strong><p>{note}</p></div>)}</div>
-    <div className="source-capture-grid">{sourceCaptures.map((capture) => <a className="source-capture" href={capture.href} target="_blank" rel="noreferrer" key={capture.label}><span className="mono-label">{capture.tag}</span><strong>{capture.label} ↗</strong><span>{capture.note}</span></a>)}</div>
-  </div>;
-}
-
-function DiagramRegistrySnapshot() {
-  return <div className="registry-snapshot panel">
-    <div className="registry-heading"><div><div className="panel-kicker">ADJACENT NOTION DATABASE / PUBLIC-SAFE SNAPSHOT</div><h3>Diagram support is part of the truth.</h3></div><span className="registry-count">{diagramRegistry.length} records</span></div>
-    <p className="registry-intro">The connected workspace also contains a diagram taxonomy registry. It is maintained for the adjacent Mermaid Theme Builder effort, but its support vocabulary sharpens this tutorial's warning: native, partial, emulatable, gap, and external are not interchangeable claims.</p>
-    <div className="registry-summary">{["Native", "Partial", "Emulatable", "Gap", "External"].map((support) => <div className="registry-stat" key={support}><strong>{registrySupportCounts[support] ?? 0}</strong><span>{support}</span></div>)}</div>
-    <div className="registry-highlights">{registryHighlights.map((record, index) => <article className="registry-highlight" key={`${record.diagramType}-${index}`}><span className="mono-label">{record.family ?? "Unclassified"}</span><h4>{record.diagramType}</h4><p>{record.mermaidSupport ?? "Unclassified"} / {record.themeConfidence ?? "confidence not set"}</p><small>{record.exampleFile ?? "No example file recorded"}</small></article>)}</div>
-    <details className="registry-details"><summary>Open the copied registry record set</summary><div className="registry-table-wrap"><table className="registry-table"><caption>Public-safe snapshot of the Notion Visual Language Diagram Types database</caption><thead><tr><th>Diagram type</th><th>Family</th><th>Mermaid support</th><th>Theme confidence</th><th>Notation</th><th>Priority</th><th>Example</th><th>Action</th></tr></thead><tbody>{diagramRegistry.map((record, index) => <tr key={`${record.diagramType}-${index}`}><td><strong>{record.diagramType}</strong><small>{record.purpose ?? record.definition ?? ""}</small></td><td>{record.family ?? "-"}</td><td>{record.mermaidSupport ?? "-"}</td><td>{record.themeConfidence ?? "-"}</td><td>{record.notationCompliance ?? "-"}</td><td>{record.examplePriority ?? "-"}</td><td>{record.exampleFile ?? "-"}</td><td>{record.actionLane ?? "-"}</td></tr>)}</tbody></table></div></details>
-    <p className="registry-note">This snapshot omits Notion record IDs, URLs, workspace structure, and private links. The complete normalized record data is checked into the repository with the source captures.</p>
+    <div className="workbench-evidence"><div><span className="panel-kicker">SOURCE EXCERPT / SELECTABLE</span><pre>{model.source}</pre></div><div><span className="panel-kicker">WHAT CHANGED?</span><p>{model.change}</p><p className="text-alternative"><strong>Text alternative:</strong> {model.visual} {showLoops && model.loopNote}</p></div></div>
+    <p className="illustrative-note">Illustrative SVG only - this is a teaching surface, not a live Mermaid parser or general-purpose diagram editor.</p>
   </div>;
 }
 
 function SourceRoom() {
   return <section className="source-room" aria-labelledby="source-room-title">
     <div className="source-room-heading"><div><p className="eyebrow"><span className="eyebrow-mark">↳</span>{notionSourceDigest.eyebrow}</p><h3 id="source-room-title">{notionSourceDigest.title}</h3></div><span className="source-room-stamp">PUBLIC-SAFE COPY / 9 PAGES + 1 DB</span></div>
-    <p className="source-room-intro">{notionSourceDigest.intro}</p>
-    <div className="source-stage-grid">{notionSourceDigest.stages.map((stage) => <article className="source-stage" key={stage.label}><span className="source-stage-label">{stage.label}</span><h4>{stage.title}</h4><p>{stage.copy}</p></article>)}</div>
+    <p className="source-room-intro">{notionSourceDigest.intro}</p><div className="source-stage-grid">{notionSourceDigest.stages.map((stage) => <article className="source-stage" key={stage.label}><span className="source-stage-label">{stage.label}</span><h4>{stage.title}</h4><p>{stage.copy}</p></article>)}</div>
     <div className="source-receipt-wrap"><div className="panel-kicker">THE PUBLIC RECEIPT STACK</div><div className="source-receipt-grid">{notionSourceDigest.receipts.map((receipt) => <article className="source-receipt" key={receipt.label}><span className="source-stage-label">{receipt.label}</span><h4>{receipt.title}</h4><p>{receipt.copy}</p></article>)}</div></div>
     <div className="source-cycle-wrap"><div className="panel-kicker">THE COUNCIL LOOP</div><div className="source-cycle-grid">{notionSourceDigest.cycle.map((cycle, index) => <article className="source-cycle" key={cycle.label}><span className="source-cycle-number">{String(index + 1).padStart(2, "0")}</span><h4>{cycle.label}</h4><p>{cycle.copy}</p></article>)}</div></div>
     <div className="source-release-wrap"><div className="panel-kicker">THE LINEAGE / STATUS STAYS VISIBLE</div><div className="source-release-grid">{notionSourceDigest.releases.map((release) => <article className={`source-release source-release-${release.status}`} key={release.version}><div className="source-release-top"><span>{release.version}</span><small>{release.status}</small></div><h4>{release.label}</h4><p>{release.copy}</p></article>)}</div></div>
-    <SourceLibrary />
-    <DiagramRegistrySnapshot />
+    <div className="source-library panel"><div className="source-library-head"><div><div className="panel-kicker">PUBLIC-SAFE SOURCE COPIES</div><h3>The writer's room, left inspectable.</h3></div><a className="source-library-index" href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/notion-captures" target="_blank" rel="noreferrer">Open the source library ↗</a></div><p className="source-library-intro">These normalized copies keep the method, history, and open version questions in the repository without exposing private workspace links or signed attachments.</p></div>
+    <div className="registry-snapshot panel"><div className="registry-heading"><div><div className="panel-kicker">ADJACENT NOTION DATABASE / PUBLIC-SAFE SNAPSHOT</div><h3>Diagram support is part of the truth.</h3></div><span className="registry-count">{diagramRegistry.length} records</span></div><p className="registry-intro">Native, partial, emulatable, gap, and external are not interchangeable claims. This adjacent registry is included as a public-safe receipt, not as a promise that this tutorial renders every notation.</p><div className="registry-summary">{["Native", "Partial", "Emulatable", "Gap", "External"].map((support) => <div className="registry-stat" key={support}><strong>{registrySupportCounts[support] ?? 0}</strong><span>{support}</span></div>)}</div><details className="registry-details"><summary>Open the copied registry record set</summary><div className="registry-table-wrap"><table className="registry-table"><caption>Public-safe snapshot of the Notion Visual Language Diagram Types database</caption><thead><tr><th>Diagram type</th><th>Family</th><th>Mermaid support</th><th>Theme confidence</th><th>Priority</th><th>Example</th><th>Action</th></tr></thead><tbody>{diagramRegistry.map((record, index) => <tr key={`${record.diagramType}-${index}`}><td><strong>{record.diagramType}</strong><small>{record.purpose ?? ""}</small></td><td>{record.family ?? "-"}</td><td>{record.mermaidSupport ?? "-"}</td><td>{record.themeConfidence ?? "-"}</td><td>{record.examplePriority ?? "-"}</td><td>{record.exampleFile ?? "-"}</td><td>{record.actionLane ?? "-"}</td></tr>)}</tbody></table></div></details><p className="registry-note">This snapshot omits Notion record IDs, URLs, workspace structure, and private links.</p></div>
     <p className="source-room-note">{notionSourceDigest.sourceNote}</p>
   </section>;
 }
 
 function App() {
-  const [activeStep, setActiveStep] = useState(0);
-  const [words, setWords] = useState(50);
-  const [clarity, setClarity] = useState(7);
-  const [showLoops, setShowLoops] = useState(true);
+  const [session, setSession] = useState<SessionState>(() => createDefaultSession());
+  const [storageStatus, setStorageStatus] = useState<"saved" | "session-only">("saved");
+  const [storageReady, setStorageReady] = useState(false);
   const [copied, setCopied] = useState(false);
   const [copyFailed, setCopyFailed] = useState(false);
-  const [handoffDownloaded, setHandoffDownloaded] = useState(false);
-  const [handoffDownloadFailed, setHandoffDownloadFailed] = useState(false);
-  const [checked, setChecked] = useState<Record<string, boolean>>({});
-  const [storageReady, setStorageReady] = useState(false);
+  const [downloadFailed, setDownloadFailed] = useState(false);
+  const [resetMessage, setResetMessage] = useState("");
   const hasNavigated = useRef(false);
+  const activeStep = session.activeStep;
+  const royScore = useMemo(() => calculateRoy(session.roy.words, session.roy.clarity), [session.roy.words, session.roy.clarity]);
+  const readyCount = checklist.filter((item) => session.checklist[item.id]).length;
+  const completedSteps = session.visitedSteps.filter((step) => step < activeStep || (step === 4 && readyCount === checklist.length));
 
   useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(progressStorageKey);
-      if (saved) {
-        const parsed = JSON.parse(saved) as unknown;
-        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-          const validProgress = Object.fromEntries(checklist.filter((item) => (parsed as Record<string, unknown>)[item.id] === true).map((item) => [item.id, true]));
-          setChecked(validProgress);
-        }
-      }
-    } catch {
-      try { window.localStorage.removeItem(progressStorageKey); } catch { /* Storage may be blocked. */ }
-    } finally {
-      setStorageReady(true);
-    }
+    const result = loadSession(window.localStorage);
+    setSession(result.session);
+    setStorageStatus(result.available ? "saved" : "session-only");
+    setStorageReady(true);
+    const hashStep = readHashStep();
+    if (hashStep !== null) setSession((current) => ({ ...current, activeStep: hashStep, visitedSteps: [...new Set([...current.visitedSteps, hashStep])] }));
+    else if (window.location.hash) window.history.replaceState({}, "", "#step-1");
   }, []);
   useEffect(() => {
     if (!storageReady) return;
-    try { window.localStorage.setItem(progressStorageKey, JSON.stringify(checked)); } catch { /* Checklist remains usable when storage is unavailable. */ }
-  }, [checked, storageReady]);
+    const stored = persistSession(window.localStorage, session);
+    if (!stored) setStorageStatus("session-only");
+  }, [session, storageReady]);
   useEffect(() => {
-    if (!hasNavigated.current) { hasNavigated.current = true; return; }
-    document.getElementById("main-content")?.focus();
-  }, [activeStep]);
+    const onHash = () => { const step = readHashStep(); if (step !== null) setSession((current) => ({ ...current, activeStep: step, visitedSteps: [...new Set([...current.visitedSteps, step])] })); };
+    window.addEventListener("hashchange", onHash); window.addEventListener("popstate", onHash);
+    return () => { window.removeEventListener("hashchange", onHash); window.removeEventListener("popstate", onHash); };
+  }, []);
+  useEffect(() => { if (!hasNavigated.current) { hasNavigated.current = true; return; } document.getElementById("main-content")?.focus(); }, [activeStep]);
 
-  const royScore = useMemo(() => Math.round((clarity * 50) / words * 10) / 10, [clarity, words]);
-  const readyCount = Object.values(checked).filter(Boolean).length;
-  const completedSteps = [0, 1, 2, 3, 4].filter((step) => step < activeStep || (step === 4 && readyCount === checklist.length));
-  function goToStep(step: number) { setActiveStep(step); window.scrollTo({ top: 0, behavior: "smooth" }); }
-  async function copyBrief() { setCopyFailed(false); try { if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable"); await navigator.clipboard.writeText(compactBrief); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setCopied(false); setCopyFailed(true); } }
-  function downloadHandoff() {
-    setCopied(false);
+  function updateSession(change: (current: SessionState) => SessionState) {
+    setSession((current) => change({ ...current, updatedAt: Date.now() }));
+  }
+  function goToStep(step: number) {
+    const safeStep = Math.max(0, Math.min(4, step));
+    updateSession((current) => ({ ...current, activeStep: safeStep, visitedSteps: [...new Set([...current.visitedSteps, safeStep])] }));
+    window.history.pushState({}, "", `#step-${safeStep + 1}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  function selectPremise(pattern: LiePattern) { updateSession((current) => ({ ...current, premise: { ...current.premise, pattern } })); }
+  async function copyBrief() {
     setCopyFailed(false);
-    setHandoffDownloadFailed(false);
+    try { if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable"); const generatedDate = session.handoff.generatedDate || new Date().toISOString().slice(0, 10); await navigator.clipboard.writeText(buildHandoffMarkdown({ ...session, handoff: { ...session.handoff, generatedDate } }, generatedDate)); updateSession((current) => ({ ...current, handoff: { ...current.handoff, copied: true, generatedDate } })); setCopied(true); window.setTimeout(() => setCopied(false), 1800); }
+    catch { setCopied(false); setCopyFailed(true); }
+  }
+  function downloadHandoff() {
+    setDownloadFailed(false); setCopyFailed(false);
     try {
       if (!window.URL?.createObjectURL || !document.body) throw new Error("Local downloads are unavailable");
-      const content = buildHandoffMarkdown({ activeStep, words, clarity, royScore, showLoops, checked });
+      const generatedDate = session.handoff.generatedDate || new Date().toISOString().slice(0, 10);
+      const content = buildHandoffMarkdown({ ...session, handoff: { ...session.handoff, generatedDate } }, generatedDate);
       const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = handoffFilename;
-      link.rel = "noopener";
-      link.style.display = "none";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.setTimeout(() => window.URL.revokeObjectURL(url), 0);
-      setHandoffDownloaded(true);
-      window.setTimeout(() => setHandoffDownloaded(false), 2200);
-    } catch {
-      setHandoffDownloaded(false);
-      setHandoffDownloadFailed(true);
-    }
+      const url = window.URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = HANDOFF_FILENAME; link.rel = "noopener"; link.style.display = "none"; document.body.appendChild(link); link.click(); link.remove(); window.setTimeout(() => window.URL.revokeObjectURL(url), 0);
+      updateSession((current) => ({ ...current, handoff: { ...current.handoff, downloaded: true, generatedDate } }));
+    } catch { setDownloadFailed(true); }
   }
-  function toggleCheck(id: string) { setChecked((current) => ({ ...current, [id]: !current[id] })); }
+  function toggleCheck(id: string) { updateSession((current) => ({ ...current, checklist: { ...current.checklist, [id]: !current.checklist[id] } })); }
+  function reset() {
+    if (!window.confirm("Reset this local learning session? Your premise, controls, and checklist will be cleared.")) return;
+    const removed = resetSession(window.localStorage); setSession(createDefaultSession()); setStorageStatus(removed ? "saved" : "session-only"); setResetMessage("Session reset. Nothing was sent anywhere."); window.history.pushState({}, "", "#step-1"); window.setTimeout(() => setResetMessage(""), 3000);
+  }
 
-  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="app-shell">
-    <StepRail activeStep={activeStep} completedSteps={completedSteps} onSelect={goToStep} />
-     <main className="main-content" id="main-content" aria-label="Tutorial content" tabIndex={-1}>
-      <header className="topbar"><span className="mono-label">ETCH-AI-SKETCH / TUTORIAL APPLICATION</span><a href="https://github.com/OKHP3/first-diagram-is-a-liar" target="_blank" rel="noreferrer">VIEW RECEIPTS ↗</a></header>
-       {activeStep === 0 && <section className="hero-section content-width"><div className="hero-copy"><p className="eyebrow"><span className="eyebrow-mark">01</span>THE PREMISE</p><h1>The first diagram<br /><em>is usually a liar.</em></h1><p className="hero-lede">It wants to look resolved before the thinking has earned that confidence. This field guide turns that uncomfortable observation into a working method.</p><div className="hero-actions"><button className="button button-primary" onClick={() => goToStep(1)}>Start the field guide <span>↓</span></button><a className="button button-quiet" href="https://overkillhill.com/writings/first-diagram-is-a-liar/" target="_blank" rel="noreferrer">Read the long form ↗</a></div></div><div className="hero-art" role="img" aria-label="A diagram that begins as a tidy line and then reveals its revision loops"><div className="art-label art-label-top">FIG. 01 / THE LIE</div><div className="art-line line-one" /><div className="art-line line-two" /><div className="art-loop" /><div className="art-node node-one">A</div><div className="art-node node-two">?</div><div className="art-node node-three">B</div><div className="art-stamp">MAKE<br />THE<br />LOOP<br />VISIBLE</div><div className="art-label art-label-bottom">HONESTY IS A STRUCTURAL CHOICE</div></div></section>}
-      {activeStep === 1 && <section className="content-width step-section"><SectionIntro eyebrow="02 / THE EXCHANGE RATE" title="Measure what the picture bought." copy="ROY is not a beauty score. It is a pressure test: how much shared understanding did the visual return for the words and effort invested?" /><div className="roy-layout"><div className="panel control-panel"><div className="panel-kicker">YOUR DRAFT INPUT</div><label htmlFor="words">Words invested <output>{words}</output></label><input id="words" type="range" min="20" max="200" step="5" value={words} onChange={(event) => setWords(Number(event.target.value))} /><div className="range-notes"><span>quick sketch</span><span>over-explained</span></div><label htmlFor="clarity">Clarity delivered <output>{clarity}/10</output></label><input id="clarity" type="range" min="1" max="10" value={clarity} onChange={(event) => setClarity(Number(event.target.value))} /><div className="range-notes"><span>muddy</span><span>shared model</span></div><div className="control-callout">A high score is not permission to stop thinking. It is a signal to inspect the assumptions before you ship.</div></div><div className="roy-meter"><div className="meter-head"><span className="panel-kicker">LIVE ROY READOUT</span><span className="meter-status">{royScore >= 5 ? "EARNING SPACE" : "NEEDS WORK"}</span></div><div className="roy-number" aria-live="polite">{royScore}<span>x</span></div><div className="formula"><span>clarity delivered</span><strong>÷</strong><span>words invested</span></div><div className="meter-bar"><span style={{ width: `${Math.min(100, royScore * 10)}%` }} /></div><p>{royScore >= 5 ? "The diagram is starting to pay rent. Now ask what it hides." : "The words are doing too much work. Reduce friction before adding decoration."}</p></div></div><div className="quote-strip"><span className="quote-mark">“</span><p>A picture is not automatically worth 1,000 words. The real metric is the clarity, compression, and shared understanding extracted per word invested.</p><span className="quote-source">LIVE ARTICLE / v0.5</span></div><StepNav previous={0} next={2} onSelect={goToStep} /></section>}
-      {activeStep === 2 && <section className="content-width step-section"><SectionIntro eyebrow="03 / THE WORKBENCH" title="Draw the truth, not the brochure." copy="A first pass is allowed to be wrong. The useful correction is to make the wrong turn, doubt, and return path part of the model." /><DiagramWorkbench showLoops={showLoops} onToggleLoops={() => setShowLoops((current) => !current)} /><div className="two-column-notes"><div><span className="note-number">01</span><h3>Start ugly.</h3><p>Get the shape out of your head before you spend time styling it. The first draft is diagnostic equipment.</p></div><div><span className="note-number">02</span><h3>Make revision visible.</h3><p>Solid arrows show what happened. Dashed arrows show what it took to get there. Both are part of the story.</p></div></div><StepNav previous={1} next={3} onSelect={goToStep} /></section>}
-      {activeStep === 3 && <section className="content-width step-section"><SectionIntro eyebrow="04 / THE COUNCIL" title="Use disagreement as a variance engine." copy="Multiple models do not magically produce truth. They expose different instincts. The human work is to compare, question, borrow, reject, and synthesize." /><div className="council-grid">{council.map((member, index) => <article className={`council-card tier-${member.tier.toLowerCase()}`} key={member.name}><div className="council-card-top"><span className="tier-pill">{member.tier}</span><span className="card-index">{String(index + 1).padStart(2, "0")}</span></div><h3>{member.name}</h3><p className="member-role">{member.role}</p><p className="member-result">{member.result}</p><p className="member-note">{member.note}</p></article>)}</div><div className="fairness-note"><span className="fairness-icon">!</span><div><strong>Fairness is part of the artifact.</strong><p>Core Five means direct comparison. Exhibition and Specialty entries stay visible, but their different access or context is not flattened into a fake leaderboard.</p></div></div><StepNav previous={2} next={4} onSelect={goToStep} /></section>}
-       {activeStep === 4 && <section className="content-width step-section"><SectionIntro eyebrow="05 / THE HANDOFF" title="Ship the proof someone else can use." copy="A tutorial is only useful when it changes the next move. Run the checklist, copy the compact brief, and keep the receipts attached." /><div className="handoff-layout"><div className="panel checklist-panel"><div className="panel-kicker">SHIP CHECK / {readyCount} OF {checklist.length}</div>{checklist.map((item) => <label className={`check-row ${checked[item.id] ? "is-checked" : ""}`} key={item.id}><input type="checkbox" checked={Boolean(checked[item.id])} onChange={() => toggleCheck(item.id)} /><span className="check-box" aria-hidden="true">✓</span><span>{item.label}</span></label>)}</div><div className="panel brief-panel"><div className="panel-kicker">THE COMPACT BRIEF</div><p className="brief-copy">{compactBrief}</p><div className="handoff-actions"><button className="button button-primary download-handoff-button" onClick={downloadHandoff}>{handoffDownloaded ? "Handoff downloaded" : "Download Markdown handoff"} <span>{handoffDownloaded ? "✓" : "↓"}</span></button><button className="button button-quiet copy-brief-button" onClick={copyBrief}>{copied ? "Copied to clipboard" : copyFailed ? "Try copying again" : "Copy the brief"} <span>{copied ? "✓" : "↗"}</span></button></div><p className="handoff-note">Local working file only — no cloud backup, account, or server storage. The handoff records this browser’s current tutorial state; it is not a verdict.</p><p className="copy-status" role="status" aria-live="polite">{handoffDownloadFailed ? "The browser could not start a local download. You can still copy the brief above." : copyFailed ? "Clipboard access is unavailable. Select the brief above to copy it manually, or download the full Markdown handoff." : copied ? "Brief copied to your clipboard." : handoffDownloaded ? `Saved locally as ${handoffFilename}.` : ""}</p></div></div><div className="final-card"><div><p className="eyebrow"><span className="eyebrow-mark">↳</span>THE POINT</p><h3>The winning diagram did not exist in any single output.</h3><p>It emerged from comparing the field. That is the method: make the disagreement inspectable, then make a human decision.</p></div><div className="final-mark">ROY<br /><span>∞</span></div></div><SourceRoom /><div className="source-links"><span className="panel-kicker">KEEP GOING</span>{publicSourceLinks.slice(3).map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>{source.label} ↗</a>)}</div><StepNav previous={3} next={0} onSelect={goToStep} last /></section>}
+  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="app-shell"><StepRail activeStep={activeStep} completedSteps={completedSteps} onSelect={goToStep} />
+    <main className="main-content" id="main-content" aria-label="Tutorial content" tabIndex={-1}>
+      <header className="topbar"><span className="mono-label">ETCH-AI-SKETCH / TUTORIAL APPLICATION</span><span className="session-status" role="status">{storageStatus === "saved" ? "Saved locally" : "This session only"} · <button onClick={reset}>Reset session</button></span><a href="https://github.com/OKHP3/first-diagram-is-a-liar" target="_blank" rel="noreferrer">VIEW RECEIPTS ↗</a></header>
+      {resetMessage && <p className="reset-message" role="status">{resetMessage}</p>}
+      {activeStep === 0 && <section className="hero-section content-width"><div className="hero-copy"><p className="eyebrow"><span className="eyebrow-mark">01</span>THE PREMISE</p><h1>The first diagram<br /><em>is usually a liar.</em></h1><p className="hero-lede">It wants to look resolved before the thinking has earned that confidence. This field guide turns that uncomfortable observation into a working method.</p><div className="hero-actions"><button className="button button-primary" onClick={() => goToStep(1)}>Start the field guide <span>↓</span></button><a className="button button-quiet" href="https://overkillhill.com/writings/first-diagram-is-a-liar/" target="_blank" rel="noreferrer">Read the long form ↗</a></div><div className="premise-capture panel"><div className="panel-kicker">NAME THE LIE / REQUIRED TO MOVE YOUR THINKING</div><fieldset><legend>Which pattern is present?</legend><div className="pattern-grid">{patterns.map((pattern) => <label className={`pattern-choice ${session.premise.pattern === pattern.id ? "is-selected" : ""}`} key={pattern.id}><input type="radio" name="lie-pattern" value={pattern.id} checked={session.premise.pattern === pattern.id} onChange={() => selectPremise(pattern.id)} /><strong>{pattern.label}</strong><span>{pattern.note}</span></label>)}</div></fieldset><label className="claim-label" htmlFor="claim">Optional bounded claim <span>{session.premise.claim.length}/{CLAIM_MAX_LENGTH}</span></label><textarea id="claim" maxLength={CLAIM_MAX_LENGTH} value={session.premise.claim} onChange={(event) => updateSession((current) => ({ ...current, premise: { ...current.premise, claim: event.target.value } }))} placeholder="This diagram claims that…" rows={2} /><p className="field-help">One short claim, not an essay. It stays in this browser and the handoff you choose to download.</p></div></div><div className="hero-art" role="img" aria-label="A diagram that begins as a tidy line and then reveals its revision loops"><div className="art-label art-label-top">FIG. 01 / THE LIE</div><div className="art-line line-one" /><div className="art-line line-two" /><div className="art-loop" /><div className="art-node node-one">A</div><div className="art-node node-two">?</div><div className="art-node node-three">B</div><div className="art-stamp">MAKE<br />THE<br />LOOP<br />VISIBLE</div><div className="art-label art-label-bottom">HONESTY IS A STRUCTURAL CHOICE</div></div></section>}
+      {activeStep === 1 && <section className="content-width step-section"><SectionIntro eyebrow="02 / THE EXCHANGE RATE" title="Measure what the picture bought." copy="ROY is not a beauty score. It is a pressure test: how much shared understanding did the visual return for the words and effort invested?" /><div className="roy-layout"><div className="panel control-panel"><div className="panel-kicker">YOUR DRAFT INPUT</div><div className="preset-row"><span className="mono-label">TEACHING PRESETS</span>{royPresets.map((preset) => <button className="preset-button" key={preset.id} onClick={() => updateSession((current) => ({ ...current, roy: { words: preset.words, clarity: preset.clarity, preset: preset.label } }))}>{preset.label}</button>)}</div><label htmlFor="words">Words invested <output>{session.roy.words}</output></label><input id="words" type="range" min="20" max="200" step="5" value={session.roy.words} onChange={(event) => updateSession((current) => ({ ...current, roy: { words: Number(event.target.value), clarity: current.roy.clarity, preset: "" } }))} /><div className="range-notes"><span>quick sketch</span><span>over-explained</span></div><label htmlFor="clarity">Clarity delivered <output>{session.roy.clarity}/10</output></label><input id="clarity" type="range" min="1" max="10" value={session.roy.clarity} onChange={(event) => updateSession((current) => ({ ...current, roy: { words: current.roy.words, clarity: Number(event.target.value), preset: "" } }))} /><div className="range-notes"><span>muddy</span><span>shared model</span></div><div className="formula-note"><strong>ROY = understanding produced ÷ explanation invested</strong><span>We normalize the teaching readout to clarity × 50 ÷ words. The number is bounded and useful for a conversation, not scientific measurement.</span></div><div className="control-callout">A high score is not permission to stop thinking. It is a signal to inspect the assumptions before you ship.</div></div><div className="roy-meter"><div className="meter-head"><span className="panel-kicker">LIVE ROY READOUT</span><span className="meter-status">{getRoyBand(royScore).replace("-", " ").toUpperCase()}</span></div><div className="roy-number" aria-live="polite">{royScore}<span>x</span></div><div className="formula"><span>clarity delivered</span><strong>÷</strong><span>words invested</span></div><div className="meter-bar"><span style={{ width: `${Math.min(100, royScore * 10)}%` }} /></div><p>{getRoyInterpretation(royScore)}</p></div></div><div className="quote-strip"><span className="quote-mark">“</span><p>A picture is not automatically worth 1,000 words. The real metric is the clarity, compression, and shared understanding extracted per word invested.</p><span className="quote-source">LIVE ARTICLE / v0.5</span></div><StepNav previous={0} next={2} onSelect={goToStep} /></section>}
+      {activeStep === 2 && <section className="content-width step-section"><SectionIntro eyebrow="03 / THE WORKBENCH" title="Draw the truth, not the brochure." copy="A first pass is allowed to be wrong. Compare the source and the visible state, then make the wrong turn, doubt, and return path part of the model." /><DiagramWorkbench revision={session.workbench.revision} showLoops={session.workbench.showLoops} onRevision={(revision) => updateSession((current) => ({ ...current, workbench: { ...current.workbench, revision } }))} onToggleLoops={() => updateSession((current) => ({ ...current, workbench: { ...current.workbench, showLoops: !current.workbench.showLoops } }))} /><div className="two-column-notes"><div><span className="note-number">01</span><h3>Start ugly.</h3><p>Get the shape out of your head before you spend time styling it. The first draft is diagnostic equipment.</p></div><div><span className="note-number">02</span><h3>Make revision visible.</h3><p>Solid arrows show what happened. Dashed arrows show what it took to get there. Both are part of the story.</p></div></div><StepNav previous={1} next={3} onSelect={goToStep} /></section>}
+      {activeStep === 3 && <section className="content-width step-section"><SectionIntro eyebrow="04 / THE COUNCIL" title="Use disagreement as a variance engine." copy="Multiple models do not magically produce truth. Compare one criterion at a time, keep the conditions visible, and make your synthesis inspectable." /><div className="council-controls panel"><div><span className="panel-kicker">COMPARE BY ONE CRITERION</span><div className="criterion-row" role="radiogroup" aria-label="Council comparison criterion">{councilCriteria.map((criterion) => <label className={session.council.criterion === criterion.id ? "is-selected" : ""} key={criterion.id}><input type="radio" name="criterion" value={criterion.id} checked={session.council.criterion === criterion.id} onChange={() => updateSession((current) => ({ ...current, council: { ...current.council, criterion: criterion.id } }))} />{criterion.label}</label>)}</div><p className="criterion-question">{councilCriteria.find((criterion) => criterion.id === session.council.criterion)?.question}</p></div><div><span className="panel-kicker">SYNTHESIS / NO OVERALL WINNER</span><div className="outcome-row" role="radiogroup" aria-label="Synthesis outcome">{(["borrow", "reject", "combine"] as const).map((outcome) => <label className={session.council.outcome === outcome ? "is-selected" : ""} key={outcome}><input type="radio" name="outcome" value={outcome} checked={session.council.outcome === outcome} onChange={() => updateSession((current) => ({ ...current, council: { ...current.council, outcome } }))} />{outcome}</label>)}</div><label className="claim-label" htmlFor="synthesis-note">Optional synthesis sentence</label><textarea id="synthesis-note" maxLength={CLAIM_MAX_LENGTH} rows={2} value={session.council.note} onChange={(event) => updateSession((current) => ({ ...current, council: { ...current.council, note: event.target.value } }))} placeholder="Borrow the loop, reject the noise, combine the useful…" /></div></div><div className="council-grid">{council.map((member, index) => <article className={`council-card tier-${member.tier.toLowerCase().replaceAll(" ", "-")}`} key={member.name}><div className="council-card-top"><span className="tier-pill">{member.tier}</span><span className="card-index">{String(index + 1).padStart(2, "0")}</span></div><h3>{member.name}</h3><p className="member-role">{member.role}</p><p className="member-result">{member.result}</p><p className="member-note">{member.note}</p><p className="comparability">{member.comparable ? "Direct comparison eligible" : "Condition kept separate"}</p></article>)}</div><div className="fairness-note"><span className="fairness-icon">!</span><div><strong>Fairness is part of the artifact.</strong><p>Core Five means direct comparison. Exhibition, Specialty Notion, Specialty Replit, and Attempted entries stay visible, but different access or context is not flattened into a fake leaderboard.</p></div></div><StepNav previous={2} next={4} onSelect={goToStep} /></section>}
+      {activeStep === 4 && <section className="content-width step-section"><SectionIntro eyebrow="05 / THE HANDOFF" title="Ship the proof someone else can use." copy="A tutorial is only useful when it changes the next move. Run the checklist, record a falsifiable next test, and export the receipts you actually assembled." /><div className="handoff-layout"><div className="panel checklist-panel"><div className="panel-kicker">SHIP CHECK / {readyCount} OF {checklist.length}</div>{checklist.map((item) => <label className={`check-row ${session.checklist[item.id] ? "is-checked" : ""}`} key={item.id}><input type="checkbox" checked={Boolean(session.checklist[item.id])} onChange={() => toggleCheck(item.id)} /><span className="check-box" aria-hidden="true">✓</span><span>{item.label}</span></label>)}</div><div className="panel brief-panel"><div className="panel-kicker">THE PORTABLE HANDOFF</div><p className="brief-copy">{compactBrief}</p><label className="claim-label" htmlFor="next-test">Next feedback question / test</label><textarea id="next-test" maxLength={CLAIM_MAX_LENGTH} rows={3} value={session.nextTest} onChange={(event) => updateSession((current) => ({ ...current, nextTest: event.target.value }))} placeholder="What would prove this diagram is still hiding a lie?" /><details className="handoff-preview"><summary>Preview the full Markdown packet</summary><pre>{buildHandoffMarkdown(session)}</pre></details><div className="handoff-actions"><button className="button button-primary download-handoff-button" onClick={downloadHandoff}>{session.handoff.downloaded ? "Handoff downloaded" : "Download Markdown handoff"} <span>{session.handoff.downloaded ? "✓" : "↓"}</span></button><button className="button button-quiet copy-brief-button" onClick={copyBrief}>{copied ? "Copied Markdown" : copyFailed ? "Try copying again" : "Copy Markdown packet"} <span>{copied ? "✓" : "↗"}</span></button></div><p className="handoff-note">Local working file only — no cloud backup, account, or server storage. The Markdown packet includes this session’s premise, ROY, workbench, Council choice, checklist, next test, receipts, generated date, and schema version.</p><p className="copy-status" role="status" aria-live="polite">{downloadFailed ? "The browser could not start a local download. You can still copy the Markdown preview above." : copyFailed ? "Clipboard access is unavailable. Select the Markdown preview above to copy it manually, or download the full packet." : copied ? "Markdown packet copied to your clipboard." : session.handoff.downloaded ? `Saved locally as ${HANDOFF_FILENAME}.` : ""}</p></div></div><div className="completion-summary panel"><div><span className="panel-kicker">COMPLETION SUMMARY</span><h3>{readyCount === checklist.length ? "Ready for review" : "Incomplete by choice"}</h3><p>Visited {session.visitedSteps.length} of 5 steps · {readyCount} of 5 checks · premise {session.premise.pattern ? "named" : "not named"} · synthesis {session.council.outcome ? "recorded" : "not recorded"} · packet {session.handoff.downloaded || session.handoff.copied ? "handled" : "not handled"}.</p></div><strong>Not a validated diagram.<br />A useful next test.</strong></div><SourceRoom /><div className="source-links"><span className="panel-kicker">KEEP GOING</span>{publicSourceLinks.slice(3).map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>{source.label} ↗</a>)}</div><StepNav previous={3} next={0} onSelect={goToStep} last /></section>}
       <footer className="site-footer"><span><BrandMark /> / Precision · Protocol · Promptcraft</span><span>Built as a working tutorial, not a written exercise in hypocrisy.</span></footer>
-     </main>
-   </div></>;
+    </main></div></>;
 }
 
+function readHashStep(): number | null {
+  const match = window.location.hash.match(/^#step-([1-5])$/);
+  return match ? Number(match[1]) - 1 : null;
+}
 function StepNav({ previous, next, onSelect, last = false }: { previous: number; next: number; onSelect: (step: number) => void; last?: boolean }) {
   return <div className="step-nav"><button className="button button-quiet" onClick={() => onSelect(previous)}>← Previous</button><button className="button button-primary" onClick={() => onSelect(next)}>{last ? "Run it again" : "Next field test"} <span>→</span></button></div>;
 }
