@@ -174,3 +174,27 @@ recorded for that cut.
 **Dated release decision:** keep v0.5 — Council-Assisted Scoring as the current
 public release. Do not date v1.0 before the complete readout and deployment
 gates are reviewed on or after 2026-09-01.
+
+## Evidence closure update — 2026-09-03
+
+The earlier sections remain historical records of their stated review dates.
+The current closure reran the unresolved hosted Mermaid check and updated only
+the status that can be supported now:
+
+| Gate | Current result | Evidence |
+|---|---|---|
+| Full ARTICLE-1.0 source | **FROZEN / PREPARED** | Local source commit `366a43343da0850c8bcb4d2daaa76adb88a18ccb`; editorial tree `6c89c14647689de2bfb3649e77c03d2ffe202af2` |
+| Full-cut owner approval | **PENDING** | The 2026-08-31 approval covers only the count-label correction |
+| Full-cut external deployment | **NOT RUN** | No v1.0 deployment identifier exists; the live article remains v0.5 |
+| Public article and metadata | **PASS WITH VERSION LIMITATION** | HTTP 200, matching canonical/social URLs, approved count present, old count absent; current displayed release is v0.5 |
+| Repaired deck/archive links | **PASS** | Four deck and three deep archive destinations returned HTTP 200 on 2026-09-01T01:17:40Z |
+| Tutorial GitHub Pages | **PASS** | HTTP 200 on 2026-09-03; remote Pages workflow run `33459481352` passed for `d52803b894320ad9c96819ac24beca33681746d9` |
+| Hosted Mermaid | **PASS** | Four-route harness passed, including ChatGPT V2; all 15 current archive routes rendered non-empty SVG in Chromium on 2026-09-03 |
+| Campaign/readout | **UNAVAILABLE** | No GA4, DebugView, provider, UTM, referral, comment, or confusion-signal data was available; not treated as zero |
+| ARTICLE-0.5 rollback | **PASS** | Snapshot `c02f0662944e3b950fdcc659b18f19f5b2826c60`, production commit `3d25419d700fe279bbdbd808e16bfbbd2d673e8b`, Pages deployment `6187760304` |
+
+**Final decision: DEFERRED.** The technical and archive evidence is sufficient
+for owner review, but the full editorial cut is not owner-approved or
+externally deployed. Do not call it published, assign a v1.0 date, or report
+performance results. See the
+[dated release-evidence packet](../../docs/article-1.0-release-evidence-2026-09-03.md).

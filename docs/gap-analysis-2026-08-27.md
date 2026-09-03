@@ -65,3 +65,20 @@ Option C is tempting because Mermaid Theme Builder and BPMN for Mermaid are ship
 - [ ] Publish article v1.0 with the deployed source snapshot and release evidence roadmap.md calls for
 - [ ] Resolve the v0.6 hashtag policy conflict, then clear v0.6-v0.9 and the v1.0 synthesis post through their review gate and publish in order
 - [ ] Close out the two open CHANGELOG items: article revision notes v0.2+, and poll-result/council-interview summaries
+
+## 2026-09-03 closure addendum
+
+The findings above are a historical report of the 2026-08-27 state and are not
+rewritten. The current evidence changes only the statuses that were actually
+rechecked:
+
+| Earlier gap | Current evidence | Current status |
+|---|---|---|
+| G-01: Pages route returned 404 | The route returned HTTP 200 on 2026-09-03; the remote Pages workflow also passed on 2026-09-01 | **Resolved technically**; keep it separate from article publication |
+| G-06: count wording unresolved | The approved count wording is live in the v0.5 article; the full local editorial cut remains separate | **Resolved for the bounded correction; ARTICLE-1.0 still deferred** |
+| Article v1.0 publication/evidence | The exact local editorial source is frozen and the evidence packet is complete, but full-cut owner approval and external deployment are absent | **Deferred, not published** |
+| Campaign readout | No GA4/DebugView/provider/qualitative data was available for the closed window | **Unknown / unavailable, not zero** |
+| G-07: `/projects/` positioning | No owner decision or external site change was part of this evidence closure | **Out of scope and still owner-controlled** |
+
+The dated evidence packet is
+[`docs/article-1.0-release-evidence-2026-09-03.md`](article-1.0-release-evidence-2026-09-03.md).

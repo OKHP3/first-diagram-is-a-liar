@@ -15,6 +15,27 @@ All notable public-facing changes to **The First Diagram Is Usually a Liar** pro
 
 This changelog tracks the evolution of the article, supporting artifacts, and the ETCH-AI-SKETCH methodology archive.
 
+## 2026-09-03 — ARTICLE-1.0 evidence closure deferred
+
+- Froze the local `ARTICLE-1.0` editorial source identity and recorded the
+  owner-approval boundary. The full editorial cut remains prepared, not
+  externally published.
+- Rechecked the live v0.5 article, canonical/social metadata, repaired
+  deck/archive links, tutorial Pages route, provider/referral destinations, and
+  attribution assumptions with dated limitations.
+- Re-ran hosted Mermaid verification: the four formerly unresolved routes passed,
+  including ChatGPT V2, and all 15 current archive routes rendered non-empty SVG
+  content in Chromium. Local source and checked-in fallbacks remain authoritative
+  recovery artifacts.
+- Recorded that no GA4, DebugView, provider-dashboard, UTM/referral, comment,
+  or confusion-signal readout was available for the observation window. Missing
+  data is not zero performance.
+- Confirmed the ARTICLE-0.5 source and deployment identifiers as the rollback
+  point. The final decision is **DEFERRED** pending owner approval and a full-cut
+  external deployment record. No v1.0 publication date or performance result is
+  claimed.
+- Full evidence: `docs/article-1.0-release-evidence-2026-09-03.md`.
+
 ## [Unreleased]
 
 ### Recorded
@@ -39,9 +60,11 @@ This changelog tracks the evolution of the article, supporting artifacts, and th
 
 ## [v0.1] - 2026-04
 
-> This is the archive packaging release date. The public Article v1.0
-> publication date is 2026-03-17; the source materials do not record exact
-> dates for the Article v0.1 draft or either council round.
+> This is the archive packaging release date. A legacy source note mentioned
+> 2026-03-17 as an Article v1.0 publication date, but this repository does not
+> verify that date and it is not a current release claim. The current public
+> article remains v0.5; the source materials do not record exact dates for the
+> Article v0.1 draft or either council round.
 
 ### Added
 - Public repo scaffold and primary README

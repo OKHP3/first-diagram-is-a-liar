@@ -98,3 +98,13 @@ final LinkedIn copy are connected in
 [`v1.0-synthesis-handoff.md`](v1.0-synthesis-handoff.md). This handoff does not
 change the `ARTICLE-1.0` publication status or the current public `ARTICLE-0.5`
 record.
+
+## 2026-09-03 evidence closure
+
+The full `ARTICLE-1.0` editorial cut is **prepared locally and deferred**, not
+published. Its frozen local source is recorded in
+[`../../docs/article-1.0-release-evidence-2026-09-03.md`](../../docs/article-1.0-release-evidence-2026-09-03.md).
+The owner-approved 2026-09-01 external release was limited to the corrected
+diagram/deck count wording and subsequent archive-link repair; the live article
+still displays v0.5. No full-cut owner approval, v1.0 publication date, or
+performance result is recorded.

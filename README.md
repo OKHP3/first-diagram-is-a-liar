@@ -29,10 +29,16 @@ available for the full packet as a separate convenience.
 - [LinkedIn article](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)
 - [GitHub repository](https://github.com/OKHP3/first-diagram-is-a-liar)
 - **Live tutorial application:** [okhp3.github.io/first-diagram-is-a-liar](https://okhp3.github.io/first-diagram-is-a-liar/)
-  — not live yet. The Pages deploy workflow is wired up (see Validation
-  below) but has not completed a successful run against this URL; it
-  currently 404s. Run the app locally with `npm run dev` until a deploy
-  lands.
+  — the GitHub Pages route is live and technically verified. It is a separate
+  tutorial surface, not the `overkillhill.com` article host.
+- **Article release boundary:** the public article remains labelled v0.5. The
+  full `ARTICLE-1.0` editorial cut is frozen locally but deferred pending
+  owner approval and external publication evidence. The approved count-label
+  correction was deployed separately on 2026-09-01.
+- **Release evidence:** see
+  [`docs/article-1.0-release-evidence-2026-09-03.md`](docs/article-1.0-release-evidence-2026-09-03.md)
+  for the dated decision, Mermaid rerun, campaign-data limitation, and rollback
+  identifiers.
 
 ## The core idea
 

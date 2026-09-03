@@ -125,3 +125,19 @@ confusion signals are also **not yet reviewed as campaign evidence**. Any
 pre-window or partial-window link check must remain a contract check only. Keep
 v0.5 current until the complete readout and the external v1.0 deployment gates
 are recorded.
+
+## Closed-window evidence status — 2026-09-03
+
+The 2026-08-25 through 2026-08-31 observation window is closed, but its
+readout is **UNAVAILABLE**, not zero. This workspace has no GA4 export,
+DebugView capture, provider dashboard report, UTM source/medium breakdown,
+referral conversion result, comment sample, or confusion-signal review to
+attach. The worksheet therefore remains unpopulated for users, sessions,
+engaged sessions, campaign landings, diagram views/actions, provider clicks,
+referral clicks, and primary CTA clicks.
+
+The 2026-09-03 article and provider link checks are delivery-contract evidence
+only. They confirm reachable destinations and visible referral/support labels
+where browser evidence exists; they do not establish campaign attribution,
+conversion, revenue, or qualitative performance. No tracking was added to the
+client-only tutorial as part of this closure.
