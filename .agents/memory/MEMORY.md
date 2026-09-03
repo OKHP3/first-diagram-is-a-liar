@@ -4,3 +4,4 @@
 - [Local browser acceptance](browser-acceptance.md) — Reuse the managed preview before starting another Vite watcher to avoid inotify exhaustion.
 - [Local handoff exports](local-handoff-exports.md) — Keep downloaded working snapshots deterministic, browser-only, and explicitly separate from verdicts or cloud storage.
 - [Merge marker validation](merge-marker-validation.md) — A clean merge commit can still contain committed conflict markers; scan the resulting tree before trusting it.
+- [Pure TypeScript contracts](pure-typescript-contracts.md) — Use Node’s native type stripping when a lightweight runner needs to execute source modules without a test framework.
