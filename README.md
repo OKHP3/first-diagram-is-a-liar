@@ -21,7 +21,10 @@ The handoff step can download a deterministic
 local tutorial state, including the premise, ROY, workbench, Council, checklist,
 next test, receipts, generated date, and schema version. It is deliberately not
 cloud backup, durable server storage, or a verdict; clipboard copy remains
-available for the full packet as a separate convenience.
+available for the full packet as a separate convenience. By owner policy, an
+explicit local export includes the learner-entered bounded claim, synthesis
+sentence, and next test. A future shared or externally distributed export must
+offer an explicit redacted mode first.
 
 ## The article and application
 

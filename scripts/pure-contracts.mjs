@@ -171,6 +171,8 @@ async function run() {
     assertEqual(firstMarkdown, secondMarkdown, "handoff Markdown should be deterministic for the same session and date");
     assert(firstMarkdown.includes("# Local Working Handoff") && firstMarkdown.includes("- **Step:** 05 / The handoff"),
       "handoff should include export identity and current position");
+    assert(firstMarkdown.includes("Learner text policy:** Included by default for an explicit local export"),
+      "handoff should state the learner text export policy");
     assert(firstMarkdown.includes("\\*bold\\* \\_under\\_ \\[link\\] \\#tag \\| pipe \\\\tick\\`"),
       "handoff should escape Markdown punctuation in learner text");
     assert(!firstMarkdown.includes("<script>") && !firstMarkdown.includes("\n*bold*"),

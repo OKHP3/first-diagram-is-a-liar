@@ -4,6 +4,8 @@ import { calculateRoy, getRoyInterpretation } from "./roy";
 import { workbenchStates } from "./workbench";
 
 export const HANDOFF_FILENAME = "first-diagram-is-a-liar-handoff.md";
+export const LEARNER_TEXT_EXPORT_POLICY =
+  "Included by default for an explicit local export; any future shared or externally distributed export must offer an explicit redacted mode.";
 export const publicSourceLinks = [
   { label: "GitHub repository / receipts", url: "https://github.com/OKHP3/first-diagram-is-a-liar" },
   { label: "Live long-form article", url: "https://overkillhill.com/writings/first-diagram-is-a-liar/" },
@@ -53,6 +55,7 @@ export function buildHandoffMarkdown(session: SessionState, generatedDate = sess
 - **Generated date:** ${generatedDate}
 - **Filename:** \`${HANDOFF_FILENAME}\`
 - **Privacy boundary:** Assembled in the browser. No account, identifier, analytics, or server persistence is involved.
+- **Learner text policy:** ${LEARNER_TEXT_EXPORT_POLICY}
 - **Completion status:** ${checkedCount === checklistItems.length ? "Ready for review" : "Incomplete by choice"}
 - **Important boundary:** This records learning activity. It does not claim that the learner produced a validated diagram.
 

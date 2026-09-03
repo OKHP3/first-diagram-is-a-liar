@@ -70,11 +70,23 @@ local version, verify strict security settings, preserve a static fallback and
 the text alternative, test parser and render failures, and set an explicit
 bundle budget before changing this boundary.
 
+## Owner policy: learner text in exported handoffs
+
+**Decision (2026-09-03): keep learner-entered text included by default for an
+explicit browser-local export; require an explicit redacted mode before adding
+any shared or externally distributed export path.**
+
+The current local packet includes the optional bounded premise claim, synthesis
+sentence, and next test because the learner chose to copy or download the
+working handoff. This remains safe within the current boundary: the packet is
+assembled in the browser, is not uploaded, and is labelled as a working
+snapshot rather than a verdict. A redacted mode is not a second current export
+mode. Revisit this policy if a future release adds sharing, upload, hosted
+storage, or any other export path outside the learner's local control.
+
 ## Unknown or owner-controlled
 
 - Whether the normalized ROY scale should be renamed or calibrated differently.
-- Whether a future owner-approved release should include learner-entered text by
-  default in exported Markdown.
 - Whether anonymous measurement should ever be enabled under a future,
   explicitly approved contract.
 - Whether review-only article material should be promoted.
