@@ -68,20 +68,33 @@ The browser check is hosted-render evidence, not proof of authorship or
 semantic correctness. Local `.mmd` sources and checked-in SVG/PNG fallbacks
 remain the recovery path if a hosted document later changes or disappears.
 
-## Campaign, UTM, referral, and qualitative readout
+## First complete campaign readout — 2026-08-25 through 2026-08-31
 
-**Readout status: NOT AVAILABLE — not zero.**
+**Readout status: UNAVAILABLE as of 2026-09-03 — not zero.**
 
-No GA4 export, DebugView capture, provider dashboard report, campaign landing
-sample, UTM source/medium breakdown, referral conversion result, comment sample,
-or confusion-signal review was available in this workspace for the
-2026-08-25 through 2026-08-31 observation window. The measurement map and event
-contract remain documented, but a contract is not an observed result. No
-performance claim is made and no missing measure is entered as zero.
+No dated GA4/DebugView export or equivalent owner-approved readout is available
+in this workspace to attach for the completed observation window. The
+measurement map and event contract remain documented, but a contract is not an
+observed result.
 
-The dated HTTP and human-browser link checks above are delivery/contract
-evidence only. They do not substitute for campaign analytics or qualitative
-feedback.
+| Evidence family | Measures | Status | Boundary |
+|---|---|---|---|
+| Acquisition and attribution | Users, sessions, engaged sessions, `campaign_landing`, and UTM source/medium/campaign/content | **UNAVAILABLE** | No audience, reach, or source-performance conclusion |
+| Interactions | `diagram_view`, `diagram_render`, and `diagram_action` by action | **UNAVAILABLE** | No interaction, usage, or engagement conclusion |
+| CTA/referral activity | Primary `cta_click`, `provider_click`, `referral_click`, destination activity, and provider-dashboard conversion/revenue | **UNAVAILABLE** | No CTA, referral conversion, support, or revenue conclusion |
+| Qualitative observations | Comments, questions, confusion signals, and new angles | **UNAVAILABLE** | No comprehension, confusion, sentiment, or audience-response conclusion |
+| Diagram quality | Render health, title matching, source/fallback availability, and link reachability | **SEPARATE TECHNICAL EVIDENCE** | QA/delivery evidence only; not a campaign result or diagram-quality claim |
+
+The dated HTTP and human-browser link checks above are delivery-contract
+evidence only. They do not substitute for campaign analytics, provider
+dashboards, UTM attribution, or qualitative feedback. No missing measure is
+entered as zero, no performance or campaign conclusion is made, and no
+tracking was added to the client-only tutorial.
+
+If the owner later supplies a readout, it must be attached with its retrieval
+date, source or GA4 property, observation window, release version, and observed
+measures before it is used for a performance conclusion. This evidence update
+does not claim `ARTICLE-1.0` publication.
 
 ## Rollback verification
 

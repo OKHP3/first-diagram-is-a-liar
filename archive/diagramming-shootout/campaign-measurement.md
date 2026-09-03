@@ -126,18 +126,30 @@ pre-window or partial-window link check must remain a contract check only. Keep
 v0.5 current until the complete readout and the external v1.0 deployment gates
 are recorded.
 
-## Closed-window evidence status — 2026-09-03
+## First complete campaign readout — 2026-09-03
 
-The 2026-08-25 through 2026-08-31 observation window is closed, but its
-readout is **UNAVAILABLE**, not zero. This workspace has no GA4 export,
-DebugView capture, provider dashboard report, UTM source/medium breakdown,
-referral conversion result, comment sample, or confusion-signal review to
-attach. The worksheet therefore remains unpopulated for users, sessions,
-engaged sessions, campaign landings, diagram views/actions, provider clicks,
-referral clicks, and primary CTA clicks.
+The observation window **2026-08-25 through 2026-08-31** is closed. The first
+complete owner readout was due after the 2026-08-31 close, but no dated
+GA4/DebugView export or equivalent owner-approved readout is available in this
+workspace as of **2026-09-03**. There is therefore no attachment to include,
+and every unavailable measure remains **UNAVAILABLE**, not zero.
 
-The 2026-09-03 article and provider link checks are delivery-contract evidence
-only. They confirm reachable destinations and visible referral/support labels
-where browser evidence exists; they do not establish campaign attribution,
-conversion, revenue, or qualitative performance. No tracking was added to the
-client-only tutorial as part of this closure.
+| Evidence family | Measures requested for the window | Status | Permitted interpretation |
+|---|---|---|---|
+| Acquisition and attribution | Users, sessions, engaged sessions, `campaign_landing`, and UTM source/medium/campaign/content breakdown | **UNAVAILABLE** | No audience size, campaign reach, or source-performance conclusion |
+| Tutorial/article interactions | `diagram_view`, `diagram_render`, and `diagram_action` by action | **UNAVAILABLE** | No interaction-rate, diagram-usage, or engagement conclusion |
+| CTA and referral activity | Primary `cta_click`, `provider_click`, `referral_click`, destination activity, and provider-dashboard conversion/revenue | **UNAVAILABLE** | No CTA, referral conversion, support, or revenue conclusion |
+| Qualitative observations | Comments, questions, confusion signals, and observed new angles | **UNAVAILABLE** | No comprehension, confusion, sentiment, or audience-response conclusion |
+| Diagram quality | Render health, source/fallback availability, title matching, and link reachability | **SEPARATE TECHNICAL EVIDENCE** | Delivery and artifact checks only; not a campaign or diagram-quality outcome |
+
+The dated article and provider-link checks are delivery-contract evidence only.
+They confirm reachable destinations and visible referral/support labels where
+browser evidence exists; they do not substitute for the missing campaign
+readout. In particular, technical render verification must not be converted
+into a claim that the diagrams were clear, useful, or effective.
+
+No tracking was added to the client-only tutorial as part of this closure, and
+this record does not claim `ARTICLE-1.0` publication. If the owner later
+supplies an approved readout, attach it with its retrieval date, property or
+source, observation window, release version, and observed measures before
+making any performance or campaign conclusion.

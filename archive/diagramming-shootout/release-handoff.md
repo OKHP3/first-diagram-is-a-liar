@@ -115,14 +115,17 @@ The current evidence packet records:
   attribution checks;
 - the 2026-09-03 hosted Mermaid rerun, including ChatGPT V2 and all 15 current
   archive routes;
-- the unavailable seven-day campaign/readout data, explicitly not zero; and
+- the unavailable 2026-08-25 through 2026-08-31 campaign readout, separated
+  into acquisition, interactions, CTA/referral activity, qualitative
+  observations, and separate technical diagram evidence; and
 - the usable `ARTICLE-0.5` rollback snapshot, production commit, and Pages
   deployment identifier.
 
 **Final decision: DEFERRED.** No full-cut deployment identifier, v1.0
-publication date, or performance result is recorded. The bounded 2026-09-01
-count correction and the subsequent link repair remain separate historical
-production records.
+publication date, performance result, or campaign conclusion is recorded. The
+missing readout is explicitly unavailable, not zero; no tracking was added to
+the client-only tutorial. The bounded 2026-09-01 count correction and the
+subsequent link repair remain separate historical production records.
 
 See
 [`../../docs/article-1.0-release-evidence-2026-09-03.md`](../../docs/article-1.0-release-evidence-2026-09-03.md)
