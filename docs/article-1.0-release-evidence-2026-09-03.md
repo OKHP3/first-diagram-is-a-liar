@@ -118,6 +118,26 @@ the redacted summary with its retrieval date and source label, but that does
 not make raw analytics public evidence. This evidence update does not claim
 `ARTICLE-1.0` publication.
 
+### Future visual attachment gate
+
+This evidence packet contains no approved campaign screenshot or other visual
+attachment as of 2026-09-03. If the owner later supplies one, create a separate
+owner review record for that visual using the
+[canonical visual attachment review record](../archive/diagramming-shootout/campaign-measurement.md#owner-review-record-for-visual-attachments)
+before treating it as evidence. The reviewer must inspect the pixels and
+explicitly confirm every crop/redaction item; the repository privacy check
+cannot make that determination.
+
+The record must include the attachment reference, source type and label,
+reviewer/date, retrieval date, observation window, release/content version,
+non-sensitive property alias, checklist result, aggregate-only confirmation,
+the exact label **aggregate campaign evidence — restricted raw source not
+attached**, raw-source restricted-storage disposition, and an
+`APPROVED FOR SHARED EVIDENCE` or rejected decision. A missing or incomplete
+record means the visual remains restricted and must not be attached, committed,
+or linked. The raw source stays in the owner's restricted analytics storage;
+only the approved redacted aggregate summary may enter shared evidence.
+
 ## Rollback verification
 
 `ARTICLE-0.5` remains the usable rollback point:

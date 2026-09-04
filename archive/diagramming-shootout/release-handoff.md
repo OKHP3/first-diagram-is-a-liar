@@ -100,6 +100,12 @@ If an owner supplies a GA4, DebugView, or provider readout, use the
 [campaign measurement evidence boundary](campaign-measurement.md#evidence-handling-redaction-and-retention-boundary)
 before adding it to this handoff:
 
+- create one owner review record for each screenshot or other visual
+  attachment, using the [visual attachment review record](campaign-measurement.md#owner-review-record-for-visual-attachments);
+- inspect the pixels as the owner/editorial reviewer, explicitly confirm every
+  item in the screenshot and attachment checklist, and stop if any item is
+  unchecked or uncertain; automated filename/path checks do not satisfy this
+  review;
 - archive only a redacted, aggregate summary with its retrieval date, source
   label/property alias, observation window, release version, measures, and
   limitations;
@@ -110,16 +116,18 @@ before adding it to this handoff:
 - crop screenshots to remove signed-in account details, GA4 user/device
   selectors, DebugView device panels, event-parameter panels, browser tabs,
   address bars, and DevTools request URLs/headers/payloads; and
-- label the attachment **aggregate campaign evidence — restricted raw source
-  not attached**. Keep raw CSV/JSON, event-level exports, DebugView streams,
-  user explorers, and provider-dashboard rows in the owner's access-controlled
-  analytics storage. Delete any temporary local copy after checking the
-  summary; do not commit it or host it with the article.
+- label the approved attachment **aggregate campaign evidence — restricted raw
+  source not attached** and record that exact label in the owner review record.
+  Keep raw CSV/JSON, event-level exports, DebugView streams, user explorers,
+  and provider-dashboard rows in the owner's access-controlled analytics
+  storage. Delete any temporary local copy after checking the summary; do not
+  commit it or host it with the article.
 
 An aggregate summary is shareable evidence about campaign activity, not
 permission to disclose the underlying analytics. If a breakdown could identify
 an individual or tiny audience, suppress or combine it and retain only the
-broader aggregate.
+broader aggregate. No visual attachment is approved for this handoff unless
+its owner review record says `APPROVED FOR SHARED EVIDENCE`.
 
 Before committing this handoff or any campaign record, run
 `npm run check:campaign-evidence`. The guard permits the documented

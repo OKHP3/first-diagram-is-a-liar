@@ -173,6 +173,41 @@ table transcribed from one), labelled **aggregate campaign evidence —
 restricted raw source not attached**. Keep the source location and retrieval
 date in the handoff note without copying the restricted export itself.
 
+### Owner review record for visual attachments
+
+Every campaign screenshot, dashboard image, chart capture, or other visual
+attachment is **restricted and unapproved** until the owner completes a review
+record. Filename and path checks are not a substitute for inspecting the
+pixels: they cannot reliably detect account details, selectors, device panels,
+event-parameter panels, or DevTools payloads.
+
+Use one record per visual attachment. The record may live in the handoff note
+or release-evidence packet, but it must contain all of the following before an
+attachment enters shared evidence:
+
+| Field | Required owner entry |
+|---|---|
+| Attachment reference | A non-sensitive local reference or owner-assigned ID; do not copy the restricted source into the repository |
+| Source type | Screenshot, dashboard capture, chart, or other visual attachment, plus the provider/source label |
+| Reviewer and review date | Named owner/editorial reviewer and the date the pixels were inspected |
+| Retrieval date and observation window | When the source was retrieved and the campaign dates it represents |
+| Release/content version | The release ID and `content_version` represented by the visual |
+| Source label/property alias | A non-sensitive label or property alias only; do not record account or property identifiers that are not needed for provenance |
+| Pixel checklist result | Explicit confirmation that every item in the Screenshot and attachment checklist above was cropped or redacted; record any exception as **not approved** |
+| Aggregate-only result | Confirmation that the remaining content contains only low-cardinality aggregate totals/grouped counts and no user-level, event-level, or sensitive dimensions |
+| Approved archive label | **aggregate campaign evidence — restricted raw source not attached** |
+| Raw-source disposition | Confirmation that the raw source remains in the owner's access-controlled analytics storage under the existing restricted retention policy; any temporary local copy was deleted after checking the summary |
+| Decision | `APPROVED FOR SHARED EVIDENCE` or `REJECTED — REMAINS RESTRICTED`, with the reason for rejection when applicable |
+
+The owner must make the decision after the crop/redaction review, not merely
+after a filename scan. A missing record, an unchecked checklist item, an
+uncertain breakdown, or a source that still contains raw detail is a stop
+signal: do not attach, commit, or link the visual. If a group could identify an
+individual or tiny audience, suppress or combine it and repeat the review.
+The approved archive copy must carry the exact approved archive label above;
+the owner review record is evidence of handling approval, not permission to
+disclose the restricted source.
+
 ### Repository privacy guard
 
 Run `npm run check:campaign-evidence` before committing changes to campaign
@@ -181,7 +216,8 @@ records for likely GA4/DebugView exports, data-shaped user or device
 identifiers, contact or network identifiers, cookies, tokens, tracking IDs,
 and suspicious screenshots or attachments. It allows this documented
 aggregate-summary label and ordinary event-contract prose, but it cannot
-decide whether pixels in a novel image are safe.
+decide whether pixels in a novel image are safe; the completed owner review
+record is the required human gate for that decision.
 
 The same validation command runs the maintained fixture suite in
 `scripts/campaign-evidence-fixtures`. When a new export format appears, add a
