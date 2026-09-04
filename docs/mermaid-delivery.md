@@ -72,7 +72,12 @@ The pure contract check covers:
 
 The browser acceptance check additionally visits the root workbench and verifies
 the accessible SVG/text fallback contract while confirming no runtime Mermaid
-block is present. These checks protect the tutorial/archive boundary if the
+block is present. It also visits the local archived editorial cut with the
+Mermaid ESM URL blocked, verifying that all three featured cards retain their
+loaded static image, readable alt text, source controls, source disclosure,
+and explicit failure status. The archive is served as a separate path for
+this check and is not a root tutorial dependency or a hosted-renderer
+requirement. These checks protect the tutorial/archive boundary if the
 tutorial grows.
 
 ## Verification record

@@ -10,6 +10,8 @@ const mobileWidth = 390;
 const briefStorageKey = "first-diagram-progress";
 const sessionStorageKey = "first-diagram-session";
 const handoffFilename = "first-diagram-is-a-liar-handoff.md";
+const archivePath = "/archive/editorial-cut/index.html";
+const mermaidModulePattern = "*cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs*";
 
 async function hasExecutable(command) {
   if (command.includes("/")) {
@@ -288,6 +290,8 @@ async function runAcceptance() {
     client = new DevToolsClient(target.webSocketDebuggerUrl);
     await client.connect();
     await client.send("Page.enable");
+    await client.send("Network.enable");
+    await client.send("Network.setBlockedURLs", { urls: [mermaidModulePattern] });
     await client.send("Runtime.enable");
     await client.send("Page.navigate", { url: appUrl });
     await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "application startup");
@@ -535,6 +539,50 @@ async function runAcceptance() {
     assert(mobileLayout.width === mobileWidth, "mobile width overflow", `expected viewport width ${mobileWidth}, got ${mobileLayout.width}`);
     assert(mobileLayout.documentWidth <= mobileWidth && mobileLayout.bodyWidth <= mobileWidth, "mobile width overflow", `horizontal overflow at ${mobileWidth}px (${mobileLayout.documentWidth}px document, ${mobileLayout.bodyWidth}px body)`);
     passed.push(`responsive boundary at ${mobileWidth}px`);
+
+    const archiveUrl = new URL(archivePath, appUrl).href;
+    await client.send("Page.navigate", { url: archiveUrl });
+    await waitFor(client, 'document.readyState === "complete" && document.querySelectorAll("[data-diagram-id]").length === 3', "archive startup");
+    await waitFor(client, '[...document.querySelectorAll("[data-diagram-id] [data-diagram-status]")].every((status) => status.textContent.includes("Live render unavailable"))', "archive blocked-renderer fallback");
+    const archiveFallback = await client.evaluate(`(() => {
+      const expected = {
+        "words-structure-understanding": "Words become structure, and structure becomes understanding.",
+        "feedback-loop": "Words lead to structure, then understanding, with confusion telemetry feeding back into structure.",
+        "replit-v2": "Replit V2 moves from spark through honest revision and council disagreement to an edited release.",
+      };
+      return [...document.querySelectorAll("[data-diagram-id]")].map((card) => {
+        const id = card.dataset.diagramId;
+        const fallback = card.querySelector(".diagram-fallback");
+        const source = card.querySelector("[data-source]");
+        const controls = card.querySelector(".diagram-actions");
+        const actionLinks = [...(controls?.querySelectorAll("a") ?? [])];
+        return {
+          id,
+          imageLoaded: fallback instanceof HTMLImageElement && fallback.naturalWidth > 0,
+          alt: fallback?.alt ?? "",
+          expectedAlt: expected[id] ?? "",
+          status: card.querySelector("[data-diagram-status]")?.textContent.trim() ?? "",
+          fallbackVisible: fallback instanceof HTMLImageElement && !fallback.hidden,
+          liveBlockHidden: card.querySelector(".mermaid")?.getAttribute("aria-hidden") === "true",
+          fallbackClass: card.querySelector(".mermaid")?.classList.contains("mermaid--fallback") ?? false,
+          hasViewFallback: actionLinks.some((link) => link.textContent.includes("View fallback") && link.getAttribute("href")?.endsWith(id + ".svg")),
+          hasSourceDownload: actionLinks.some((link) => link.textContent.includes("Download source") && link.getAttribute("href")?.endsWith(id + ".mmd")),
+          hasCopyControl: Boolean(controls?.querySelector("[data-copy-diagram]")),
+          hasSvgDownload: actionLinks.some((link) => link.textContent.includes("Download SVG") && link.getAttribute("href")?.endsWith(id + ".svg")),
+          hasSourceDisclosure: Boolean(card.querySelector("details.diagram-source [data-source]") && source?.textContent.trim()),
+        };
+      });
+    })()`, "archive blocked-renderer fallback");
+    assert(archiveFallback.length === 3, "archive blocked-renderer fallback", `expected three featured diagrams, found ${archiveFallback.length}`);
+    for (const diagram of archiveFallback) {
+      assert(diagram.imageLoaded, `archive ${diagram.id} static image`, "static fallback image did not load");
+      assert(diagram.alt === diagram.expectedAlt && diagram.alt.length > 0, `archive ${diagram.id} alt text`, "static fallback image lost its readable alt text");
+      assert(diagram.status === "Live render unavailable — static fallback shown", `archive ${diagram.id} failure status`, `unexpected fallback status: ${diagram.status}`);
+      assert(diagram.fallbackVisible && diagram.liveBlockHidden && diagram.fallbackClass, `archive ${diagram.id} fallback visibility`, "failed live-render block was not hidden while the static image remained available");
+      assert(diagram.hasViewFallback && diagram.hasSourceDownload && diagram.hasCopyControl && diagram.hasSvgDownload && diagram.hasSourceDisclosure,
+        `archive ${diagram.id} source controls`, "one or more fallback, source, copy, SVG, or source-disclosure controls are missing");
+    }
+    passed.push("archive static fallbacks under blocked Mermaid import");
 
     console.log(`Browser acceptance: PASS (${passed.length} checks)`);
     passed.forEach((check) => console.log(`- ${check}`));
