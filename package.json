@@ -9,7 +9,7 @@
     "build": "npm run check && vite build",
     "preview": "vite preview",
     "check:archive": "node scripts/check-archive.mjs",
-    "check:campaign-evidence": "node scripts/check-campaign-evidence.mjs",
+    "check:campaign-evidence": "node scripts/check-campaign-evidence.mjs && node scripts/test-campaign-evidence.mjs",
     "health:mermaid": "node scripts/check-mermaid-delivery.mjs",
     "benchmark:mermaid": "node scripts/benchmark-mermaid.mjs",
     "test:contracts": "node --experimental-strip-types scripts/pure-contracts.mjs",

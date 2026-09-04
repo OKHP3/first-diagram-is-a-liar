@@ -1,0 +1,1 @@
+The captured link was https://example.test/landing?gclid=fixture-tracking-id-001&utm_source=fixture.

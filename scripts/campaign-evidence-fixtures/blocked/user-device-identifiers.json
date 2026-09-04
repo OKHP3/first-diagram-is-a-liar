@@ -1,0 +1,8 @@
+{
+  "user_id": "fixture-user-identifier-001",
+  "user_pseudo_id": "fixture-pseudo-identifier-001",
+  "client_id": "fixture-client-identifier-001",
+  "session_id": "fixture-session-identifier-001",
+  "device_id": "fixture-device-identifier-001",
+  "advertising_id": "fixture-advertising-identifier-001"
+}

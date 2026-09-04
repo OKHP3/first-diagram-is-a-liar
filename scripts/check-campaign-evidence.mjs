@@ -53,17 +53,17 @@ const contentRules = [
   {
     name: "user or device identifier value",
     pattern:
-      /\b(?:user_id|user_pseudo_id|client_id|session_id|device_id|advertising_id)\b\s*(?::|=|,)\s*(?:"[^"\r\n]+"|'[^'\r\n]+'|[A-Za-z0-9][A-Za-z0-9._:-]{2,})/iu,
+      /\b(?:user_id|user_pseudo_id|client_id|session_id|device_id|advertising_id)\b\s*["']?\s*(?::|=|,)\s*(?:"[^"\r\n]+"|'[^'\r\n]+'|[A-Za-z0-9][A-Za-z0-9._:-]{2,})/iu,
   },
   {
     name: "cookie or token value",
     pattern:
-      /\b(?:cookie|set-cookie|authorization|bearer|access_token|refresh_token|id_token|api_key)\b\s*(?::|=)\s*(?:"[^"\r\n]+"|'[^'\r\n]+'|[^\s,}]+)/iu,
+      /\b(?:cookie|set-cookie|authorization|bearer|access_token|refresh_token|id_token|api_key)\b\s*["']?\s*(?::|=)\s*(?:"[^"\r\n]+"|'[^'\r\n]+'|[^\s,}]+)/iu,
   },
   {
     name: "contact or network identifier value",
     pattern:
-      /\b(?:email|phone|ip(?:_address)?|exact_location)\b\s*(?::|=)\s*(?:"[^"\r\n]+"|'[^'\r\n]+'|[^\s,}]+)/iu,
+      /\b(?:email|phone|ip(?:_address)?|exact_location)\b\s*["']?\s*(?::|=)\s*(?:"[^"\r\n]+"|'[^'\r\n]+'|[^\s,}]+)/iu,
   },
   {
     name: "tracking identifier in URL",
@@ -127,9 +127,9 @@ function addFailure(failures, file, reason, line) {
   failures.push(`${displayPath(file)}${line ? `:${line}` : ""} — ${reason}`);
 }
 
-async function scanFile(file, failures) {
+async function scanFile(file, failures, { fixtureMode = false } = {}) {
   const relativePath = displayPath(file);
-  if (!isCampaignEvidencePath(relativePath)) return;
+  if (!fixtureMode && !isCampaignEvidencePath(relativePath)) return;
 
   const extension = extname(file).toLowerCase();
   const name = file.split(sep).pop() ?? "";
@@ -183,7 +183,14 @@ async function scanFile(file, failures) {
   }
 }
 
-const requestedPaths = process.argv.slice(2);
+const rawArguments = process.argv.slice(2);
+const fixtureMode = rawArguments[0] === "--fixture";
+const requestedPaths = fixtureMode ? rawArguments.slice(1) : rawArguments;
+if (fixtureMode && requestedPaths.length === 0) {
+  console.error("Campaign evidence privacy check: FAIL — --fixture needs a path");
+  process.exit(1);
+}
+
 const paths = requestedPaths.length ? requestedPaths : defaultPaths;
 const files = [];
 for (const path of paths) {
@@ -197,7 +204,7 @@ for (const path of paths) {
 }
 
 const failures = [];
-for (const file of files) await scanFile(file, failures);
+for (const file of files) await scanFile(file, failures, { fixtureMode });
 
 if (failures.length) {
   console.error("Campaign evidence privacy check: FAIL");
@@ -206,7 +213,9 @@ if (failures.length) {
   process.exit(1);
 }
 
-const scanned = files.filter((file) => isCampaignEvidencePath(displayPath(file))).length;
+const scanned = fixtureMode
+  ? files.length
+  : files.filter((file) => isCampaignEvidencePath(displayPath(file))).length;
 console.log(
   `Campaign evidence privacy check: PASS (${scanned} campaign evidence paths scanned; ` +
     "aggregate summaries and event-contract prose allowed)",

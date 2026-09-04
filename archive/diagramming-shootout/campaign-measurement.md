@@ -183,6 +183,15 @@ and suspicious screenshots or attachments. It allows this documented
 aggregate-summary label and ordinary event-contract prose, but it cannot
 decide whether pixels in a novel image are safe.
 
+The same validation command runs the maintained fixture suite in
+`scripts/campaign-evidence-fixtures`. When a new export format appears, add a
+small fixture containing placeholders only, put it under `blocked/`, and add
+its path and a short category label to `manifest.json`. Add approved summary or
+contract examples under `safe/`. Run `npm run check:campaign-evidence` and
+update a detection rule if the new restricted fixture is not rejected. The
+fixture runner suppresses the guard's child-process output and reports only
+category labels, so fixture values never appear in a failed validation log.
+
 Raw CSV/JSON, event-level exports, DebugView streams, screenshots, and
 provider-dashboard attachments remain owner-controlled in restricted
 analytics storage. A failing check is a stop signal: remove the raw or

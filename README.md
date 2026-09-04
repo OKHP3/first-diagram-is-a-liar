@@ -81,6 +81,7 @@ and [`archive/diagramming-shootout/council-brief.md`](archive/diagramming-shooto
 npm run check
 npm run build
 npm run check:archive
+npm run check:campaign-evidence
 npm run health:mermaid
 npm run test:acceptance
 git diff --check

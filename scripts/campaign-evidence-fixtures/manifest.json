@@ -1,0 +1,34 @@
+{
+  "safe": [
+    {
+      "path": "safe/aggregate-summary.md",
+      "label": "approved aggregate-summary label"
+    },
+    {
+      "path": "safe/event-contract-prose.md",
+      "label": "ordinary event-contract prose"
+    }
+  ],
+  "blocked": [
+    {
+      "path": "blocked/user-device-identifiers.json",
+      "label": "user and device identifiers"
+    },
+    {
+      "path": "blocked/cookies-and-tokens.txt",
+      "label": "cookies and tokens"
+    },
+    {
+      "path": "blocked/tracking-id-url.md",
+      "label": "tracking IDs"
+    },
+    {
+      "path": "blocked/analytics/ga4-debugview-export.json",
+      "label": "raw GA4 and DebugView filename"
+    },
+    {
+      "path": "blocked/evidence/meeting-capture.pdf",
+      "label": "generic evidence-folder attachment"
+    }
+  ]
+}

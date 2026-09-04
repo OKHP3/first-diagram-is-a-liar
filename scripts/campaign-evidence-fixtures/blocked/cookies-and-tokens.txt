@@ -1,0 +1,4 @@
+cookie: "fixture-cookie-value"
+authorization: "Bearer fixture-bearer-value"
+access_token: "fixture-access-token-value"
+refresh_token: "fixture-refresh-token-value"
