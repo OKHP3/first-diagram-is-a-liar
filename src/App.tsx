@@ -36,7 +36,7 @@ function BrandMark() { return <span className="brand-lock">OverKill&nbsp;Hill&nb
 function StepRail({ activeStep, completedSteps, onSelect }: { activeStep: number; completedSteps: number[]; onSelect: (step: number) => void }) {
   return <aside className="step-rail" aria-label="Tutorial steps">
     <div className="rail-brand"><span className="signal-dot" /> FIELD GUIDE / 01</div><div className="rail-line" aria-hidden="true" />
-    <nav>{steps.map((step, index) => <button key={step.number} aria-label={`${step.number}. ${step.kicker}: ${step.label}`} aria-current={activeStep === index ? "step" : undefined} className={`rail-step ${activeStep === index ? "is-active" : ""} ${completedSteps.includes(index) ? "is-complete" : ""}`} onClick={() => onSelect(index)}><span className="rail-step-number" aria-hidden="true">{completedSteps.includes(index) ? "✓" : step.number}</span><span><small>{step.kicker}</small>{step.label}</span></button>)}</nav>
+    <nav>{steps.map((step, index) => <button key={step.number} data-step={index + 1} aria-label={`${step.number}. ${step.kicker}: ${step.label}`} aria-current={activeStep === index ? "step" : undefined} className={`rail-step ${activeStep === index ? "is-active" : ""} ${completedSteps.includes(index) ? "is-complete" : ""}`} onClick={() => onSelect(index)}><span className="rail-step-number" aria-hidden="true">{completedSteps.includes(index) ? "✓" : step.number}</span><span><small>{step.kicker}</small>{step.label}</span></button>)}</nav>
     <div className="rail-footer"><span className="mono-label">ROY / 001</span><span>One honest diagram beats a polished lie.</span></div>
   </aside>;
 }

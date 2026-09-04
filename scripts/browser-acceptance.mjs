@@ -485,7 +485,7 @@ async function runAcceptance() {
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 100));
     await client.send("Page.reload", { ignoreCache: true });
     await waitFor(client, 'document.readyState === "complete" && document.querySelectorAll(".rail-step").length === 5', "step 5 persistence reload");
-    await click(client, ".rail-step:nth-of-type(5)", "step 5 persistence navigation");
+    await click(client, '.step-rail nav .rail-step[data-step="5"]', "step 5 persistence navigation");
     await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Ship the proof")', "step 5 persistence navigation");
     const persisted = await client.evaluate(`(() => ({
       checked: document.querySelectorAll(".check-row input:checked").length,
