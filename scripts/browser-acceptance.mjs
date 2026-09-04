@@ -353,6 +353,25 @@ async function runAcceptance() {
     await click(client, ".step-nav .button-primary", "step 2 next control");
     await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Draw the truth")', "step 3 navigation");
     await assertActiveStep(client, 2, "step 3 active semantics");
+    const workbenchAccessibility = await client.evaluate(`(() => {
+      const svg = document.querySelector(".diagram-lines");
+      const textAlternative = document.querySelector(".text-alternative");
+      const boundary = document.querySelector(".illustrative-note");
+      return {
+        svgRole: svg?.getAttribute("role"),
+        svgLabel: svg?.getAttribute("aria-label"),
+        hasTextAlternative: Boolean(textAlternative?.textContent?.includes("Text alternative:")),
+        hasBoundaryNote: Boolean(boundary?.textContent?.includes("not a live Mermaid parser")),
+        hasRuntimeMermaidBlock: Boolean(document.querySelector(".mermaid")),
+      };
+    })()`, "step 3 SVG fallback accessibility");
+    assert(workbenchAccessibility.svgRole === "img" && Boolean(workbenchAccessibility.svgLabel),
+      "step 3 SVG fallback accessibility", "the fixed teaching SVG must expose an accessible image role and label");
+    assert(workbenchAccessibility.hasTextAlternative && workbenchAccessibility.hasBoundaryNote,
+      "step 3 SVG fallback accessibility", "the workbench must retain its prose alternative and honest renderer boundary");
+    assert(!workbenchAccessibility.hasRuntimeMermaidBlock,
+      "step 3 SVG fallback accessibility", "the root tutorial must not render a Mermaid block at runtime");
+    passed.push("fixed SVG fallback and text alternative accessibility");
     const loopState = await client.evaluate(`(() => {
       const toggle = document.querySelector(".toggle-button");
       const lines = [...document.querySelectorAll(".loop-line")];

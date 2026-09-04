@@ -81,6 +81,9 @@ async function run() {
   const modules = await loadModules();
   const { session, roy, workbench, handoff } = modules;
   const passed = [];
+  const rootAppSource = await readFile(join(root, "src", "App.tsx"), "utf8");
+  const archiveRendererSource = await readFile(join(root, "archive", "editorial-cut", "mermaid-init.js"), "utf8");
+  const archivePageSource = await readFile(join(root, "archive", "editorial-cut", "index.html"), "utf8");
 
   try {
     const fixedNow = 1_725_350_400_000;
@@ -152,6 +155,24 @@ async function run() {
     assert(workbench.workbenchStates.v2.source.includes("doubt / revise") && workbench.workbenchStates.v2.source.includes("missing exception"),
       "V2 should expose both revision loopbacks");
     passed.push("workbench revision contract");
+
+    assert(!rootAppSource.includes('from "mermaid"') && !rootAppSource.includes('from "mermaid/') && !rootAppSource.includes("mermaid.initialize"),
+      "the root tutorial should not acquire an opportunistic Mermaid runtime dependency");
+    assert(rootAppSource.includes('role="img"') && rootAppSource.includes("aria-label={model.visual}"),
+      "the fixed workbench SVG should expose an accessible image role and label");
+    assert(rootAppSource.includes('<strong>Text alternative:</strong>') && rootAppSource.includes("Illustrative SVG only"),
+      "the fixed workbench should keep its prose alternative and honest renderer boundary");
+    assert(archiveRendererSource.includes('securityLevel: "strict"') && archiveRendererSource.includes('startOnLoad: false'),
+      "the archived renderer should use strict, explicit Mermaid configuration");
+    assert(archiveRendererSource.includes("await mermaid.run({ nodes: blocks })") &&
+      archiveRendererSource.includes("catch (error)") && archiveRendererSource.includes("cards.forEach((card) => showFallback(card, error))"),
+    "archive parser, import, and render failures should flow to the static fallback");
+    assert(archiveRendererSource.includes('block.setAttribute("aria-hidden", "true")'),
+      "the archive fallback should hide a failed live-render block from assistive technology");
+    assert((archivePageSource.match(/class="diagram-fallback"/g) ?? []).length >= 3 &&
+      archivePageSource.includes("data-copy-diagram") && archivePageSource.includes("Download source"),
+      "featured archive diagrams should retain static fallback, source, and copy affordances");
+    passed.push("diagram renderer boundary, security, fallback, and accessibility contracts");
 
     const unsafeText = "<script>\n*bold* _under_ [link] #tag | pipe \\tick`";
     const handoffSession = {

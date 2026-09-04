@@ -91,5 +91,23 @@ storage, or any other export path outside the learner's local control.
   explicitly approved contract.
 - Whether review-only article material should be promoted.
 
+## Mermaid evidence record
+
+The renderer boundary has now been tested rather than left as an assumption.
+The pinned local candidate `mermaid@11.12.0` was measured in an isolated Vite
+fixture on 2026-09-04. It added approximately 2.6 MB of built JavaScript
+against a documented 1 MB budget; cold module evaluation stayed roughly within
+the 500 ms startup-delta budget (277.7 ms in the recorded run), but that
+favorable result does not offset the bundle cost. The repeatable command is
+`npm run benchmark:mermaid`, which does not add Mermaid to the root dependency
+graph.
+
+Contract and browser acceptance checks cover strict archive configuration,
+parser/import/render fallback, failed-render accessibility, root SVG labels,
+the existing prose alternative, and the explicit no-runtime boundary. The
+decision is therefore **NO-GO for Mermaid in the root tutorial**; the
+archive's separate static-first delivery remains the only current Mermaid
+surface.
+
 Local build and browser acceptance are source evidence only. They do not by
 themselves establish a new hosted release.
