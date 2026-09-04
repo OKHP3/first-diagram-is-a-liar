@@ -503,7 +503,31 @@ async function runAcceptance() {
     await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent.includes("Draw the truth")', "deep-link navigation");
     await client.evaluate('history.back()', "browser back navigation");
     await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent.includes("Ship the proof")', "browser back navigation");
-    passed.push("hash deep link and history navigation");
+    const backCompletion = await client.evaluate(`(() => {
+      const stepFiveRail = document.querySelector('.rail-step[data-step="5"]');
+      return {
+        checked: document.querySelectorAll(".check-row input:checked").length,
+        status: document.querySelector(".checklist-panel .panel-kicker")?.textContent.trim(),
+        railComplete: stepFiveRail?.classList.contains("is-complete"),
+        railNumber: stepFiveRail?.querySelector(".rail-step-number")?.textContent.trim(),
+      };
+    })()`, "step 5 completion after browser back");
+    assert(backCompletion.checked === 5, "step 5 completion after browser back", `expected five checked items after returning, found ${backCompletion.checked}`);
+    assert(backCompletion.status === "SHIP CHECK / 5 OF 5", "step 5 completion after browser back", `unexpected checklist status after returning: ${backCompletion.status}`);
+    assert(backCompletion.railComplete && backCompletion.railNumber === "✓", "step 5 rail completion after browser back", "completed step 5 rail control lost its completion state after returning");
+    await client.evaluate('history.forward()', "browser forward navigation");
+    await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent.includes("Draw the truth")', "browser forward navigation");
+    const forwardRailCompletion = await client.evaluate(`(() => {
+      const stepFiveRail = document.querySelector('.rail-step[data-step="5"]');
+      return {
+        railComplete: stepFiveRail?.classList.contains("is-complete"),
+        railNumber: stepFiveRail?.querySelector(".rail-step-number")?.textContent.trim(),
+      };
+    })()`, "step 5 rail completion after browser forward");
+    assert(forwardRailCompletion.railComplete && forwardRailCompletion.railNumber === "✓", "step 5 rail completion after browser forward", "completed step 5 rail control lost its completion state after navigating forward");
+    await client.evaluate('history.back()', "browser back restoration");
+    await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent.includes("Ship the proof")', "browser back restoration");
+    passed.push("completion state survives browser back and forward navigation");
 
     await client.evaluate(`(() => {
       Storage.prototype.__firstDiagramOriginalSetItem = Storage.prototype.setItem;
