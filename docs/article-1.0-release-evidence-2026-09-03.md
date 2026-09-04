@@ -146,6 +146,7 @@ workflow available for browser acceptance).
 | `npm run check` | **PASS** — `tsc --noEmit` | Local TypeScript evidence |
 | `npm run build` | **PASS** — Vite production bundle emitted | Local production-build evidence |
 | `npm run check:archive` | **PASS** — 5 authority anchors | Authority-anchor evidence |
+| `npm run check:campaign-evidence` | **PASS** — no raw analytics or unreviewed attachment signals | Campaign evidence privacy boundary |
 | `npm run health:mermaid` | **PASS** — 3 featured pairs and 0 broken canonical destinations | Local source/fallback and destination evidence |
 | `npm run test:acceptance` | **PASS** — 19 checks in Chromium | Local browser behavior only |
 | `git diff --check` | **PASS** | Documentation formatting |

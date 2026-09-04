@@ -173,6 +173,21 @@ table transcribed from one), labelled **aggregate campaign evidence —
 restricted raw source not attached**. Keep the source location and retrieval
 date in the handoff note without copying the restricted export itself.
 
+### Repository privacy guard
+
+Run `npm run check:campaign-evidence` before committing changes to campaign
+records. The check scans this campaign archive and the release-evidence
+records for likely GA4/DebugView exports, data-shaped user or device
+identifiers, contact or network identifiers, cookies, tokens, tracking IDs,
+and suspicious screenshots or attachments. It allows this documented
+aggregate-summary label and ordinary event-contract prose, but it cannot
+decide whether pixels in a novel image are safe.
+
+Raw CSV/JSON, event-level exports, DebugView streams, screenshots, and
+provider-dashboard attachments remain owner-controlled in restricted
+analytics storage. A failing check is a stop signal: remove the raw or
+unreviewed attachment rather than committing it or weakening the guard.
+
 ## Launch readout worksheet
 
 | Window | Baseline | Target | Owner | Interpretation |

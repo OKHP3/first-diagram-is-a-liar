@@ -72,6 +72,7 @@ live smoke test succeed.
 npm run check
 npm run build
 npm run check:archive
+npm run check:campaign-evidence
 npm run health:mermaid
 git diff --check
 git status --short --branch

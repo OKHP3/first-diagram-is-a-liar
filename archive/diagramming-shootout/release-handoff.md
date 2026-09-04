@@ -121,6 +121,13 @@ permission to disclose the underlying analytics. If a breakdown could identify
 an individual or tiny audience, suppress or combine it and retain only the
 broader aggregate.
 
+Before committing this handoff or any campaign record, run
+`npm run check:campaign-evidence`. The guard permits the documented
+aggregate-summary label and ordinary event-contract prose, but stops likely
+raw exports, user identifiers, cookies, tokens, and suspicious screenshots or
+attachments. Raw analytics remains owner-controlled and restricted; a passing
+check is not permission to copy the source export into shared evidence.
+
 ## Ownership
 
 Jamie Hill / OverKill Hill P³™ owns editorial acceptance and publication
