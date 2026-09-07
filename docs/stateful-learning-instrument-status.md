@@ -22,9 +22,12 @@ owner decisions separate.
 - A versioned session is validated on read, migrates the earlier checklist
   storage, persists locally when available, reports session-only mode when
   storage is blocked, supports reset, and follows dependency-free step hashes.
-- The handoff is generated in-browser as deterministic Markdown with premise,
-  ROY, workbench, Council, checklist, next test, public receipts, generated
-  date, schema version, and an explicit non-validation boundary.
+- The handoff offers an explicit full local packet or redacted sharing packet.
+  Both are generated in-browser as deterministic Markdown with structural
+  premise, ROY, workbench, Council, checklist, public receipts, generated date,
+  schema version, and an explicit non-validation boundary. Redacted mode omits
+  the learner-entered claim, synthesis sentence, and next test while retaining
+  useful structural receipts and the privacy boundary.
 - Copy failure, local download failure, malformed storage, keyboard labels,
   reduced motion CSS, and the 390px responsive boundary have acceptance
   coverage.
@@ -72,17 +75,19 @@ bundle budget before changing this boundary.
 
 ## Owner policy: learner text in exported handoffs
 
-**Decision (2026-09-03): keep learner-entered text included by default for an
-explicit browser-local export; require an explicit redacted mode before adding
-any shared or externally distributed export path.**
+**Decision (2026-09-07): keep learner-entered text included by default for an
+explicit browser-local full export, while offering a separate explicit redacted
+sharing packet.**
 
-The current local packet includes the optional bounded premise claim, synthesis
+The full local packet includes the optional bounded premise claim, synthesis
 sentence, and next test because the learner chose to copy or download the
-working handoff. This remains safe within the current boundary: the packet is
-assembled in the browser, is not uploaded, and is labelled as a working
-snapshot rather than a verdict. A redacted mode is not a second current export
-mode. Revisit this policy if a future release adds sharing, upload, hosted
-storage, or any other export path outside the learner's local control.
+working handoff. The redacted sharing packet omits those three learner-authored
+fields and retains selected patterns, outcomes, controls, checklist state,
+public receipts, and the same browser-local privacy boundary. Both packets are
+assembled in the browser, are not uploaded, and are labelled as working
+snapshots rather than verdicts. Full remains the default so local continuity
+does not silently lose context; redacted mode is an explicit opt-in for a
+sharing-shaped handoff.
 
 ## Unknown or owner-controlled
 

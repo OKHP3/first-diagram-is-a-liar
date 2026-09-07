@@ -16,15 +16,15 @@ shipping checklist. It is the solution surface. The archive is the receipt
 stack. The local session remembers premise, controls, revision, synthesis,
 checklist, and handoff activity when browser storage is available.
 
-The handoff step can download a deterministic
-`first-diagram-is-a-liar-handoff.md` working snapshot containing the current
+The handoff step offers two explicit deterministic Markdown packets. The
+`first-diagram-is-a-liar-handoff.md` full local packet contains the current
 local tutorial state, including the premise, ROY, workbench, Council, checklist,
-next test, receipts, generated date, and schema version. It is deliberately not
-cloud backup, durable server storage, or a verdict; clipboard copy remains
-available for the full packet as a separate convenience. By owner policy, an
-explicit local export includes the learner-entered bounded claim, synthesis
-sentence, and next test. A future shared or externally distributed export must
-offer an explicit redacted mode first.
+next test, receipts, generated date, and schema version. The
+`first-diagram-is-a-liar-handoff-redacted.md` sharing packet keeps the structural
+receipts and privacy boundary while omitting the learner-entered bounded claim,
+synthesis sentence, and next test. Both are assembled in the browser only:
+neither is cloud backup, durable server storage, or a verdict. Full is the
+default; redacted mode must be selected explicitly for each copy or download.
 
 ## The article and application
 
@@ -94,10 +94,10 @@ actual tutorial in headless Chromium. It covers the five-step journey, bounded
 premise capture, ROY recalculation, revision-loop visibility, source-first V1/V2
 comparison, Council condition labels and synthesis, checklist completion and
 reload persistence, malformed-state recovery, hash/history navigation,
-clipboard failure feedback, local Markdown handoff content and deterministic
-naming, keyboard-facing semantics, and the 390px narrow viewport. The handoff
-assertions capture the browser-generated Blob locally; they do not upload
-handoff text or diagram state.
+clipboard failure feedback, full and redacted local Markdown handoff content
+and deterministic naming, keyboard-facing semantics, and the 390px narrow
+viewport. The handoff assertions capture the browser-generated Blob locally;
+they do not upload handoff text or diagram state.
 
 The command needs a locally installed Chromium or Chrome executable. Chromium
 is available in the Replit development environment; on another machine, set

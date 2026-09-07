@@ -4,8 +4,16 @@ import { calculateRoy, getRoyInterpretation } from "./roy";
 import { workbenchStates } from "./workbench";
 
 export const HANDOFF_FILENAME = "first-diagram-is-a-liar-handoff.md";
+export const REDACTED_HANDOFF_FILENAME = "first-diagram-is-a-liar-handoff-redacted.md";
 export const LEARNER_TEXT_EXPORT_POLICY =
   "Included by default for an explicit local export; any future shared or externally distributed export must offer an explicit redacted mode.";
+export const REDACTED_LEARNER_TEXT_EXPORT_POLICY =
+  "Learner-entered claim, synthesis sentence, and next test are omitted; structural receipts remain available for sharing.";
+export type HandoffMode = "full" | "redacted";
+
+export function getHandoffFilename(mode: HandoffMode): string {
+  return mode === "redacted" ? REDACTED_HANDOFF_FILENAME : HANDOFF_FILENAME;
+}
 export const publicSourceLinks = [
   { label: "GitHub repository / receipts", url: "https://github.com/OKHP3/first-diagram-is-a-liar" },
   { label: "Live long-form article", url: "https://overkillhill.com/writings/first-diagram-is-a-liar/" },
@@ -30,9 +38,18 @@ function markdownText(value: string, empty = "Not entered"): string {
   return clean || empty;
 }
 
-export function buildHandoffMarkdown(session: SessionState, generatedDate = session.handoff.generatedDate || "Not generated yet"): string {
+export function buildHandoffMarkdown(
+  session: SessionState,
+  generatedDate = session.handoff.generatedDate || "Not generated yet",
+  mode: HandoffMode = "full",
+): string {
   const workbench = workbenchStates[session.workbench.revision];
   const score = calculateRoy(session.roy.words, session.roy.clarity);
+  const learnerText = (value: string, empty = "Not entered") => mode === "redacted"
+    ? "Redacted for sharing — learner-entered text omitted"
+    : markdownText(value, empty);
+  const exportLabel = mode === "redacted" ? "Redacted sharing packet" : "Full local packet";
+  const exportPolicy = mode === "redacted" ? REDACTED_LEARNER_TEXT_EXPORT_POLICY : LEARNER_TEXT_EXPORT_POLICY;
   const checklistItems = [
     ["claim", "The claim is clear before the diagram appears."],
     ["loops", "The revision path is visible, not politely hidden."],
@@ -53,16 +70,18 @@ export function buildHandoffMarkdown(session: SessionState, generatedDate = sess
 - **Tutorial version:** 1.0
 - **Schema version:** ${session.schemaVersion}
 - **Generated date:** ${generatedDate}
-- **Filename:** \`${HANDOFF_FILENAME}\`
+- **Filename:** \`${getHandoffFilename(mode)}\`
+- **Export mode:** ${exportLabel}
 - **Privacy boundary:** Assembled in the browser. No account, identifier, analytics, or server persistence is involved.
-- **Learner text policy:** ${LEARNER_TEXT_EXPORT_POLICY}
+- **Learner text policy:** ${exportPolicy}
+- **Redaction boundary:** ${mode === "redacted" ? "Personal working text is intentionally omitted from this sharing packet; selected patterns, outcomes, controls, checklist state, and public receipts remain." : "This full local packet keeps the learner-authored working text because the learner explicitly chose a local export."}
 - **Completion status:** ${checkedCount === checklistItems.length ? "Ready for review" : "Incomplete by choice"}
 - **Important boundary:** This records learning activity. It does not claim that the learner produced a validated diagram.
 
 ## Premise
 
 - **Lie pattern:** ${patternLabels[session.premise.pattern] ?? "Not selected"}
-- **Bounded claim:** ${markdownText(session.premise.claim)}
+- **Bounded claim:** ${learnerText(session.premise.claim)}
 
 ## Current tutorial position
 
@@ -97,7 +116,7 @@ ${workbench.source}
 
 - **Selected criterion:** ${criterionLabels[session.council.criterion]}
 - **Synthesis outcome:** ${session.council.outcome || "Not selected"}
-- **Synthesis sentence:** ${markdownText(session.council.note)}
+- **Synthesis sentence:** ${learnerText(session.council.note)}
 - **Comparison boundary:** Core Five entries are directly comparable. Exhibition, Specialty Notion, Specialty Replit, and Attempted entries remain separate conditions. No overall winner is declared.
 
 ## Checklist (${checkedCount}/${checklistItems.length})
@@ -106,7 +125,7 @@ ${checklistItems.map(([id, label]) => `- [${session.checklist[id] ? "x" : " "}] 
 
 ## Next test
 
-${markdownText(session.nextTest, "Write the smallest question that could falsify this diagram.")}
+${learnerText(session.nextTest, "Write the smallest question that could falsify this diagram.")}
 
 ## Public receipts
 

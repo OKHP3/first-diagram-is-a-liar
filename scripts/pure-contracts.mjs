@@ -180,7 +180,7 @@ async function run() {
       activeStep: 4,
       visitedSteps: [0, 1, 2, 3, 4],
       premise: { pattern: "hidden-loop", claim: unsafeText },
-      roy: { words: 50, clarity: 7, preset: unsafeText },
+      roy: { words: 50, clarity: 7, preset: "useful-compression" },
       workbench: { revision: "v2", showLoops: true },
       council: { criterion: "iteration", outcome: "combine", note: unsafeText },
       checklist: { claim: true, loops: true, signal: true, conditions: true, handoff: true },
@@ -189,9 +189,14 @@ async function run() {
     };
     const firstMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03");
     const secondMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03");
+    const explicitFullMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03", "full");
+    const redactedMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03", "redacted");
     assertEqual(firstMarkdown, secondMarkdown, "handoff Markdown should be deterministic for the same session and date");
+    assertEqual(firstMarkdown, explicitFullMarkdown, "full handoff Markdown should remain the default export mode");
     assert(firstMarkdown.includes("# Local Working Handoff") && firstMarkdown.includes("- **Step:** 05 / The handoff"),
       "handoff should include export identity and current position");
+    assert(firstMarkdown.includes("Export mode:** Full local packet") && firstMarkdown.includes(`Filename:** \`${handoff.HANDOFF_FILENAME}\``),
+      "full handoff should identify its local export mode and filename");
     assert(firstMarkdown.includes("Learner text policy:** Included by default for an explicit local export"),
       "handoff should state the learner text export policy");
     assert(firstMarkdown.includes("\\*bold\\* \\_under\\_ \\[link\\] \\#tag \\| pipe \\\\tick\\`"),
@@ -202,7 +207,20 @@ async function run() {
       "handoff should preserve checklist and ROY values");
     assert(firstMarkdown.includes("Selected revision:** V2 / honest revision") && firstMarkdown.includes("Synthesis outcome:** combine"),
       "handoff should preserve workbench and council selections");
-    passed.push("handoff escaping and deterministic output");
+    assert(redactedMarkdown.includes("Export mode:** Redacted sharing packet") && redactedMarkdown.includes(`Filename:** \`${handoff.REDACTED_HANDOFF_FILENAME}\``),
+      "redacted handoff should identify its sharing mode and filename");
+    assert(redactedMarkdown.includes("Privacy boundary:** Assembled in the browser") &&
+      redactedMarkdown.includes("Lie pattern:** Hidden loop") &&
+      redactedMarkdown.includes("Synthesis outcome:** combine") &&
+      redactedMarkdown.includes("- [x] The claim is clear before the diagram appears."),
+    "redacted handoff should retain privacy boundary and structural receipts");
+    assert(!redactedMarkdown.includes(unsafeText) &&
+      redactedMarkdown.includes("Redacted for sharing — learner-entered text omitted"),
+    "redacted handoff should omit learner-authored text while marking the omission");
+    assert(handoff.getHandoffFilename("full") === handoff.HANDOFF_FILENAME &&
+      handoff.getHandoffFilename("redacted") === handoff.REDACTED_HANDOFF_FILENAME,
+    "handoff mode should select distinct deterministic filenames");
+    passed.push("handoff full and redacted deterministic output");
   } finally {
     await rm(modules.temporaryRoot, { recursive: true, force: true });
   }

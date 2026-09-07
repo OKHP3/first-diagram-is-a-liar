@@ -484,7 +484,32 @@ async function runAcceptance() {
       content: await window.__handoffCapture.textPromise,
     }))()`, "step 5 deterministic Markdown handoff content");
     assert(secondHandoff.filename === firstHandoff.filename && secondHandoff.content === firstHandoff.content, "step 5 deterministic Markdown handoff", "repeated exports did not produce the same filename and content");
-    passed.push("local Markdown handoff download and deterministic content");
+    await click(client, 'input[name="handoff-mode"][value="redacted"]', "step 5 redacted handoff mode");
+    await waitFor(client, 'document.querySelector(".handoff-mode-option.is-selected strong")?.textContent.includes("Redacted sharing packet")', "step 5 redacted handoff mode selected");
+    await click(client, ".download-handoff-button", "step 5 redacted Markdown handoff download");
+    const redactedHandoff = await client.evaluate(`(async () => ({
+      filename: window.__handoffCapture.download,
+      content: await window.__handoffCapture.textPromise,
+    }))()`, "step 5 redacted Markdown handoff content");
+    assert(redactedHandoff.filename === "first-diagram-is-a-liar-handoff-redacted.md", "step 5 redacted Markdown handoff filename", `unexpected redacted filename: ${redactedHandoff.filename}`);
+    for (const expected of [
+      "Export mode:** Redacted sharing packet",
+      "Privacy boundary:** Assembled in the browser",
+      "Lie pattern:** Hidden loop",
+      "Synthesis outcome:** combine",
+      "Redacted for sharing — learner-entered text omitted",
+      "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut",
+    ]) {
+      assert(redactedHandoff.content.includes(expected), "step 5 redacted Markdown handoff content", `redacted export is missing ${expected}`);
+    }
+    for (const omitted of [
+      "The tidy line hides a retry.",
+      "A synthesis that survives comparison.",
+      "Test whether the loop is visible to a new reader.",
+    ]) {
+      assert(!redactedHandoff.content.includes(omitted), "step 5 redacted Markdown handoff content", `redacted export leaked learner text: ${omitted}`);
+    }
+    passed.push("local Markdown handoff full and redacted modes");
 
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 100));
     await client.send("Page.reload", { ignoreCache: true });
@@ -494,9 +519,11 @@ async function runAcceptance() {
     const persisted = await client.evaluate(`(() => ({
       checked: document.querySelectorAll(".check-row input:checked").length,
       status: document.querySelector(".checklist-panel .panel-kicker")?.textContent.trim(),
+      defaultHandoffMode: document.querySelector('input[name="handoff-mode"][value="full"]')?.checked,
     }))()`, "step 5 checklist reload persistence");
     assert(persisted.checked === 5, "step 5 checklist reload persistence", `expected five checked items after reload, found ${persisted.checked}`);
     assert(persisted.status === "SHIP CHECK / 5 OF 5", "step 5 checklist reload persistence", `unexpected checklist status after reload: ${persisted.status}`);
+    assert(persisted.defaultHandoffMode === true, "step 5 handoff mode default after reload", "redacted mode must remain an explicit opt-in after reload");
     passed.push("checklist reload persistence");
 
     await client.evaluate('location.hash = "#step-3"', "deep-link setup");
