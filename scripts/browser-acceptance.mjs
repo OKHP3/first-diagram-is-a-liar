@@ -608,6 +608,37 @@ async function runAcceptance() {
     }
     passed.push("archive static fallbacks under blocked Mermaid import");
 
+    const archiveCopyFallback = await client.evaluate(`(async () => {
+      const cards = [...document.querySelectorAll("[data-diagram-id]")];
+      const before = cards.map((card) => ({
+        id: card.dataset.diagramId,
+        source: card.querySelector("[data-source]")?.textContent ?? "",
+      }));
+      Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined });
+      for (const card of cards) {
+        card.querySelector("[data-copy-diagram]")?.click();
+        await new Promise((resolveDelay) => setTimeout(resolveDelay, 0));
+      }
+      return cards.map((card, index) => ({
+        id: card.dataset.diagramId,
+        copyLabel: card.querySelector("[data-copy-diagram]")?.textContent.trim() ?? "",
+        source: card.querySelector("[data-source]")?.textContent ?? "",
+        sourceDisclosure: Boolean(card.querySelector("details.diagram-source [data-source]")),
+        fallbackVisible: card.querySelector(".diagram-fallback") instanceof HTMLImageElement && !card.querySelector(".diagram-fallback").hidden,
+        liveBlockHidden: card.querySelector(".mermaid")?.getAttribute("aria-hidden") === "true",
+        sourceBefore: before[index]?.source ?? "",
+      }));
+    })()`, "archive clipboard-unavailable copy fallback");
+    assert(archiveCopyFallback.length === 3, "archive clipboard-unavailable copy fallback", `expected three featured diagrams, found ${archiveCopyFallback.length}`);
+    for (const diagram of archiveCopyFallback) {
+      assert(diagram.copyLabel === "Copy unavailable", `archive ${diagram.id} clipboard-unavailable copy fallback`, `expected Copy unavailable, got ${diagram.copyLabel}`);
+      assert(diagram.source.length > 0 && diagram.source === diagram.sourceBefore && diagram.sourceDisclosure,
+        `archive ${diagram.id} readable source after copy failure`, "readable source was hidden or changed after clipboard access failed");
+      assert(diagram.fallbackVisible && diagram.liveBlockHidden,
+        `archive ${diagram.id} fallback after copy failure`, "static fallback was hidden or changed after clipboard access failed");
+    }
+    passed.push("archive copy fallback without clipboard access");
+
     console.log(`Browser acceptance: PASS (${passed.length} checks)`);
     passed.forEach((check) => console.log(`- ${check}`));
   } catch (error) {
