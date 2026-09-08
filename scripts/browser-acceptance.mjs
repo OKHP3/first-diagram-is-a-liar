@@ -172,6 +172,23 @@ async function click(client, selector, scope) {
   })()`, scope);
 }
 
+async function pressKey(client, key, code, keyCode, scope) {
+  await client.send("Input.dispatchKeyEvent", {
+    type: "rawKeyDown",
+    key,
+    code,
+    windowsVirtualKeyCode: keyCode,
+    nativeVirtualKeyCode: keyCode,
+  });
+  await client.send("Input.dispatchKeyEvent", {
+    type: "keyUp",
+    key,
+    code,
+    windowsVirtualKeyCode: keyCode,
+    nativeVirtualKeyCode: keyCode,
+  });
+}
+
 async function setRange(client, selector, value, scope) {
   await client.evaluate(`(() => {
     const control = document.querySelector(${JSON.stringify(selector)});
@@ -637,6 +654,66 @@ async function runAcceptance() {
         `archive ${diagram.id} source controls`, "one or more fallback, source, copy, SVG, or source-disclosure controls are missing");
     }
     passed.push("archive static fallbacks under blocked Mermaid import");
+
+    await client.evaluate(`Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined })`, "archive keyboard clipboard fallback setup");
+    const archiveKeyboardFocusOrder = [];
+    for (const [index, expected] of archiveFallback.entries()) {
+      const focused = await client.evaluate(`(() => {
+        const card = [...document.querySelectorAll("[data-diagram-id]")][${index}];
+        const source = card?.querySelector("details.diagram-source summary");
+        const copy = card?.querySelector("[data-copy-diagram]");
+        if (!card || !source || !copy) throw new Error("archive source or copy control missing");
+        source.focus();
+        const sourceFocused = document.activeElement === source;
+        return {
+          id: card.dataset.diagramId,
+          sourceFocused,
+          sourceText: card.querySelector("[data-source]")?.textContent.trim() ?? "",
+          copyLabelBefore: copy.textContent.trim(),
+        };
+      })()`, `archive ${expected.id} source control focus`);
+      assert(focused.id === expected.id, `archive ${expected.id} keyboard order`, `expected diagram ${expected.id}, got ${focused.id}`);
+      assert(focused.sourceFocused, `archive ${expected.id} source control focus`, "readable source control could not receive focus");
+      archiveKeyboardFocusOrder.push(`${focused.id}:source`);
+
+      await pressKey(client, " ", "Space", 32, `archive ${expected.id} source control keyboard activation`);
+      await waitFor(client, `document.querySelectorAll("[data-diagram-id]")[${index}]?.querySelector("details.diagram-source")?.open === true`, `archive ${expected.id} source disclosure keyboard activation`);
+
+      const copyFocused = await client.evaluate(`(() => {
+        const card = [...document.querySelectorAll("[data-diagram-id]")][${index}];
+        const copy = card?.querySelector("[data-copy-diagram]");
+        if (!copy) throw new Error("archive copy control missing");
+        copy.focus();
+        return {
+          id: card.dataset.diagramId,
+          copyFocused: document.activeElement === copy,
+        };
+      })()`, `archive ${expected.id} copy control focus`);
+      assert(copyFocused.id === expected.id, `archive ${expected.id} keyboard order`, `expected diagram ${expected.id}, got ${copyFocused.id}`);
+      assert(copyFocused.copyFocused, `archive ${expected.id} copy control focus`, "copy control could not receive focus");
+      archiveKeyboardFocusOrder.push(`${copyFocused.id}:copy`);
+
+      await pressKey(client, " ", "Space", 32, `archive ${expected.id} copy control keyboard activation`);
+      await waitFor(client, `document.querySelectorAll("[data-diagram-id]")[${index}]?.querySelector("[data-copy-diagram]")?.textContent.trim() === "Copy unavailable"`, `archive ${expected.id} keyboard clipboard fallback`);
+      const afterKeyboard = await client.evaluate(`(() => {
+        const card = [...document.querySelectorAll("[data-diagram-id]")][${index}];
+        const fallback = card?.querySelector(".diagram-fallback");
+        return {
+          source: card?.querySelector("[data-source]")?.textContent.trim() ?? "",
+          sourceDisclosure: Boolean(card?.querySelector("details.diagram-source[open] [data-source]")),
+          fallbackVisible: fallback instanceof HTMLImageElement && !fallback.hidden,
+          liveBlockHidden: card?.querySelector(".mermaid")?.getAttribute("aria-hidden") === "true",
+        };
+      })()`, `archive ${expected.id} keyboard fallback state`);
+      assert(afterKeyboard.source.length > 0 && afterKeyboard.source === focused.sourceText && afterKeyboard.sourceDisclosure,
+        `archive ${expected.id} readable source after keyboard interaction`, "readable source was hidden or changed after keyboard interaction");
+      assert(afterKeyboard.fallbackVisible && afterKeyboard.liveBlockHidden,
+        `archive ${expected.id} fallback after keyboard interaction`, "static fallback was hidden or changed after keyboard interaction");
+    }
+    const expectedKeyboardFocusOrder = archiveFallback.flatMap(({ id }) => [`${id}:source`, `${id}:copy`]);
+    assert(JSON.stringify(archiveKeyboardFocusOrder) === JSON.stringify(expectedKeyboardFocusOrder),
+      "archive keyboard focus order", `expected ${expectedKeyboardFocusOrder.join(", ")}, got ${archiveKeyboardFocusOrder.join(", ")}`);
+    passed.push("archive source and copy keyboard recovery under blocked Mermaid import");
 
     const archiveCopyFallback = await client.evaluate(`(async () => {
       const cards = [...document.querySelectorAll("[data-diagram-id]")];
