@@ -513,18 +513,21 @@ async function runAcceptance() {
 
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 100));
     await client.send("Page.reload", { ignoreCache: true });
-    await waitFor(client, 'document.readyState === "complete" && document.querySelectorAll(".rail-step").length === 5', "step 5 persistence reload");
+    await waitFor(client, 'document.readyState === "complete" && Boolean(document.querySelector(\'.step-rail nav .rail-step[data-step="5"]\'))', "step 5 persistence reload");
     await click(client, '.step-rail nav .rail-step[data-step="5"]', "step 5 persistence navigation");
     await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Ship the proof")', "step 5 persistence navigation");
     const persisted = await client.evaluate(`(() => ({
       checked: document.querySelectorAll(".check-row input:checked").length,
       status: document.querySelector(".checklist-panel .panel-kicker")?.textContent.trim(),
       defaultHandoffMode: document.querySelector('input[name="handoff-mode"][value="full"]')?.checked,
+      railComplete: document.querySelector('.rail-step[data-step="5"]')?.classList.contains("is-complete"),
+      railNumber: document.querySelector('.rail-step[data-step="5"] .rail-step-number')?.textContent.trim(),
     }))()`, "step 5 checklist reload persistence");
     assert(persisted.checked === 5, "step 5 checklist reload persistence", `expected five checked items after reload, found ${persisted.checked}`);
     assert(persisted.status === "SHIP CHECK / 5 OF 5", "step 5 checklist reload persistence", `unexpected checklist status after reload: ${persisted.status}`);
     assert(persisted.defaultHandoffMode === true, "step 5 handoff mode default after reload", "redacted mode must remain an explicit opt-in after reload");
-    passed.push("checklist reload persistence");
+    assert(persisted.railComplete && persisted.railNumber === "✓", "step 5 rail completion after reload", "completed step 5 rail control lost its completion state after a full reload");
+    passed.push("checklist and rail reload persistence");
 
     await client.evaluate('location.hash = "#step-3"', "deep-link setup");
     await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent.includes("Draw the truth")', "deep-link navigation");
