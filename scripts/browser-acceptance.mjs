@@ -669,6 +669,52 @@ async function runAcceptance() {
     }
     passed.push("archive copy fallback without clipboard access");
 
+    const archiveCopySuccess = await client.evaluate(`(async () => {
+      const cards = [...document.querySelectorAll("[data-diagram-id]")];
+      const copiedSources = [];
+      Object.defineProperty(navigator, "clipboard", {
+        configurable: true,
+        value: {
+          writeText(value) {
+            copiedSources.push(value);
+            return Promise.resolve();
+          },
+        },
+      });
+      const before = cards.map((card) => ({
+        id: card.dataset.diagramId,
+        source: card.querySelector("[data-source]")?.textContent.trim() ?? "",
+        sourceDisclosure: Boolean(card.querySelector("details.diagram-source [data-source]")),
+        fallbackVisible: card.querySelector(".diagram-fallback") instanceof HTMLImageElement && !card.querySelector(".diagram-fallback").hidden,
+        liveBlockHidden: card.querySelector(".mermaid")?.getAttribute("aria-hidden") === "true",
+      }));
+      for (const card of cards) {
+        card.querySelector("[data-copy-diagram]")?.click();
+        await new Promise((resolveDelay) => setTimeout(resolveDelay, 0));
+      }
+      return cards.map((card, index) => ({
+        id: card.dataset.diagramId,
+        copiedSource: copiedSources[index] ?? "",
+        copyLabel: card.querySelector("[data-copy-diagram]")?.textContent.trim() ?? "",
+        source: card.querySelector("[data-source]")?.textContent.trim() ?? "",
+        sourceDisclosure: Boolean(card.querySelector("details.diagram-source [data-source]")),
+        fallbackVisible: card.querySelector(".diagram-fallback") instanceof HTMLImageElement && !card.querySelector(".diagram-fallback").hidden,
+        liveBlockHidden: card.querySelector(".mermaid")?.getAttribute("aria-hidden") === "true",
+        before: before[index],
+      }));
+    })()`, "archive clipboard copy success");
+    assert(archiveCopySuccess.length === 3, "archive clipboard copy success", `expected three featured diagrams, found ${archiveCopySuccess.length}`);
+    for (const diagram of archiveCopySuccess) {
+      assert(diagram.copyLabel === "Copied", `archive ${diagram.id} clipboard copy success`, `expected Copied, got ${diagram.copyLabel}`);
+      assert(diagram.source.length > 0 && diagram.copiedSource === diagram.source && diagram.source === diagram.before.source,
+        `archive ${diagram.id} copied readable source`, "clipboard received source that did not match the disclosed Mermaid source");
+      assert(diagram.sourceDisclosure === diagram.before.sourceDisclosure && diagram.sourceDisclosure,
+        `archive ${diagram.id} source disclosure after copy success`, "readable source disclosure was hidden or changed after copying");
+      assert(diagram.fallbackVisible === diagram.before.fallbackVisible && diagram.liveBlockHidden === diagram.before.liveBlockHidden,
+        `archive ${diagram.id} fallback after copy success`, "static fallback was hidden or changed after copying");
+    }
+    passed.push("archive copy source with clipboard access");
+
     console.log(`Browser acceptance: PASS (${passed.length} checks)`);
     passed.forEach((check) => console.log(`- ${check}`));
   } catch (error) {
