@@ -29,6 +29,22 @@
     {
       "path": "blocked/evidence/meeting-capture.pdf",
       "label": "generic evidence-folder attachment"
+    },
+    {
+      "path": "blocked/email-address.txt",
+      "label": "email address"
+    },
+    {
+      "path": "blocked/phone-number.txt",
+      "label": "phone number"
+    },
+    {
+      "path": "blocked/ipv4-address.txt",
+      "label": "IPv4 address"
+    },
+    {
+      "path": "blocked/exact-location.txt",
+      "label": "exact location"
     }
   ]
 }
