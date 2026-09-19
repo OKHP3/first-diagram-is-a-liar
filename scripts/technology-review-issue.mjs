@@ -20,18 +20,20 @@ export function issueChange(issues, report, repository) {
   return existing ? { action: "update", number: existing.number, body } : { action: "create", body };
 }
 
-async function main() {
-  const repository = process.env.GITHUB_REPOSITORY;
-  if (!/^[\w.-]+\/[\w.-]+$/.test(repository ?? "") || !process.env.GH_TOKEN) throw new Error("GitHub repository and token are required");
-  const report = JSON.parse(await readFile(process.argv[2], "utf8"));
-  const endpoint = `https://api.github.com/repos/${repository}/issues`;
+export async function syncReviewIssue({ repository, token, report, fetcher = fetch }) {
+  if (!/^[\w.-]+\/[\w.-]+$/.test(repository ?? "") || !token) throw new Error("GitHub repository and token are required");
+  const repositoryEndpoint = `https://api.github.com/repos/${repository}`;
+  const endpoint = `${repositoryEndpoint}/issues`;
   async function request(url, method = "GET", data) {
-    const response = await fetch(url, { method,
-      headers: { Authorization: `Bearer ${process.env.GH_TOKEN}`, Accept: "application/vnd.github+json", "Content-Type": "application/json" },
+    const response = await fetcher(url, { method,
+      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json", "Content-Type": "application/json" },
       body: data ? JSON.stringify(data) : undefined, signal: AbortSignal.timeout(20000) });
     if (!response.ok) throw new Error(`GitHub issue request failed: HTTP ${response.status}`);
     return response.json();
   }
+  const metadata = await request(repositoryEndpoint);
+  if (metadata.has_issues === false) return { action: "disabled" };
+  if (metadata.has_issues !== true) throw new Error("Repository issue availability is unknown");
   const issues = [];
   for (let page = 1; ; page++) {
     const batch = await request(`${endpoint}?state=open&per_page=100&page=${page}`);
@@ -43,6 +45,13 @@ async function main() {
   if (change.action === "create") await request(endpoint, "POST", { title, body: change.body });
   if (change.action === "update") await request(`${endpoint}/${change.number}`, "PATCH", { body: change.body });
   if (change.action === "close") await request(`${endpoint}/${change.number}`, "PATCH", { state: "closed" });
+  return change;
+}
+
+async function main() {
+  const report = JSON.parse(await readFile(process.argv[2], "utf8"));
+  const change = await syncReviewIssue({ repository: process.env.GITHUB_REPOSITORY, token: process.env.GH_TOKEN, report });
+  if (change.action === "disabled") console.log("::notice::Repository Issues are disabled. Review the Actions summary and technology-versions artifact; Dependabot pull requests remain active.");
   console.log(`Technology review issue: ${change.action}`);
 }
 
