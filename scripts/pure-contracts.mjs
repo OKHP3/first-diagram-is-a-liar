@@ -174,17 +174,23 @@ async function run() {
       "featured archive diagrams should retain static fallback, source, and copy affordances");
     passed.push("diagram renderer boundary, security, fallback, and accessibility contracts");
 
-    const unsafeText = "<script>\n*bold* _under_ [link] #tag | pipe \\tick`";
+    const learnerTextFixture = {
+      premiseClaim: "<script>\n*claim* _alpha_ [link] #tag | pipe \\tick`",
+      councilNote: "<script>\n*note* _bravo_ [link] #tag | pipe \\tick`",
+      nextTest: "<script>\n*test* _charlie_ [link] #tag | pipe \\tick`",
+    };
+    assertDeepEqual(Object.keys(learnerTextFixture), handoff.LEARNER_TEXT_FIELD_NAMES,
+      "learner text fixture should inventory every learner-editable field included in the handoff");
     const handoffSession = {
       ...defaultSession,
       activeStep: 4,
       visitedSteps: [0, 1, 2, 3, 4],
-      premise: { pattern: "hidden-loop", claim: unsafeText },
+      premise: { pattern: "hidden-loop", claim: learnerTextFixture.premiseClaim },
       roy: { words: 50, clarity: 7, preset: "useful-compression" },
       workbench: { revision: "v2", showLoops: true },
-      council: { criterion: "iteration", outcome: "combine", note: unsafeText },
+      council: { criterion: "iteration", outcome: "combine", note: learnerTextFixture.councilNote },
       checklist: { claim: true, loops: true, signal: true, conditions: true, handoff: true },
-      nextTest: unsafeText,
+      nextTest: learnerTextFixture.nextTest,
       handoff: { copied: false, downloaded: false, generatedDate: "2026-09-03" },
     };
     const firstMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03");
@@ -201,10 +207,15 @@ async function run() {
       "full handoff should identify its local export mode and filename");
     assert(firstMarkdown.includes("Learner text policy:** Included only after deliberate confirmation for an explicit local export"),
       "handoff should state the learner text export policy");
-    assert(firstMarkdown.includes("\\*bold\\* \\_under\\_ \\[link\\] \\#tag \\| pipe \\\\tick\\`"),
+    assert(firstMarkdown.includes("\\*claim\\* \\_alpha\\_ \\[link\\] \\#tag \\| pipe \\\\tick\\`"),
       "handoff should escape Markdown punctuation in learner text");
-    assert(!firstMarkdown.includes("<script>") && !firstMarkdown.includes("\n*bold*"),
+    assert(!firstMarkdown.includes("<script>") && !firstMarkdown.includes("\n*claim*"),
       "handoff should remove angle brackets and flatten learner line breaks");
+    for (const [field, value] of Object.entries(learnerTextFixture)) {
+      const escapedMarker = value.match(/\*(\w+)\*/)?.[1];
+      assert(escapedMarker && firstMarkdown.includes(`\\*${escapedMarker}\\*`),
+        `full handoff should include the learner-editable ${field} fixture`);
+    }
     assert(firstMarkdown.includes("- [x] The claim is clear before the diagram appears.") && firstMarkdown.includes("Current ROY readout:** 7x"),
       "handoff should preserve checklist and ROY values");
     assert(firstMarkdown.includes("Selected revision:** V2 / honest revision") && firstMarkdown.includes("Synthesis outcome:** combine"),
@@ -216,9 +227,13 @@ async function run() {
       redactedMarkdown.includes("Synthesis outcome:** combine") &&
       redactedMarkdown.includes("- [x] The claim is clear before the diagram appears."),
     "redacted handoff should retain privacy boundary and structural receipts");
-    assert(!redactedMarkdown.includes(unsafeText) &&
-      redactedMarkdown.includes("Redacted for sharing — learner-entered text omitted"),
-    "redacted handoff should omit learner-authored text while marking the omission");
+    for (const [field, value] of Object.entries(learnerTextFixture)) {
+      const uniqueMarker = value.match(/_(\w+)_/)?.[1];
+      assert(uniqueMarker && !redactedMarkdown.includes(uniqueMarker),
+        `redacted handoff should omit the learner-editable ${field} fixture`);
+    }
+    assert(redactedMarkdown.includes("Redacted for sharing — learner-entered text omitted"),
+      "redacted handoff should mark omitted learner-authored text");
     assertEqual(sharedMarkdown, redactedMarkdown, "shared delivery should default to the redacted handoff");
     assertEqual(confirmedSharedMarkdown, explicitFullMarkdown, "shared delivery should include learner text only after explicit confirmation");
     assert(handoff.getHandoffFilename("full") === handoff.HANDOFF_FILENAME &&

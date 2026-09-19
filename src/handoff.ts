@@ -13,6 +13,16 @@ export type HandoffMode = "full" | "redacted";
 export type SharedHandoffOptions = {
   includeLearnerTextConfirmed?: boolean;
 };
+export const LEARNER_TEXT_FIELD_NAMES = ["premiseClaim", "councilNote", "nextTest"] as const;
+export type LearnerTextFieldName = typeof LEARNER_TEXT_FIELD_NAMES[number];
+
+export function getLearnerTextFields(session: SessionState): Record<LearnerTextFieldName, string> {
+  return {
+    premiseClaim: session.premise.claim,
+    councilNote: session.council.note,
+    nextTest: session.nextTest,
+  };
+}
 
 export function getHandoffFilename(mode: HandoffMode): string {
   return mode === "redacted" ? REDACTED_HANDOFF_FILENAME : HANDOFF_FILENAME;
@@ -48,6 +58,7 @@ export function buildHandoffMarkdown(
 ): string {
   const workbench = workbenchStates[session.workbench.revision];
   const score = calculateRoy(session.roy.words, session.roy.clarity);
+  const learnerTextFields = getLearnerTextFields(session);
   const learnerText = (value: string, empty = "Not entered") => mode === "redacted"
     ? "Redacted for sharing — learner-entered text omitted"
     : markdownText(value, empty);
@@ -84,7 +95,7 @@ export function buildHandoffMarkdown(
 ## Premise
 
 - **Lie pattern:** ${patternLabels[session.premise.pattern] ?? "Not selected"}
-- **Bounded claim:** ${learnerText(session.premise.claim)}
+- **Bounded claim:** ${learnerText(learnerTextFields.premiseClaim)}
 
 ## Current tutorial position
 
@@ -119,7 +130,7 @@ ${workbench.source}
 
 - **Selected criterion:** ${criterionLabels[session.council.criterion]}
 - **Synthesis outcome:** ${session.council.outcome || "Not selected"}
-- **Synthesis sentence:** ${learnerText(session.council.note)}
+- **Synthesis sentence:** ${learnerText(learnerTextFields.councilNote)}
 - **Comparison boundary:** Core Five entries are directly comparable. Exhibition, Specialty Notion, Specialty Replit, and Attempted entries remain separate conditions. No overall winner is declared.
 
 ## Checklist (${checkedCount}/${checklistItems.length})
@@ -128,7 +139,7 @@ ${checklistItems.map(([id, label]) => `- [${session.checklist[id] ? "x" : " "}] 
 
 ## Next test
 
-${learnerText(session.nextTest, "Write the smallest question that could falsify this diagram.")}
+${learnerText(learnerTextFields.nextTest, "Write the smallest question that could falsify this diagram.")}
 
 ## Public receipts
 

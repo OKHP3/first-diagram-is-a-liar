@@ -14,6 +14,11 @@ const handoffFilename = "first-diagram-is-a-liar-handoff.md";
 const redactedHandoffFilename = "first-diagram-is-a-liar-handoff-redacted.md";
 const archivePath = "/archive/editorial-cut/index.html";
 const mermaidModulePattern = "*cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs*";
+const learnerTextFixture = {
+  premiseClaim: "The tidy line hides a retry.",
+  councilNote: "Borrow the loop and reject the decoration.",
+  nextTest: "Test whether the loop is visible to a new reader.",
+};
 
 async function hasExecutable(command) {
   if (isAbsolute(command) || command.includes("/")) {
@@ -357,9 +362,9 @@ async function runAcceptance() {
     passed.push("keyboard-relevant labels and active-step semantics");
 
     await click(client, '.pattern-choice input[value="hidden-loop"]', "step 1 premise pattern");
-    await client.evaluate(`(() => { const field = document.querySelector("#claim"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("claim field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, "The tidy line hides a retry."); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 1 bounded claim");
+    await client.evaluate(`(() => { const field = document.querySelector("#claim"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("claim field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, ${JSON.stringify(learnerTextFixture.premiseClaim)}); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 1 bounded claim");
     const premise = await client.evaluate('({ pattern: document.querySelector(\'.pattern-choice input:checked\')?.value, claim: document.querySelector("#claim")?.value })', "step 1 premise capture");
-    assert(premise.pattern === "hidden-loop" && premise.claim === "The tidy line hides a retry.", "step 1 premise capture", "pattern or bounded claim did not persist in the UI");
+    assert(premise.pattern === "hidden-loop" && premise.claim === learnerTextFixture.premiseClaim, "step 1 premise capture", "pattern or bounded claim did not persist in the UI");
     passed.push("bounded premise capture");
 
     await click(client, ".hero-actions .button-primary", "step 1 start control");
@@ -438,7 +443,7 @@ async function runAcceptance() {
     passed.push("Council taxonomy labels");
     await click(client, 'input[name="criterion"][value="iteration"]', "step 4 criterion");
     await click(client, 'input[name="outcome"][value="combine"]', "step 4 synthesis outcome");
-    await client.evaluate(`(() => { const field = document.querySelector("#synthesis-note"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("synthesis field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, "Borrow the loop and reject the decoration."); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 4 synthesis note");
+    await client.evaluate(`(() => { const field = document.querySelector("#synthesis-note"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("synthesis field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, ${JSON.stringify(learnerTextFixture.councilNote)}); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 4 synthesis note");
     const synthesis = await client.evaluate('({ criterion: document.querySelector(\'input[name="criterion"]:checked\')?.value, outcome: document.querySelector(\'input[name="outcome"]:checked\')?.value, note: document.querySelector("#synthesis-note")?.value })', "step 4 synthesis state");
     assert(synthesis.criterion === "iteration" && synthesis.outcome === "combine" && synthesis.note?.includes("Borrow the loop"), "step 4 synthesis state", "criterion or synthesis did not persist");
     passed.push("criterion and synthesis capture");
@@ -459,6 +464,8 @@ async function runAcceptance() {
     assert(completion.checked === 5, "step 5 checklist completion", `expected five checked items, found ${completion.checked}`);
     assert(completion.completedRail === 5, "step 5 checklist completion", "completed checklist did not mark the tutorial rail complete");
     passed.push("checklist completion");
+
+    await client.evaluate(`(() => { const field = document.querySelector("#next-test"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("next test field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, ${JSON.stringify(learnerTextFixture.nextTest)}); field.dispatchEvent(new Event("input", { bubbles: true })); return field.value; })()`, "step 5 next test");
 
     await client.evaluate(`(() => {
       Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined });
@@ -497,11 +504,7 @@ async function runAcceptance() {
     ]) {
       assert(redactedHandoff.content.includes(expected), "step 5 default redacted Markdown handoff content", `redacted export is missing ${expected}`);
     }
-    for (const omitted of [
-      "The tidy line hides a retry.",
-      "A synthesis that survives comparison.",
-      "Test whether the loop is visible to a new reader.",
-    ]) {
+    for (const omitted of Object.values(learnerTextFixture)) {
       assert(!redactedHandoff.content.includes(omitted), "step 5 redacted Markdown handoff content", `redacted export leaked learner text: ${omitted}`);
     }
     await client.evaluate(`window.confirm = () => false`, "step 5 full packet declined confirmation setup");
@@ -520,15 +523,17 @@ async function runAcceptance() {
     for (const expected of [
       "# Local Working Handoff",
       "- **Step:** 05 / The handoff",
-      "Bounded claim:** The tidy line hides a retry.",
+      `Bounded claim:** ${learnerTextFixture.premiseClaim}`,
       "Selected revision:** V2 / honest revision",
       "Selected criterion:",
       "Synthesis outcome:** combine",
+      `Synthesis sentence:** ${learnerTextFixture.councilNote}`,
       "Schema version:** 2",
       "Current ROY readout:** 5x",
       "- [x] The claim is clear before the diagram appears.",
       "Revision loopbacks:** Visible",
       "## Next test",
+      learnerTextFixture.nextTest,
       "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut",
     ]) {
       assert(firstHandoff.content.includes(expected), "step 5 full Markdown handoff content", `export is missing ${expected}`);
