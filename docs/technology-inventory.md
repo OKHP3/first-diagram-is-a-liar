@@ -39,12 +39,15 @@ remains preserved rather than being rewritten as post-upgrade evidence.
   version alone does not establish compatibility.
 - **Proposed:** adopt updates through tested pull requests, use the current Node
   LTS line, and review archive rendering separately.
-- **Unknown:** exact live Replit versions, hosted Mermaid renderer version,
-  and historical PptxGenJS version. Check the current hosted workflow run for
+- **Unknown:** hosted Mermaid renderer version and historical PptxGenJS
+  version. Check the current hosted workflow run for
   its execution and artifact status.
 
 The Replit connector returned `UNAUTHORIZED` with reauthentication required.
-The `.replit` file is evidence of configuration, not of the remote process.
+The browser Shell was verified separately on 2026-09-19 UTC: Node `24.13.0`,
+npm `11.6.2`, and Python `3.13.11`. The `chromium` command was unavailable on
+that Shell's PATH despite the configured package. The `.replit` file alone is
+evidence of configuration, not of a running process or installed executable.
 
 ## Application and build packages
 

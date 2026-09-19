@@ -321,7 +321,10 @@ async function runAcceptance() {
     await client.connect();
     await client.send("Page.enable");
     await client.send("Network.enable");
-    await client.send("Network.setBlockedURLs", { urls: [mermaidModulePattern] });
+    // Exercise usable fallback fonts without depending on a third-party font
+    // service completing before the document load event.
+    await client.send("Network.setBlockedURLs", { urls: [mermaidModulePattern,
+      "*fonts.googleapis.com/*", "*fonts.gstatic.com/*"] });
     await client.send("Runtime.enable");
     await client.send("Page.navigate", { url: appUrl });
     await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "application startup");
