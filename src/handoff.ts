@@ -6,10 +6,13 @@ import { workbenchStates } from "./workbench";
 export const HANDOFF_FILENAME = "first-diagram-is-a-liar-handoff.md";
 export const REDACTED_HANDOFF_FILENAME = "first-diagram-is-a-liar-handoff-redacted.md";
 export const LEARNER_TEXT_EXPORT_POLICY =
-  "Included by default for an explicit local export; any future shared or externally distributed export must offer an explicit redacted mode.";
+  "Included only after deliberate confirmation for an explicit local export; shared or externally distributed delivery is redacted by default.";
 export const REDACTED_LEARNER_TEXT_EXPORT_POLICY =
   "Learner-entered claim, synthesis sentence, and next test are omitted; structural receipts remain available for sharing.";
 export type HandoffMode = "full" | "redacted";
+export type SharedHandoffOptions = {
+  includeLearnerTextConfirmed?: boolean;
+};
 
 export function getHandoffFilename(mode: HandoffMode): string {
   return mode === "redacted" ? REDACTED_HANDOFF_FILENAME : HANDOFF_FILENAME;
@@ -135,4 +138,16 @@ ${sourceList}
 
 This handoff preserves what the learner selected and recorded in this browser session. A reviewer can inspect the premise, heuristic inputs, revision source, comparison condition, checklist, and next test without treating completion as diagram validation.
 `;
+}
+
+export function buildSharedHandoffMarkdown(
+  session: SessionState,
+  generatedDate = session.handoff.generatedDate || "Not generated yet",
+  options: SharedHandoffOptions = {},
+): string {
+  return buildHandoffMarkdown(
+    session,
+    generatedDate,
+    options.includeLearnerTextConfirmed === true ? "full" : "redacted",
+  );
 }

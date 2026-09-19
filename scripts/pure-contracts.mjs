@@ -191,13 +191,15 @@ async function run() {
     const secondMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03");
     const explicitFullMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03", "full");
     const redactedMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03", "redacted");
+    const sharedMarkdown = handoff.buildSharedHandoffMarkdown(handoffSession, "2026-09-03");
+    const confirmedSharedMarkdown = handoff.buildSharedHandoffMarkdown(handoffSession, "2026-09-03", { includeLearnerTextConfirmed: true });
     assertEqual(firstMarkdown, secondMarkdown, "handoff Markdown should be deterministic for the same session and date");
     assertEqual(firstMarkdown, explicitFullMarkdown, "full handoff Markdown should remain the default export mode");
     assert(firstMarkdown.includes("# Local Working Handoff") && firstMarkdown.includes("- **Step:** 05 / The handoff"),
       "handoff should include export identity and current position");
     assert(firstMarkdown.includes("Export mode:** Full local packet") && firstMarkdown.includes(`Filename:** \`${handoff.HANDOFF_FILENAME}\``),
       "full handoff should identify its local export mode and filename");
-    assert(firstMarkdown.includes("Learner text policy:** Included by default for an explicit local export"),
+    assert(firstMarkdown.includes("Learner text policy:** Included only after deliberate confirmation for an explicit local export"),
       "handoff should state the learner text export policy");
     assert(firstMarkdown.includes("\\*bold\\* \\_under\\_ \\[link\\] \\#tag \\| pipe \\\\tick\\`"),
       "handoff should escape Markdown punctuation in learner text");
@@ -217,6 +219,8 @@ async function run() {
     assert(!redactedMarkdown.includes(unsafeText) &&
       redactedMarkdown.includes("Redacted for sharing — learner-entered text omitted"),
     "redacted handoff should omit learner-authored text while marking the omission");
+    assertEqual(sharedMarkdown, redactedMarkdown, "shared delivery should default to the redacted handoff");
+    assertEqual(confirmedSharedMarkdown, explicitFullMarkdown, "shared delivery should include learner text only after explicit confirmation");
     assert(handoff.getHandoffFilename("full") === handoff.HANDOFF_FILENAME &&
       handoff.getHandoffFilename("redacted") === handoff.REDACTED_HANDOFF_FILENAME,
     "handoff mode should select distinct deterministic filenames");
