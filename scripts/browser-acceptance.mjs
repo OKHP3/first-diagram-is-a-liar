@@ -848,10 +848,15 @@ async function runAcceptance() {
         card.querySelector("[data-copy-diagram]")?.click();
         await new Promise((resolveDelay) => setTimeout(resolveDelay, 0));
       }
+      const successLabels = cards.map((card) =>
+        card.querySelector("[data-copy-diagram]")?.textContent.trim() ?? ""
+      );
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, 1700));
       return cards.map((card, index) => ({
         id: card.dataset.diagramId,
         copiedSource: copiedSources[index] ?? "",
-        copyLabel: card.querySelector("[data-copy-diagram]")?.textContent.trim() ?? "",
+        successLabel: successLabels[index] ?? "",
+        resetLabel: card.querySelector("[data-copy-diagram]")?.textContent.trim() ?? "",
         source: card.querySelector("[data-source]")?.textContent.trim() ?? "",
         sourceDisclosure: Boolean(card.querySelector("details.diagram-source [data-source]")),
         fallbackVisible: card.querySelector(".diagram-fallback") instanceof HTMLImageElement && !card.querySelector(".diagram-fallback").hidden,
@@ -861,15 +866,16 @@ async function runAcceptance() {
     })()`, "archive clipboard copy success");
     assert(archiveCopySuccess.length === 3, "archive clipboard copy success", `expected three featured diagrams, found ${archiveCopySuccess.length}`);
     for (const diagram of archiveCopySuccess) {
-      assert(diagram.copyLabel === "Copied", `archive ${diagram.id} clipboard copy success`, `expected Copied, got ${diagram.copyLabel}`);
+      assert(diagram.successLabel === "Copied", `archive ${diagram.id} clipboard copy success`, `expected Copied, got ${diagram.successLabel}`);
+      assert(diagram.resetLabel === "Copy source", `archive ${diagram.id} clipboard copy reset`, `expected Copy source after success timeout, got ${diagram.resetLabel}`);
       assert(diagram.source.length > 0 && diagram.copiedSource === diagram.source && diagram.source === diagram.before.source,
-        `archive ${diagram.id} copied readable source`, "clipboard received source that did not match the disclosed Mermaid source");
+        `archive ${diagram.id} copied readable source after feedback reset`, "clipboard received source that did not match the disclosed Mermaid source");
       assert(diagram.sourceDisclosure === diagram.before.sourceDisclosure && diagram.sourceDisclosure,
-        `archive ${diagram.id} source disclosure after copy success`, "readable source disclosure was hidden or changed after copying");
+        `archive ${diagram.id} source disclosure after feedback reset`, "readable source disclosure was hidden or changed after copying");
       assert(diagram.fallbackVisible === diagram.before.fallbackVisible && diagram.liveBlockHidden === diagram.before.liveBlockHidden,
-        `archive ${diagram.id} fallback after copy success`, "static fallback was hidden or changed after copying");
+        `archive ${diagram.id} fallback after feedback reset`, "static fallback was hidden or changed after copying");
     }
-    passed.push("archive copy source with clipboard access");
+    passed.push("archive copy feedback resets without changing source or fallback");
 
     await client.send("Network.setBlockedURLs", { urls: [] });
     await client.send("Page.navigate", { url: archiveUrl });
