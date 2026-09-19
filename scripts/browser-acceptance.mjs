@@ -800,6 +800,84 @@ async function runAcceptance() {
     }
     passed.push("archive copy source with clipboard access");
 
+    await client.send("Network.setBlockedURLs", { urls: [] });
+    await client.send("Page.navigate", { url: archiveUrl });
+    await waitFor(client, 'document.readyState === "complete" && document.querySelectorAll("[data-diagram-id]").length === 3', "archive live-render startup");
+    await waitFor(client, '[...document.querySelectorAll("[data-diagram-id] [data-diagram-status]")].every((status) => status.textContent.includes("Live Mermaid render")) && [...document.querySelectorAll("[data-diagram-id]")].every((card) => Boolean(card.querySelector(".mermaid svg")))', "archive live-render completion");
+    const archiveLive = await client.evaluate(`(() => [...document.querySelectorAll("[data-diagram-id]")].map((card) => ({
+      id: card.dataset.diagramId,
+      source: card.querySelector("[data-source]")?.textContent.trim() ?? "",
+      status: card.querySelector("[data-diagram-status]")?.textContent.trim() ?? "",
+      renderedSvg: Boolean(card.querySelector(".mermaid svg")),
+      fallbackVisible: card.querySelector(".diagram-fallback") instanceof HTMLImageElement && !card.querySelector(".diagram-fallback").hidden,
+      sourceDisclosure: Boolean(card.querySelector("details.diagram-source [data-source]")),
+    })))()`, "archive live-render state");
+    assert(archiveLive.length === 3, "archive live-render state", `expected three featured diagrams, found ${archiveLive.length}`);
+    for (const diagram of archiveLive) {
+      assert(diagram.status === "Live Mermaid render" && diagram.renderedSvg && !diagram.fallbackVisible,
+        `archive ${diagram.id} live-render state`, "Mermaid output did not replace the fallback image");
+      assert(diagram.source.length > 0 && diagram.sourceDisclosure,
+        `archive ${diagram.id} live-render source`, "readable Mermaid source is missing after live rendering");
+    }
+    passed.push("archive live Mermaid rendering");
+
+    await client.evaluate(`Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined })`, "archive live keyboard clipboard fallback setup");
+    const archiveLiveKeyboardFocusOrder = [];
+    for (const [index, expected] of archiveLive.entries()) {
+      const focused = await client.evaluate(`(() => {
+        const card = [...document.querySelectorAll("[data-diagram-id]")][${index}];
+        const source = card?.querySelector("details.diagram-source summary");
+        const copy = card?.querySelector("[data-copy-diagram]");
+        if (!card || !source || !copy) throw new Error("archive live source or copy control missing");
+        source.focus();
+        return {
+          id: card.dataset.diagramId,
+          sourceFocused: document.activeElement === source,
+          sourceText: card.querySelector("[data-source]")?.textContent.trim() ?? "",
+        };
+      })()`, `archive ${expected.id} live source control focus`);
+      assert(focused.id === expected.id, `archive ${expected.id} live keyboard order`, `expected diagram ${expected.id}, got ${focused.id}`);
+      assert(focused.sourceFocused, `archive ${expected.id} live source control focus`, "readable source control could not receive focus");
+      archiveLiveKeyboardFocusOrder.push(`${focused.id}:source`);
+
+      await pressKey(client, " ", "Space", 32, `archive ${expected.id} live source control keyboard activation`);
+      await waitFor(client, `document.querySelectorAll("[data-diagram-id]")[${index}]?.querySelector("details.diagram-source")?.open === true`, `archive ${expected.id} live source disclosure keyboard activation`);
+
+      const copyFocused = await client.evaluate(`(() => {
+        const card = [...document.querySelectorAll("[data-diagram-id]")][${index}];
+        const copy = card?.querySelector("[data-copy-diagram]");
+        if (!copy) throw new Error("archive live copy control missing");
+        copy.focus();
+        return {
+          id: card.dataset.diagramId,
+          copyFocused: document.activeElement === copy,
+        };
+      })()`, `archive ${expected.id} live copy control focus`);
+      assert(copyFocused.id === expected.id, `archive ${expected.id} live keyboard order`, `expected diagram ${expected.id}, got ${copyFocused.id}`);
+      assert(copyFocused.copyFocused, `archive ${expected.id} live copy control focus`, "copy control could not receive focus");
+      archiveLiveKeyboardFocusOrder.push(`${copyFocused.id}:copy`);
+
+      await pressKey(client, " ", "Space", 32, `archive ${expected.id} live copy control keyboard activation`);
+      await waitFor(client, `document.querySelectorAll("[data-diagram-id]")[${index}]?.querySelector("[data-copy-diagram]")?.textContent.trim() === "Copy unavailable"`, `archive ${expected.id} live keyboard clipboard fallback`);
+      const afterKeyboard = await client.evaluate(`(() => {
+        const card = [...document.querySelectorAll("[data-diagram-id]")][${index}];
+        return {
+          source: card?.querySelector("[data-source]")?.textContent.trim() ?? "",
+          sourceDisclosure: Boolean(card?.querySelector("details.diagram-source[open] [data-source]")),
+          renderedSvg: Boolean(card?.querySelector(".mermaid svg")),
+          fallbackVisible: card?.querySelector(".diagram-fallback") instanceof HTMLImageElement && !card?.querySelector(".diagram-fallback").hidden,
+        };
+      })()`, `archive ${expected.id} live keyboard state`);
+      assert(afterKeyboard.source.length > 0 && afterKeyboard.source === focused.sourceText && afterKeyboard.sourceDisclosure,
+        `archive ${expected.id} readable source after live keyboard interaction`, "readable source was hidden or changed after keyboard interaction");
+      assert(afterKeyboard.renderedSvg && !afterKeyboard.fallbackVisible,
+        `archive ${expected.id} live diagram after keyboard interaction`, "rendered Mermaid output was hidden or changed after keyboard interaction");
+    }
+    const expectedLiveKeyboardFocusOrder = archiveLive.flatMap(({ id }) => [`${id}:source`, `${id}:copy`]);
+    assert(JSON.stringify(archiveLiveKeyboardFocusOrder) === JSON.stringify(expectedLiveKeyboardFocusOrder),
+      "archive live keyboard focus order", `expected ${expectedLiveKeyboardFocusOrder.join(", ")}, got ${archiveLiveKeyboardFocusOrder.join(", ")}`);
+    passed.push("archive live-render source and copy keyboard recovery");
+
     console.log(`Browser acceptance: PASS (${passed.length} checks)`);
     passed.forEach((check) => console.log(`- ${check}`));
   } catch (error) {
