@@ -711,6 +711,29 @@ async function runAcceptance() {
     }
     passed.push("archive static fallbacks under blocked Mermaid import");
 
+    const archiveSourceDownloads = await client.evaluate(`(async () => {
+      const cards = [...document.querySelectorAll("[data-diagram-id]")];
+      return Promise.all(cards.map(async (card) => {
+        const sourceLink = [...card.querySelectorAll(".diagram-actions a")]
+          .find((link) => link.textContent.includes("Download source"));
+        if (!sourceLink) throw new Error("archive source download link missing");
+        const response = await fetch(sourceLink.href);
+        return {
+          id: card.dataset.diagramId,
+          responseOk: response.ok,
+          downloadedSource: (await response.text()).trim(),
+          disclosedSource: card.querySelector("[data-source]")?.textContent.trim() ?? "",
+        };
+      }));
+    })()`, "archive source downloads");
+    assert(archiveSourceDownloads.length === 3, "archive source downloads", `expected three featured diagrams, found ${archiveSourceDownloads.length}`);
+    for (const diagram of archiveSourceDownloads) {
+      assert(diagram.responseOk, `archive ${diagram.id} source download`, "source download request failed");
+      assert(diagram.downloadedSource.length > 0 && diagram.downloadedSource === diagram.disclosedSource,
+        `archive ${diagram.id} source download`, "downloaded Mermaid source did not match the readable source disclosure");
+    }
+    passed.push("archive source downloads match readable Mermaid");
+
     await client.evaluate(`Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined })`, "archive keyboard clipboard fallback setup");
     const archiveKeyboardFocusOrder = [];
     for (const [index, expected] of archiveFallback.entries()) {
