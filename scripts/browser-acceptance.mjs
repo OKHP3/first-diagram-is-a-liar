@@ -547,11 +547,21 @@ async function runAcceptance() {
     assert(secondHandoff.filename === firstHandoff.filename && secondHandoff.content === firstHandoff.content, "step 5 deterministic Markdown handoff", "repeated exports did not produce the same filename and content");
     passed.push("local Markdown handoff full and redacted modes");
 
+    await client.evaluate('history.replaceState({}, "", "#step-3")', "step 5 keyboard reload setup");
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 100));
     await reloadTutorial(client);
     await waitFor(client, 'document.readyState === "complete" && Boolean(document.querySelector(\'.step-rail nav .rail-step[data-step="5"]\'))', "step 5 persistence reload");
-    await click(client, '.step-rail nav .rail-step[data-step="5"]', "step 5 persistence navigation");
-    await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Ship the proof")', "step 5 persistence navigation");
+    await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.dataset.step === "3"', "step 5 keyboard reload starting section");
+    await client.evaluate('document.querySelector(".skip-link")?.focus()', "step 5 keyboard focus starting point");
+    for (let tabIndex = 0; tabIndex < 6; tabIndex += 1) {
+      const stepFiveFocused = await client.evaluate('document.activeElement?.matches(\'.rail-step[data-step="5"]\') === true', "step 5 keyboard focus");
+      if (stepFiveFocused) break;
+      await pressKey(client, "Tab", "Tab", 9, "step 5 keyboard focus");
+    }
+    const completedRailFocused = await client.evaluate('document.activeElement?.matches(\'.rail-step[data-step="5"].is-complete\') === true', "step 5 keyboard focus");
+    assert(completedRailFocused, "step 5 keyboard focus", "Tab navigation did not focus the completed step 5 rail button");
+    await pressKey(client, " ", "Space", 32, "step 5 keyboard activation");
+    await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Ship the proof")', "step 5 keyboard activation");
     const persisted = await client.evaluate(`(() => ({
       checked: document.querySelectorAll(".check-row input:checked").length,
       status: document.querySelector(".checklist-panel .panel-kicker")?.textContent.trim(),
@@ -563,6 +573,7 @@ async function runAcceptance() {
     assert(persisted.status === "SHIP CHECK / 5 OF 5", "step 5 checklist reload persistence", `unexpected checklist status after reload: ${persisted.status}`);
     assert(persisted.defaultHandoffMode === true, "step 5 handoff mode default after reload", "redacted mode must remain the default after reload");
     assert(persisted.railComplete && persisted.railNumber === "✓", "step 5 rail completion after reload", "completed step 5 rail control lost its completion state after a full reload");
+    passed.push("completed rail keyboard activation after reload");
     passed.push("checklist and rail reload persistence");
 
     await client.evaluate('location.hash = "#step-3"', "deep-link setup");
