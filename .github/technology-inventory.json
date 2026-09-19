@@ -1,40 +1,74 @@
 {
-  "reviewedOn": "2026-08-24",
-  "technologies": [
+  "schemaVersion": 2,
+  "reviewedOn": "2026-09-18",
+  "description": "Root npm packages and workflow actions are discovered from source. These entries cover tools outside those manifests. Reviewed baselines do not claim installed versions.",
+  "externalTools": [
     {
-      "name": "Vite",
-      "package": "vite",
-      "ecosystem": "npm",
-      "inPlaceVersion": "8.2.2",
-      "lastReviewedStableVersion": "8.2.2"
+      "name": "Mermaid benchmark",
+      "source": "scripts/benchmark-mermaid.mjs",
+      "pattern": "const MERMAID_VERSION = \"([^\"]+)\"",
+      "release": {
+        "type": "npm",
+        "package": "mermaid"
+      },
+      "policy": "Review benchmark and diagrams before changing the experimental pin."
     },
     {
-      "name": "React",
-      "package": "react",
-      "ecosystem": "npm",
-      "inPlaceVersion": "19.2.8",
-      "lastReviewedStableVersion": "19.2.8"
+      "name": "Vite benchmark",
+      "source": "scripts/benchmark-mermaid.mjs",
+      "pattern": "const VITE_VERSION = \"([^\"]+)\"",
+      "release": {
+        "type": "npm",
+        "package": "vite"
+      },
+      "policy": "Update alongside an accepted root Vite update."
     },
     {
-      "name": "Tailwind CSS",
-      "package": "tailwindcss",
-      "ecosystem": "npm",
-      "inPlaceVersion": "4.3.3",
-      "lastReviewedStableVersion": "4.3.3"
+      "name": "Mermaid editorial CDN",
+      "source": "archive/editorial-cut/mermaid-init.js",
+      "pattern": "mermaid@([^/]+)/",
+      "release": {
+        "type": "npm",
+        "package": "mermaid"
+      },
+      "policy": "Exact loaded patch unknown. Preserve archive; migrate with visual and fallback acceptance."
     },
     {
-      "name": "Mermaid",
-      "package": "mermaid",
-      "ecosystem": "npm",
-      "inPlaceVersion": null,
-      "lastReviewedStableVersion": "11.15.0"
+      "name": "PptxGenJS historical authoring",
+      "source": "archive/diagramming-shootout/slides/README.md",
+      "reviewedBaseline": "4.0.1",
+      "release": {
+        "type": "npm",
+        "package": "pptxgenjs"
+      },
+      "policy": "Generator source and installed version unavailable. Review only, never automatically regenerate evidence."
     },
     {
-      "name": "PptxGenJS",
-      "package": "pptxgenjs",
-      "ecosystem": "npm",
-      "inPlaceVersion": null,
-      "lastReviewedStableVersion": "4.0.1"
+      "name": "Node.js CI selector",
+      "source": ".nvmrc",
+      "pattern": "^(\\d+)\\s*$",
+      "release": {
+        "type": "node"
+      },
+      "policy": "Newest patch in this LTS major. Review a new LTS major and update .nvmrc and Replit together."
+    },
+    {
+      "name": "Node.js Replit selector",
+      "source": ".replit",
+      "pattern": "nodejs-(\\d+)",
+      "release": {
+        "type": "node"
+      },
+      "policy": "Configured major only. Exact remote version and available modules need live verification."
+    },
+    {
+      "name": "Python Replit selector",
+      "source": ".replit",
+      "pattern": "python-base-([\\d.]+)",
+      "release": {
+        "type": "python"
+      },
+      "policy": "Skill tooling only. Verify module availability and skill tests before adopting a new minor."
     }
   ]
 }
