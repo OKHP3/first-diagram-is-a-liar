@@ -45,9 +45,10 @@ remains preserved rather than being rewritten as post-upgrade evidence.
 
 The Replit connector returned `UNAUTHORIZED` with reauthentication required.
 The browser Shell was verified separately on 2026-09-19 UTC: Node `24.13.0`,
-npm `11.6.2`, and Python `3.13.11`. The `chromium` command was unavailable on
-that Shell's PATH despite the configured package. The `.replit` file alone is
-evidence of configuration, not of a running process or installed executable.
+npm `11.6.2`, Python `3.13.11`, and Chromium `138.0.7204.100`. Shell pull and
+push succeeded independently of the expired connector session. The `.replit`
+file alone is evidence of configuration, not of a running process or installed
+executable.
 
 ## Application and build packages
 
