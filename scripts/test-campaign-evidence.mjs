@@ -86,15 +86,30 @@ async function findMissingFixtures(fixtures) {
 }
 
 async function runFixture(fixture) {
+  const source = await readFile(fixture.fixturePath, "utf8");
+  const contentLines = source
+    .split(/\r?\n/u)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
   try {
-    await execFileAsync(
+    const { stdout, stderr } = await execFileAsync(
       process.execPath,
       [guardPath, "--fixture", fixture.fixturePath],
       { cwd: root, encoding: "utf8" },
     );
-    return 0;
+    return {
+      exitCode: 0,
+      leakedContent: contentLines.some((line) =>
+        `${stdout}${stderr}`.includes(line),
+      ),
+    };
   } catch (error) {
-    return typeof error?.code === "number" ? error.code : null;
+    const output = `${error?.stdout ?? ""}${error?.stderr ?? ""}`;
+    return {
+      exitCode: typeof error?.code === "number" ? error.code : null,
+      leakedContent: contentLines.some((line) => output.includes(line)),
+    };
   }
 }
 
@@ -121,8 +136,8 @@ if (failures.length) {
 }
 
 for (const fixture of fixtures) {
-  const actualExitCode = await runFixture(fixture);
-  if (actualExitCode !== fixture.expectedExitCode) {
+  const result = await runFixture(fixture);
+  if (result.exitCode !== fixture.expectedExitCode || result.leakedContent) {
     failures.push(fixture.label);
   }
 }
