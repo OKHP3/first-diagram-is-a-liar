@@ -595,6 +595,32 @@ async function runAcceptance() {
     await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent.includes("Ship the proof")', "browser back restoration");
     passed.push("completion state survives browser back and forward navigation");
 
+    await client.evaluate("window.confirm = () => true", "reset session confirmation setup");
+    await click(client, ".session-status button", "reset completed session");
+    await waitFor(client, `(() => {
+      const saved = localStorage.getItem(${JSON.stringify(sessionStorageKey)});
+      if (!saved) return false;
+      const session = JSON.parse(saved);
+      return session.activeStep === 0 && Object.keys(session.checklist).length === 0;
+    })()`, "reset session persistence");
+    const resetState = await client.evaluate(`(() => {
+      const stepFiveRail = document.querySelector('.rail-step[data-step="5"]');
+      const session = JSON.parse(localStorage.getItem(${JSON.stringify(sessionStorageKey)}));
+      return {
+        activeStep: document.querySelector('.rail-step[aria-current="step"]')?.dataset.step,
+        heading: document.querySelector(".hero-section h1")?.textContent.trim(),
+        checked: Object.keys(session.checklist).length,
+        railComplete: stepFiveRail?.classList.contains("is-complete"),
+        railNumber: stepFiveRail?.querySelector(".rail-step-number")?.textContent.trim(),
+      };
+    })()`, "reset completed session state");
+    assert(resetState.checked === 0, "reset completed session state", `expected an empty checklist after reset, found ${resetState.checked} completed items`);
+    assert(resetState.activeStep === "1" && resetState.heading?.includes("The first diagram"), "reset completed session state", "reset did not return the tutorial to step 1");
+    assert(!resetState.railComplete && resetState.railNumber === "05", "reset completed session state", "reset left step 5 marked complete");
+    await click(client, '.step-rail nav .rail-step[data-step="5"]', "step 5 navigation after reset");
+    await waitFor(client, 'document.querySelectorAll(".check-row input:not(:checked)").length === 5', "empty checklist after reset");
+    passed.push("reset clears checklist and completed rail state");
+
     await client.evaluate(`(() => {
       Storage.prototype.__firstDiagramOriginalSetItem = Storage.prototype.setItem;
       Storage.prototype.setItem = function () { throw new Error("storage blocked"); };
