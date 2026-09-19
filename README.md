@@ -118,6 +118,23 @@ from the committed npm lockfile, typechecks, builds, and reruns the archive and
 Mermaid checks. The hook is root-only because this repository has no backend,
 database, or secondary artifact.
 
+## Technology maintenance
+
+The [technology inventory and update plan](docs/technology-inventory.md) lists
+the application, tooling, archive formats, current versions and official stable
+releases. Run `npm run audit:technologies` for a fresh comparison; reports are
+written to `.local/technology-review/`.
+
+The configured weekly Dependabot checks propose npm and GitHub Actions updates.
+Pull requests run the full validation and browser acceptance checks. A separate
+weekly technology review covers runtime selectors and archive authoring tools.
+CI reads the Node LTS major from `.nvmrc`; Replit modules are verified separately.
+The maintainer reviews and merges passing updates before Pages deployment.
+
+Use the [Git synchronization runbook](docs/git-synchronization.md) to keep the
+Windows checkout and Replit on the published `main`, preserve unfinished work,
+and distinguish Shell transport from Replit connector authentication.
+
 ## License and provenance
 
 The Mermaid source files are provided for reference, learning, and adaptation.

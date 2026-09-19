@@ -1,7 +1,34 @@
 version: 2
 updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '09:00'
+      timezone: America/Chicago
+    open-pull-requests-limit: 5
+    versioning-strategy: increase
+    groups:
+      react:
+        patterns: [react, react-dom, '@types/react', '@types/react-dom']
+      tailwind:
+        patterns: [tailwindcss, '@tailwindcss/*']
+      vite:
+        patterns: [vite, '@vitejs/*']
+      other-npm:
+        patterns: ['*']
+      npm-security:
+        applies-to: security-updates
+        patterns: ['*']
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+      day: monday
+      time: '09:00'
+      timezone: America/Chicago
+    open-pull-requests-limit: 1
+    groups:
+      github-actions:
+        patterns: ['*']

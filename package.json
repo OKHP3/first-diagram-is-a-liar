@@ -13,7 +13,9 @@
     "health:mermaid": "node scripts/check-mermaid-delivery.mjs",
     "benchmark:mermaid": "node scripts/benchmark-mermaid.mjs",
     "test:contracts": "node --experimental-strip-types scripts/pure-contracts.mjs",
-    "test:acceptance": "node scripts/browser-acceptance.mjs"
+    "test:acceptance": "node scripts/browser-acceptance.mjs",
+    "audit:technologies": "node scripts/technology-audit.mjs",
+    "test:technology-audit": "node --test scripts/technology-audit.test.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.3.3",

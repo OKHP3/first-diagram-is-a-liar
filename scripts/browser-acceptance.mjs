@@ -1,11 +1,12 @@
 import { access, mkdtemp, rm } from "node:fs/promises";
 import { constants } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, resolve } from "node:path";
+import { dirname, isAbsolute, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
 
-const root = resolve(dirname(new URL(import.meta.url).pathname), "..");
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const mobileWidth = 390;
 const briefStorageKey = "first-diagram-progress";
 const sessionStorageKey = "first-diagram-session";
@@ -14,7 +15,7 @@ const archivePath = "/archive/editorial-cut/index.html";
 const mermaidModulePattern = "*cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs*";
 
 async function hasExecutable(command) {
-  if (command.includes("/")) {
+  if (isAbsolute(command) || command.includes("/")) {
     try {
       await access(command, constants.X_OK);
       return true;
@@ -163,6 +164,14 @@ async function waitFor(client, expression, scope, timeoutMs = 5_000) {
   throw new Error(`Acceptance failure [${scope}]: timed out${detail}`);
 }
 
+async function reloadTutorial(client) {
+  // Page.reload returns before navigation starts. Exclude the old document
+  // from readiness checks so persistence assertions cannot race navigation.
+  await client.evaluate("window.__acceptanceReloadPending = true", "reload marker");
+  await client.send("Page.reload", { ignoreCache: true });
+  await waitFor(client, `!window.__acceptanceReloadPending && document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "new tutorial document");
+}
+
 async function click(client, selector, scope) {
   await client.evaluate(`(() => {
     const control = document.querySelector(${JSON.stringify(selector)});
@@ -267,10 +276,8 @@ async function runAcceptance() {
       passed.push("reuse running local app");
     } else {
       const appPort = await freePort();
-      server = spawn(process.platform === "win32" ? "npm.cmd" : "npm", [
-        "run",
-        "dev",
-        "--",
+      server = spawn(process.execPath, [
+        resolve(root, "node_modules/vite/bin/vite.js"),
         "--host",
         "127.0.0.1",
         "--port",
@@ -280,6 +287,7 @@ async function runAcceptance() {
         env: { ...process.env, NODE_ENV: "development" },
         stdio: ["ignore", "pipe", "pipe"],
         detached: process.platform !== "win32",
+        windowsHide: true,
       });
       server.stdout.on("data", (chunk) => { serverOutput += chunk; });
       server.stderr.on("data", (chunk) => { serverOutput += chunk; });
@@ -313,15 +321,15 @@ async function runAcceptance() {
     await client.send("Page.navigate", { url: appUrl });
     await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "application startup");
     await client.evaluate(`localStorage.removeItem(${JSON.stringify(briefStorageKey)}); localStorage.removeItem(${JSON.stringify(sessionStorageKey)})`, "clean acceptance state");
-    await client.send("Page.reload", { ignoreCache: true });
+    await reloadTutorial(client);
     await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "application startup");
     await client.evaluate(`localStorage.setItem(${JSON.stringify(sessionStorageKey)}, "{malformed")`, "malformed session setup");
-    await client.send("Page.reload", { ignoreCache: true });
+    await reloadTutorial(client);
     await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "malformed session recovery");
     const malformedRecovery = await client.evaluate('({ active: document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent, status: document.querySelector(".session-status")?.textContent })', "malformed session recovery");
     assert(malformedRecovery.active?.includes("Spot the lie") && malformedRecovery.status?.includes("Saved locally"), "malformed session recovery", `malformed local state did not safely fall back while preserving storage availability: ${JSON.stringify(malformedRecovery)}`);
     await client.evaluate(`localStorage.removeItem(${JSON.stringify(sessionStorageKey)})`, "clean malformed session state");
-    await client.send("Page.reload", { ignoreCache: true });
+    await reloadTutorial(client);
     await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "clean session recovery");
     passed.push("malformed session recovery");
 
@@ -529,7 +537,7 @@ async function runAcceptance() {
     passed.push("local Markdown handoff full and redacted modes");
 
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 100));
-    await client.send("Page.reload", { ignoreCache: true });
+    await reloadTutorial(client);
     await waitFor(client, 'document.readyState === "complete" && Boolean(document.querySelector(\'.step-rail nav .rail-step[data-step="5"]\'))', "step 5 persistence reload");
     await click(client, '.step-rail nav .rail-step[data-step="5"]', "step 5 persistence navigation");
     await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Ship the proof")', "step 5 persistence navigation");
