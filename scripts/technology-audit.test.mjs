@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { readFile } from "node:fs/promises";
 import { checkRows, classify, collectActions, collectPackages, compareVersions, requestJson, selectPython } from "./technology-audit.mjs";
-import { issueChange } from "./technology-review-issue.mjs";
+import { issueChange, syncReviewIssue } from "./technology-review-issue.mjs";
 
 test("numeric versions, majors, prereleases and downgrades are distinguished", () => {
   assert.equal(compareVersions("1.10.0", "1.9.9"), 1);
@@ -84,6 +84,29 @@ test("all external inventory anchors are present", async () => {
     const source = await readFile(new URL(tool.source, root), "utf8");
     if (tool.pattern) assert.match(source, new RegExp(tool.pattern, "m"), tool.name);
   }
+});
+
+test("disabled repository Issues keep the report available without attempting issue writes", async () => {
+  const calls = [];
+  const result = await syncReviewIssue({ repository: "owner/repo", token: "test-token", report: { rows: [] },
+    fetcher: async (url, options) => {
+      calls.push({ url, method: options.method });
+      return Response.json({ has_issues: false });
+    } });
+  assert.deepEqual(result, { action: "disabled" });
+  assert.deepEqual(calls, [{ url: "https://api.github.com/repos/owner/repo", method: "GET" }]);
+});
+
+test("unknown availability and authentication failures do not masquerade as disabled Issues", async () => {
+  const input = { repository: "owner/repo", token: "test-token", report: { rows: [] } };
+  await assert.rejects(syncReviewIssue({ ...input, fetcher: async () => Response.json({}) }), /availability is unknown/);
+  await assert.rejects(syncReviewIssue({ ...input, fetcher: async () => new Response("", { status: 401 }) }), /HTTP 401/);
+  const calls = [];
+  await syncReviewIssue({ ...input, fetcher: async (url, options) => {
+    calls.push(options.method);
+    return Response.json(calls.length === 1 ? { has_issues: true } : []);
+  } });
+  assert.deepEqual(calls, ["GET", "GET"]);
 });
 
 test("rate limits retry within budget and respect longer server backoff without hammering", async () => {

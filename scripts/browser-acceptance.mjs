@@ -87,6 +87,7 @@ async function isTutorialApp(url) {
 }
 
 class DevToolsClient {
+  runtimeErrors = [];
   constructor(url) {
     this.url = url;
     this.nextId = 0;
@@ -102,6 +103,10 @@ class DevToolsClient {
     });
     this.socket.addEventListener("message", (event) => {
       const message = JSON.parse(String(event.data));
+      if (message.method === "Runtime.exceptionThrown") {
+        const detail = message.params.exceptionDetails;
+        this.runtimeErrors.push(detail.exception?.description ?? detail.text);
+      }
       if (!message.id) return;
       const request = this.pending.get(message.id);
       if (!request) return;
@@ -316,7 +321,10 @@ async function runAcceptance() {
     await client.connect();
     await client.send("Page.enable");
     await client.send("Network.enable");
-    await client.send("Network.setBlockedURLs", { urls: [mermaidModulePattern] });
+    // Exercise usable fallback fonts without depending on a third-party font
+    // service completing before the document load event.
+    await client.send("Network.setBlockedURLs", { urls: [mermaidModulePattern,
+      "*fonts.googleapis.com/*", "*fonts.gstatic.com/*"] });
     await client.send("Runtime.enable");
     await client.send("Page.navigate", { url: appUrl });
     await waitFor(client, `document.readyState === "complete" && Boolean(document.querySelector(".app-shell"))`, "application startup");
@@ -804,9 +812,16 @@ async function runAcceptance() {
     passed.forEach((check) => console.log(`- ${check}`));
   } catch (error) {
     const detail = error instanceof Error ? error.message : String(error);
-    const serverDetail = server?.exitCode ? `\nVite output:\n${serverOutput}` : "";
+    let pageDetail = "";
+    if (client) {
+      try {
+        const page = await client.evaluate('({readyState: document.readyState, url: location.href, text: document.body?.innerText.slice(0, 1000)})', "failure diagnostics");
+        pageDetail = `\nPage state: ${JSON.stringify(page)}\nRuntime errors: ${JSON.stringify(client.runtimeErrors.slice(-5))}`;
+      } catch { /* Preserve the original failure when the browser is unavailable. */ }
+    }
+    const serverDetail = serverOutput ? `\nVite output:\n${serverOutput.slice(-4000)}` : "";
     const browserDetail = chromium?.exitCode ? `\nChromium output:\n${browserOutput}` : "";
-    throw new Error(`${detail}${serverDetail}${browserDetail}`);
+    throw new Error(`${detail}${pageDetail}${serverDetail}${browserDetail}`);
   } finally {
     if (client) {
       try { await client.send("Browser.close"); } catch { /* Browser may already be gone after a failed assertion. */ }

@@ -105,6 +105,8 @@ is available in the Replit development environment; on another machine, set
 credentials, analytics, private sources, hosted test service, or deployment.
 This is a local acceptance check, not a GitHub Pages or hosted-renderer smoke
 test.
+It blocks the external font services and exercises the application's fallback
+fonts, so an unavailable font CDN cannot stall functional acceptance.
 
 The GitHub Pages workflow (`.github/workflows/deploy-pages.yml`) builds the
 root app with the production base `/first-diagram-is-a-liar/` on every push
