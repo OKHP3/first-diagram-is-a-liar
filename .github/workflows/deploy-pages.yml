@@ -30,6 +30,10 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Test maintenance deletion guards and benchmark entry point
+        run: |
+          python3 -m unittest discover -s .agents/skills/okhp3-replit-repl-janitor/tests -v
+          python3 .agents/skills/okhp3-replit-free-mode-autonomy/benchmarks/run-native-telemetry.py --help
       - name: Run pure contract checks
         run: npm run test:contracts
       - name: Test technology review failure and update handling
