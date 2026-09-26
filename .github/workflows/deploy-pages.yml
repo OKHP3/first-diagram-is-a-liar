@@ -68,7 +68,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          export CHROMIUM_PATH="$(command -v google-chrome || command -v chromium)"
+          CHROMIUM_PATH="$(command -v google-chrome || command -v chromium)"
+          export CHROMIUM_PATH
           "$CHROMIUM_PATH" --version
           npm run test:acceptance
       - name: Add Pages fallback
