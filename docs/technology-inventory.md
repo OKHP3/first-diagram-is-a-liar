@@ -1,6 +1,6 @@
 # Technology inventory and update plan
 
-Reviewed: 2026-09-18 America/Chicago; release lookups continued on 2026-09-19 UTC.
+Baseline reviewed: 2026-09-18 America/Chicago; release lookups continued on 2026-09-19 UTC. The live dependency inventory was rechecked against publisher stable channels on 2026-09-26.
 
 The baseline audit found ten direct npm dependencies and 108 locked package
 entries in all, including seven direct dependencies and 36 transitive entries
@@ -62,11 +62,11 @@ be reviewed together.
 | TypeScript | Type checking and TS/TSX source | 7.0.2 | [7.0.2](https://registry.npmjs.org/typescript/latest) | Current |
 | React | UI runtime | 19.3.0 | [19.3.0](https://registry.npmjs.org/react/latest) | Current |
 | React DOM | Browser rendering | 19.3.0 | [19.3.0](https://registry.npmjs.org/react-dom/latest) | Current |
-| Vite | Development server and production bundler | 8.3.0 | [8.3.0](https://registry.npmjs.org/vite/latest) | Current |
+| Vite | Development server and production bundler | 8.3.1 | [8.3.1](https://registry.npmjs.org/vite/latest) | Current |
 | Vite React plugin | React integration | 6.1.1 | [6.1.1](https://registry.npmjs.org/%40vitejs%2Fplugin-react/latest) | Current |
 | Tailwind CSS | Utility styling | 4.3.3 | [4.3.3](https://registry.npmjs.org/tailwindcss/latest) | Current |
 | Tailwind Vite plugin | CSS build integration | 4.3.3 | [4.3.3](https://registry.npmjs.org/%40tailwindcss%2Fvite/latest) | Current |
-| `@types/node` | Build-script and Node API types | 26.6.2 | [26.6.2](https://registry.npmjs.org/%40types%2Fnode/latest) | Current; type declarations do not upgrade the Node 24 runtime |
+| `@types/node` | Build-script and Node API types | 26.6.3 | [26.6.3](https://registry.npmjs.org/%40types%2Fnode/latest) | Current; type declarations do not upgrade the Node 24 runtime |
 | `@types/react` | React types | 19.3.0 | [19.3.0](https://registry.npmjs.org/%40types%2Freact/latest) | Current |
 | `@types/react-dom` | React DOM types | 19.3.0 | [19.3.0](https://registry.npmjs.org/%40types%2Freact-dom/latest) | Current |
 
@@ -111,7 +111,7 @@ are project metadata, not independently published technology releases.
 | Technology | In place | Latest stable | Treatment |
 |---|---|---|---|
 | Mermaid benchmark | Exact `11.12.0` in `scripts/benchmark-mermaid.mjs` | [12.0.0](https://registry.npmjs.org/mermaid/latest) | Experimental candidate, not installed in the root app; review breaking changes and benchmark before changing |
-| Vite benchmark | Separate exact `8.2.2` in the same script | [8.3.0](https://registry.npmjs.org/vite/latest) | Review alongside the root Vite upgrade |
+| Vite benchmark | Separate exact `8.2.2` in the same script | [8.3.1](https://registry.npmjs.org/vite/latest) | Review alongside the root Vite upgrade |
 | Mermaid editorial renderer | CDN selector `mermaid@10` in the preserved article JavaScript; exact resolved patch unknown | [12.0.0](https://registry.npmjs.org/mermaid/latest) | Major migration requires visual and fallback checks; do not silently rewrite historical evidence |
 | Hosted Mermaid / Mermaid Chart | Public hosted diagram references; renderer version not disclosed | Service-managed; [Mermaid source releases](https://github.com/mermaid-js/mermaid/releases) do not prove the hosted version | Check hosted output and retain `.mmd` plus static fallbacks |
 | PptxGenJS | Named in `archive/diagramming-shootout/slides/README.md`; generator and installed version absent | [4.0.1](https://registry.npmjs.org/pptxgenjs/latest) | Monitor publisher release against reviewed baseline; no automatic deck regeneration |
