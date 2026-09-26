@@ -30,7 +30,11 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Lint GitHub Actions workflows and run pure contract checks
+      - name: Test maintenance deletion guards and benchmark entry point
+        run: |
+          python3 -m unittest discover -s .agents/skills/okhp3-replit-repl-janitor/tests -v
+          python3 .agents/skills/okhp3-replit-free-mode-autonomy/benchmarks/run-native-telemetry.py --help
+      - name: Run pure contract checks
         run: npm run test:contracts
       - name: Test technology review failure and update handling
         run: npm run test:technology-audit
@@ -68,16 +72,16 @@ jobs:
           "$CHROMIUM_PATH" --version
           npm run test:acceptance
       - name: Add Pages fallback
-        if: github.event_name != 'pull_request'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: cp dist/index.html dist/404.html
       - name: Upload Pages artifact
-        if: github.event_name != 'pull_request'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     permissions:

@@ -2,10 +2,12 @@
 
 Reviewed: 2026-09-18 America/Chicago; release lookups continued on 2026-09-19 UTC.
 
-The tutorial has ten direct npm dependencies and 108 locked package entries in
-all. Seven direct dependencies and 36 transitive entries have newer stable
-releases. These counts include optional native packages for several operating
-systems; they are not 108 packages loaded by a visitor's browser.
+The baseline audit found ten direct npm dependencies and 108 locked package
+entries in all, including seven direct dependencies and 36 transitive entries
+with newer stable releases. These historical counts include optional native
+packages for several operating systems; they are not 108 packages loaded by a
+visitor's browser. The application table below reflects the subsequent reviewed
+updates. Fresh Actions artifacts report the current lockfile in full.
 
 The complete, dated comparison is in
 [technology-versions.md](technology-review-2026-09-18/technology-versions.md),
@@ -24,9 +26,12 @@ support files were inspected. The GitHub connector confirmed that the public
 main package manifest matches the local dependency declarations.
 
 The original audited HEAD was `79e4cd71d9476db0755231a4c90f5c46e7c5f16d`.
-The accompanying automation changes are local working-tree changes. The dated
-report reflects those changes, including the new Node selector and report
-artifact action. It does not claim they have run on GitHub.
+The dated report was generated from the local implementation before publication.
+The automation and synchronization runbook were subsequently merged in
+[PR #7](https://github.com/OKHP3/first-diagram-is-a-liar/pull/7), whose checks and
+Pages deployment passed. React and its companion packages were upgraded in
+[PR #8](https://github.com/OKHP3/first-diagram-is-a-liar/pull/8). The dated baseline
+remains preserved rather than being rewritten as post-upgrade evidence.
 
 - **Confirmed:** manifest and lock versions, source imports, workflow selectors,
   local command versions, artifact headers, and publisher release responses.
@@ -34,11 +39,16 @@ artifact action. It does not claim they have run on GitHub.
   version alone does not establish compatibility.
 - **Proposed:** adopt updates through tested pull requests, use the current Node
   LTS line, and review archive rendering separately.
-- **Unknown:** exact live Replit versions, hosted Mermaid renderer version,
-  historical PptxGenJS version, and the outcome of the new workflow on GitHub.
+- **Unknown:** hosted Mermaid renderer version and historical PptxGenJS
+  version. Check the current hosted workflow run for
+  its execution and artifact status.
 
 The Replit connector returned `UNAUTHORIZED` with reauthentication required.
-The `.replit` file is evidence of configuration, not of the remote process.
+The browser Shell was verified separately on 2026-09-19 UTC: Node `24.13.0`,
+npm `11.6.2`, Python `3.13.11`, and Chromium `138.0.7204.100`. Shell pull and
+push succeeded independently of the expired connector session. The `.replit`
+file alone is evidence of configuration, not of a running process or installed
+executable.
 
 ## Application and build packages
 
@@ -50,17 +60,17 @@ be reviewed together.
 | Technology | Role | In place | Latest stable | Finding |
 |---|---|---:|---:|---|
 | TypeScript | Type checking and TS/TSX source | 7.0.2 | [7.0.2](https://registry.npmjs.org/typescript/latest) | Current |
-| React | UI runtime | 19.2.8 | [19.3.0](https://registry.npmjs.org/react/latest) | Update candidate |
-| React DOM | Browser rendering | 19.2.8 | [19.3.0](https://registry.npmjs.org/react-dom/latest) | Update with React |
-| Vite | Development server and production bundler | 8.2.2 | [8.3.0](https://registry.npmjs.org/vite/latest) | Update candidate |
-| Vite React plugin | React integration | 6.1.0 | [6.1.1](https://registry.npmjs.org/%40vitejs%2Fplugin-react/latest) | Update with Vite |
+| React | UI runtime | 19.3.0 | [19.3.0](https://registry.npmjs.org/react/latest) | Current |
+| React DOM | Browser rendering | 19.3.0 | [19.3.0](https://registry.npmjs.org/react-dom/latest) | Current |
+| Vite | Development server and production bundler | 8.3.0 | [8.3.0](https://registry.npmjs.org/vite/latest) | Current |
+| Vite React plugin | React integration | 6.1.1 | [6.1.1](https://registry.npmjs.org/%40vitejs%2Fplugin-react/latest) | Current |
 | Tailwind CSS | Utility styling | 4.3.3 | [4.3.3](https://registry.npmjs.org/tailwindcss/latest) | Current |
 | Tailwind Vite plugin | CSS build integration | 4.3.3 | [4.3.3](https://registry.npmjs.org/%40tailwindcss%2Fvite/latest) | Current |
-| `@types/node` | Build-script and Node API types | 26.3.0 | [26.6.2](https://registry.npmjs.org/%40types%2Fnode/latest) | Review against Node 24 runtime; newest types are not a runtime upgrade |
-| `@types/react` | React types | 19.2.18 | [19.3.0](https://registry.npmjs.org/%40types%2Freact/latest) | Update with React |
-| `@types/react-dom` | React DOM types | 19.2.5 | [19.3.0](https://registry.npmjs.org/%40types%2Freact-dom/latest) | Update with React DOM |
+| `@types/node` | Build-script and Node API types | 26.6.2 | [26.6.2](https://registry.npmjs.org/%40types%2Fnode/latest) | Current; type declarations do not upgrade the Node 24 runtime |
+| `@types/react` | React types | 19.3.0 | [19.3.0](https://registry.npmjs.org/%40types%2Freact/latest) | Current |
+| `@types/react-dom` | React DOM types | 19.3.0 | [19.3.0](https://registry.npmjs.org/%40types%2Freact-dom/latest) | Current |
 
-The remaining 98 lock entries are individually listed in the report. They
+The baseline's remaining 98 lock entries are individually listed in the report. They
 include Rolldown and its native bindings, Oxc, Lightning CSS, Tailwind Oxide,
 TypeScript native distributions, React Scheduler, source-map tools, and their
 helpers. Upgrade these through their owning packages and npm's resolver.
@@ -226,6 +236,10 @@ dated review, pass `-- --out docs/technology-review-YYYY-MM-DD`. The local audit
 only reads publisher feeds and writes local reports. It does not edit dependencies,
 create issues, or install software. The separate issue updater is called only by
 the scheduled or manually dispatched workflow and needs its scoped GitHub token.
+When repository Issues are disabled, the workflow records that setting and keeps
+the complete Actions summary and downloadable artifact. It does not enable
+Issues or attempt an issue write. Authentication failures and unknown repository
+settings still fail visibly. Dependabot pull requests work independently.
 
 ## Validation and activation
 
