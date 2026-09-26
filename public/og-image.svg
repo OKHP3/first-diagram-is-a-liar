@@ -9,21 +9,22 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="#111714"/>
-  <rect x="32" y="32" width="1136" height="566" fill="url(#wash)" stroke="#e8e4db" stroke-opacity=".18"/>
+  <rect x="32" y="32" width="1136" height="566" fill="url(#wash)" stroke="#e8e4db" stroke-opacity=".2"/>
   <rect x="32" y="32" width="1136" height="566" fill="url(#grid)"/>
   <text x="78" y="98" fill="#f0b84b" font-family="monospace" font-size="18" letter-spacing="4">ETCH-AI-SKETCH / FIELD GUIDE 01</text>
-  <text x="78" y="240" fill="#e8e4db" font-family="Georgia, serif" font-size="86" font-weight="bold">The first diagram</text>
-  <text x="78" y="330" fill="#d8793e" font-family="Georgia, serif" font-size="86" font-weight="bold">is usually a liar.</text>
-  <text x="80" y="400" fill="#a9aaa0" font-family="monospace" font-size="18" letter-spacing="2">MAKE THE THINKING — AND THE LOOP — VISIBLE.</text>
-  <path d="M780 185H1010M1010 185C1100 185 1105 290 1018 330H835C770 330 762 430 850 456H1055" fill="none" stroke="#f0b84b" stroke-width="5"/>
-  <path d="M1018 330C960 365 915 368 870 350" fill="none" stroke="#d8793e" stroke-width="5" stroke-dasharray="16 12"/>
-  <circle cx="780" cy="185" r="23" fill="#234c40" stroke="#e8e4db" stroke-width="3"/>
-  <circle cx="1010" cy="185" r="23" fill="#f0b84b"/>
-  <circle cx="835" cy="330" r="23" fill="#713c2b" stroke="#d8793e" stroke-width="3"/>
-  <circle cx="1055" cy="456" r="23" fill="#234c40" stroke="#e8e4db" stroke-width="3"/>
-  <text x="768" y="193" fill="#e8e4db" font-family="monospace" font-size="18">A</text>
-  <text x="1003" y="193" fill="#111714" font-family="monospace" font-size="18">?</text>
-  <text x="827" y="338" fill="#e8e4db" font-family="monospace" font-size="18">B</text>
-  <text x="1047" y="464" fill="#e8e4db" font-family="monospace" font-size="18">✓</text>
-  <text x="78" y="554" fill="#d8793e" font-family="monospace" font-size="16" letter-spacing="3">OVERKILL HILL P³™ / ROY 001</text>
+  <path d="M78 124h365" stroke="#d8793e" stroke-width="2"/>
+  <text x="78" y="234" fill="#e8e4db" font-family="Georgia, serif" font-size="64" font-weight="bold">The first diagram</text>
+  <text x="78" y="310" fill="#d8793e" font-family="Georgia, serif" font-size="64" font-weight="bold">is usually a liar.</text>
+  <text x="80" y="372" fill="#b3b7ad" font-family="monospace" font-size="15" letter-spacing="2">MAKE THE THINKING — AND THE LOOP — VISIBLE.</text>
+  <path d="M752 176h196c78 0 94 85 24 125H827c-66 0-81 85-3 121h180" fill="none" stroke="#f0b84b" stroke-linecap="round" stroke-width="5"/>
+  <path d="M972 301c-41 30-81 33-119 17" fill="none" stroke="#d8793e" stroke-width="5" stroke-dasharray="15 11" stroke-linecap="round"/>
+  <circle cx="752" cy="176" r="22" fill="#234c40" stroke="#e8e4db" stroke-width="3"/>
+  <circle cx="948" cy="176" r="22" fill="#f0b84b"/>
+  <circle cx="824" cy="301" r="22" fill="#713c2b" stroke="#d8793e" stroke-width="3"/>
+  <circle cx="1004" cy="422" r="22" fill="#234c40" stroke="#e8e4db" stroke-width="3"/>
+  <text x="746" y="183" fill="#e8e4db" font-family="monospace" font-size="17">A</text>
+  <text x="942" y="183" fill="#111714" font-family="monospace" font-size="17">?</text>
+  <text x="818" y="308" fill="#e8e4db" font-family="monospace" font-size="17">B</text>
+  <text x="998" y="429" fill="#e8e4db" font-family="monospace" font-size="17">✓</text>
+  <text x="78" y="554" fill="#d8793e" font-family="monospace" font-size="15" letter-spacing="3">OVERKILL HILL P³™ / ROY 001</text>
 </svg>

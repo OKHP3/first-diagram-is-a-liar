@@ -4,7 +4,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const moduleNames = ["session", "roy", "workbench", "handoff"];
+const moduleNames = ["session", "roy", "workbench", "handoff", "analytics"];
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -74,12 +74,13 @@ async function loadModules() {
     roy: imports[1],
     workbench: imports[2],
     handoff: imports[3],
+    analytics: imports[4],
   };
 }
 
 async function run() {
   const modules = await loadModules();
-  const { session, roy, workbench, handoff } = modules;
+  const { session, roy, workbench, handoff, analytics } = modules;
   const passed = [];
   const rootAppSource = await readFile(join(root, "src", "App.tsx"), "utf8");
   const archiveRendererSource = await readFile(join(root, "archive", "editorial-cut", "mermaid-init.js"), "utf8");
@@ -91,6 +92,47 @@ async function run() {
     assert(session.validateSession(defaultSession), "the default session should satisfy its own schema");
     assertDeepEqual(session.createDefaultSession(fixedNow), defaultSession, "default sessions should be deterministic for a fixed clock");
     passed.push("default session contract");
+
+    const campaignParameters = analytics.readCampaignParameters(
+      "?utm_source=LinkedIn&utm_medium=Organic-Social&utm_campaign=First-Diagram-Is-A-Liar&utm_content=V0-5-Article&email=private%40example.com&gclid=ignored",
+    );
+    assertDeepEqual(campaignParameters, {
+      utm_source: "linkedin",
+      utm_medium: "organic-social",
+      utm_campaign: "first-diagram-is-a-liar",
+      utm_content: "v0-5-article",
+    }, "campaign tracking should return only the four normalized allow-listed values");
+    assertEqual(
+      analytics.readCampaignParameters("?utm_source=linkedin&utm_medium=owned"),
+      null,
+      "campaign tracking should require all four UTM fields",
+    );
+    assertEqual(
+      analytics.readCampaignParameters("?utm_source=linkedin&utm_medium=owned&utm_campaign=first-diagram-is-a-liar&utm_content=owner%40example.com"),
+      null,
+      "campaign tracking should reject values that could contain personal data",
+    );
+    assertEqual(
+      analytics.readCampaignParameters("?utm_source=linkedin&utm_source=private&utm_medium=owned&utm_campaign=first-diagram-is-a-liar&utm_content=article"),
+      null,
+      "campaign tracking should reject ambiguous duplicate parameters",
+    );
+    assertEqual(
+      analytics.sanitizePageLocation(
+        "https://okhp3.github.io",
+        "/first-diagram-is-a-liar/",
+        "?utm_source=LinkedIn&utm_medium=Organic-Social&utm_campaign=First-Diagram-Is-A-Liar&utm_content=V0-5-Article&email=private%40example.com&gclid=ignored",
+      ),
+      "https://okhp3.github.io/first-diagram-is-a-liar/?utm_source=linkedin&utm_medium=organic-social&utm_campaign=first-diagram-is-a-liar&utm_content=v0-5-article",
+      "page locations should drop unapproved query values and fragments",
+    );
+    assertDeepEqual(analytics.getCtaParameters("start-field-guide"), {
+      cta_id: "start-field-guide",
+      surface: "hero",
+      destination: "tutorial-step-2",
+    }, "CTA payloads should use fixed low-cardinality classifications");
+    assertEqual(analytics.getCtaParameters("unknown-cta"), null, "unrecognized CTA identifiers should not become event payloads");
+    passed.push("privacy-bounded analytics event contract");
 
     const maxClaim = "x".repeat(session.CLAIM_MAX_LENGTH);
     const validBoundarySession = {
