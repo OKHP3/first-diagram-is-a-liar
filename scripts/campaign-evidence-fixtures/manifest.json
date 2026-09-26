@@ -45,6 +45,14 @@
     {
       "path": "blocked/exact-location.txt",
       "label": "exact location"
+    },
+    {
+      "path": "blocked/evidence/contact-export.csv",
+      "label": "generated contact export"
+    },
+    {
+      "path": "blocked/evidence/network-location-export.ndjson",
+      "label": "generated network and location export"
     }
   ]
 }

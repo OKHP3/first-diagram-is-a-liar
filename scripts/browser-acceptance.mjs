@@ -11,8 +11,14 @@ const mobileWidth = 390;
 const briefStorageKey = "first-diagram-progress";
 const sessionStorageKey = "first-diagram-session";
 const handoffFilename = "first-diagram-is-a-liar-handoff.md";
+const redactedHandoffFilename = "first-diagram-is-a-liar-handoff-redacted.md";
 const archivePath = "/archive/editorial-cut/index.html";
 const mermaidModulePattern = "*cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs*";
+const learnerTextFixture = {
+  premiseClaim: "The tidy line hides a retry.",
+  councilNote: "Borrow the loop and reject the decoration.",
+  nextTest: "Test whether the loop is visible to a new reader.",
+};
 
 async function hasExecutable(command) {
   if (isAbsolute(command) || command.includes("/")) {
@@ -364,9 +370,9 @@ async function runAcceptance() {
     passed.push("keyboard-relevant labels and active-step semantics");
 
     await click(client, '.pattern-choice input[value="hidden-loop"]', "step 1 premise pattern");
-    await client.evaluate(`(() => { const field = document.querySelector("#claim"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("claim field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, "The tidy line hides a retry."); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 1 bounded claim");
+    await client.evaluate(`(() => { const field = document.querySelector("#claim"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("claim field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, ${JSON.stringify(learnerTextFixture.premiseClaim)}); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 1 bounded claim");
     const premise = await client.evaluate('({ pattern: document.querySelector(\'.pattern-choice input:checked\')?.value, claim: document.querySelector("#claim")?.value })', "step 1 premise capture");
-    assert(premise.pattern === "hidden-loop" && premise.claim === "The tidy line hides a retry.", "step 1 premise capture", "pattern or bounded claim did not persist in the UI");
+    assert(premise.pattern === "hidden-loop" && premise.claim === learnerTextFixture.premiseClaim, "step 1 premise capture", "pattern or bounded claim did not persist in the UI");
     passed.push("bounded premise capture");
 
     await click(client, ".hero-actions .button-primary", "step 1 start control");
@@ -445,7 +451,7 @@ async function runAcceptance() {
     passed.push("Council taxonomy labels");
     await click(client, 'input[name="criterion"][value="iteration"]', "step 4 criterion");
     await click(client, 'input[name="outcome"][value="combine"]', "step 4 synthesis outcome");
-    await client.evaluate(`(() => { const field = document.querySelector("#synthesis-note"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("synthesis field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, "Borrow the loop and reject the decoration."); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 4 synthesis note");
+    await client.evaluate(`(() => { const field = document.querySelector("#synthesis-note"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("synthesis field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, ${JSON.stringify(learnerTextFixture.councilNote)}); field.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`, "step 4 synthesis note");
     const synthesis = await client.evaluate('({ criterion: document.querySelector(\'input[name="criterion"]:checked\')?.value, outcome: document.querySelector(\'input[name="outcome"]:checked\')?.value, note: document.querySelector("#synthesis-note")?.value })', "step 4 synthesis state");
     assert(synthesis.criterion === "iteration" && synthesis.outcome === "combine" && synthesis.note?.includes("Borrow the loop"), "step 4 synthesis state", "criterion or synthesis did not persist");
     passed.push("criterion and synthesis capture");
@@ -466,6 +472,8 @@ async function runAcceptance() {
     assert(completion.checked === 5, "step 5 checklist completion", `expected five checked items, found ${completion.checked}`);
     assert(completion.completedRail === 5, "step 5 checklist completion", "completed checklist did not mark the tutorial rail complete");
     passed.push("checklist completion");
+
+    await client.evaluate(`(() => { const field = document.querySelector("#next-test"); if (!(field instanceof HTMLTextAreaElement)) throw new Error("next test field missing"); const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setter.call(field, ${JSON.stringify(learnerTextFixture.nextTest)}); field.dispatchEvent(new Event("input", { bubbles: true })); return field.value; })()`, "step 5 next test");
 
     await client.evaluate(`(() => {
       Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined });
@@ -488,43 +496,12 @@ async function runAcceptance() {
       };
       return true;
     })()`, "step 5 local handoff capture setup");
-    await click(client, ".download-handoff-button", "step 5 Markdown handoff download");
-    const firstHandoff = await client.evaluate(`(async () => ({
-      filename: window.__handoffCapture.download,
-      content: await window.__handoffCapture.textPromise,
-    }))()`, "step 5 Markdown handoff content");
-    assert(firstHandoff.filename === handoffFilename, "step 5 Markdown handoff filename", `expected deterministic filename ${handoffFilename}, got ${firstHandoff.filename}`);
-    for (const expected of [
-      "# Local Working Handoff",
-      "- **Step:** 05 / The handoff",
-      "Bounded claim:** The tidy line hides a retry.",
-      "Selected revision:** V2 / honest revision",
-      "Selected criterion:",
-      "Synthesis outcome:** combine",
-      "Schema version:** 2",
-      "Current ROY readout:** 5x",
-      "- [x] The claim is clear before the diagram appears.",
-      "Revision loopbacks:** Visible",
-      "## Next test",
-      "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut",
-    ]) {
-      assert(firstHandoff.content.includes(expected), "step 5 Markdown handoff content", `export is missing ${expected}`);
-    }
-    await waitFor(client, `document.querySelector(".copy-status")?.textContent.includes("Saved locally as ${handoffFilename}.")`, "step 5 local handoff feedback");
-    await click(client, ".download-handoff-button", "step 5 deterministic Markdown handoff download");
-    const secondHandoff = await client.evaluate(`(async () => ({
-      filename: window.__handoffCapture.download,
-      content: await window.__handoffCapture.textPromise,
-    }))()`, "step 5 deterministic Markdown handoff content");
-    assert(secondHandoff.filename === firstHandoff.filename && secondHandoff.content === firstHandoff.content, "step 5 deterministic Markdown handoff", "repeated exports did not produce the same filename and content");
-    await click(client, 'input[name="handoff-mode"][value="redacted"]', "step 5 redacted handoff mode");
-    await waitFor(client, 'document.querySelector(".handoff-mode-option.is-selected strong")?.textContent.includes("Redacted sharing packet")', "step 5 redacted handoff mode selected");
-    await click(client, ".download-handoff-button", "step 5 redacted Markdown handoff download");
+    await click(client, ".download-handoff-button", "step 5 default Markdown handoff download");
     const redactedHandoff = await client.evaluate(`(async () => ({
       filename: window.__handoffCapture.download,
       content: await window.__handoffCapture.textPromise,
-    }))()`, "step 5 redacted Markdown handoff content");
-    assert(redactedHandoff.filename === "first-diagram-is-a-liar-handoff-redacted.md", "step 5 redacted Markdown handoff filename", `unexpected redacted filename: ${redactedHandoff.filename}`);
+    }))()`, "step 5 default Markdown handoff content");
+    assert(redactedHandoff.filename === redactedHandoffFilename, "step 5 default redacted Markdown handoff filename", `unexpected redacted filename: ${redactedHandoff.filename}`);
     for (const expected of [
       "Export mode:** Redacted sharing packet",
       "Privacy boundary:** Assembled in the browser",
@@ -533,33 +510,78 @@ async function runAcceptance() {
       "Redacted for sharing — learner-entered text omitted",
       "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut",
     ]) {
-      assert(redactedHandoff.content.includes(expected), "step 5 redacted Markdown handoff content", `redacted export is missing ${expected}`);
+      assert(redactedHandoff.content.includes(expected), "step 5 default redacted Markdown handoff content", `redacted export is missing ${expected}`);
     }
-    for (const omitted of [
-      "The tidy line hides a retry.",
-      "A synthesis that survives comparison.",
-      "Test whether the loop is visible to a new reader.",
-    ]) {
+    for (const omitted of Object.values(learnerTextFixture)) {
       assert(!redactedHandoff.content.includes(omitted), "step 5 redacted Markdown handoff content", `redacted export leaked learner text: ${omitted}`);
     }
+    await client.evaluate(`window.confirm = () => false`, "step 5 full packet declined confirmation setup");
+    await click(client, 'input[name="handoff-mode"][value="full"]', "step 5 full packet declined confirmation");
+    const remainsRedacted = await client.evaluate('document.querySelector(\'input[name="handoff-mode"][value="redacted"]\')?.checked', "step 5 full packet declined confirmation");
+    assert(remainsRedacted, "step 5 full packet declined confirmation", "declining confirmation should keep the redacted packet selected");
+    await client.evaluate(`window.confirm = () => true`, "step 5 full packet accepted confirmation setup");
+    await click(client, 'input[name="handoff-mode"][value="full"]', "step 5 full packet accepted confirmation");
+    await waitFor(client, 'document.querySelector(\'input[name="handoff-mode"][value="full"]\')?.checked === true', "step 5 full packet accepted confirmation");
+    await click(client, ".download-handoff-button", "step 5 full Markdown handoff download");
+    const firstHandoff = await client.evaluate(`(async () => ({
+      filename: window.__handoffCapture.download,
+      content: await window.__handoffCapture.textPromise,
+    }))()`, "step 5 full Markdown handoff content");
+    assert(firstHandoff.filename === handoffFilename, "step 5 full Markdown handoff filename", `expected deterministic filename ${handoffFilename}, got ${firstHandoff.filename}`);
+    for (const expected of [
+      "# Local Working Handoff",
+      "- **Step:** 05 / The handoff",
+      `Bounded claim:** ${learnerTextFixture.premiseClaim}`,
+      "Selected revision:** V2 / honest revision",
+      "Selected criterion:",
+      "Synthesis outcome:** combine",
+      `Synthesis sentence:** ${learnerTextFixture.councilNote}`,
+      "Schema version:** 2",
+      "Current ROY readout:** 5x",
+      "- [x] The claim is clear before the diagram appears.",
+      "Revision loopbacks:** Visible",
+      "## Next test",
+      learnerTextFixture.nextTest,
+      "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut",
+    ]) {
+      assert(firstHandoff.content.includes(expected), "step 5 full Markdown handoff content", `export is missing ${expected}`);
+    }
+    await waitFor(client, `document.querySelector(".copy-status")?.textContent.includes("Saved locally as ${handoffFilename}.")`, "step 5 local handoff feedback");
+    await click(client, ".download-handoff-button", "step 5 deterministic Markdown handoff download");
+    const secondHandoff = await client.evaluate(`(async () => ({
+      filename: window.__handoffCapture.download,
+      content: await window.__handoffCapture.textPromise,
+    }))()`, "step 5 deterministic Markdown handoff content");
+    assert(secondHandoff.filename === firstHandoff.filename && secondHandoff.content === firstHandoff.content, "step 5 deterministic Markdown handoff", "repeated exports did not produce the same filename and content");
     passed.push("local Markdown handoff full and redacted modes");
 
+    await client.evaluate('history.replaceState({}, "", "#step-3")', "step 5 keyboard reload setup");
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 100));
     await reloadTutorial(client);
     await waitFor(client, 'document.readyState === "complete" && Boolean(document.querySelector(\'.step-rail nav .rail-step[data-step="5"]\'))', "step 5 persistence reload");
-    await click(client, '.step-rail nav .rail-step[data-step="5"]', "step 5 persistence navigation");
-    await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Ship the proof")', "step 5 persistence navigation");
+    await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.dataset.step === "3"', "step 5 keyboard reload starting section");
+    await client.evaluate('document.querySelector(".skip-link")?.focus()', "step 5 keyboard focus starting point");
+    for (let tabIndex = 0; tabIndex < 6; tabIndex += 1) {
+      const stepFiveFocused = await client.evaluate('document.activeElement?.matches(\'.rail-step[data-step="5"]\') === true', "step 5 keyboard focus");
+      if (stepFiveFocused) break;
+      await pressKey(client, "Tab", "Tab", 9, "step 5 keyboard focus");
+    }
+    const completedRailFocused = await client.evaluate('document.activeElement?.matches(\'.rail-step[data-step="5"].is-complete\') === true', "step 5 keyboard focus");
+    assert(completedRailFocused, "step 5 keyboard focus", "Tab navigation did not focus the completed step 5 rail button");
+    await pressKey(client, " ", "Space", 32, "step 5 keyboard activation");
+    await waitFor(client, 'document.querySelector(".section-intro h2")?.textContent.includes("Ship the proof")', "step 5 keyboard activation");
     const persisted = await client.evaluate(`(() => ({
       checked: document.querySelectorAll(".check-row input:checked").length,
       status: document.querySelector(".checklist-panel .panel-kicker")?.textContent.trim(),
-      defaultHandoffMode: document.querySelector('input[name="handoff-mode"][value="full"]')?.checked,
+      defaultHandoffMode: document.querySelector('input[name="handoff-mode"][value="redacted"]')?.checked,
       railComplete: document.querySelector('.rail-step[data-step="5"]')?.classList.contains("is-complete"),
       railNumber: document.querySelector('.rail-step[data-step="5"] .rail-step-number')?.textContent.trim(),
     }))()`, "step 5 checklist reload persistence");
     assert(persisted.checked === 5, "step 5 checklist reload persistence", `expected five checked items after reload, found ${persisted.checked}`);
     assert(persisted.status === "SHIP CHECK / 5 OF 5", "step 5 checklist reload persistence", `unexpected checklist status after reload: ${persisted.status}`);
-    assert(persisted.defaultHandoffMode === true, "step 5 handoff mode default after reload", "redacted mode must remain an explicit opt-in after reload");
+    assert(persisted.defaultHandoffMode === true, "step 5 handoff mode default after reload", "redacted mode must remain the default after reload");
     assert(persisted.railComplete && persisted.railNumber === "✓", "step 5 rail completion after reload", "completed step 5 rail control lost its completion state after a full reload");
+    passed.push("completed rail keyboard activation after reload");
     passed.push("checklist and rail reload persistence");
 
     await client.evaluate('location.hash = "#step-3"', "deep-link setup");
@@ -591,6 +613,32 @@ async function runAcceptance() {
     await client.evaluate('history.back()', "browser back restoration");
     await waitFor(client, 'document.querySelector(\'.rail-step[aria-current="step"]\')?.textContent.includes("Ship the proof")', "browser back restoration");
     passed.push("completion state survives browser back and forward navigation");
+
+    await client.evaluate("window.confirm = () => true", "reset session confirmation setup");
+    await click(client, ".session-status button", "reset completed session");
+    await waitFor(client, `(() => {
+      const saved = localStorage.getItem(${JSON.stringify(sessionStorageKey)});
+      if (!saved) return false;
+      const session = JSON.parse(saved);
+      return session.activeStep === 0 && Object.keys(session.checklist).length === 0;
+    })()`, "reset session persistence");
+    const resetState = await client.evaluate(`(() => {
+      const stepFiveRail = document.querySelector('.rail-step[data-step="5"]');
+      const session = JSON.parse(localStorage.getItem(${JSON.stringify(sessionStorageKey)}));
+      return {
+        activeStep: document.querySelector('.rail-step[aria-current="step"]')?.dataset.step,
+        heading: document.querySelector(".hero-section h1")?.textContent.trim(),
+        checked: Object.keys(session.checklist).length,
+        railComplete: stepFiveRail?.classList.contains("is-complete"),
+        railNumber: stepFiveRail?.querySelector(".rail-step-number")?.textContent.trim(),
+      };
+    })()`, "reset completed session state");
+    assert(resetState.checked === 0, "reset completed session state", `expected an empty checklist after reset, found ${resetState.checked} completed items`);
+    assert(resetState.activeStep === "1" && resetState.heading?.includes("The first diagram"), "reset completed session state", "reset did not return the tutorial to step 1");
+    assert(!resetState.railComplete && resetState.railNumber === "05", "reset completed session state", "reset left step 5 marked complete");
+    await click(client, '.step-rail nav .rail-step[data-step="5"]', "step 5 navigation after reset");
+    await waitFor(client, 'document.querySelectorAll(".check-row input:not(:checked)").length === 5', "empty checklist after reset");
+    passed.push("reset clears checklist and completed rail state");
 
     await client.evaluate(`(() => {
       Storage.prototype.__firstDiagramOriginalSetItem = Storage.prototype.setItem;
@@ -670,6 +718,29 @@ async function runAcceptance() {
         `archive ${diagram.id} source controls`, "one or more fallback, source, copy, SVG, or source-disclosure controls are missing");
     }
     passed.push("archive static fallbacks under blocked Mermaid import");
+
+    const archiveSourceDownloads = await client.evaluate(`(async () => {
+      const cards = [...document.querySelectorAll("[data-diagram-id]")];
+      return Promise.all(cards.map(async (card) => {
+        const sourceLink = [...card.querySelectorAll(".diagram-actions a")]
+          .find((link) => link.textContent.includes("Download source"));
+        if (!sourceLink) throw new Error("archive source download link missing");
+        const response = await fetch(sourceLink.href);
+        return {
+          id: card.dataset.diagramId,
+          responseOk: response.ok,
+          downloadedSource: (await response.text()).trim(),
+          disclosedSource: card.querySelector("[data-source]")?.textContent.trim() ?? "",
+        };
+      }));
+    })()`, "archive source downloads");
+    assert(archiveSourceDownloads.length === 3, "archive source downloads", `expected three featured diagrams, found ${archiveSourceDownloads.length}`);
+    for (const diagram of archiveSourceDownloads) {
+      assert(diagram.responseOk, `archive ${diagram.id} source download`, "source download request failed");
+      assert(diagram.downloadedSource.length > 0 && diagram.downloadedSource === diagram.disclosedSource,
+        `archive ${diagram.id} source download`, "downloaded Mermaid source did not match the readable source disclosure");
+    }
+    passed.push("archive source downloads match readable Mermaid");
 
     await client.evaluate(`Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined })`, "archive keyboard clipboard fallback setup");
     const archiveKeyboardFocusOrder = [];
@@ -785,10 +856,15 @@ async function runAcceptance() {
         card.querySelector("[data-copy-diagram]")?.click();
         await new Promise((resolveDelay) => setTimeout(resolveDelay, 0));
       }
+      const successLabels = cards.map((card) =>
+        card.querySelector("[data-copy-diagram]")?.textContent.trim() ?? ""
+      );
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, 1700));
       return cards.map((card, index) => ({
         id: card.dataset.diagramId,
         copiedSource: copiedSources[index] ?? "",
-        copyLabel: card.querySelector("[data-copy-diagram]")?.textContent.trim() ?? "",
+        successLabel: successLabels[index] ?? "",
+        resetLabel: card.querySelector("[data-copy-diagram]")?.textContent.trim() ?? "",
         source: card.querySelector("[data-source]")?.textContent.trim() ?? "",
         sourceDisclosure: Boolean(card.querySelector("details.diagram-source [data-source]")),
         fallbackVisible: card.querySelector(".diagram-fallback") instanceof HTMLImageElement && !card.querySelector(".diagram-fallback").hidden,
@@ -798,15 +874,94 @@ async function runAcceptance() {
     })()`, "archive clipboard copy success");
     assert(archiveCopySuccess.length === 3, "archive clipboard copy success", `expected three featured diagrams, found ${archiveCopySuccess.length}`);
     for (const diagram of archiveCopySuccess) {
-      assert(diagram.copyLabel === "Copied", `archive ${diagram.id} clipboard copy success`, `expected Copied, got ${diagram.copyLabel}`);
+      assert(diagram.successLabel === "Copied", `archive ${diagram.id} clipboard copy success`, `expected Copied, got ${diagram.successLabel}`);
+      assert(diagram.resetLabel === "Copy source", `archive ${diagram.id} clipboard copy reset`, `expected Copy source after success timeout, got ${diagram.resetLabel}`);
       assert(diagram.source.length > 0 && diagram.copiedSource === diagram.source && diagram.source === diagram.before.source,
-        `archive ${diagram.id} copied readable source`, "clipboard received source that did not match the disclosed Mermaid source");
+        `archive ${diagram.id} copied readable source after feedback reset`, "clipboard received source that did not match the disclosed Mermaid source");
       assert(diagram.sourceDisclosure === diagram.before.sourceDisclosure && diagram.sourceDisclosure,
-        `archive ${diagram.id} source disclosure after copy success`, "readable source disclosure was hidden or changed after copying");
+        `archive ${diagram.id} source disclosure after feedback reset`, "readable source disclosure was hidden or changed after copying");
       assert(diagram.fallbackVisible === diagram.before.fallbackVisible && diagram.liveBlockHidden === diagram.before.liveBlockHidden,
-        `archive ${diagram.id} fallback after copy success`, "static fallback was hidden or changed after copying");
+        `archive ${diagram.id} fallback after feedback reset`, "static fallback was hidden or changed after copying");
     }
-    passed.push("archive copy source with clipboard access");
+    passed.push("archive copy feedback resets without changing source or fallback");
+
+    await client.send("Network.setBlockedURLs", { urls: [] });
+    await client.send("Page.navigate", { url: archiveUrl });
+    await waitFor(client, 'document.readyState === "complete" && document.querySelectorAll("[data-diagram-id]").length === 3', "archive live-render startup");
+    await waitFor(client, '[...document.querySelectorAll("[data-diagram-id] [data-diagram-status]")].every((status) => status.textContent.includes("Live Mermaid render")) && [...document.querySelectorAll("[data-diagram-id]")].every((card) => Boolean(card.querySelector(".mermaid svg")))', "archive live-render completion");
+    const archiveLive = await client.evaluate(`(() => [...document.querySelectorAll("[data-diagram-id]")].map((card) => ({
+      id: card.dataset.diagramId,
+      source: card.querySelector("[data-source]")?.textContent.trim() ?? "",
+      status: card.querySelector("[data-diagram-status]")?.textContent.trim() ?? "",
+      renderedSvg: Boolean(card.querySelector(".mermaid svg")),
+      fallbackVisible: card.querySelector(".diagram-fallback") instanceof HTMLImageElement && !card.querySelector(".diagram-fallback").hidden,
+      sourceDisclosure: Boolean(card.querySelector("details.diagram-source [data-source]")),
+    })))()`, "archive live-render state");
+    assert(archiveLive.length === 3, "archive live-render state", `expected three featured diagrams, found ${archiveLive.length}`);
+    for (const diagram of archiveLive) {
+      assert(diagram.status === "Live Mermaid render" && diagram.renderedSvg && !diagram.fallbackVisible,
+        `archive ${diagram.id} live-render state`, "Mermaid output did not replace the fallback image");
+      assert(diagram.source.length > 0 && diagram.sourceDisclosure,
+        `archive ${diagram.id} live-render source`, "readable Mermaid source is missing after live rendering");
+    }
+    passed.push("archive live Mermaid rendering");
+
+    await client.evaluate(`Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined })`, "archive live keyboard clipboard fallback setup");
+    const archiveLiveKeyboardFocusOrder = [];
+    for (const [index, expected] of archiveLive.entries()) {
+      const focused = await client.evaluate(`(() => {
+        const card = [...document.querySelectorAll("[data-diagram-id]")][${index}];
+        const source = card?.querySelector("details.diagram-source summary");
+        const copy = card?.querySelector("[data-copy-diagram]");
+        if (!card || !source || !copy) throw new Error("archive live source or copy control missing");
+        source.focus();
+        return {
+          id: card.dataset.diagramId,
+          sourceFocused: document.activeElement === source,
+          sourceText: card.querySelector("[data-source]")?.textContent.trim() ?? "",
+        };
+      })()`, `archive ${expected.id} live source control focus`);
+      assert(focused.id === expected.id, `archive ${expected.id} live keyboard order`, `expected diagram ${expected.id}, got ${focused.id}`);
+      assert(focused.sourceFocused, `archive ${expected.id} live source control focus`, "readable source control could not receive focus");
+      archiveLiveKeyboardFocusOrder.push(`${focused.id}:source`);
+
+      await pressKey(client, " ", "Space", 32, `archive ${expected.id} live source control keyboard activation`);
+      await waitFor(client, `document.querySelectorAll("[data-diagram-id]")[${index}]?.querySelector("details.diagram-source")?.open === true`, `archive ${expected.id} live source disclosure keyboard activation`);
+
+      const copyFocused = await client.evaluate(`(() => {
+        const card = [...document.querySelectorAll("[data-diagram-id]")][${index}];
+        const copy = card?.querySelector("[data-copy-diagram]");
+        if (!copy) throw new Error("archive live copy control missing");
+        copy.focus();
+        return {
+          id: card.dataset.diagramId,
+          copyFocused: document.activeElement === copy,
+        };
+      })()`, `archive ${expected.id} live copy control focus`);
+      assert(copyFocused.id === expected.id, `archive ${expected.id} live keyboard order`, `expected diagram ${expected.id}, got ${copyFocused.id}`);
+      assert(copyFocused.copyFocused, `archive ${expected.id} live copy control focus`, "copy control could not receive focus");
+      archiveLiveKeyboardFocusOrder.push(`${copyFocused.id}:copy`);
+
+      await pressKey(client, " ", "Space", 32, `archive ${expected.id} live copy control keyboard activation`);
+      await waitFor(client, `document.querySelectorAll("[data-diagram-id]")[${index}]?.querySelector("[data-copy-diagram]")?.textContent.trim() === "Copy unavailable"`, `archive ${expected.id} live keyboard clipboard fallback`);
+      const afterKeyboard = await client.evaluate(`(() => {
+        const card = [...document.querySelectorAll("[data-diagram-id]")][${index}];
+        return {
+          source: card?.querySelector("[data-source]")?.textContent.trim() ?? "",
+          sourceDisclosure: Boolean(card?.querySelector("details.diagram-source[open] [data-source]")),
+          renderedSvg: Boolean(card?.querySelector(".mermaid svg")),
+          fallbackVisible: card?.querySelector(".diagram-fallback") instanceof HTMLImageElement && !card?.querySelector(".diagram-fallback").hidden,
+        };
+      })()`, `archive ${expected.id} live keyboard state`);
+      assert(afterKeyboard.source.length > 0 && afterKeyboard.source === focused.sourceText && afterKeyboard.sourceDisclosure,
+        `archive ${expected.id} readable source after live keyboard interaction`, "readable source was hidden or changed after keyboard interaction");
+      assert(afterKeyboard.renderedSvg && !afterKeyboard.fallbackVisible,
+        `archive ${expected.id} live diagram after keyboard interaction`, "rendered Mermaid output was hidden or changed after keyboard interaction");
+    }
+    const expectedLiveKeyboardFocusOrder = archiveLive.flatMap(({ id }) => [`${id}:source`, `${id}:copy`]);
+    assert(JSON.stringify(archiveLiveKeyboardFocusOrder) === JSON.stringify(expectedLiveKeyboardFocusOrder),
+      "archive live keyboard focus order", `expected ${expectedLiveKeyboardFocusOrder.join(", ")}, got ${archiveLiveKeyboardFocusOrder.join(", ")}`);
+    passed.push("archive live-render source and copy keyboard recovery");
 
     console.log(`Browser acceptance: PASS (${passed.length} checks)`);
     passed.forEach((check) => console.log(`- ${check}`));

@@ -1,0 +1,58 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "vb0pEJUkyh4ejYdXfJtFJ"
+uri = "file://screenshots/etch-ai-sketch-preview.jpg"
+type = "image"
+title = "Tutorial preview screenshot"
+description = "Saved 1280×720 screenshot of the refreshed tutorial preview."
+logical_id = "5cbb9915-026d-4d25-970a-c6ea7bf32d70"
+content_hash = "sha256:3265800b866c8790130d05e539033b025948df5d80f302909c27ef5516133afb"
+size = 73521
+mtime_ms = 1790427901466
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:bb1da2b0-78de-40be-9a8a-a8d344427d97/5cbb9915-026d-4d25-970a-c6ea7bf32d70/4ad9e223-c7ce-4a17-a9c1-77cc02bd30cc"
+storage_version_token = "1790427912581710"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "aMhJ-9ps0dP-i00nrKTDO"
+uri = "file://public/og-image.png"
+type = "image"
+title = "Social sharing image"
+description = "1200×630 Open Graph image in the ETCH-AI-SKETCH blueprint identity."
+logical_id = "c3e53f60-0305-4db8-9ccd-3aa19b6b3e90"
+content_hash = "sha256:2a43e0fca1c8cd55c3a766afdb874d9ca8708fea3f79b7f2cf1951f80934c495"
+size = 92936
+mtime_ms = 1790427795697
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:bb1da2b0-78de-40be-9a8a-a8d344427d97/c3e53f60-0305-4db8-9ccd-3aa19b6b3e90/5f0c2aab-83b3-47f3-af21-32d10263c443"
+storage_version_token = "1790427913286241"
+content_type = "image/png"
+
+[[outputs]]
+id = "aaQ_HOF0kJG4gTUGb3U9M"
+uri = "file://public/github-social-preview.png"
+type = "image"
+title = "GitHub social preview"
+description = "1280×640 repository social-preview artwork, ready for manual upload in GitHub repository Settings."
+logical_id = "0f4dda8f-f293-4b90-9461-12bb3f51008e"
+content_hash = "sha256:f04e79ae065fbf01421466c265e8f5095dfc5596222901feae5094643527933a"
+size = 97911
+mtime_ms = 1790427795885
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:bb1da2b0-78de-40be-9a8a-a8d344427d97/0f4dda8f-f293-4b90-9461-12bb3f51008e/9c24a02c-88d1-4d4c-b050-3b3cec732641"
+storage_version_token = "1790427913977614"
+content_type = "image/png"
+
+[[outputs]]
+id = "OWBVp1e66JVrqYx4GkltO"
+uri = "file://public/project-avatar.png"
+type = "image"
+title = "Project avatar and app mark"
+description = "512×512 project icon artwork. This is a project asset, not a personal or contributor avatar."
+logical_id = "263d43fe-0a51-4224-be04-8843a8db663d"
+content_hash = "sha256:a49563ba2accd2654c36316bfc17b599acc3453c4f197f7ceed46a2b1b258e73"
+size = 38769
+mtime_ms = 1790427688333
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:bb1da2b0-78de-40be-9a8a-a8d344427d97/263d43fe-0a51-4224-be04-8843a8db663d/6e049d16-a998-4734-a3da-0c8b48a8b16d"
+storage_version_token = "1790427914618853"
+content_type = "image/png"

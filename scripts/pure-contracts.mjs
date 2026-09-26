@@ -4,7 +4,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const moduleNames = ["session", "roy", "workbench", "handoff"];
+const moduleNames = ["session", "roy", "workbench", "handoff", "analytics"];
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -74,12 +74,13 @@ async function loadModules() {
     roy: imports[1],
     workbench: imports[2],
     handoff: imports[3],
+    analytics: imports[4],
   };
 }
 
 async function run() {
   const modules = await loadModules();
-  const { session, roy, workbench, handoff } = modules;
+  const { session, roy, workbench, handoff, analytics } = modules;
   const passed = [];
   const rootAppSource = await readFile(join(root, "src", "App.tsx"), "utf8");
   const archiveRendererSource = await readFile(join(root, "archive", "editorial-cut", "mermaid-init.js"), "utf8");
@@ -91,6 +92,47 @@ async function run() {
     assert(session.validateSession(defaultSession), "the default session should satisfy its own schema");
     assertDeepEqual(session.createDefaultSession(fixedNow), defaultSession, "default sessions should be deterministic for a fixed clock");
     passed.push("default session contract");
+
+    const campaignParameters = analytics.readCampaignParameters(
+      "?utm_source=LinkedIn&utm_medium=Organic-Social&utm_campaign=First-Diagram-Is-A-Liar&utm_content=V0-5-Article&email=private%40example.com&gclid=ignored",
+    );
+    assertDeepEqual(campaignParameters, {
+      utm_source: "linkedin",
+      utm_medium: "organic-social",
+      utm_campaign: "first-diagram-is-a-liar",
+      utm_content: "v0-5-article",
+    }, "campaign tracking should return only the four normalized allow-listed values");
+    assertEqual(
+      analytics.readCampaignParameters("?utm_source=linkedin&utm_medium=owned"),
+      null,
+      "campaign tracking should require all four UTM fields",
+    );
+    assertEqual(
+      analytics.readCampaignParameters("?utm_source=linkedin&utm_medium=owned&utm_campaign=first-diagram-is-a-liar&utm_content=owner%40example.com"),
+      null,
+      "campaign tracking should reject values that could contain personal data",
+    );
+    assertEqual(
+      analytics.readCampaignParameters("?utm_source=linkedin&utm_source=private&utm_medium=owned&utm_campaign=first-diagram-is-a-liar&utm_content=article"),
+      null,
+      "campaign tracking should reject ambiguous duplicate parameters",
+    );
+    assertEqual(
+      analytics.sanitizePageLocation(
+        "https://okhp3.github.io",
+        "/first-diagram-is-a-liar/",
+        "?utm_source=LinkedIn&utm_medium=Organic-Social&utm_campaign=First-Diagram-Is-A-Liar&utm_content=V0-5-Article&email=private%40example.com&gclid=ignored",
+      ),
+      "https://okhp3.github.io/first-diagram-is-a-liar/?utm_source=linkedin&utm_medium=organic-social&utm_campaign=first-diagram-is-a-liar&utm_content=v0-5-article",
+      "page locations should drop unapproved query values and fragments",
+    );
+    assertDeepEqual(analytics.getCtaParameters("start-field-guide"), {
+      cta_id: "start-field-guide",
+      surface: "hero",
+      destination: "tutorial-step-2",
+    }, "CTA payloads should use fixed low-cardinality classifications");
+    assertEqual(analytics.getCtaParameters("unknown-cta"), null, "unrecognized CTA identifiers should not become event payloads");
+    passed.push("privacy-bounded analytics event contract");
 
     const maxClaim = "x".repeat(session.CLAIM_MAX_LENGTH);
     const validBoundarySession = {
@@ -174,35 +216,48 @@ async function run() {
       "featured archive diagrams should retain static fallback, source, and copy affordances");
     passed.push("diagram renderer boundary, security, fallback, and accessibility contracts");
 
-    const unsafeText = "<script>\n*bold* _under_ [link] #tag | pipe \\tick`";
+    const learnerTextFixture = {
+      premiseClaim: "<script>\n*claim* _alpha_ [link] #tag | pipe \\tick`",
+      councilNote: "<script>\n*note* _bravo_ [link] #tag | pipe \\tick`",
+      nextTest: "<script>\n*test* _charlie_ [link] #tag | pipe \\tick`",
+    };
+    assertDeepEqual(Object.keys(learnerTextFixture), handoff.LEARNER_TEXT_FIELD_NAMES,
+      "learner text fixture should inventory every learner-editable field included in the handoff");
     const handoffSession = {
       ...defaultSession,
       activeStep: 4,
       visitedSteps: [0, 1, 2, 3, 4],
-      premise: { pattern: "hidden-loop", claim: unsafeText },
+      premise: { pattern: "hidden-loop", claim: learnerTextFixture.premiseClaim },
       roy: { words: 50, clarity: 7, preset: "useful-compression" },
       workbench: { revision: "v2", showLoops: true },
-      council: { criterion: "iteration", outcome: "combine", note: unsafeText },
+      council: { criterion: "iteration", outcome: "combine", note: learnerTextFixture.councilNote },
       checklist: { claim: true, loops: true, signal: true, conditions: true, handoff: true },
-      nextTest: unsafeText,
+      nextTest: learnerTextFixture.nextTest,
       handoff: { copied: false, downloaded: false, generatedDate: "2026-09-03" },
     };
     const firstMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03");
     const secondMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03");
     const explicitFullMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03", "full");
     const redactedMarkdown = handoff.buildHandoffMarkdown(handoffSession, "2026-09-03", "redacted");
+    const sharedMarkdown = handoff.buildSharedHandoffMarkdown(handoffSession, "2026-09-03");
+    const confirmedSharedMarkdown = handoff.buildSharedHandoffMarkdown(handoffSession, "2026-09-03", { includeLearnerTextConfirmed: true });
     assertEqual(firstMarkdown, secondMarkdown, "handoff Markdown should be deterministic for the same session and date");
     assertEqual(firstMarkdown, explicitFullMarkdown, "full handoff Markdown should remain the default export mode");
     assert(firstMarkdown.includes("# Local Working Handoff") && firstMarkdown.includes("- **Step:** 05 / The handoff"),
       "handoff should include export identity and current position");
     assert(firstMarkdown.includes("Export mode:** Full local packet") && firstMarkdown.includes(`Filename:** \`${handoff.HANDOFF_FILENAME}\``),
       "full handoff should identify its local export mode and filename");
-    assert(firstMarkdown.includes("Learner text policy:** Included by default for an explicit local export"),
+    assert(firstMarkdown.includes("Learner text policy:** Included only after deliberate confirmation for an explicit local export"),
       "handoff should state the learner text export policy");
-    assert(firstMarkdown.includes("\\*bold\\* \\_under\\_ \\[link\\] \\#tag \\| pipe \\\\tick\\`"),
+    assert(firstMarkdown.includes("\\*claim\\* \\_alpha\\_ \\[link\\] \\#tag \\| pipe \\\\tick\\`"),
       "handoff should escape Markdown punctuation in learner text");
-    assert(!firstMarkdown.includes("<script>") && !firstMarkdown.includes("\n*bold*"),
+    assert(!firstMarkdown.includes("<script>") && !firstMarkdown.includes("\n*claim*"),
       "handoff should remove angle brackets and flatten learner line breaks");
+    for (const [field, value] of Object.entries(learnerTextFixture)) {
+      const escapedMarker = value.match(/\*(\w+)\*/)?.[1];
+      assert(escapedMarker && firstMarkdown.includes(`\\*${escapedMarker}\\*`),
+        `full handoff should include the learner-editable ${field} fixture`);
+    }
     assert(firstMarkdown.includes("- [x] The claim is clear before the diagram appears.") && firstMarkdown.includes("Current ROY readout:** 7x"),
       "handoff should preserve checklist and ROY values");
     assert(firstMarkdown.includes("Selected revision:** V2 / honest revision") && firstMarkdown.includes("Synthesis outcome:** combine"),
@@ -214,9 +269,15 @@ async function run() {
       redactedMarkdown.includes("Synthesis outcome:** combine") &&
       redactedMarkdown.includes("- [x] The claim is clear before the diagram appears."),
     "redacted handoff should retain privacy boundary and structural receipts");
-    assert(!redactedMarkdown.includes(unsafeText) &&
-      redactedMarkdown.includes("Redacted for sharing — learner-entered text omitted"),
-    "redacted handoff should omit learner-authored text while marking the omission");
+    for (const [field, value] of Object.entries(learnerTextFixture)) {
+      const uniqueMarker = value.match(/_(\w+)_/)?.[1];
+      assert(uniqueMarker && !redactedMarkdown.includes(uniqueMarker),
+        `redacted handoff should omit the learner-editable ${field} fixture`);
+    }
+    assert(redactedMarkdown.includes("Redacted for sharing — learner-entered text omitted"),
+      "redacted handoff should mark omitted learner-authored text");
+    assertEqual(sharedMarkdown, redactedMarkdown, "shared delivery should default to the redacted handoff");
+    assertEqual(confirmedSharedMarkdown, explicitFullMarkdown, "shared delivery should include learner text only after explicit confirmation");
     assert(handoff.getHandoffFilename("full") === handoff.HANDOFF_FILENAME &&
       handoff.getHandoffFilename("redacted") === handoff.REDACTED_HANDOFF_FILENAME,
     "handoff mode should select distinct deterministic filenames");

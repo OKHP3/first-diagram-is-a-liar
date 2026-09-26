@@ -22,7 +22,8 @@ owner decisions separate.
 - A versioned session is validated on read, migrates the earlier checklist
   storage, persists locally when available, reports session-only mode when
   storage is blocked, supports reset, and follows dependency-free step hashes.
-- The handoff offers an explicit full local packet or redacted sharing packet.
+- The handoff defaults to a redacted sharing packet and offers a deliberately
+  confirmed full local packet.
   Both are generated in-browser as deterministic Markdown with structural
   premise, ROY, workbench, Council, checklist, public receipts, generated date,
   schema version, and an explicit non-validation boundary. Redacted mode omits
@@ -75,19 +76,19 @@ bundle budget before changing this boundary.
 
 ## Owner policy: learner text in exported handoffs
 
-**Decision (2026-09-07): keep learner-entered text included by default for an
-explicit browser-local full export, while offering a separate explicit redacted
-sharing packet.**
+**Decision (2026-09-19): default every sharing-shaped or future hosted delivery
+to the redacted packet, and require deliberate confirmation before
+learner-authored text can leave the browser.**
 
-The full local packet includes the optional bounded premise claim, synthesis
-sentence, and next test because the learner chose to copy or download the
-working handoff. The redacted sharing packet omits those three learner-authored
-fields and retains selected patterns, outcomes, controls, checklist state,
-public receipts, and the same browser-local privacy boundary. Both packets are
-assembled in the browser, are not uploaded, and are labelled as working
-snapshots rather than verdicts. Full remains the default so local continuity
-does not silently lose context; redacted mode is an explicit opt-in for a
-sharing-shaped handoff.
+The redacted sharing packet omits the optional bounded premise claim, synthesis
+sentence, and next test while retaining selected patterns, outcomes, controls,
+checklist state, public receipts, and the same browser-local privacy boundary.
+It is the UI default and the default produced by the shared-delivery API, so a
+future hosted or external action cannot inherit a full payload accidentally.
+The full local packet remains available only after a deliberate confirmation
+that learner-authored text may leave the browser. Both packets are assembled in
+the browser, are not uploaded, and are labelled as working snapshots rather
+than verdicts.
 
 ## Unknown or owner-controlled
 
