@@ -5,7 +5,7 @@ the ETCH-AI-SKETCH release ladder:
 
 | Chapter | Focus | Packet | Companion draft | Status |
 |---|---|---|---|---|
-| v0.6 | Notion as the writer's room | [Notion](v0.6-notion.md) | [LinkedIn draft](../../docs/linkedin/proto-posts/v0.6-notion.md) | Prepared; review-only |
+| v0.6 | Notion as documentarian and MCP-connected project hub | [Notion](v0.6-notion.md) | [LinkedIn draft](../../docs/linkedin/proto-posts/v0.6-notion.md) | Prepared; review-only |
 | v0.7 | Replit as a build surface | [Replit](v0.7-replit.md) | [LinkedIn draft](../../docs/linkedin/proto-posts/v0.7-replit.md) | Prepared; review-only |
 | v0.8 | Mermaid Theme Builder and visual governance | [Mermaid Theme Builder](v0.8-mermaid-theme-builder.md) | [LinkedIn draft](../../docs/linkedin/proto-posts/v0.8-mermaid-theme-builder.md) | Prepared; review-only |
 | v0.9 | BPMN for Mermaid and process semantics | [BPMN for Mermaid](v0.9-bpmn-for-mermaid.md) | [LinkedIn draft](../../docs/linkedin/proto-posts/v0.9-bpmn-for-mermaid.md) | Prepared; review-only |
