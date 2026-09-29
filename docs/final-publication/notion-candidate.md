@@ -242,13 +242,13 @@ This is why the later work moved toward a Process Narrative Specification. The n
 
 The narrative and the diagram remain distinct representations. They can refer to the same stable identifiers and be maintained together. Regenerating an image from text does not prove that the image preserved every important meaning in the narrative. The review still has to check what was selected, omitted, and implied.
 
-That gives knowledge custody a practical role. In this project, Notion provided an editorial home for drafts, consolidation, and the evolving record. GitHub preserved public source files and publication receipts. The article surfaces presented the argument to readers. Each had a job. Confusion arose when a working copy or historical receipt sounded like the current authority without clearly identifying its status.
+That gives knowledge custody a practical role. In this project, [Notion](https://www.notion.com) provided an editorial home for drafts, consolidation, and the evolving record. GitHub preserved public source files and publication receipts. The article surfaces presented the argument to readers. Each had a job. Confusion arose when a working copy or historical receipt sounded like the current authority without clearly identifying its status.
 
 A connection between tools can make reading and writing possible. It does not establish automatic synchronization, complete decision lineage, or agreement between every page. A skill can package a repeatable set of instructions. It does not guarantee that every host has the required tools, permissions, or execution behavior. These boundaries are mundane, which is precisely why they are easy to skip in an exciting demonstration.
 
 For business use, I would make custody explicit. Name the authoritative process record. Identify the views derived from it. Record each view's owner, audience, revision, and last verification. Keep an unresolved question visibly unresolved. When a change is accepted, retain enough rationale to distinguish a deliberate decision from an accidental edit.
 
-Replit contributed a different lesson. I initially approached it with expectations shaped by chat-based tools. Its value became clearer as I learned to use a build environment that could work with files and executable behavior. That late discovery belongs to the author's learning curve and to Replit's specialty role. It should not be retroactively described as an equal-condition victory over the original participants.
+[Replit](https://replit.com) contributed a different lesson. I initially approached it with expectations shaped by chat-based tools. Its value became clearer as I learned to use a build environment that could work with files and executable behavior. That late discovery belongs to the author's learning curve and to Replit's specialty role. It should not be retroactively described as an equal-condition victory over the original participants.
 
 The practical question expanded from whether an answer sounded convincing to whether the work survived contact with a repository, a rendered interface, and an observable result. A running preview, a committed change, and a published application are separate states. A team needs to know which one it has. The same distinction applies to documentation: drafted, reviewed, approved, and distributed are different claims.
 
@@ -264,25 +264,101 @@ That is a more demanding objective than making an impressive picture. It is also
 
 ## Make visual consistency serve the work
 
-Once a team can generate diagrams quickly, inconsistency becomes visible quickly too. Two views of the same process may use different colors, shapes, fonts, spacing, or direction. Some differences help explain different tasks. Others force the reader to relearn a visual vocabulary without gaining new information.
+Once a team can generate diagrams quickly, inconsistency becomes visible quickly too. Two views of the same process may use different colors, shapes, fonts, spacing, or direction. Some differences help explain different tasks. Others force the reader to relearn a visual vocabulary without gaining new information. The picture renders, but it looks as though a different department commissioned every page.
 
-My work on Mermaid Theme Builder followed that practical irritation. I wanted reusable styling choices that could make diagrams feel like part of a coherent system. The lesson is visual governance: make the design decisions that carry meaning deliberately, then apply them consistently where the renderer and destination support them. [Mermaid Theme Builder](https://overkillhill.com/projects/mermaid-theme-builder/)
+That is the next translation tax. We reduced the effort of drawing the relationships, then spent the saving asking the agent to make them look like something we would actually use. Change the blue. Increase the labels. Keep the exceptions orange. Restore the shape it changed while fixing the font. A styling conversation can gradually become another diagramming project.
 
-A team can begin with a small visual contract. Define what a decision looks like, how an exception is labeled, how return paths are distinguished, and what information a caption must supply. Make sure the same color does not mean “approved” in one diagram and “requires review” in the next. Prefer labels and structure that remain understandable if color is unavailable.
+The frustration is familiar, but its cause needs separating into layers. The generating model chooses source syntax and may invent or omit style instructions. Mermaid interprets that source using its configuration and available diagram features. The destination decides which renderer, settings, fonts, and embedding behavior are available. Finally, the exported image or document imposes its own size and background. An unwanted result can originate at any of those layers.
 
-Consistency should also expose status. A proposed step should not look indistinguishable from an approved control when readers may act on it. An unknown can be labeled directly. A view can identify its scope and source revision. Those choices help readers calibrate trust before they interpret the process itself.
+That distinction applies whether the conversation starts in ChatGPT, Claude, Copilot, Gemini, Perplexity, or another assistant. It does not establish that they all make the same mistakes or expose identical controls. The weakness I want to address is the workflow: when preferences are missing from the active task, the assistant and renderer have to fill the gaps. A fresh conversation is a poor place to renegotiate a visual identity that the user already settled last Tuesday.
 
-Renderer conditions still matter. The same source can be presented under different configurations, layouts, fonts, and integration settings. Differences observed between environments do not by themselves prove that each AI platform has a different Mermaid implementation. Record the source and the relevant render conditions before assigning a cause. The historical configuration issue in the Council archive is a reminder that presentation has provenance too.
+Defaults are choices too. Mermaid's current documentation describes different theme and look defaults for different diagram families and changes between releases. It also documents customization through the base theme and theme variables, including hexadecimal colors and font settings. Consequently, “use Mermaid” is not a complete appearance specification. State the intended configuration and check it in the actual destination. [Mermaid theme configuration](https://mermaid.js.org/config/theming.html)
 
-Keep the source beside the accepted render. If the destination cannot render a feature reliably, provide an approved static fallback and a source link. The image used in a report should be traceable to the source it represents. When a source changes, the old picture should not quietly remain in circulation with a current label.
+My work on Mermaid Theme Builder grew out of that practical irritation. The project provides a workbench for applying themes to existing Mermaid source, previewing choices, and preparing exports. Its documented outputs include palette JSON, CSS custom properties, styled source, and prompt scaffolds, with examples and renderer guidance. Those are concrete ways to make a visual choice reusable. They are not evidence that every exported setting will survive every host. [Theme Builder project](https://overkillhill.com/projects/mermaid-theme-builder/) · [Documented exports](https://github.com/OKHP3/mermaid-theme-builder#exports)
 
-Accessibility is part of this maintenance problem. A dense diagram that requires magnification and precise color discrimination can exclude the reader who most needs the explanation. Use readable labels, descriptive captions, and visible prose that explains the consequential relationships. A full-resolution link gives an interested reader detail; the article still needs to carry its argument when the image is unavailable.
+The lesson I take from that work is broader than choosing a palette. Once a person has found a useful combination of color, typography, shape conventions, and layout preferences, those decisions should become an input to the next task. The workbench helps discover and inspect the choices. A personal Agent Skill could carry the chosen rules into generation, before the first source file exists. A plugin could package that workflow for a host that supports it.
 
-The two selected figures above follow that principle. Their surrounding text explains why they were selected and where they fail. The originals remain available for inspection. A future crop or simplified teaching illustration should identify itself as an editorial derivative, so no one mistakes a corrected teaching diagram for the original competition submission.
+I would therefore treat Theme Builder and a personal styling skill as complementary. Use the visual workbench to decide what good looks like and inspect what the target can reproduce. Use the skill to recall that decision, select a relevant example, and constrain the next draft. Return to the workbench when the result or destination needs inspection. The aim is fewer avoidable correction turns, with the design decision made once and reused deliberately.
 
-Maintenance should be triggered by changes in meaning as well as changes in software. A new approval rule, a different owner, a revised exception, or a changed evidence requirement can invalidate a perfectly rendered image. Renderer upgrades can separately affect presentation. Treat those as different checks with different owners, even when one release happens to address both.
+Consistency still has to serve meaning. In the purchase-request example, an exception should remain recognizable across the overview, the detailed procedure, and the training material. If amber means “requires attention” in one view, it should not casually mean “approved” in the next. A profile can preserve that vocabulary while allowing each view to show the amount of detail its audience needs.
 
-Visual consistency earns its place when it reduces unnecessary interpretation and makes important differences easier to notice. If maintaining the theme becomes more important than maintaining the meaning, the project has wandered back into wallpaper production.
+## Package the preference so the next prompt can use it
+
+A personal styling skill could be a small, understandable package. I would give it an entry instruction, one named preference profile, examples for the supported diagram families, and a short compatibility record. Optional scripts would handle repeatable transformations and checks. This is a proposed design for the workflow, not a claim that a universal personal-theme installer has already been delivered by Theme Builder.
+
+The Agent Skills specification provides a suitable container: a `SKILL.md` entry file with metadata and instructions, plus optional scripts, references, and assets. Script execution and supported languages depend on the agent implementation. That establishes a packaging option; it does not make every chat product capable of discovering, loading, or running the package. [Agent Skills specification](https://agentskills.io/specification)
+
+The entry instruction should say when to use the skill and what it governs. For example: use this profile when generating or restyling Mermaid diagrams for my operational documents; preserve supplied process facts and identifiers; choose a compatible family example; apply the profile; disclose any styling fallback. It should also say what counts as completion: source provided, configuration identified, and rendering either inspected in a named environment or explicitly unverified.
+
+The preference file could be JSON because structured values are easier to inspect and apply consistently than several paragraphs of adjectives. I would separate identity, visual tokens, semantic roles, layout preferences, and output requirements. A profile name such as “operations-light” identifies the intended use. A revision identifies which agreed choices the diagram used. Neither is a replacement for recording the process revision represented by the diagram.
+
+For a concrete illustrative palette, the profile might specify background #FFFFFF, text #172A3A, ordinary process fill #E8F2F4, process border #176B78, and attention fill #FFF0CC. These are example design choices, not the user's approved palette or a claim of measured accessibility. A text label would accompany the attention color. The package should identify the intended color pairs so a contrast check evaluates the actual combinations used.
+
+Typography needs equally explicit choices. A profile might prefer Arial with a generic sans-serif fallback, a readable node-label size, and a larger title where the family supports a title style. A font-family name does not install or embed the font. The destination must have access to it, or use a disclosed fallback. The agent should report a substitution rather than claiming exact brand fidelity because the source contains the preferred name.
+
+Semantic roles deserve their own mapping. “Process,” “decision,” “exception,” “external party,” and “unresolved” describe why an element looks different. The profile can map each role to permitted fills, borders, shapes, and labels. That is more useful than supplying five attractive colors and allowing the model to assign fresh meanings every time. It also lets someone change the palette without changing what an exception means.
+
+Layout preferences should express intent with room for the facts. Prefer left-to-right for a short sequence; permit top-to-bottom when an article column makes the horizontal view unreadable. Keep decision labels concise, label consequential branches, and avoid forcing every subgraph into the same width. Those are proposed design rules. They should guide presentation without dropping a real exception just to make the diagram fit a template.
+
+The profile also needs an explicit precedence rule. I would use the user's current request first, then an applicable organizational design requirement, then the selected personal profile, then the diagram-family defaults. If those requirements conflict, expose the conflict. An instruction to prepare a monochrome handout should override a preference for an elaborate color palette. A personal preference should not quietly change a control's meaning or override the task's acceptance conditions.
+
+The examples would give the agent something concrete to follow. Store an editable Mermaid source beside an approved render and a note explaining its intended use, renderer conditions, and known limitations. Include a short ordinary case and a case with an exception. The source supplies syntax and configuration; the image supplies a visual target for a host that can inspect images. Neither should be treated as proof that an unseen destination will render identically.
+
+Avoid putting a real client workflow into a reusable style example. A fictional request and generic role names are enough to demonstrate the pattern. The personal package should carry the user's design choices, not an accidental collection of business facts copied into every future conversation. The diagram's task context can be supplied separately, keeping preference reuse distinct from information disclosure.
+
+This is where the package starts to save attention. The user no longer needs to remember the preferred border color, repeat the font request, or describe the same exception style in every prompt. The agent has a declared reference to retrieve. A failure to follow it becomes a specific mismatch with an inspectable rule, rather than another round of “make it look more professional.”
+
+## Give each diagram family an example it can actually follow
+
+One attractive flowchart is not a template for the whole Mermaid language. A flowchart models routes and decisions. An architecture view emphasizes services, groups, and connections. A fishbone diagram organizes possible causes around an effect. A Venn diagram expresses set relationships. They need a shared visual identity and different instructions about how to preserve their meaning.
+
+The current Mermaid documentation includes dedicated architecture, Venn, and Ishikawa/fishbone syntax. Venn and Ishikawa are documented as newer types whose syntax may evolve. A package should therefore declare the Mermaid version and host conditions under which each example was checked, then select examples the destination can support. Native syntax in current documentation does not prove that an embedded renderer has been upgraded to include it. [Architecture](https://mermaid.js.org/syntax/architecture.html) · [Venn](https://mermaid.js.org/syntax/venn.html) · [Ishikawa](https://mermaid.js.org/syntax/ishikawa.html)
+
+For flowcharts, I would include a template with ordinary work, a decision, a return path, and a visibly unresolved condition. In the purchase-request example, DEC-01 and DEC-02 must remain separate even if the theme uses the same decision shape for both. The preferred palette can make the two decisions look related. It cannot make completeness equivalent to approval.
+
+For architecture diagrams, the exemplar should distinguish a component from a boundary and a connection from an ordered step. If a desired icon is unavailable, a clear text label is an acceptable declared fallback. Replacing a missing service symbol with something that suggests a different service is a semantic change. Styling instructions should never promote an attractive substitute above an accurate description.
+
+For a fishbone example, the style rules should keep the stated problem and categories readable while allowing enough space for contributing causes. The content rules should distinguish a proposed cause from one supported by evidence. A beautifully organized fishbone can make speculation look settled; an exemplar can teach the agent to keep that uncertainty in the labels or adjoining explanation.
+
+For a Venn example, the package should explain what membership and overlap mean. Reusing the attention color for an overlap should not imply risk unless risk is actually the subject. If area carries quantitative meaning, the source needs the relevant quantities and the chosen rendering must be suitable for that claim. A template that merely looks like three overlapping circles is not automatically an appropriate quantitative model.
+
+Sequence, state, and entity-relationship examples could extend the library as actual work demands them. Start with the families the person regularly uses. Each added family introduces syntax, style mappings, and maintenance responsibilities. A small collection of understood examples is a better operational starting point than a large catalog whose compatibility has never been inspected.
+
+There is a practical limit to the CSS analogy. A portable profile can resemble a stylesheet by centralizing colors and typography, but its values still need translation into the chosen diagram's supported controls. Mermaid flowcharts provide classDef for reusable node styling; their documentation warns that external CSS may be overridden by Mermaid's own scoped styles. A flowchart class recipe should not be copied into every other family on the assumption that the syntax is universal. [Flowchart styling](https://mermaid.js.org/syntax/flowchart.html#classes)
+
+Theme Builder makes this distinction concrete: its CSS export is a set of static design tokens for handoff, not a runtime Mermaid theme. A personal skill would need to map those values into supported Mermaid configuration or diagram statements. Attaching the CSS file alone would not perform that translation. [CSS export implementation](https://github.com/OKHP3/mermaid-theme-builder/blob/main/src/lib/exporters.ts)
+
+Theme variables, diagram-specific statements, and host-level CSS are different mechanisms. Mermaid's configuration schema includes themeCSS, but a configuration option is not proof that a particular integration exposes it. I would have the package prefer supported theme settings, use family-specific styling where appropriate, and reserve CSS overrides for a destination where their behavior has been checked. The export should record which route it took. [Mermaid configuration schema](https://mermaid.js.org/config/schema-docs/config.html)
+
+When the requested family is unavailable, the skill needs a fallback policy. It could provide the native source for use in a compatible renderer, offer an approved static export, or propose another representation that preserves the relevant meaning. It should identify an approximation as an approximation. Silently drawing a generic flowchart and calling it a Venn diagram would solve the rendering error by creating a communication error.
+
+The same discipline applies to consistency itself. A font substitution, a different line break, and a missing exception are different classes of defect. Record them separately. The first may be an acceptable compatibility compromise; the second may need layout review; the third changes the process. A styling skill should make those distinctions easier to manage, not hide them under a single “looks good” verdict.
+
+## One prompt for the user, a repeatable workflow for the agent
+
+The desired interaction can be short: “Use my operations-light diagram skill to show this purchase-request process as a flowchart for our documentation page. Preserve DEC-01 and DEC-02, show the missing-evidence return path, and use the profile's exception style.” The process facts would accompany the request. The person supplies the purpose and the variation; the package supplies the already-agreed visual conventions.
+
+Behind that short request, the agent still has work to do. Load the named profile and relevant family example. Establish the destination constraints. Generate the model from the supplied facts. Apply the permitted style mappings. Inspect the source for unsupported or omitted settings. Render and inspect the result when tools permit it. Return the source, the result, and any material compatibility exception. A single user prompt can initiate several internal steps.
+
+An optional Python helper could make the repetitive parts more deterministic. It could read the JSON profile, check expected keys and hexadecimal values, choose a reviewed template, and emit configuration using the correct serialization rules. It could also compare requested tokens with generated source and flag an unexplained color or missing profile identifier. Those are proposed helper responsibilities, not a claim that a Python file can understand every diagram's correctness.
+
+A helper would need more care when modifying existing source. Blindly inserting another configuration header or appending duplicate style statements can create conflicts. I would require it to recognize the supported input structure, preserve the diagram content, and stop when it cannot safely reconcile existing settings. A source difference should show whether the operation changed presentation, meaning, or both. The task owner should not discover a deleted branch during a palette review.
+
+Python is also not the Mermaid renderer. A host could permit profile reading but prohibit script execution, or support execution without having a compatible rendering tool. In those cases the skill can still supply the preferred source and explain which check was unavailable. It must not say that the image was inspected merely because a helper successfully wrote a file.
+
+A plugin could bundle the skill, preference editor, examples, and a rendering or validation tool into a more convenient installation. That would make sense for a supported host and a recurring workflow. Where native skills are available, invocation can use the host's skill mechanism. Elsewhere, an attached profile and example, or the relevant instructions supplied explicitly, may provide a simpler adaptation. These are deployment choices to verify in the chosen product, not a promise of identical installation across major platforms.
+
+The portable part is the user's intent and the reusable assets. Discovery, context loading, tool execution, and rendering remain host responsibilities. An agent that cannot access the named package should say so before inventing its contents. An agent that can read the package but cannot run its script should use the documented manual path. “The skill was installed” and “the skill governed this output” are different claims.
+
+I would keep the ordinary response concise: the diagram, its editable source, the profile used, and any deviation that matters. The user does not need a paragraph explaining a successful hex-color check. They do need to know that a requested font was substituted or that the preview used a different renderer from the destination. The implementation details should earn their place by affecting a decision.
+
+This approach aims to make the first result closer to the user's intended appearance. It does not promise a correct or beautiful diagram from every single prompt. The process facts may still be incomplete, the layout may be awkward, or the destination may impose a constraint the profile cannot overcome. Those are reasons for targeted revision. Repeating the same known color and font preferences should become the exception.
+
+The two historical figures in this article remain unchanged. Their surrounding text explains the consequential relationships and defects, and the full-resolution originals and source remain available. A new styled teaching version would be labeled as a derivative. That distinction keeps an improved presentation from rewriting the evidence of what the original systems produced.
+
+For ongoing use, give the personal package an owner and retain its prior revision. Recheck the relevant examples after changing a palette, font, diagram-family rule, or renderer. A corporate team can share an approved baseline while allowing explicit personal or publication profiles where appropriate. The principle is the same as the process record: keep the governing choices inspectable, then regenerate and review their dependent views.
+
+The opportunity is practical. Theme Builder helps make the design decision visible. A skill or plugin can make that decision available at the moment the next diagram is requested. Together, they offer a path toward spending fewer turns negotiating appearance and more attention checking whether the picture tells the truth.
 
 ## Measure the work and keep the limits visible
 
@@ -300,6 +376,8 @@ Keep comparisons fair enough for the decision. Similar readers should receive co
 
 The pilot also needs an effort budget. If a Council consumes considerably more review time than a single draft plus domain review, that additional cost belongs in the comparison. More generated alternatives can increase the burden of choosing among them. The test is whether they expose enough useful differences to justify that burden for this task.
 
+Evaluate the styling package on that same basis. Compare equivalent diagram tasks with ordinary prompting and with the selected profile available at the start. Record first-result adherence to the agreed visual rules, styling correction turns, elapsed effort, rendering failures, and semantic defects separately. A reduction in color corrections is useful only if the process remains accurate. Include the time spent creating and maintaining the profile, spread across a stated number of uses. This would test the proposed benefit of Theme Builder plus a personal skill without pretending that the original Council experiment already measured it.
+
 Research on model evaluation reinforces the need for care. Zheng and colleagues examined model-based judging and documented sensitivity to factors such as response position and verbosity in their evaluated settings. Their discussion of self-enhancement bias was inconclusive, so it would be inaccurate to treat that particular concern as a settled finding from the paper. The practical implication here is to use model review as evidence to inspect, with source checks and human adjudication. It does not validate the Council's scores. [Research: LLM-as-a-judge](https://arxiv.org/html/2306.05685v4)
 
 Huang and colleagues studied intrinsic self-correction on reasoning tasks and found important limits when models attempted correction without external feedback. This Council exercise includes peer material and human feedback, so its conditions differ. The useful connection is a question for our workflow: what new evidence does a revision receive? Asking the same system to reconsider an answer may produce a different explanation without supplying a reason to trust it more. [Research: intrinsic self-correction](https://arxiv.org/abs/2310.01798)
@@ -309,6 +387,22 @@ Both papers concern particular tasks and model generations. They inform evaluati
 The principal limitations of the original case remain straightforward: unequal product conditions, evolving prompts, peer exposure before V2, my own role in both direction and judgment, incomplete raw scoring provenance, sparse audience participation, and no controlled reader-comprehension comparison. The preserved outputs are rich enough to teach from. They are not a shortcut around those limitations.
 
 For a decision maker, the responsible conclusion is conditional. Try the method where ambiguity and consequences make structured challenge valuable. Keep it if the pilot improves the relevant work at an acceptable total cost. Simplify it if ordinary review performs just as well. Stop if the process creates more ceremony than understanding.
+
+## Explore the tools and reusable methods
+
+**Skillz Forge:** [project and approach](https://overkillhill.com/skillz-forge/) · [browse the skill catalog](https://okhp3.github.io/skillz/).
+
+**Mermaid Theme Builder:** [project and styling workflow](https://overkillhill.com/projects/mermaid-theme-builder/) · [open the workbench](https://okhp3.github.io/mermaid-theme-builder/).
+
+**BPMN for Mermaid:** [process-knowledge project](https://overkillhill.com/projects/bpmn-for-mermaid/) · [explore the application](https://okhp3.github.io/mermaid-diagram-bpmn/).
+
+**Mermaid:** [open-source overview](https://mermaid.ai/open-source/) · [upstream code and contributions](https://github.com/mermaid-js/mermaid).
+
+**Agent Skills:** [format and ecosystem](https://agentskills.io/home) · [upstream specification repository](https://github.com/agentskills/agentskills).
+
+**Working tools:** [Replit](https://replit.com) for building and iteration; [Notion](https://www.notion.com) for editorial organization and knowledge custody.
+
+**Topics:** #OverKillHill #SkillzForge #MermaidThemeBuilder #BPMNForMermaid #Mermaid #AgentSkills #Replit #Notion #ProcessImprovement #VisualCommunication
 
 ## Evidence routes
 
@@ -329,6 +423,8 @@ If several interpretations remain plausible, use comparison to expose them. Give
 Link the accepted view to the knowledge it compresses. Name the maintenance owner. Record the decision conditions and the changes that should reopen review. Then measure whether the result helps people do the work. A process record that nobody can maintain is already beginning to become historical, however recently it was published.
 
 The useful shift I experienced was the ability to put an imperfect model in front of people while it was still cheap to change. Mermaid made structure editable. The Council made alternative interpretations visible. Human judgment decided what to keep. The later work on process documentation made the missing depth harder to ignore.
+
+A reusable visual profile would carry another part of that learning forward: the appearance choices already made. Bring them into the next prompt so attention can return to the process, its exceptions, and its meaning.
 
 Together, those experiences suggest a practical discipline: make the claim visible, inspect its source, challenge the exceptions, and keep the meaning connected to the picture. The tools can change. The responsibility survives.
 

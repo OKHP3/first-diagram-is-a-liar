@@ -10,6 +10,8 @@ Selection is a judgment. It does not finish the inspection.
 
 The First Diagram Is Usually a Liar follows that experiment into a practical business method: capture the process, expose the exceptions, compare alternatives when the decision warrants the effort, and give a human owner responsibility for accepting the result.
 
+It also explores a problem I pursued through Mermaid Theme Builder: why should every new diagram require another conversation about the same colors and fonts? A personal Agent Skill could bring a saved profile, relevant examples, and renderer rules into the first prompt. Fewer styling corrections is the goal, not a promise that every platform renders identically.
+
 The original diagram rounds remain available, flaws included. The business method is a proposal to pilot, with task accuracy, reader effort, and maintenance cost as checks. I have not measured a productivity gain from this experiment.
 
 If a diagram helps somebody make the right decision, it has earned its space.
@@ -18,3 +20,5 @@ If nobody can explain the exception path, it probably needs another conversation
 
 Read the article:
 https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc/
+
+#OverKillHill #SkillzForge #MermaidThemeBuilder #BPMNForMermaid #Mermaid #AgentSkills #Replit #Notion #ProcessImprovement #VisualCommunication

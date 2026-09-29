@@ -1,5 +1,7 @@
 # Surface preparation and issue disposition
 
+Historical baseline: counts and hashes below describe the preceding 8,239-word candidate. The issue dispositions remain useful, but current expanded-candidate counts and checks are in `style-expansion-review.md` and `candidate-manifest.json`.
+
 Status: candidate only, September 29, 2026. This file distinguishes candidate corrections from outstanding changes to live surfaces.
 
 ## Surface checks

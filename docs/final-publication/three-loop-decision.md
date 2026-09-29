@@ -1,5 +1,7 @@
 # Three-loop equilibrium decision
 
+Historical review: this decision applies to the preceding 8,239-word candidate and its recorded hashes. The user-requested styling expansion supersedes it as the current manuscript. See `style-expansion-review.md` for the focused review of that revision; the three loops were not rerun for the expansion.
+
 Date: September 29, 2026. Decision: **approve with limits for candidate delivery**.
 
 The completed manuscript and three surface candidates satisfy the review contract within a bounded practitioner-case-study scope. This decision does not assert empirical business benefit, owner acceptance, final platform rendering, or public publication.

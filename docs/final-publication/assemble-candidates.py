@@ -63,6 +63,7 @@ banner = '<aside><strong>Publication candidate, September 29, 2026.</strong> Pre
 plain = '\n\n'.join(link.sub(lambda m: m[1] + ' (' + m[2] + ')', re.sub(r'^#{1,3} ', '', b)).replace('**','') for b in blocks) + '\n'
 (ROOT / 'linkedin-article.txt').write_text(plain, encoding='utf-8')
 notion = 'Publication candidate, September 29, 2026. Prepared for owner review. This page is an editorial candidate, not a record of a live article update.\n\n<table_of_contents/>\n\n' + '\n\n'.join(blocks[1:]) + '\n'
+notion = notion.replace('SKILL.md', '`SKILL.md`')  # Prevent Notion from inventing a filename hyperlink.
 for figure in figures:
     notion = notion.replace(figure['caption_markdown'], '![' + figure['alt'] + '](' + figure['url'] + ')\n\n' + figure['caption_markdown'])
 (ROOT / 'notion-candidate.md').write_text(notion, encoding='utf-8')
@@ -92,7 +93,9 @@ for name in ['website-candidate.html','linkedin-article.html']:
     results[name]={'article_text_matches_master':True,'images':len(parser.images),'links':len(parser.links)}
 assert len(plain)<125000 and 7000<=len(expected.split())<=12000
 assert '\u2014' not in master
-assert not re.search(r'notion\.(?:so|com)|\b[0-9a-f]{32}\b', master, re.I)
+notion_urls = re.findall(r'https?://(?:[a-z0-9-]+\.)?notion\.(?:so|com)(?:/[^\s)]*)?', master, re.I)
+assert all(url.rstrip('/') == 'https://www.notion.com' for url in notion_urls), 'Private or unapproved Notion destination'
+assert not re.search(r'\b[0-9a-f]{32}\b', master, re.I)
 assert not re.search(r'\bv0\.[1-9]\b|Zack Snyder|\bv1\.0\b', master, re.I)
 announcement=(ROOT/'linkedin-announcement.md').read_text(encoding='utf-8')
 assert len(announcement)<3000 and '\u2014' not in announcement

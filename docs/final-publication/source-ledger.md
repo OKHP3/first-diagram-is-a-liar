@@ -1,6 +1,6 @@
 # Candidate source and claim ledger
 
-Status: candidate review, 2026-09-29. Evidence baseline: GitHub main `249b72ab8bb2813dc74156444683f2eb43eec3e2`; live article and editorial source snapshots from the preceding two-pass audit. This ledger is editorial apparatus, outside the article body.
+Status: expanded candidate review, 2026-09-29. Original case-evidence baseline: GitHub main `249b72ab8bb2813dc74156444683f2eb43eec3e2`; live article and editorial source snapshots from the preceding two-pass audit. The styling expansion additionally uses current primary documentation and inspected Theme Builder source. This ledger is editorial apparatus, outside the article body.
 
 ## Claims and source boundaries
 
@@ -24,7 +24,24 @@ Status: candidate review, 2026-09-29. Evidence baseline: GitHub main `249b72ab8b
 
 ## Review disposition
 
-CLM-01 through CLM-04, CLM-08 and CLM-10 from the review contract are accepted within the boundaries above. CLM-05, CLM-06, CLM-07, CLM-09 and CLM-11 remain unsupported in their strong forms and are explicitly excluded. CLM-12 awaits generated-surface comparison and Notion readback.
+CLM-01 through CLM-04, CLM-08 and CLM-10 from the review contract are accepted within the boundaries above. CLM-05, CLM-06, CLM-07, CLM-09 and CLM-11 remain unsupported in their strong forms and are explicitly excluded. CLM-12 was confirmed for the preceding candidate and is rechecked for the expanded candidate in `style-expansion-review.md`.
+
+## Styling expansion evidence
+
+Retrieved September 29, 2026. These rows distinguish source-supported capability from the proposed personal workflow.
+
+| Claim | Tier | Evidence | Consequence if false | Next check |
+|---|---|---|---|---|
+| Theme Builder documents JSON, CSS, styled-source and prompt-scaffold exports | Confirmed documentation and inspected local implementation | [Public README](https://github.com/OKHP3/mermaid-theme-builder#exports); local sibling `src/lib/exporters.ts` | Article would describe unavailable building blocks | Verify chosen export in target app when implementing a skill |
+| CSS export contains static design tokens rather than a runtime theme | Confirmed source | [Exporter](https://github.com/OKHP3/mermaid-theme-builder/blob/main/src/lib/exporters.ts), `paletteToCssVariables` | A user could wrongly expect an attached CSS file to style every Mermaid host | Translate values into supported configuration and inspect rendering |
+| Mermaid exposes theme variables, family-dependent defaults and separate CSS controls | Confirmed documentation | [Theming](https://mermaid.js.org/config/theming.html), [configuration schema](https://mermaid.js.org/config/schema-docs/config.html), [flowchart styling](https://mermaid.js.org/syntax/flowchart.html#classes) | Invalid or ignored styling instructions | Check exact destination version and configuration policy |
+| Architecture, Venn and Ishikawa have dedicated documented syntax | Confirmed documentation, host availability unknown | [Architecture](https://mermaid.js.org/syntax/architecture.html), [Venn](https://mermaid.js.org/syntax/venn.html), [Ishikawa](https://mermaid.js.org/syntax/ishikawa.html) | Unsupported family could be presented as universally portable | Declare and verify family/version support per destination |
+| Skills can package instructions, examples and optional scripts | Confirmed format specification | [Agent Skills specification](https://agentskills.io/specification) | Package could be mistaken for universal host execution | Verify discovery, file access and execution support separately |
+| A personal profile, family examples, optional helper and host adapter can reduce repetitive styling work | Proposal | Design developed from supplied user direction and the confirmed building blocks | Expected improvement may not occur | Compare first-result adherence, correction turns, semantic defects and total effort |
+| The same package works identically in every major platform | Unknown and not claimed | No current all-platform execution/render matrix was run | Unsupported portability promise | Host-specific pilot with named renderer, profile revision and inspected output |
+| Example colors and font are the user's approved visual identity | Not claimed; illustrative choices | Clearly labeled fictional profile in the article | Invented preference or accessibility assurance | User selects actual profile; inspect color pairs and available fonts |
+
+No claim is made that Theme Builder already ships the complete proposed personal-skill/plugin integration. No measured prompt reduction, universal fidelity, executable proof of semantic correctness, or current platform leaderboard is asserted. Current documentation includes newer Mermaid behavior than some preserved project version references; the article consequently avoids treating those snapshots as one runtime.
 
 The first-loop reviews required adjacent treatment of the Claude regression, historical formula/timing claims, and inconclusive self-enhancement evidence. All are incorporated. The outcome review required a named owner, unresolved-fact escalation, budget cap and defer path. Those are present in the operating method. Conditional disruption found no additional blocking defect in the inspected excerpt; it did not accept the then-unfinished manuscript.
 

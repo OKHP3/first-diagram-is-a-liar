@@ -2,6 +2,8 @@
 
 Status: candidate preparation only. Date: 2026-09-29.
 
+Revision note: the user subsequently requested 10,000-11,000 words with greater emphasis on personal Mermaid styling skills/plugins. That narrower current length target governs the expanded manuscript. The three-loop sequence below records the preceding review; expansion checks are recorded separately in `style-expansion-review.md`.
+
 Question: Do the recommendations and resulting publication candidates provide a coherent, source-supported 7,000-12,000-word practitioner article with business strategy and tactical implementation, while preserving diagram V1/V2 and removing serial-release scaffolding?
 
 ## Acceptance criteria

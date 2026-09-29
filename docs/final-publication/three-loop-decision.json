@@ -1,7 +1,7 @@
 {
   "date": "2026-09-29",
   "decision": "approve-with-limits",
-  "scope": "candidate delivery only",
+  "scope": "historical preceding 8239-word candidate; superseded for current manuscript by style-expansion-review.md",
   "loops_completed": 3,
   "protocol": "independent evidence/outcome/safety reviews; conditional disruption; evidence-based root adjudication",
   "loop_dispositions": [
