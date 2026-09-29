@@ -26,6 +26,11 @@ space and are intentionally not linked or reproduced here.
 
 ## Review status
 
+The v0.8 long-form article update and one comment were published on 2026-09-28.
+Their [publication record](../../v0.8-publication-2026-09-28.md) preserves the
+exact copy and release evidence. The standalone feed-posts in this directory
+remain drafts.
+
 - Audience: LinkedIn readers following the release series
 - Status: Proto-posts for Jamie's reading and review
 - Publication destination: LinkedIn post, with companion article and project links

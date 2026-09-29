@@ -25,6 +25,17 @@ This roadmap describes planned updates, public milestones, and content releases 
 - [x] Publish Council-assisted scoring and model self-interviews
 - [x] Record the deployed v0.5 state separately from local editorial material
 
+## V0.8 (published 2026-09-28)
+
+- [x] Publish the visual-consistency and Mermaid Theme Builder article addition
+- [x] Publish the long-form LinkedIn addition and one comment
+- [x] Preserve the exact LinkedIn copy in the website artifacts
+- [x] Update the FORGE announcement on all 59 published HTML pages
+- [x] Record the protected website merge, Pages deployment, and live checks
+
+See the [v0.8 publication record](v0.8-publication-2026-09-28.md).
+The standalone companion feed-post remains a draft.
+
 ## V1.0 (prepared, unpublished; release decision deferred 2026-09-03)
 - [ ] Verify and publish the full editorial cut
 - [x] Freeze the exact local editorial source and record its evidence boundary
@@ -40,7 +51,8 @@ This roadmap describes planned updates, public milestones, and content releases 
 
 The 2026-09-03 evidence closure is **DEFERRED**: technical delivery checks
 pass with documented limitations, but the full cut has no owner approval or
-external deployment record. The public article remains v0.5; no v1.0 date or
+external deployment record. That dated decision described the then-live v0.5
+article; the v0.8 addition above was published separately. No v1.0 date or
 performance result is assigned. See
 [`article-1.0-release-evidence-2026-09-03.md`](article-1.0-release-evidence-2026-09-03.md).
 
