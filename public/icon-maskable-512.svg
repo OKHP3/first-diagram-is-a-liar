@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>First Diagram revision loop</title>
+  <rect width="512" height="512" fill="#111714"/>
+  <circle cx="256" cy="256" r="194" fill="#192e25"/>
+  <path d="M152 180H284C376 180 376 320 288 336H224C172 336 146 304 150 268" fill="none" stroke="#f0b84b" stroke-width="23" stroke-linecap="round"/>
+  <path d="M150 264V308H193" fill="none" stroke="#d8793e" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="152" cy="180" r="19" fill="#d8793e"/>
+  <circle cx="264" cy="180" r="19" fill="#f0b84b"/>
+  <circle cx="333" cy="282" r="20" fill="#234c40" stroke="#e8e4db" stroke-width="6"/>
+</svg>

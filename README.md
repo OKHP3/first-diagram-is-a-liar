@@ -8,13 +8,16 @@ visible before its polish becomes a substitute for understanding.
 
 ## Read the Final Cut
 
-- **[Final Cut manuscript](docs/final-publication/master-article.md)**: the unified article candidate, approximately 10,900 words.
+**Home base: [OverKill Hill](https://overkillhill.com/).** The [story hub](https://overkillhill.com/writings/first-diagram-is-a-liar/#read-or-interact) connects the reading edition, interactive field guide, and related projects.
+
+- **[Final Cut reading edition](https://okhp3.github.io/first-diagram-is-a-liar/final-cut.html)**: the complete thesis with figures and sources, delivered alongside the field guide.
+- **[Final Cut manuscript](docs/final-publication/master-article.md)**: the unified article candidate, approximately 11,400 words.
 - **[Publication packet](docs/final-publication/README.md)**: website and LinkedIn candidates, announcement, source ledger, and review records.
 - **[Website article](https://overkillhill.com/writings/first-diagram-is-a-liar/)** and **[LinkedIn article](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)**: existing public publication surfaces.
 - **[Interactive tutorial](https://okhp3.github.io/first-diagram-is-a-liar/)**: the separate GitHub Pages application.
 - **[Original evidence archive](archive/README.md)**: prompts, Mermaid sources, renders, decks, and historical records.
 
-**Publication status:** the Final Cut is available here as a reviewable candidate.
+**Publication status:** this repository supplies the Final Cut reading edition and aligned field guide through its Pages workflow. The source packet retains its editorial review records.
 Adding it to this repository does not replace the public website or LinkedIn
 article. Those surfaces retain their previously published content until the
 replacement is applied and verified. See the
@@ -78,17 +81,46 @@ render, with its significance explained beside the selected figure.
 
 ## Run the tutorial
 
+### Display, pin, and share
+
+The header includes a GitHub source link and **Light / System / Dark** controls.
+System is the default. Your appearance choice is saved on this device separately
+from the tutorial session. It follows operating-system changes while System is
+selected.
+
+- **iPhone/iPad:** Safari's Share menu, then Add to Home Screen. The shortcut uses
+  the `First Diagram` name and a dedicated 180px Apple icon.
+- **Android:** use the browser's install or Add to Home Screen action when offered.
+  The manifest supplies regular icons and a separate opaque, maskable 512px icon.
+- **Shared links:** the field guide and Final Cut reading page expose absolute
+  Open Graph and large Twitter/X card image URLs. Preview refresh timing belongs
+  to the receiving platform.
+
+Home-screen launch needs a network connection; offline caching is not provided.
+Availability and wording of installation actions depend on the browser.
+
+[![First Diagram link preview](public/og-image.png)](https://okhp3.github.io/first-diagram-is-a-liar/)
+
+[Share image](public/og-image.png) · [Apple icon](public/apple-touch-icon.png) ·
+[Android maskable icon](public/icon-maskable-512.png) ·
+[Web manifest](public/site.webmanifest) ·
+[GitHub repository preview asset](public/github-social-preview.png)
+
+See the [presentation comparison and delivery notes](docs/presentation-polish.md)
+for the reference-app comparison and asset boundaries. GitHub's repository
+social-preview setting is separate from the application's share metadata.
+
 ```bash
 npm ci
 npm run dev
 ```
 
-The application walks through the premise, an illustrative ROY calculation,
-a source-first V1/V2 workbench, Council conditions, and a shipping checklist.
+The application walks through the premise, an illustrative ROY calculation and reader-task measurement,
+a source-first V1/V2 workbench, a personal visual-profile exercise, Council conditions,
+and a business handoff with process ownership and exception handling.
 Browser storage can preserve the local session's premise, controls, revision,
 synthesis, checklist, and handoff activity. The tutorial is a separate learning
-surface; this editorial update does not claim every tutorial label has been
-revised to match the Final Cut.
+surface aligned with the Final Cut; the complete reading edition is generated from the same committed article body. See the [alignment record](docs/final-cut-spa-alignment-2026-09-29.md).
 
 The handoff step offers two deterministic Markdown packets:
 
@@ -96,8 +128,7 @@ The handoff step offers two deterministic Markdown packets:
 - `first-diagram-is-a-liar-handoff-redacted.md`: structural receipts and privacy boundaries, omitting the learner-entered bounded claim, synthesis sentence, and next test.
 
 Both are assembled in the browser. They provide neither cloud backup nor durable
-server storage nor a verdict. Full is the default; select redacted mode explicitly
-for each copy or download.
+server storage nor a verdict. Redacted is the default; full export requires deliberate confirmation.
 
 ## Repository map
 

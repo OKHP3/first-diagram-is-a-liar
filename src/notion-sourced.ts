@@ -40,13 +40,13 @@ export const notionSourceDigest = {
     },
     {
       label: "03 / ADJUDICATE",
-      title: "Use disagreement as evidence.",
+      title: "Use disagreement to find questions.",
       copy: "Parallel outputs expose different instincts. Compare them under visible conditions, borrow what works, reject decoration, and keep the human decision inspectable.",
     },
     {
       label: "04 / HAND OFF",
       title: "Ship the visual with its receipts.",
-      copy: "The image carries the proof. The source carries the lineage. The post, poll, or comment carries the next feedback loop. None of those layers is the whole artifact.",
+      copy: "The image exposes a claim. The source preserves its lineage. The post, poll, or comment carries the next feedback loop. None of those layers is the whole artifact.",
     },
   ] satisfies SourceStage[],
   receipts: [
@@ -56,7 +56,7 @@ export const notionSourceDigest = {
       copy: "Explain the claim, the experiment, and why the visual matters.",
     },
     {
-      label: "PROOF",
+      label: "MODEL",
       title: "Diagram",
       copy: "Show the structure, including the loop or doubt the first pass hid.",
     },
@@ -79,55 +79,11 @@ export const notionSourceDigest = {
     { label: "PATCH", copy: "Feed the decision into the next version." },
   ] satisfies SourceCycle[],
   releases: [
-    {
-      version: "v0.1",
-      label: "Protoform",
-      copy: "The ROY thesis, first diagrams, and the promise of a public experiment.",
-      status: "historical",
-    },
-    {
-      version: "v0.3",
-      label: "Visual edition",
-      copy: "The public hub, deck, prompts, scoring lanes, and the method made visible.",
-      status: "historical",
-    },
-    {
-      version: "v0.4",
-      label: "Council of AIs",
-      copy: "A documented fan-out, compare, adjudicate, and synthesize process.",
-      status: "historical",
-    },
-    {
-      version: "v0.5",
-      label: "Council-assisted scoring",
-      copy: "The current canonical article release and the archive-backed field guide.",
-      status: "current",
-    },
-    {
-      version: "v0.6",
-      label: "Notion deep dive",
-      copy: "The writer's room, PRD, consolidation surface, and documentarian role kept separate from direct model competition.",
-      status: "review-only",
-    },
-    {
-      version: "v0.8",
-      label: "The rematch",
-      copy: "A proposed review cut about cleaner conditions, updated models, and better prompts.",
-      status: "review-only",
-    },
-    {
-      version: "v0.9",
-      label: "The gap after the diagram",
-      copy: "A proposed review cut about style governance and the Theme Builder response.",
-      status: "review-only",
-    },
-    {
-      version: "v1.0",
-      label: "Source vault",
-      copy: "An incomplete long-form receipt structure for the case study, rubric, council interviews, and reusable method.",
-      status: "review-only",
-    },
+    { version: "v0.1-v0.5", label: "Argument and Council", copy: "Historical serial development of ROY, the diagram rounds, and Council-assisted review.", status: "historical" },
+    { version: "v0.6-v0.7", label: "Knowledge custody and building", copy: "Notion and Replit companion chapters developed the documentation and implementation lessons.", status: "historical" },
+    { version: "v0.8-v0.9", label: "Styling and process meaning", copy: "Mermaid Theme Builder and BPMN for Mermaid companion chapters. These labels describe article history, not diagram rounds.", status: "historical" },
+    { version: "Final Cut", label: "One argument, one working method", copy: "The unified thesis is available from this field guide. External website and LinkedIn publication states have their own receipts.", status: "current" },
   ] satisfies SourceRelease[],
   sourceNote:
-    "This public copy synthesizes nine relevant Notion pages captured on 2026-08-27. The pages were source material, not a replacement for the repository's canonical archive. No database rows were available from the supplied project links. Private workspace links, IDs, temporary signed assets, and internal page structure are intentionally omitted.",
+    "Historical public-safe source copies and a registry snapshot inform this room. They preserve the development of the case, not current platform support. The Final Cut manuscript and source ledger govern the current interpretation; private workspace locators are excluded.",
 };
