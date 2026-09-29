@@ -1,0 +1,14 @@
+[
+  {
+    "number": 1,
+    "url": "https://raw.githubusercontent.com/OKHP3/first-diagram-is-a-liar/main/archive/diagramming-shootout/images/v1/etch-ai-sketch-using-a-council-to-design-at-velocity-copilot-v1.png",
+    "alt": "Copilot V1: a text-only option, ideation, diagram revision and feedback paths.",
+    "caption_markdown": "**Figure 1. Copilot V1, Core Five, my Round 1 selection.** The original shows the choice to remain in prose, the diagram revision cycle, and a feedback route to earlier ideation. It is a preserved example, not a measured comprehension result. [Original full-resolution figure](https://raw.githubusercontent.com/OKHP3/first-diagram-is-a-liar/main/archive/diagramming-shootout/images/v1/etch-ai-sketch-using-a-council-to-design-at-velocity-copilot-v1.png) · [Mermaid source](https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/diagramming-shootout/diagrams/v1/etch-ai-sketch-using-a-council-to-design-at-velocity-copilot-v1.mmd)"
+  },
+  {
+    "number": 2,
+    "url": "https://raw.githubusercontent.com/OKHP3/first-diagram-is-a-liar/main/archive/diagramming-shootout/images/v2/etch-ai-sketch-using-a-council-to-design-at-velocity-claude-v2.png",
+    "alt": "Claude V2: five phases with revision paths; the negative route into Sharpen it is absent. Historical claims are qualified in the caption and adjoining text.",
+    "caption_markdown": "**Figure 2. Claude V2, Core Five, my Round 2 selection.** Its phase organization and visible revision paths illustrate the attraction of the design. The missing negative route, compound question, and unmeasured claims illustrate why a favored artifact still needs review. Original text and formulas are preserved as historical content. Its 3K medium label refers to the historical feed-post design, not this article's character limit. [Original full-resolution figure](https://raw.githubusercontent.com/OKHP3/first-diagram-is-a-liar/main/archive/diagramming-shootout/images/v2/etch-ai-sketch-using-a-council-to-design-at-velocity-claude-v2.png) · [Mermaid source](https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/archive/diagramming-shootout/diagrams/v2/etch-ai-sketch-using-a-council-to-design-at-velocity-claude-v2.mmd)"
+  }
+]
