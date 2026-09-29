@@ -129,7 +129,7 @@ server storage nor a verdict. Redacted is the default; full export requires deli
 
 ```text
 src/                         interactive tutorial application
-docs/final-publication/       Final Cut master, surface candidates, evidence and review
+docs/final-publication/       Final Cut published source, delivery receipts, evidence and review
 archive/
   diagramming-shootout/       brief, prompts, V1/V2 sources, images, decks
   member-deliberations/      specialty-role records

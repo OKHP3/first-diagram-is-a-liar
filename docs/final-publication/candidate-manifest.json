@@ -57,5 +57,6 @@
       "sha256": "1fa223fc5f725ac6d0f8d0c4254a988d1613b799122811b2c6ecf5361ba7ec5c"
     }
   ],
-  "publication_record": "publication-record.md"
+  "publication_record": "publication-record.md",
+  "confirmed_delivery_record": "confirmed-delivery-2026-09-29.json"
 }
