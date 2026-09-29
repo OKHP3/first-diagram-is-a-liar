@@ -29,9 +29,11 @@ sources, rendered assets, slide exports, Replit specialty records, and the
 prepared editorial HTML cut are preserved under `archive/`.
 
 Current status: the root tutorial is implemented and has a source-controlled
-GitHub Pages workflow. The external article is v0.5, Council-Assisted Scoring,
-verified on 2026-08-24. Pages deployment is not confirmed until Actions and a
-live smoke test succeed.
+GitHub Pages workflow. The external article includes the v0.8 visual-consistency
+addition, published on 2026-09-28. The LinkedIn article addition and one comment
+were published before the website release. Exact copy and deployment receipts
+are in `docs/v0.8-publication-2026-09-28.md`. Each future deployment still requires
+its own successful Actions run and live verification.
 
 ## Repository map
 

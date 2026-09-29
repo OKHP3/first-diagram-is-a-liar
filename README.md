@@ -34,7 +34,10 @@ default; redacted mode must be selected explicitly for each copy or download.
 - **Live tutorial application:** [okhp3.github.io/first-diagram-is-a-liar](https://okhp3.github.io/first-diagram-is-a-liar/)
   — the GitHub Pages route is live and technically verified. It is a separate
   tutorial surface, not the `overkillhill.com` article host.
-- **Article release boundary:** the public article remains labelled v0.5. The
+- **Article release boundary:** the public article includes the v0.8 visual-consistency
+  update published on 2026-09-28. See the
+  [v0.8 publication record](docs/v0.8-publication-2026-09-28.md) for the website,
+  LinkedIn article, comment, and release evidence. The
   full `ARTICLE-1.0` editorial cut is frozen locally but deferred pending
   owner approval and external publication evidence. The approved count-label
   correction was deployed separately on 2026-09-01.
