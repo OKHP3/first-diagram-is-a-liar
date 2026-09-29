@@ -17,6 +17,8 @@ export function FinalCutIntro() {
     <p>Make the claim visible. Challenge the exceptions. Keep the meaning connected to the picture.</p>
     <p>This field guide applies the Final Cut's argument: shared understanding needs evidence, a responsible owner, and a maintainable record. Start with one process and an honest question.</p>
     <a className="text-link" href={finalCutUrl}>Read the complete Final Cut, with figures and sources ↗</a>
+    <p>Created using <a className="text-link" href="https://replit.com">Replit</a>. Explore here, return to the story, and carry the next question back into the work.</p>
+    <a className="text-link" href="https://overkillhill.com/writings/first-diagram-is-a-liar/">Visit the story at OverKill Hill ↗</a>
   </div>;
 }
 

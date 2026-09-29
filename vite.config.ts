@@ -34,7 +34,7 @@ function finalCutReadingEdition() {
     .replace('<meta name="robots" content="noindex,nofollow">', '<link rel="canonical" href="https://okhp3.github.io/first-diagram-is-a-liar/final-cut.html">')
     .replace("The First Diagram Is Usually a Liar | Candidate", "The First Diagram Is Usually a Liar | Final Cut")
     .replace("</head>", `${readingMetadata()}</head>`)
-    .replace(/<aside>.*?<\/aside>/s, '<aside><a href="./">← Return to the interactive field guide</a><br><strong>The Final Cut · September 29, 2026.</strong> Reading edition of the unified thesis. The <a href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/docs/final-publication">source and review records</a> remain inspectable. Website and LinkedIn editions have separate publication records.</aside>');
+    .replace(/<aside>.*?<\/aside>/s, '<aside><a href="https://overkillhill.com/">OverKill Hill P³ · Project home</a> · <a href="./">Use the interactive field guide →</a><br><strong>The Final Cut · September 29, 2026.</strong> Read the story here or explore its ideas in the application, created using <a href="https://replit.com">Replit</a>. The <a href="https://overkillhill.com/writings/first-diagram-is-a-liar/">OverKill Hill story page</a> connects the wider project. <a href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/docs/final-publication">Source and review records</a> remain inspectable; website and LinkedIn editions have separate publication records.</aside>');
 }
 
 // The reading page shares the app's icon and social identity. Keep its own URL,
