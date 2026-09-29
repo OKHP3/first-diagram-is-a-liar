@@ -11,18 +11,13 @@ visible before its polish becomes a substitute for understanding.
 **Home base: [OverKill Hill](https://overkillhill.com/).** The [story hub](https://overkillhill.com/writings/first-diagram-is-a-liar/#read-or-interact) connects the reading edition, interactive field guide, and related projects.
 
 - **[Final Cut reading edition](https://okhp3.github.io/first-diagram-is-a-liar/final-cut.html)**: the complete thesis with figures and sources, delivered alongside the field guide.
-- **[Final Cut manuscript](docs/final-publication/master-article.md)**: the unified article candidate, approximately 11,400 words.
-- **[Publication packet](docs/final-publication/README.md)**: website and LinkedIn candidates, announcement, source ledger, and review records.
+- **[Final Cut manuscript](docs/final-publication/master-article.md)**: the published article source, approximately 11,440 words.
+- **[Publication packet](docs/final-publication/README.md)**: published source, publication receipts, source ledger, and historical review records.
 - **[Website article](https://overkillhill.com/writings/first-diagram-is-a-liar/)** and **[LinkedIn article](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)**: existing public publication surfaces.
 - **[Interactive tutorial](https://okhp3.github.io/first-diagram-is-a-liar/)**: the separate GitHub Pages application.
 - **[Original evidence archive](archive/README.md)**: prompts, Mermaid sources, renders, decks, and historical records.
 
-**Publication status:** this repository supplies the Final Cut reading edition and aligned field guide through its Pages workflow. The source packet retains its editorial review records.
-Adding it to this repository does not replace the public website or LinkedIn
-article. Those surfaces retain their previously published content until the
-replacement is applied and verified. See the
-[latest historical companion receipt](docs/linkedin/proto-posts/v0.9-bpmn-for-mermaid.md)
-and the [current candidate manifest](docs/final-publication/candidate-manifest.json).
+**Publication status:** the Final Cut was published to LinkedIn and OverKill Hill on September 29, 2026, in that order. One LinkedIn comment was published and memorialized on the website. The [publication record](docs/final-publication/publication-record.md) records the exact destinations and deployment evidence. This repository supplies the aligned reading edition and interactive guide through its own Pages workflow. The [Diagram Truth project home](https://overkillhill.com/projects/diagram-truth/) connects both forms.
 
 ## What the Final Cut brings together
 

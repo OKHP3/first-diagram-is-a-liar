@@ -1,0 +1,17 @@
+{
+  "url": "https://overkillhill.com/writings/first-diagram-is-a-liar/",
+  "commit": "1ed17e9a2d70bf2e111c371464605a7d80142b99",
+  "pullRequest": "https://github.com/OKHP3/overkill-hill/pull/133",
+  "deployment": "https://github.com/OKHP3/overkill-hill/actions/runs/36629485911",
+  "attempt": 2,
+  "validation": "success",
+  "deploymentResult": "success",
+  "liveChecks": [
+    "Final Cut title and body",
+    "article ending",
+    "two loaded historical figures",
+    "exact published comment and permalink",
+    "Final Cut banner"
+  ],
+  "observedAt": "2026-09-29T21:57:02.329Z"
+}

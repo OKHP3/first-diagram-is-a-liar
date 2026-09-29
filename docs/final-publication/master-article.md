@@ -6,29 +6,23 @@ By Jamie Hill | OverKill Hill P³
 
 ## Read the story. Work through the idea.
 
-Before you settle into the long version, you have a choice. Read the argument here, or [open the interactive field guide](https://okhp3.github.io/first-diagram-is-a-liar/) and work through its ideas in your browser. Both belong to the same project. [OverKill Hill](https://overkillhill.com/) is home base, with the [story and its wider context](https://overkillhill.com/writings/first-diagram-is-a-liar/) connecting the writing, the application, and the projects that grew around them.
+Before you settle into the long version, you have a choice. Read the argument here, or visit [Diagram Truth](https://overkillhill.com/projects/diagram-truth/), the project doorway to the interactive field guide. From there, start the five-step tutorial or jump into the Draw the Truth workbench. The [story](https://overkillhill.com/writings/first-diagram-is-a-liar/) explains the argument; the application gives you somewhere to practice it. [OverKill Hill](https://overkillhill.com/) is home base for both, with the related projects and evidence connected around them.
 
 The application was created using [Replit](https://replit.com). That sentence still makes me smile. I began with a question about diagrams and ended up with a working single-page application that lets somebody explore the argument instead of only reading my explanation of it. Replit became one of the unexpected discoveries of this project: a way to turn a written idea into something a reader could actually operate. The implementation and subsequent improvements are maintained in GitHub, and the public application is hosted on GitHub Pages.
 
-I didn't arrive with that destination neatly plotted. The route ran through Mermaid, competing AI interpretations, visual preferences, reusable Agent Skills, and the realization that a useful explanation could have controls. Somewhere along the way, the project stopped being only about making a better picture. It became an education in tools, methods, and skills I hadn't known to look for when I started. I'm excited by what I built, and by how much my own sense of what I could build changed while building it.
-
-That's a rabbit hole I'm glad I went down.
+I didn't arrive with that destination neatly plotted. The route ran through Mermaid, competing AI interpretations, visual preferences, reusable Agent Skills, and the realization that a useful explanation could have controls. Somewhere along the way, the project stopped being only about making a better picture. It became an education in tools, methods, and skills I hadn't known to look for when I started. I'm excited by what I built, and by how much my own sense of what I could build changed while building it. That's a rabbit hole I'm glad I went down.
 
 The field guide gives that exploration a practical shape. Identify the kind of lie a tidy diagram might be telling. Adjust the illustrative ROY inputs and consider what clarity costs. Compare a clean forward path with a revision that exposes its loops. Explore a reusable visual-preference profile. Examine structured disagreement, then assemble a handoff for the next person. You can move between those activities without reading the whole essay first, and return to the longer explanation when a question deserves more space.
 
 Try it with one process you know well. Name the exception that always gets explained in a meeting but never makes it into the diagram. Notice whether changing the view helps you describe that exception more precisely. Then bring the question back to the article's evidence and operating method. The application offers a place to rehearse the thinking; the article supplies the context and qualifications. Its sliders are illustrative, and its teaching diagrams aren't a general-purpose Mermaid editor.
 
-This is the loop I want the project to support: read, interact, question, return, and improve. Someone arriving through LinkedIn can find the interactive route. Someone discovering the application can return to the story. Both should lead back to [overkillhill.com](https://overkillhill.com/), where the related projects and their context stay connected. Choose the form that helps you understand the work, then switch when another form would help more. A long article can explain why the first diagram lies. An interactive infographic can give you somewhere to practice catching it.
+This is the loop I want the project to support: read, interact, question, return, and improve. Someone arriving through LinkedIn can find the interactive route. Someone discovering the application can return to the story. Both should lead back to [OverKill Hill](https://overkillhill.com/), through the [story](https://overkillhill.com/writings/first-diagram-is-a-liar/) and the [Diagram Truth project page](https://overkillhill.com/projects/diagram-truth/), where the related projects and their context stay connected. Choose the form that helps you understand the work, then switch when another form would help more. A long article can explain why the first diagram lies. An interactive infographic can give you somewhere to practice catching it.
 
 ## The cost of a tidy lie
 
-A diagram is a claim about how reality is structured. Every box says something exists. Every arrow says a relationship matters. Every missing exception makes a promise the author may never have intended to make.
+A diagram is a claim about how reality is structured. Every box says something exists. Every arrow says a relationship matters. Every missing exception makes a promise the author may never have intended to make. That is a lot of authority for a picture that somebody generated between meetings.
 
-That is a lot of authority for a picture that somebody generated between meetings.
-
-The first diagram often looks resolved before the thinking has earned that confidence. The handoffs are smooth. The decisions have two convenient answers. Nobody is absent, the evidence arrives on time, and the process proceeds from start to finish with the optimism of a sales demonstration. Then somebody who actually does the work points at the middle and says, “That isn't what happens.”
-
-Now the useful work can begin.
+The first diagram often looks resolved before the thinking has earned that confidence. The handoffs are smooth. The decisions have two convenient answers. Nobody is absent, the evidence arrives on time, and the process proceeds from start to finish with the optimism of a sales demonstration. Then somebody who actually does the work points at the middle and says, “That isn't what happens.” Now the useful work can begin.
 
 This article follows a small diagramming experiment into a larger business question: how can we make shared understanding easier to inspect, challenge, and maintain? I used several AI systems to help describe the process of writing a post about diagrams, turned their structured text into Mermaid diagrams, compared the submissions, and asked for revisions. The resulting archive preserves both rounds, the prompts, the pictures, and the compromises. I call the method a Council of AIs because comparison and human adjudication were deliberate parts of the exercise.
 
@@ -36,9 +30,7 @@ The experiment is a practitioner case study. It provides artifacts to examine an
 
 My argument is that inexpensive generation makes disciplined review more valuable. A team can spend less effort constructing a picture and more effort checking whether it carries the right meaning. To sustain that benefit, the picture needs an underlying record of decisions, exceptions, authority, and evidence. Otherwise we have accelerated the production of documents that will become stale in exactly the familiar way.
 
-The route through the argument is practical: define what understanding is worth, examine what the two diagram rounds actually show, turn the lessons into a proportionate working method, and maintain the knowledge behind the boxes. The corporate application proposed later uses an illustrative purchase-request process. It is a worked example, not a reported client implementation.
-
-The finish line is an artifact a reader can use correctly and an owner can update responsibly.
+The route through the argument is practical: define what understanding is worth, examine what the two diagram rounds actually show, turn the lessons into a proportionate working method, and maintain the knowledge behind the boxes. The corporate application proposed later uses an illustrative purchase-request process. It is a worked example, not a reported client implementation. The finish line is an artifact a reader can use correctly and an owner can update responsibly.
 
 ## The translation and reconstruction tax
 
@@ -64,9 +56,7 @@ The communication problem is to choose a useful view while keeping the omitted k
 
 ## ROY: what did the words buy?
 
-ROY means Return on Your Words. I use it as a heuristic for useful understanding relative to the total effort invested in explanation. It asks a simple question: did this explanation remove enough confusion to justify creating, reviewing, using, and maintaining it?
-
-The return is understanding. The investment includes more than the prompt.
+ROY means Return on Your Words. I use it as a heuristic for useful understanding relative to the total effort invested in explanation. It asks a simple question: did this explanation remove enough confusion to justify creating, reviewing, using, and maintaining it? The return is understanding. The investment includes more than the prompt.
 
 A short prompt can produce a large diagram whose review consumes an hour. A carefully written paragraph can prevent that hour. Conversely, a small visual can make a tangled dependency understandable without requiring every reader to reconstruct it from several pages. Word count can expose waste, but it cannot settle the value of the communication.
 
@@ -150,9 +140,7 @@ One historical distinction deserves careful wording. An earlier five-entry sourc
 
 That is a small archival detail with a large methodological consequence. If we compare altered exports while believing they are untouched submissions, we can attribute the renderer's presentation or an editor's normalization to the model. Keeping the source-to-render relationship visible protects the interpretation. It also gives the next person a chance to correct it.
 
-Claude V2 earned my second-round selection for its narrative organization. It groups the work into ignition, strategy, craft, proof, and shipping, and makes several return paths conspicuous. The structure is easy to discuss as a sequence of concerns: establish the idea, test the framing, build the artifact, challenge it, and learn from use. That hierarchy helped me see the argument as an organized whole.
-
-Selection did not make it flawless.
+Claude V2 earned my second-round selection for its narrative organization. It groups the work into ignition, strategy, craft, proof, and shipping, and makes several return paths conspicuous. The structure is easy to discuss as a sequence of concerns: establish the idea, test the framing, build the artifact, challenge it, and learn from use. That hierarchy helped me see the argument as an organized whole. Selection did not make it flawless.
 
 The preserved Claude V2 source contains a revealing regression. A decision asks whether the framing holds. Its positive route continues, but the negative route into the nearby “Sharpen it” activity is missing. That activity still points back toward the framing. In the archived Claude V1 source, the decision explicitly connected to the sharpening step when the framing was too abstract. Revision improved the presentation while losing a meaningful route.
 
@@ -184,9 +172,7 @@ Start by deciding whether comparison is warranted. It is most useful when the pr
 
 For an uncertain workflow, establish the decision the artifact must support. A process owner should be able to complete this sentence: “The intended reader must be able to do this correctly, using this information, within these boundaries.” If that sentence is still vague, generating alternatives will multiply the vagueness.
 
-Then assign accountability. The subject-matter expert confirms how the work is actually performed. The author or analyst captures and models it. Reviewers challenge different aspects of the artifact. The domain owner adjudicates consequential disagreement. The document owner maintains the approved record. A small team can combine roles, but someone must be accountable for each decision.
-
-Here is the sequence I would use.
+Then assign accountability. The subject-matter expert confirms how the work is actually performed. The author or analyst captures and models it. Reviewers challenge different aspects of the artifact. The domain owner adjudicates consequential disagreement. The document owner maintains the approved record. A small team can combine roles, but someone must be accountable for each decision. Here is the sequence I would use.
 
 1. **Frame the task.** Record the audience, scope, cost of error, known uncertainty, and the decision to support. Decide what is outside the model so omission is explicit.
 2. **Capture the source.** Write a process narrative with actors, inputs, rules, outputs, exceptions, evidence, and unanswered questions. Ask the person who performs the work to confirm it.
@@ -218,9 +204,9 @@ Consider an illustrative internal purchase-request process. It has a requester, 
 
 The first picture is familiar: submit the request, review it, approve it. It looks complete because every box has a verb and every arrow has a destination. Yet the middle box has absorbed almost all the operational knowledge. What makes a request reviewable? Who can approve it? What happens if the evidence is missing? What if the assigned authority is unavailable? Can the requester approve their own request?
 
-The source narrative should answer those questions before the picture invents answers. Give the submission step an identifier such as `REQ-01`. Record the required inputs in a locally approved policy reference. Give the completeness check an identifier such as `DEC-01`. Its two outcomes are complete enough for assessment, or returned for clarification. Define what information accompanies a return so the requester can repair the deficiency.
+The source narrative should answer those questions before the picture invents answers. Give the submission step an identifier such as REQ-01. Record the required inputs in a locally approved policy reference. Give the completeness check an identifier such as DEC-01. Its two outcomes are complete enough for assessment, or returned for clarification. Define what information accompanies a return so the requester can repair the deficiency.
 
-Give the approval-authority check a separate identifier, `DEC-02`. It asks whether the assigned person has authority under the applicable rule. The rule itself lives in the narrative or linked policy. A diagram label is a poor home for a long or frequently changing delegation table. The visual can show the decision and link to the rule without pretending the rule is obvious.
+Give the approval-authority check a separate identifier, DEC-02. It asks whether the assigned person has authority under the applicable rule. The rule itself lives in the narrative or linked policy. A diagram label is a poor home for a long or frequently changing delegation table. The visual can show the decision and link to the rule without pretending the rule is obvious.
 
 Keep the record explicit about uncertainty. If no source establishes the route for an unavailable approver, write “escalation route requires owner decision.” Do not ask an AI model to choose whichever route sounds like professional practice. A plausible control is still a new control. It may conflict with the organization's actual authority structure.
 
@@ -228,7 +214,7 @@ The first model now has a real chance of being useful. Submission leads to the c
 
 Assign three review concerns. A fidelity reviewer checks the model against the narrative. A usability reviewer checks whether labels and branching make the intended task clear. A controls reviewer checks whether the artifact implies authority or access that the record does not grant. These are responsibilities, not a prescribed number of people or products.
 
-Suppose one review proposes combining the completeness and approval decisions to make the picture shorter. Another points out that a complete request can still lack approval. The adjudicator rejects the combination because it changes the meaning of the route. The record can be brief: “Keep `DEC-01` and `DEC-02` separate; completeness permits assessment, not approval.” That sentence prevents the next cleanup pass from reintroducing the same mistake.
+Suppose one review proposes combining the completeness and approval decisions to make the picture shorter. Another points out that a complete request can still lack approval. The adjudicator rejects the combination because it changes the meaning of the route. The record can be brief: “Keep DEC-01 and DEC-02 separate; completeness permits assessment, not approval.” That sentence prevents the next cleanup pass from reintroducing the same mistake.
 
 Suppose another review proposes automatically escalating to the reviewer's manager. The narrative does not establish that manager's authority. This proposal is deferred to the process owner. The diagram remains a candidate until the owner identifies an authorized route or narrows the supported scope. A red warning shape may expose the gap, but it cannot resolve the organizational decision.
 
@@ -238,7 +224,7 @@ A reader who routes missing evidence directly to approval has identified a mater
 
 The artifact is accepted when it meets the owner's declared correctness requirements for its scope. The publication record names the narrative revision, the diagram revision, the owner, and the remaining limitations. It also records what was intentionally omitted. Readers can then tell whether the view is an orientation aid, an operating instruction, or a proposal awaiting a policy decision.
 
-Now change the process. Imagine the organization revises its delegation policy so a particular category requires a different approval route. The stable identifier `DEC-02` lets the owner find the affected narrative rule, diagram edge, reader tasks, and related handoff instructions. Update those linked items and rerun the authority and absence cases. The identity of the decision remains stable while its rule changes.
+Now change the process. Imagine the organization revises its delegation policy so a particular category requires a different approval route. The stable identifier DEC-02 lets the owner find the affected narrative rule, diagram edge, reader tasks, and related handoff instructions. Update those linked items and rerun the authority and absence cases. The identity of the decision remains stable while its rule changes.
 
 This is where maintainability becomes tangible. A diagram that was merely an image requires someone to remember where else its meaning was copied. A linked record can make the dependencies inspectable. It still needs an owner to decide that the policy change matters and a reviewer to check the revised view. Automation can assist with finding and generating; acceptance remains a business responsibility.
 
@@ -268,9 +254,7 @@ The near-real-time workflow I am pursuing starts with a conversation about actua
 
 That complete loop remains a direction. The current project is not a claim of full BPMN 2.0 conformance, BPMN XML round-tripping, or an executable process engine. Portable instructions and a descriptive prototype should be evaluated within their actual scope. Any move toward execution introduces additional questions about permissions, decision authority, validation, monitoring, and failure handling.
 
-For a corporate strategy audience, the larger opportunity is continuity. Knowledge often fragments between a meeting, a document, a slide, and the person who remembers why the slide looks that way. A structured record with linked views offers a way to make those relationships inspectable. It requires governance proportionate to the process and a maintenance habit that survives the original author.
-
-That is a more demanding objective than making an impressive picture. It is also a more useful one.
+For a corporate strategy audience, the larger opportunity is continuity. Knowledge often fragments between a meeting, a document, a slide, and the person who remembers why the slide looks that way. A structured record with linked views offers a way to make those relationships inspectable. It requires governance proportionate to the process and a maintenance habit that survives the original author. That is a more demanding objective than making an impressive picture. It is also a more useful one.
 
 ## Make visual consistency serve the work
 
@@ -292,11 +276,13 @@ I would therefore treat Theme Builder and a personal styling skill as complement
 
 Consistency still has to serve meaning. In the purchase-request example, an exception should remain recognizable across the overview, the detailed procedure, and the training material. If amber means “requires attention” in one view, it should not casually mean “approved” in the next. A profile can preserve that vocabulary while allowing each view to show the amount of detail its audience needs.
 
+The next three sections make that package concrete for someone building it. If you're deciding whether to adopt the approach, the pilot and cost checks follow under “Measure the work and keep the limits visible.”
+
 ## Package the preference so the next prompt can use it
 
 A personal styling skill could be a small, understandable package. I would give it an entry instruction, one named preference profile, examples for the supported diagram families, and a short compatibility record. Optional scripts would handle repeatable transformations and checks. This is a proposed design for the workflow, not a claim that a universal personal-theme installer has already been delivered by Theme Builder.
 
-The Agent Skills specification provides a suitable container: a SKILL.md entry file with metadata and instructions, plus optional scripts, references, and assets. Script execution and supported languages depend on the agent implementation. That establishes a packaging option; it does not make every chat product capable of discovering, loading, or running the package. [Agent Skills specification](https://agentskills.io/specification)
+The Agent Skills specification provides a suitable container: a [skill entry file](https://agentskills.io/specification) with metadata and instructions, plus optional scripts, references, and assets. Script execution and supported languages depend on the agent implementation. That establishes a packaging option; it does not make every chat product capable of discovering, loading, or running the package. [Agent Skills specification](https://agentskills.io/specification)
 
 The entry instruction should say when to use the skill and what it governs. For example: use this profile when generating or restyling Mermaid diagrams for my operational documents; preserve supplied process facts and identifiers; choose a compatible family example; apply the profile; disclose any styling fallback. It should also say what counts as completion: source provided, configuration identified, and rendering either inspected in a named environment or explicitly unverified.
 
@@ -316,7 +302,7 @@ The examples would give the agent something concrete to follow. Store an editabl
 
 Avoid putting a real client workflow into a reusable style example. A fictional request and generic role names are enough to demonstrate the pattern. The personal package should carry the user's design choices, not an accidental collection of business facts copied into every future conversation. The diagram's task context can be supplied separately, keeping preference reuse distinct from information disclosure.
 
-This is where the package starts to save attention. The user no longer needs to remember the preferred border color, repeat the font request, or describe the same exception style in every prompt. The agent has a declared reference to retrieve. A failure to follow it becomes a specific mismatch with an inspectable rule, rather than another round of “make it look more professional.”
+This is where the package could start to save attention. The user no longer needs to remember the preferred border color, repeat the font request, or describe the same exception style in every prompt. The agent has a declared reference to retrieve. A failure to follow it becomes a specific mismatch with an inspectable rule, rather than another round of “make it look more professional.”
 
 ## Give each diagram family an example it can actually follow
 
@@ -400,6 +386,8 @@ For a decision maker, the responsible conclusion is conditional. Try the method 
 
 ## Explore the tools and reusable methods
 
+**Diagram Truth:** [project home](https://overkillhill.com/projects/diagram-truth/) · [start the interactive field guide](https://okhp3.github.io/first-diagram-is-a-liar/) · [try the Draw the Truth workbench](https://okhp3.github.io/first-diagram-is-a-liar/#step-3).
+
 **Skillz Forge:** [project and approach](https://overkillhill.com/skillz-forge/) · [browse the skill catalog](https://okhp3.github.io/skillz/).
 
 **Mermaid Theme Builder:** [project and styling workflow](https://overkillhill.com/projects/mermaid-theme-builder/) · [open the workbench](https://okhp3.github.io/mermaid-theme-builder/).
@@ -436,8 +424,6 @@ The useful shift I experienced was the ability to put an imperfect model in fron
 
 A reusable visual profile would carry another part of that learning forward: the appearance choices already made. Bring them into the next prompt so attention can return to the process, its exceptions, and its meaning.
 
-Together, those experiences suggest a practical discipline: make the claim visible, inspect its source, challenge the exceptions, and keep the meaning connected to the picture. The tools can change. The responsibility survives.
-
-The first diagram is allowed to be wrong. It becomes dangerous when its polish discourages the questions that would correct it.
+Together, those experiences suggest a practical discipline: make the claim visible, inspect its source, challenge the exceptions, and keep the meaning connected to the picture. The tools can change. The responsibility survives. The first diagram is allowed to be wrong. It becomes dangerous when its polish discourages the questions that would correct it.
 
 Make it earn its space. Otherwise, it's wallpaper.
