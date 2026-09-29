@@ -56,3 +56,4 @@ reader-choice panel; the earlier CTA description below is historical.
 `linkedin-announcement.md` is a draft for use after the replacement article is approved and published. Its CTA currently resolves to the earlier live article, so it must not be represented as announcing an already-published replacement.
 
 Draft order: direct topic and source selection; one supplied primary CTA; LinkedIn voice pass; final public-context scrub. Evidence: preserved V1/V2 source at the baseline above and completed candidate. No activity-window counts, private locators, employer details, invented outcome, or implied settled award. No secondary link or requested hashtag count. No em dashes. Publication is a separate action.
+

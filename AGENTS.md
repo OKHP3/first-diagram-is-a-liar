@@ -28,12 +28,7 @@ Confirmed archive: the ETCH-AI-SKETCH brief, eight prompts, Mermaid V1/V2
 sources, rendered assets, slide exports, Replit specialty records, and the
 prepared editorial HTML cut are preserved under `archive/`.
 
-Current status: the root tutorial is implemented and has a source-controlled
-GitHub Pages workflow. The external article includes the v0.8 visual-consistency
-addition, published on 2026-09-28. The LinkedIn article addition and one comment
-were published before the website release. Exact copy and deployment receipts
-are in `docs/v0.8-publication-2026-09-28.md`. Each future deployment still requires
-its own successful Actions run and live verification.
+Current status: the root tutorial and Final Cut reading edition have a source-controlled GitHub Pages workflow. The complete Final Cut was published to LinkedIn, followed by one comment, then to the OverKill Hill website on 2026-09-29. Exact publication and deployment receipts are in `docs/final-publication/publication-record.md`. Earlier serialized releases remain historical evidence. Each future deployment requires its own successful Actions run and live verification.
 
 ## Repository map
 

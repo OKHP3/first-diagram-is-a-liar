@@ -1,0 +1,4 @@
+The Final Cut brings the experiment into one complete argument, and Diagram Truth gives it a second form you can use. I started by trying to make a diagram explain the work more honestly; discovering Replit led me to build an interactive field guide where you can explore the same questions.
+
+The useful test is still small: take one process you know, find the exception its neat diagram leaves out, and see whether the revised view helps you explain it. The article carries the evidence and limits; the workbench gives you somewhere to practice. Both connect through the project home at OverKill Hill:
+https://overkillhill.com/projects/diagram-truth/
