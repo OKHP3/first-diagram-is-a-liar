@@ -8,8 +8,10 @@ visible before its polish becomes a substitute for understanding.
 
 ## Read the Final Cut
 
+**Home base: [OverKill Hill](https://overkillhill.com/).** The [story hub](https://overkillhill.com/writings/first-diagram-is-a-liar/#read-or-interact) connects the reading edition, interactive field guide, and related projects.
+
 - **[Final Cut reading edition](https://okhp3.github.io/first-diagram-is-a-liar/final-cut.html)**: the complete thesis with figures and sources, delivered alongside the field guide.
-- **[Final Cut manuscript](docs/final-publication/master-article.md)**: the unified article candidate, approximately 10,900 words.
+- **[Final Cut manuscript](docs/final-publication/master-article.md)**: the unified article candidate, approximately 11,400 words.
 - **[Publication packet](docs/final-publication/README.md)**: website and LinkedIn candidates, announcement, source ledger, and review records.
 - **[Website article](https://overkillhill.com/writings/first-diagram-is-a-liar/)** and **[LinkedIn article](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)**: existing public publication surfaces.
 - **[Interactive tutorial](https://okhp3.github.io/first-diagram-is-a-liar/)**: the separate GitHub Pages application.

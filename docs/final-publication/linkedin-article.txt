@@ -4,6 +4,22 @@ How to turn AI diagrams into shared understanding and maintainable process knowl
 
 By Jamie Hill | OverKill Hill P³
 
+Read the story. Work through the idea.
+
+Before you settle into the long version, you have a choice. Read the argument here, or open the interactive field guide (https://okhp3.github.io/first-diagram-is-a-liar/) and work through its ideas in your browser. Both belong to the same project. OverKill Hill (https://overkillhill.com/) is home base, with the story and its wider context (https://overkillhill.com/writings/first-diagram-is-a-liar/) connecting the writing, the application, and the projects that grew around them.
+
+The application was created using Replit (https://replit.com). That sentence still makes me smile. I began with a question about diagrams and ended up with a working single-page application that lets somebody explore the argument instead of only reading my explanation of it. Replit became one of the unexpected discoveries of this project: a way to turn a written idea into something a reader could actually operate. The implementation and subsequent improvements are maintained in GitHub, and the public application is hosted on GitHub Pages.
+
+I didn't arrive with that destination neatly plotted. The route ran through Mermaid, competing AI interpretations, visual preferences, reusable Agent Skills, and the realization that a useful explanation could have controls. Somewhere along the way, the project stopped being only about making a better picture. It became an education in tools, methods, and skills I hadn't known to look for when I started. I'm excited by what I built, and by how much my own sense of what I could build changed while building it.
+
+That's a rabbit hole I'm glad I went down.
+
+The field guide gives that exploration a practical shape. Identify the kind of lie a tidy diagram might be telling. Adjust the illustrative ROY inputs and consider what clarity costs. Compare a clean forward path with a revision that exposes its loops. Explore a reusable visual-preference profile. Examine structured disagreement, then assemble a handoff for the next person. You can move between those activities without reading the whole essay first, and return to the longer explanation when a question deserves more space.
+
+Try it with one process you know well. Name the exception that always gets explained in a meeting but never makes it into the diagram. Notice whether changing the view helps you describe that exception more precisely. Then bring the question back to the article's evidence and operating method. The application offers a place to rehearse the thinking; the article supplies the context and qualifications. Its sliders are illustrative, and its teaching diagrams aren't a general-purpose Mermaid editor.
+
+This is the loop I want the project to support: read, interact, question, return, and improve. Someone arriving through LinkedIn can find the interactive route. Someone discovering the application can return to the story. Both should lead back to overkillhill.com (https://overkillhill.com/), where the related projects and their context stay connected. Choose the form that helps you understand the work, then switch when another form would help more. A long article can explain why the first diagram lies. An interactive infographic can give you somewhere to practice catching it.
+
 The cost of a tidy lie
 
 A diagram is a claim about how reality is structured. Every box says something exists. Every arrow says a relationship matters. Every missing exception makes a promise the author may never have intended to make.

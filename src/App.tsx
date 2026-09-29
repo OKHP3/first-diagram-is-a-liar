@@ -34,7 +34,7 @@ const compactBrief = "Show the real thinking path. Include the decision that cou
 const diagramRegistry = registrySnapshot.records as Array<{ diagramType: string; family: string | null; purpose: string | null; mermaidSupport: string | null; themeConfidence: string | null; examplePriority: string | null; exampleFile: string | null; actionLane: string | null }>;
 const registrySupportCounts = diagramRegistry.reduce<Record<string, number>>((counts, record) => { const support = record.mermaidSupport ?? "Unclassified"; counts[support] = (counts[support] ?? 0) + 1; return counts; }, {});
 
-function BrandMark() { return <span className="brand-lock">OverKill&nbsp;Hill&nbsp;P³™</span>; }
+function BrandMark() { return <a className="brand-lock" href="https://overkillhill.com/" aria-label="OverKill Hill project home">OverKill&nbsp;Hill&nbsp;P³™</a>; }
 
 function StepRail({ activeStep, completedSteps, onSelect }: { activeStep: number; completedSteps: number[]; onSelect: (step: number) => void }) {
   return <aside className="step-rail" aria-label="Tutorial steps">

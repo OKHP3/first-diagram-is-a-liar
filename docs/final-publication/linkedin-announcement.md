@@ -18,7 +18,7 @@ If a diagram helps somebody make the right decision, it has earned its space.
 
 If nobody can explain the exception path, it probably needs another conversation.
 
-Read the article:
-https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc/
+Read or interact, starting at OverKill Hill:
+https://overkillhill.com/writings/first-diagram-is-a-liar/#read-or-interact
 
 #OverKillHill #SkillzForge #MermaidThemeBuilder #BPMNForMermaid #Mermaid #AgentSkills #Replit #Notion #ProcessImprovement #VisualCommunication

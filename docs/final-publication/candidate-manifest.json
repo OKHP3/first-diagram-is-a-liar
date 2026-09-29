@@ -2,55 +2,56 @@
   "status": "candidate-only",
   "date": "2026-09-29",
   "github_evidence_baseline": "249b72ab8bb2813dc74156444683f2eb43eec3e2",
-  "master_visible_words": 10876,
-  "master_markdown_characters": 75252,
-  "linkedin_plain_characters": 75090,
-  "announcement_characters": 1803,
+  "master_visible_words": 11366,
+  "master_markdown_characters": 78506,
+  "linkedin_plain_characters": 78336,
+  "announcement_characters": 1830,
   "checks": {
     "website-candidate.html": {
       "article_text_matches_master": true,
       "images": 2,
-      "links": 44
+      "links": 49
     },
     "linkedin-article.html": {
       "article_text_matches_master": true,
       "images": 2,
-      "links": 44
+      "links": 49
     }
   },
-  "notion_readback": "confirmed: normalized prose matches current candidate after resource-link update on 2026-09-29",
+  "notion_readback": "interactive-edition opening fetched and matched after whitespace and escape normalization",
   "files": [
     {
       "path": "master-article.md",
-      "sha256": "e937fa2ea8c89fd76d738a27b0b4c7138050b57417bdfd60bad3072c7c04fb06"
+      "sha256": "a8e2970d627ec8612d47093cacaa409f9c02ab92f58b04af4dbedd6766ee59af"
     },
     {
       "path": "source-ledger.md",
-      "sha256": "889b602d22af57231a3485971fbd8c461252648608437b9269945551836c9e61"
+      "sha256": "93f801c538f1f7d53ba71f7f81b5260dc4a3d873ad87068a653e54a786aad9fa"
     },
     {
       "path": "linkedin-announcement.md",
-      "sha256": "4bc288b6f867d34d4d7837a0b19e475f23eaf5307efe4809a068b4d903da7291"
+      "sha256": "0b00c66112dea385931d6be9439f756a4dff693f96f4da2a2b6d586477097684"
     },
     {
       "path": "website-candidate.html",
-      "sha256": "1baaebcdbf72d3918658e4fe6a61883174b81ca5b6005c29ea46f1a272f18230"
+      "sha256": "480e3373565728816fab43d8cbc79c4d103325b3e6d45ab8b3e6d71fdeff0035"
     },
     {
       "path": "linkedin-article.html",
-      "sha256": "92bd95a186da077c4be0d432f492aa20eefc3f16a7e23c9d656ac4e0956aa830"
+      "sha256": "02c842b5f06ee42653f3ecc7875c4e360d17105b9f2b63f4b8411a4d5efc2df6"
     },
     {
       "path": "linkedin-article.txt",
-      "sha256": "30446241930273e45f368a5b9ba9d3d39f1610137b922370772d9c8dafa49a07"
+      "sha256": "20cce8ae472fc9753850c400ec0a9c6a9f29877a6bce4030a490eba647ec089d"
     },
     {
       "path": "notion-candidate.md",
-      "sha256": "c5873a3eb64b4e74159dda6dfef44b178d6001e03999de6685b863a997031ad7"
+      "sha256": "a57f0caaf92459ebc0beab0e6a775f54f855dbf85e3014e846fd4682ec2b0655"
     },
     {
       "path": "figure-manifest.json",
       "sha256": "1fa223fc5f725ac6d0f8d0c4254a988d1613b799122811b2c6ecf5361ba7ec5c"
     }
-  ]
+  ],
+  "application_evidence_baseline": "730a826c2beae6e81aeb5bb78db0e14bc629f644"
 }

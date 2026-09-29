@@ -4,12 +4,12 @@ Prepared September 29, 2026. Candidate content is not yet the live LinkedIn or w
 
 ## Start here
 
-- [Unified manuscript](master-article.md): the substantive source, 10,876 visible words after the styling and resource-link revisions.
+- [Unified manuscript](master-article.md): the substantive source, 11,366 visible words after the interactive-edition opening.
 - [Website candidate](website-candidate.html): complete HTML article, TOC, original figures, captions and source links.
 - [LinkedIn article candidate](linkedin-article.html): formatted article file. [Plain-text fallback](linkedin-article.txt) includes explicit destination URLs.
-- [LinkedIn announcement](linkedin-announcement.md): 1,803-character feed draft, to use only after the replacement article is live.
+- [LinkedIn announcement](linkedin-announcement.md): feed draft, to use only after the replacement article is live.
 - [Notion candidate source](notion-candidate.md): complete page content. A new child page was created under the existing ROY project hub and its connector readback compared with this text. The private page link is supplied in the task response.
-- [Current resource/README review](resource-link-review.md), [expansion review](style-expansion-review.md), [claim/source ledger](source-ledger.md), [earlier surface checks and all 34 issue dispositions](surface-review.md), [review contract](review-contract.md), and [candidate hashes](candidate-manifest.json).
+- [Interactive-edition opening and hub review](interactive-edition-review.md), [resource/README review](resource-link-review.md), [expansion review](style-expansion-review.md), [claim/source ledger](source-ledger.md), [earlier surface checks and all 34 issue dispositions](surface-review.md), [review contract](review-contract.md), and [candidate hashes](candidate-manifest.json).
 - [Repository preparation](../repository-preparation-2026-09-29.md) and [Windows/Replit synchronization](synchronization-record.md).
 
 ## Preparation result
