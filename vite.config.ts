@@ -33,5 +33,19 @@ function finalCutReadingEdition() {
   return readFileSync(new URL("./docs/final-publication/website-candidate.html", import.meta.url), "utf8")
     .replace('<meta name="robots" content="noindex,nofollow">', '<link rel="canonical" href="https://okhp3.github.io/first-diagram-is-a-liar/final-cut.html">')
     .replace("The First Diagram Is Usually a Liar | Candidate", "The First Diagram Is Usually a Liar | Final Cut")
+    .replace("</head>", `${readingMetadata()}</head>`)
     .replace(/<aside>.*?<\/aside>/s, '<aside><a href="./">← Return to the interactive field guide</a><br><strong>The Final Cut · September 29, 2026.</strong> Reading edition of the unified thesis. The <a href="https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/docs/final-publication">source and review records</a> remain inspectable. Website and LinkedIn editions have separate publication records.</aside>');
+}
+
+// The reading page shares the app's icon and social identity. Keep its own URL,
+// title and description, and leave the editorial candidate itself untouched.
+function readingMetadata() {
+  const index = readFileSync(new URL("./index.html", import.meta.url), "utf8");
+  const tags = index.match(/<(?:meta|link)\b[^>]+>/g) ?? [];
+  return tags.filter((tag) => /(?:og:|twitter:|application-name|author|theme-color|mobile-web-app|msapplication|rel="(?:icon|apple-touch-icon|mask-icon|manifest)")/.test(tag))
+    .join("\n")
+    .replaceAll("%BASE_URL%", "./")
+    .replaceAll("| Final Cut Field Guide", "| Final Cut Reading Edition")
+    .replace('property="og:type" content="website"', 'property="og:type" content="article"')
+    .replace('property="og:url" content="https://okhp3.github.io/first-diagram-is-a-liar/"', 'property="og:url" content="https://okhp3.github.io/first-diagram-is-a-liar/final-cut.html"');
 }

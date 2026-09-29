@@ -79,6 +79,35 @@ render, with its significance explained beside the selected figure.
 
 ## Run the tutorial
 
+### Display, pin, and share
+
+The header includes a GitHub source link and **Light / System / Dark** controls.
+System is the default. Your appearance choice is saved on this device separately
+from the tutorial session. It follows operating-system changes while System is
+selected.
+
+- **iPhone/iPad:** Safari's Share menu, then Add to Home Screen. The shortcut uses
+  the `First Diagram` name and a dedicated 180px Apple icon.
+- **Android:** use the browser's install or Add to Home Screen action when offered.
+  The manifest supplies regular icons and a separate opaque, maskable 512px icon.
+- **Shared links:** the field guide and Final Cut reading page expose absolute
+  Open Graph and large Twitter/X card image URLs. Preview refresh timing belongs
+  to the receiving platform.
+
+Home-screen launch needs a network connection; offline caching is not provided.
+Availability and wording of installation actions depend on the browser.
+
+[![First Diagram link preview](public/og-image.png)](https://okhp3.github.io/first-diagram-is-a-liar/)
+
+[Share image](public/og-image.png) · [Apple icon](public/apple-touch-icon.png) ·
+[Android maskable icon](public/icon-maskable-512.png) ·
+[Web manifest](public/site.webmanifest) ·
+[GitHub repository preview asset](public/github-social-preview.png)
+
+See the [presentation comparison and delivery notes](docs/presentation-polish.md)
+for the reference-app comparison and asset boundaries. GitHub's repository
+social-preview setting is separate from the application's share metadata.
+
 ```bash
 npm ci
 npm run dev

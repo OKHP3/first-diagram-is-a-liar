@@ -1,0 +1,9 @@
+:root { color-scheme: dark; }
+.display-tools { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.repo-icon, .theme-switch button { display: grid; place-items: center; width: 40px; height: 40px; }
+.repo-icon svg, .theme-switch svg { width: 20px; height: 20px; }
+.theme-switch { display: flex; padding: 3px; border: 1px solid var(--line, #758177); border-radius: 5px; background: var(--surface, #18231d); }
+.theme-switch button { border: 0; border-radius: 3px; background: transparent; color: var(--muted, #b9c1b7); cursor: pointer; }
+.theme-switch button:hover { color: var(--paper, #e8e4db); }
+.theme-switch button[aria-pressed="true"] { background: var(--orange, #d8793e); color: var(--button-ink, #111714); }
+.theme-switch button:focus-visible, .repo-icon:focus-visible { outline: 2px solid var(--amber, #f0b84b); outline-offset: 4px; }
