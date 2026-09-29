@@ -1,0 +1,145 @@
+{
+  "date": "2026-09-29",
+  "decision": "approve-with-limits",
+  "scope": "candidate delivery only",
+  "loops_completed": 3,
+  "protocol": "independent evidence/outcome/safety reviews; conditional disruption; evidence-based root adjudication",
+  "loop_dispositions": [
+    {
+      "loop": 1,
+      "artifact": "prior editorial recommendations",
+      "disruptor": "run after material agreement",
+      "result": "proceed after evidence and operational corrections"
+    },
+    {
+      "loop": 2,
+      "artifact": "completed master, ledger, announcement",
+      "disruptor": "run after material agreement",
+      "result": "approve surface assembly with limits"
+    },
+    {
+      "loop": 3,
+      "artifact": "actual surface candidates and packet",
+      "disruptor": "skipped because initial privacy finding created material disagreement",
+      "result": "private identifier removed from helper; independent recheck passed; approve candidate delivery"
+    }
+  ],
+  "reports": [
+    {
+      "file": "loop-1-disruptor.json",
+      "sha256": "157667FB3012D02D6C7DF95F9DE5DBB208A2E25BAA707A379179BDB07354D014",
+      "role": "disruptor",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-1-evidence.json",
+      "sha256": "33C9265D8DE7EF9CBE07DCD2504B51BB4A5D110070EF47E406DF810BF2522334",
+      "role": "evidence",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-1-outcome.json",
+      "sha256": "34B032EEF6C5273AF272E4CFE96E3CCE42434E76C33533DBE3C39BFD9B922A1A",
+      "role": "outcome",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": null
+    },
+    {
+      "file": "loop-1-portability.json",
+      "sha256": "8E7B719F55F2B809C38C6E6C2D8FE9B51BA876BFE0C79A960751E9A3B260C255",
+      "role": "safety-portability",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-2-disruptor.json",
+      "sha256": "0CDD2B0B54859728375057E9A6753342BF49229B5E851F113DF6A85C6E0366ED",
+      "role": "disruptor",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-2-evidence.json",
+      "sha256": "FBA62E8331D82B2373F8120CC5B294D4A49B3FFF0695A3B6D2224CBFDBE5D788",
+      "role": "evidence",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-2-outcome.json",
+      "sha256": "0230DAF6D1D477FAA35921090128F2EA402C8AA7AC92EAF4790FE9D7E847856D",
+      "role": "outcome",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-2-portability.json",
+      "sha256": "3C3FA966BDB2DD2B208714FA36EA6FDD48A3E84F7D8206504389D526196DBEE3",
+      "role": "safety-portability",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-3-evidence.json",
+      "sha256": "02580129A4CA88E82D7F0108E583469CEEB184EE23D6F0A9296F87F037225743",
+      "role": "evidence",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-3-outcome.json",
+      "sha256": "AD1686490BCD38CFB24EC87338190D15C7A002E17C4992B745D1E67B88975550",
+      "role": "outcome",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-3-portability-recheck.json",
+      "sha256": "FF04CFFEF2D85AB6A0A0DDA40B281BC171A2B38DE7711C4EA3B13E7416786069",
+      "role": "safety-portability",
+      "decision": "approve-with-limits",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    },
+    {
+      "file": "loop-3-portability.json",
+      "sha256": "EB3592ECD329D686C65AFB6277D0682686719E82FC206E566313CED7C186EB80",
+      "role": "safety-portability",
+      "decision": "defer-for-evidence",
+      "evidence_status": "analytical",
+      "execution_status": "completed"
+    }
+  ],
+  "unresolved": [
+    "Live publication and owner acceptance",
+    "Native LinkedIn editor and full visual rendering",
+    "Historical archive errata and live metadata changes",
+    "Optional exact-mapping skill cleanup"
+  ],
+  "measurement": {
+    "visible_words": 8239,
+    "linkedin_plain_characters": 56341,
+    "announcement_characters": 1292,
+    "notion_prose_parity": true,
+    "owner_files_preserved": 111
+  },
+  "limits": [
+    "analytical review",
+    "shared model family and sources",
+    "no protected empirical holdout",
+    "writer and root adjudicator overlap",
+    "no public replacement or deployment"
+  ]
+}

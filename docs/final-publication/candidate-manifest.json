@@ -1,0 +1,56 @@
+{
+  "status": "candidate-only",
+  "date": "2026-09-29",
+  "github_evidence_baseline": "249b72ab8bb2813dc74156444683f2eb43eec3e2",
+  "master_visible_words": 8239,
+  "master_markdown_characters": 56440,
+  "linkedin_plain_characters": 56341,
+  "announcement_characters": 1292,
+  "checks": {
+    "website-candidate.html": {
+      "article_text_matches_master": true,
+      "images": 2,
+      "links": 21
+    },
+    "linkedin-article.html": {
+      "article_text_matches_master": true,
+      "images": 2,
+      "links": 21
+    }
+  },
+  "notion_readback": "normalized prose matched; all 21 supplied destinations retained; one product-name autolink added",
+  "files": [
+    {
+      "path": "master-article.md",
+      "sha256": "bcacd1ab5f6640e55b65f51e16931d497b6603d81039762b1a5fa2db22d030ee"
+    },
+    {
+      "path": "source-ledger.md",
+      "sha256": "7cee4543c7de2a999499bea4c49b4102d7d5e50b690b06e0b44233243de91cad"
+    },
+    {
+      "path": "linkedin-announcement.md",
+      "sha256": "f2b0c9214d8379305e15cb7ee73180d8c068c0f0268bd384ba88e1bb65db0cba"
+    },
+    {
+      "path": "website-candidate.html",
+      "sha256": "e58e91e1e53f56a1ce5330e6dd9419eede307235a8b72476386e1c9c24b39a20"
+    },
+    {
+      "path": "linkedin-article.html",
+      "sha256": "5362b92d95b2c8ed3c965c2032c4848490849c8bdb9a75043c5101858bf6f231"
+    },
+    {
+      "path": "linkedin-article.txt",
+      "sha256": "d71e301ba7c8a6d6d32157c12017506627fb1c831812b26f390d02db90374fea"
+    },
+    {
+      "path": "notion-candidate.md",
+      "sha256": "00a8be00b750ade48b96c8ed3f98fa196d276446376f951afb30020a948f1bf8"
+    },
+    {
+      "path": "figure-manifest.json",
+      "sha256": "1fa223fc5f725ac6d0f8d0c4254a988d1613b799122811b2c6ecf5361ba7ec5c"
+    }
+  ]
+}
