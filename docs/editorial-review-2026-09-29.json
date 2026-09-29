@@ -1,0 +1,423 @@
+{
+  "schema_version": "1.0",
+  "review_protocol": "equilibrium-v1",
+  "review_mode": "five-way",
+  "evaluation_status": "completed-analytical",
+  "review_date": "2026-09-29",
+  "artifact": {
+    "path": "docs/editorial-review-2026-09-29.md",
+    "sha256": "CA32AE60079161BC2754B9E980898906B9135B7A3849C5CB6B76E381A9A3B61C",
+    "version": "editorial-audit-2026-09-29",
+    "words": 6000,
+    "issues": 34
+  },
+  "decision_question": "What conflicts and structural changes must be addressed to turn the four-source portfolio into a unified 7000-12000-word corporate strategy and tactical article, preserving diagram V1/V2?",
+  "acceptance_criteria": [
+    "Review each named surface before cross-surface adjudication",
+    "Preserve diagram rounds, contributor credit, and source lineage",
+    "Separate observations, inferences, proposals, and unknowns",
+    "Give actionable issues and a length-budgeted unified argument",
+    "Verify LinkedIn's character constraint",
+    "Keep private Notion locators and raw captures outside public repository",
+    "Do not publish or mutate reviewed sources"
+  ],
+  "source_identity": {
+    "github_main": "249b72ab8bb2813dc74156444683f2eb43eec3e2",
+    "local_head": "f7ab4a5fad37d788c5d05191e1d5c9601356614a",
+    "local_remote_gap": "Latest remote v0.9 record read through connector; owner working changes preserved",
+    "website_release_pr129_merged_at": "2026-09-29T11:35:45Z",
+    "snapshot_hashes": [
+      {
+        "name": "github-v09-current.md",
+        "sha256": "73CD53EF12D69F31EA707EACD92D9B2DDCA039AEA6B03A0A2898BCA71B402493",
+        "bytes": 11546,
+        "visibility": "local evidence capture retained outside repository"
+      },
+      {
+        "name": "linkedin-article.txt",
+        "sha256": "4942C86E69C978B013F915955BDE7CFA963A00D5B7370C18ABF7F87DB3079602",
+        "bytes": 40090,
+        "visibility": "local evidence capture retained outside repository"
+      },
+      {
+        "name": "linkedin-v04-public-post.txt",
+        "sha256": "981AD0A232FF3B8A00ACD1F84EFCF4889438A5AB2C4C79BCA0F2F56B3AD0B9B7",
+        "bytes": 2025,
+        "visibility": "local evidence capture retained outside repository"
+      },
+      {
+        "name": "linkedin-v05-public-post.txt",
+        "sha256": "D7610C11A0938F474296AE68F5093394FA782F50ACB34D83F42C2C681F4FFE01",
+        "bytes": 2733,
+        "visibility": "local evidence capture retained outside repository"
+      },
+      {
+        "name": "notion-00.md",
+        "sha256": "ED6C378B253A3E9E7284AE1746796EE42AD70D6767AB55EAF777856D0109AE49",
+        "bytes": 39505,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-01.md",
+        "sha256": "556A61EC8E8586E6F0011D88341C9E19DFCA592A7B6E09E7DDAF4C703F7629B0",
+        "bytes": 18790,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-02.md",
+        "sha256": "6AA6A2C433E2CAA2352D152A68EE47988E074DEFD7B29E6ED3C233803F8D35B2",
+        "bytes": 6894,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-03.md",
+        "sha256": "203E509A57B48E3A33D50FE0ACFA8FA31CA15DA6A66B82DD76F0E4BFC06D6D25",
+        "bytes": 19691,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-04.md",
+        "sha256": "757EFD9F4CCF3312A0C0D209E3508BA516618E6AC08AC6E56F660E6B7412B507",
+        "bytes": 22600,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-05.md",
+        "sha256": "0760180FD5F0DBAA482025FA0CF1BB34F6F57AA6CDBF8D0017C0E43B98A344A5",
+        "bytes": 30731,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-06.md",
+        "sha256": "57F63583BABC56B5E0302A5EF890C9B87081A5F7206151EF80A54B472A1E5825",
+        "bytes": 48856,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-07.md",
+        "sha256": "27FFC60AFC7A5BE76B75A2A614875AC949BFAA86161FF14951280FB0CA83CA45",
+        "bytes": 12406,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-08.md",
+        "sha256": "A3BB7B4B008438175AB65BEB8CB081442F9B5C00B370D96D738167500FEE315B",
+        "bytes": 1554,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-09.md",
+        "sha256": "C4D29465CA550A4B19E3CBC5C21CD4E853A11E64C484BC2CBA25E6D79DE0DB7A",
+        "bytes": 3783,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-10.md",
+        "sha256": "13D48C8E2B1B1B72011D076FDE211A09101EC4432DF3004FDDFB6675DB4DC994",
+        "bytes": 9005,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-11.md",
+        "sha256": "9AE297CA63D8A185892F96EF690FA2C1A156B15E49D5E01E904A71EE6E3FA894",
+        "bytes": 26531,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-12.md",
+        "sha256": "C6C0E1C336B5F2E559428001663C52AC829903FA6990F5F81E47130852C0EE71",
+        "bytes": 17507,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-evidence-child-0.md",
+        "sha256": "4783F34EF317CD3671B3F40B708D17165A9D67E0C5C610E756922792D5ECA356",
+        "bytes": 36158,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-evidence-child-1.md",
+        "sha256": "FF7275ECF397131252CDCAC4C3F3D33F2B7A99283B8D315A43151E713CFFE14B",
+        "bytes": 36291,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-evidence-child-2.md",
+        "sha256": "F50FD9F5FEC954FC7D48B1406E2E74A905BE5DF8B9FF6252744701E1C5F99833",
+        "bytes": 40527,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-evidence-child-3.md",
+        "sha256": "E0BAB689AC117C4FA23C105A592091EFE13D5C1DE188E2EAD6588FADA0BD7F3E",
+        "bytes": 41642,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-evidence-child-4.md",
+        "sha256": "4290B6FDF22A2D0497BC9EC1D83603B708E86B291FD0F751559D53BEF0E75DA6",
+        "bytes": 28887,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-evidence-child-5.md",
+        "sha256": "E5A8355376EB7B6392C5F7BF5755ADDE2730440930C2AFAAA1CF35081B72B8B0",
+        "bytes": 7827,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "notion-hub.md",
+        "sha256": "C30989FB4542E3E55201696A405811BE2EAB5BE758ED27FA8E57A1E0D6A16AF7",
+        "bytes": 24626,
+        "visibility": "private editorial capture retained outside repository"
+      },
+      {
+        "name": "website-disclosures.json",
+        "sha256": "296E72F84528F861E09232E2404F06491477697534F01A7EACE6D85E9828D6E9",
+        "bytes": 81565,
+        "visibility": "local evidence capture retained outside repository"
+      },
+      {
+        "name": "website-full-dom.txt",
+        "sha256": "439A6B5EAA505FAA262422E184D3BA0E68FFDD03A44639BD137D51D528BC1B19",
+        "bytes": 142107,
+        "visibility": "local evidence capture retained outside repository"
+      },
+      {
+        "name": "website-sections.json",
+        "sha256": "42881FC93BCE200DCE8192811A6B7A91CE079675435C6EFDE162D28FC16DB4C4",
+        "bytes": 241844,
+        "visibility": "local evidence capture retained outside repository"
+      },
+      {
+        "name": "website-visible.txt",
+        "sha256": "55725DF41E9CAFA9D4B11C7A7293A0B54C673DEF5DC3C4BE2339C2BE8C2CBD91",
+        "bytes": 73919,
+        "visibility": "local evidence capture retained outside repository"
+      }
+    ]
+  },
+  "independence": {
+    "reviewer_contexts_separated": true,
+    "models": "Inherited session model; exact runtime identifiers not independently exposed",
+    "shared_model_or_source_limits": [
+      "Initial reviewers shared the parent model family and frozen source corpus",
+      "Separate role contexts improve coverage but are correlated analysis",
+      "Disruptor reused the outcome reviewer's context after initial reviews completed"
+    ],
+    "empirical_holdout": "none",
+    "protocol_limits": [
+      "Analytical editorial review, not a preregistered outcome study",
+      "Claims developed during the source review; no immutable preregistered quantitative ledger",
+      "No fresh production, full accessibility, or all-render regression test"
+    ]
+  },
+  "initial_reviews": [
+    {
+      "role": "evidence",
+      "agent": "audit_evidence",
+      "role_prompt_id": "audit_evidence-initial",
+      "status": "complete",
+      "mode": "analytical",
+      "decision": "approve-with-limits",
+      "limits": "Case-study development only; precise score statistics and comparative uplift require evidence or qualification",
+      "source_scope": "Public claim checks, repo evidence, Notion01/03/04/05/06 and six relevant children",
+      "tools": "Read-only filesystem and Notion fetch; writes limited to local review/capture files"
+    },
+    {
+      "role": "outcome",
+      "agent": "audit_business",
+      "role_prompt_id": "audit_business-initial",
+      "status": "complete",
+      "mode": "analytical",
+      "decision": "approve-with-limits",
+      "limits": "Proposed business framework, no measured corporate outcomes",
+      "source_scope": "Full public bodies, GitHub record, Notion hub/00/02/07/11, earlier prepared cut",
+      "tools": "Read-only filesystem; local review artifact write"
+    },
+    {
+      "role": "safety-portability",
+      "agent": "audit_portability",
+      "role_prompt_id": "audit_portability-initial",
+      "status": "complete",
+      "mode": "analytical",
+      "decision": "approve-with-limits",
+      "limits": "Preserve capability, privacy, attribution, archive and publication boundaries",
+      "source_scope": "Full public bodies, GitHub current record, Notion08/09/10/12 and repo provenance",
+      "tools": "Read-only filesystem; local review artifact write"
+    }
+  ],
+  "claim_ledger": [
+    {
+      "claim_id": "C01",
+      "claim": "The corpus is sufficient to begin a unified practitioner case study.",
+      "tier": "inferred",
+      "evidence": "Four-surface review and inspectable prompts/artifacts.",
+      "consequence_if_false": "Premature drafting could hide material gaps.",
+      "next_check": "Draft against issue register and verify retained claims."
+    },
+    {
+      "claim_id": "C02",
+      "claim": "The current LinkedIn article includes v0.8 and v0.9 additions.",
+      "tier": "confirmed",
+      "evidence": "Reloaded article body, captured 2026-09-29.",
+      "consequence_if_false": "Incorrect parity assessment.",
+      "next_check": "Recheck the final manuscript after publication."
+    },
+    {
+      "claim_id": "C03",
+      "claim": "LinkedIn permits articles up to 125000 characters.",
+      "tier": "confirmed",
+      "evidence": "Official LinkedIn Help a522483.",
+      "consequence_if_false": "Manuscript could fail publication.",
+      "next_check": "Count the complete final body in its destination editor."
+    },
+    {
+      "claim_id": "C04",
+      "claim": "ROY as presently expressed is a validated quantitative metric.",
+      "tier": "unknown",
+      "evidence": "Definitions vary; no validation found; tutorial labels heuristic.",
+      "consequence_if_false": "False precision in business value claims.",
+      "next_check": "Use heuristic definition and separate measurable outcomes/costs."
+    },
+    {
+      "claim_id": "C05",
+      "claim": "Exact Council score statistics are reproducible from the inspected archive.",
+      "tier": "unknown",
+      "evidence": "No original seven-criterion score matrix found in inspected corpus.",
+      "consequence_if_false": "Uncheckable quantitative finding.",
+      "next_check": "Recover original records or qualify/omit exact counts."
+    },
+    {
+      "claim_id": "C06",
+      "claim": "Poll impression ratios establish a unique-person conversion funnel and its cause.",
+      "tier": "unknown",
+      "evidence": "Reported aggregate counters only; arithmetic recomputed.",
+      "consequence_if_false": "Misdiagnosed business intervention.",
+      "next_check": "Use exposure-based ratios; label causation as hypothesis."
+    },
+    {
+      "claim_id": "C07",
+      "claim": "A Council universally outperforms a single model.",
+      "tier": "unknown",
+      "evidence": "No controlled comparator or measured reader outcome.",
+      "consequence_if_false": "Unjustified cost/complexity.",
+      "next_check": "Narrow to observed contributions or conduct a separate controlled evaluation."
+    },
+    {
+      "claim_id": "C08",
+      "claim": "The earlier five-entry source supports a bounded historical Copilot configuration distinction.",
+      "tier": "confirmed",
+      "evidence": "Earlier five-entry capture distinguishes Copilot's configuration from the other four entries.",
+      "consequence_if_false": "Unnecessary retraction of valid historical observation.",
+      "next_check": "Retain bounded original-source claim and document later source transformations."
+    },
+    {
+      "claim_id": "C09",
+      "claim": "All current archived V1 files have theme/look configuration headers.",
+      "tier": "confirmed",
+      "evidence": "Seven archived V1 Mermaid files.",
+      "consequence_if_false": "Mistaken attribution of later headers to original models.",
+      "next_check": "Separate source stages; transformation mechanism remains unknown."
+    },
+    {
+      "claim_id": "C10",
+      "claim": "Current website archive copies differ from the September 28 v0.4/v0.5 LinkedIn posts.",
+      "tier": "confirmed",
+      "evidence": "Direct comparison of the live posts and website archive copies.",
+      "consequence_if_false": "False publication provenance.",
+      "next_check": "Retain older drafts and separately archive published copies."
+    },
+    {
+      "claim_id": "C11",
+      "claim": "The proposed near-real-time transcript-to-process loop is production-ready.",
+      "tier": "unknown",
+      "evidence": "LinkedIn/GitHub expressly label it a direction and bounded prototype.",
+      "consequence_if_false": "Misleading implementation expectations.",
+      "next_check": "Keep maturity limits beside vision statements."
+    },
+    {
+      "claim_id": "C12",
+      "claim": "Current BPMN documentation lists 15 core BP-SKILL packages.",
+      "tier": "confirmed",
+      "evidence": "Current adjacent GitHub README enumerates15 plus supplemental/meta packages.",
+      "consequence_if_false": "Incorrect capability scope.",
+      "next_check": "Verify actual outputs/host behavior before any stronger operational claim."
+    },
+    {
+      "claim_id": "C13",
+      "claim": "A 9500-word business operating model can connect ROY, Council, and process knowledge.",
+      "tier": "proposed",
+      "evidence": "Section budget and operating model in report.",
+      "consequence_if_false": "New proposal could be mistaken for observed results.",
+      "next_check": "Label worked example and method as proposed; evaluate a bounded pilot."
+    },
+    {
+      "claim_id": "C14",
+      "claim": "Some older Notion version labels are explicitly superseded and remain valid historical records.",
+      "tier": "confirmed",
+      "evidence": "Explicit historical and supersession labels in the inspected Notion pages.",
+      "consequence_if_false": "Loss of legitimate provenance.",
+      "next_check": "Distinguish true conflicts, pointer lag, and preserved evolution."
+    }
+  ],
+  "concordance": "material agreement on bounded drafting direction; no material initial dissent requiring evidence arbitration",
+  "disruptor": {
+    "triggered": true,
+    "authority": "advisory",
+    "agent": "audit_business",
+    "role_prompt_id": "conditional-disruptor",
+    "falsification_hypotheses": [
+      "Drafting readiness may incorrectly imply no further source research",
+      "Current shared source headers may wrongly refute historical Copilot uniqueness",
+      "Old labels may already be explicitly superseded"
+    ],
+    "test_results": [
+      "Scope ambiguity survived; focused literature pass made explicit in opening",
+      "Historical-source counterexample survived; issue08 reframed around source stages",
+      "Local classification counterexample survived; Notion paragraph now separates pointer lag from preserved history"
+    ],
+    "mode": "Source comparison, not runtime tests"
+  },
+  "negotiator": {
+    "triggered": true,
+    "identity": "root lead reviewer",
+    "decision": "approve-with-limits",
+    "decisive_evidence": [
+      "Earlier final-competition capture versus current seven V1 files",
+      "Notion hub's explicit supersession language",
+      "Official LinkedIn character limit",
+      "Live LinkedIn article/post bodies and website section comparison"
+    ],
+    "accepted_changes": [
+      "All three disruptor qualifications incorporated",
+      "Added concrete V1/V2 feature-attribution issue33",
+      "Added live v0.4/v0.5 archive-copy discrepancy issue34"
+    ],
+    "unresolved_items": [
+      "Original score matrix and judge chronology",
+      "Complete interview prompt/response lineage",
+      "Exact diagram export transformation history",
+      "Final unified manuscript and its factual review",
+      "Any empirical efficacy claim"
+    ]
+  },
+  "release_decision": "approve-with-limits",
+  "release_scope": "Deliver this editorial review and drafting plan only",
+  "future_manuscript_publication_decision": "defer-for-evidence",
+  "external_mutations": false,
+  "limitations": [
+    "20 Notion editorial pages reviewed; promotional roll-call child excluded",
+    "Historical standalone feed posts beyond the reopened v0.4/v0.5 pair were not all independently reopened",
+    "Not every diagram/slide rendered or visually inspected",
+    "Literature starting points verified, full methods review remains part of finalization",
+    "No original raw score matrix found in inspected corpus; no assertion of absence elsewhere"
+  ],
+  "follow_up": [
+    "Resolve or narrow P0 claims",
+    "Draft one 9500-word master with diagram rounds retained",
+    "Add bounded operating model and illustrative business case",
+    "Verify citations and final character count",
+    "Review exact future manuscript across surfaces before any publication"
+  ]
+}
