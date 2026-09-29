@@ -1,0 +1,37 @@
+{
+  "observed_date": "2026-09-29",
+  "status": "published-and-synchronized-at-recorded-checkpoints",
+  "first_diagram": {
+    "commit": "fd9a4d509431b30556fedb98a07372373c6cbfcd",
+    "pull_request": "https://github.com/OKHP3/first-diagram-is-a-liar/pull/25",
+    "deployment": "https://github.com/OKHP3/first-diagram-is-a-liar/actions/runs/36640500819",
+    "deployment_attempt": 2,
+    "deployment_result": "success",
+    "live_reading_edition": "https://okhp3.github.io/first-diagram-is-a-liar/final-cut.html",
+    "visible_text_matches_published_master": true,
+    "visible_words": 11440,
+    "windows_main": "clean; 0 ahead / 0 behind",
+    "replit_main": "clean; 0 ahead / 0 behind",
+    "replit_git_panel": "PR #25 visible; recent fetch; no changes to commit"
+  },
+  "website_reconciliation": {
+    "commit": "7cebfa9eecba561468ed35ad119b85a66805bc21",
+    "pull_request": "https://github.com/OKHP3/overkill-hill/pull/134",
+    "deployment": "https://github.com/OKHP3/overkill-hill/actions/runs/36640921143",
+    "validation": "https://github.com/OKHP3/overkill-hill/actions/runs/36640920865",
+    "deployment_result": "success",
+    "windows_and_replit_main": "clean; 0 ahead / 0 behind; confirmed in Diagram Truth workstream",
+    "original_replit_commits_preserved": 3
+  },
+  "notion": {
+    "article": "Published Final Cut",
+    "prose_blocks_matched": 212,
+    "normalization": "whitespace and automatic link formatting",
+    "private_identifiers": "excluded from public records"
+  },
+  "linkedin": {
+    "article": "published",
+    "release_comment": "one published",
+    "optional_standalone_announcement": "unpublished draft"
+  }
+}

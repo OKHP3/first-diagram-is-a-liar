@@ -5,12 +5,12 @@ Published September 29, 2026. The approved Final Cut is live on LinkedIn and Ove
 ## Start here
 
 - [Unified manuscript](master-article.md): the published source, approximately 11,440 visible words, including the Diagram Truth route, Replit discovery, traditional paragraphs, and publication-time skill-entry link correction.
-- [Website candidate](website-candidate.html): complete HTML article, TOC, original figures, captions and source links.
-- [LinkedIn article candidate](linkedin-article.html): formatted article file. [Plain-text fallback](linkedin-article.txt) includes explicit destination URLs.
+- [Website publication source](website-candidate.html): complete HTML article, TOC, original figures, captions and source links.
+- [LinkedIn publication source](linkedin-article.html): formatted article file. [Plain-text fallback](linkedin-article.txt) includes explicit destination URLs.
 - [LinkedIn announcement](linkedin-announcement.md): unpublished optional feed draft. The release published the article and [one comment](linkedin-comment.txt); no separate Final Cut feed announcement was posted.
-- [Notion candidate source](notion-candidate.md): complete page content. A new child page was created under the existing ROY project hub and its connector readback compared with this text. The private page link is supplied in the task response.
+- [Notion publication source](notion-candidate.md): the complete published editorial copy. The existing page under the ROY project hub is titled Published Final Cut; its readback matched all 212 prose blocks after normalizing automatic link formatting.
 - [Interactive-edition opening and hub review](interactive-edition-review.md), [resource/README review](resource-link-review.md), [expansion review](style-expansion-review.md), [claim/source ledger](source-ledger.md), [earlier surface checks and all 34 issue dispositions](surface-review.md), [review contract](review-contract.md), and [candidate hashes](candidate-manifest.json).
-- [Repository preparation](../repository-preparation-2026-09-29.md) and [Windows/Replit synchronization](synchronization-record.md).
+- [Confirmed delivery and synchronization](confirmed-delivery-2026-09-29.json), [repository preparation](../repository-preparation-2026-09-29.md), and [historical Windows/Replit synchronization](synchronization-record.md).
 
 ## Preparation result
 
@@ -34,6 +34,6 @@ The steps below describe preparation. LinkedIn and website publication are now c
 
 `assemble-candidates.py` uses only the Python standard library and supports the simple Markdown structure in this master. Running it regenerates surface files and their manifest, resetting the Notion-readback field to pending. A new body requires a fresh page comparison. It never publishes or changes historical archives.
 
-File-level checks passed for substantive HTML parity, character budget, figures/alt text, public locators, release scaffolding and em dashes. Notion prose and supplied destinations were checked after creation, and its draft header was inspected in the signed-in browser. Local HTML browser preview was blocked by URL policy; website and LinkedIn final rendering remain publication-time checks.
+Preparation checks covered substantive HTML parity, character budget, figures/alt text, public locators, release scaffolding and em dashes. Publication-time readbacks subsequently confirmed the LinkedIn article, website article, and live Pages reading edition. The live reading edition matched the published manuscript's visible text exactly: approximately 11,440 words. The [confirmed delivery record](confirmed-delivery-2026-09-29.json) names the commits and successful deployments.
 
 The Final Cut packet is maintained as published source alongside the repository README. The [publication record](publication-record.md) separates LinkedIn, website, repository, and Notion evidence. Historical synchronization receipts apply only to their named commits; they do not establish current Replit parity. Regeneration never publishes content and resets candidate/readback state until new evidence is recorded.
