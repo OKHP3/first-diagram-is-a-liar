@@ -87,3 +87,5 @@ The external article URL and GitHub repository are public anchors, not proof
 of the new Pages deployment. A passing build proves local source integrity, not
 live hosting. Report confirmed, inferred, proposed, and unknown claims
 separately.
+
+## Imported Claude Cowork project instructions
