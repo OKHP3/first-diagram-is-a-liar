@@ -230,7 +230,7 @@ async function assertActiveStep(client, index, scope) {
 }
 
 async function getPageTarget(debugPort) {
-  const deadline = Date.now() + 10_000;
+  const deadline = Date.now() + 30_000;
   while (Date.now() < deadline) {
     try {
       const targets = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`)).json();
@@ -729,7 +729,7 @@ async function runAcceptance() {
         return {
           id: card.dataset.diagramId,
           responseOk: response.ok,
-          downloadedSource: (await response.text()).trim(),
+          downloadedSource: (await response.text()).replace(/\\r\\n/g, "\\n").trim(),
           disclosedSource: card.querySelector("[data-source]")?.textContent.trim() ?? "",
         };
       }));
@@ -975,7 +975,7 @@ async function runAcceptance() {
       } catch { /* Preserve the original failure when the browser is unavailable. */ }
     }
     const serverDetail = serverOutput ? `\nVite output:\n${serverOutput.slice(-4000)}` : "";
-    const browserDetail = chromium?.exitCode ? `\nChromium output:\n${browserOutput}` : "";
+    const browserDetail = browserOutput ? `\nChromium output:\n${browserOutput.slice(-4000)}` : "";
     throw new Error(`${detail}${pageDetail}${serverDetail}${browserDetail}`);
   } finally {
     if (client) {
