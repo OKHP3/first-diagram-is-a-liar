@@ -33,7 +33,9 @@ export const publicSourceLinks = [
   { label: "LinkedIn article", url: "https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc" },
   { label: "Preserved experiment", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout" },
   { label: "All eight prompts", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/diagramming-shootout/prompts" },
-  { label: "Editorial cut", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut" },
+  { label: "Historical editorial cut", url: "https://github.com/OKHP3/first-diagram-is-a-liar/tree/main/archive/editorial-cut" },
+  { label: "Final Cut manuscript", url: "https://github.com/OKHP3/first-diagram-is-a-liar/blob/main/docs/final-publication/master-article.md" },
+  { label: "Final Cut reading edition", url: "https://okhp3.github.io/first-diagram-is-a-liar/final-cut.html" },
 ];
 
 const criterionLabels: Record<CouncilCriterion, string> = {
@@ -104,7 +106,7 @@ export function buildHandoffMarkdown(
 
 ## ROY teaching heuristic
 
-ROY means **Return on Your Words**: understanding produced divided by explanation invested. It is a bounded teaching heuristic, not a scientific measurement or universal benchmark.
+ROY means **Return on Your Words**: useful understanding relative to the effort of creating, reviewing, using, and maintaining an explanation. The sliders illustrate clarity relative to word count only; the score is not a scientific measurement, business ROI, or universal benchmark. Measure reader task accuracy and total effort separately.
 
 - **Words invested:** ${session.roy.words}
 - **Clarity delivered:** ${session.roy.clarity}/10
@@ -131,7 +133,7 @@ ${workbench.source}
 - **Selected criterion:** ${criterionLabels[session.council.criterion]}
 - **Synthesis outcome:** ${session.council.outcome || "Not selected"}
 - **Synthesis sentence:** ${learnerText(learnerTextFields.councilNote)}
-- **Comparison boundary:** Core Five entries are directly comparable. Exhibition, Specialty Notion, Specialty Replit, and Attempted entries remain separate conditions. No overall winner is declared.
+- **Comparison boundary:** Core Five entries share the central challenge but differ in product access; this is not a controlled comparison. Exhibition, Specialty Notion, Specialty Replit, and Attempted entries remain separate conditions. No overall winner is declared.
 
 ## Checklist (${checkedCount}/${checklistItems.length})
 

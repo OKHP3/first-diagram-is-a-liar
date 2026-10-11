@@ -1,79 +1,146 @@
 # The First Diagram Is Usually a Liar
 
-An interactive field guide for turning messy thinking into diagrams that earn
-their words.
+**The Final Cut:** a practitioner case study of AI-assisted diagrams, structured
+disagreement, reusable visual preferences, and maintainable process knowledge.
 
-## Start here
+The first diagram is a claim. Make its assumptions, exceptions, and evidence
+visible before its polish becomes a substitute for understanding.
+
+## Read the Final Cut
+
+**Home base: [OverKill Hill](https://overkillhill.com/).** The [story hub](https://overkillhill.com/writings/first-diagram-is-a-liar/#read-or-interact) connects the reading edition, interactive field guide, and related projects.
+
+- **[Final Cut reading edition](https://okhp3.github.io/first-diagram-is-a-liar/final-cut.html)**: the complete thesis with figures and sources, delivered alongside the field guide.
+- **[Final Cut manuscript](docs/final-publication/master-article.md)**: the published article source, approximately 11,440 words.
+- **[Publication packet](docs/final-publication/README.md)**: published source, publication receipts, source ledger, and historical review records.
+- **[Website article](https://overkillhill.com/writings/first-diagram-is-a-liar/)** and **[LinkedIn article](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)**: existing public publication surfaces.
+- **[Interactive tutorial](https://okhp3.github.io/first-diagram-is-a-liar/)**: the separate GitHub Pages application.
+- **[Original evidence archive](archive/README.md)**: prompts, Mermaid sources, renders, decks, and historical records.
+
+**Publication status:** the Final Cut was published to LinkedIn and OverKill Hill on September 29, 2026, in that order. One LinkedIn comment was published and memorialized on the website. The [publication record](docs/final-publication/publication-record.md) records the exact destinations and deployment evidence. This repository supplies the aligned reading edition and interactive guide through its own Pages workflow. The [Diagram Truth project home](https://overkillhill.com/projects/diagram-truth/) connects both forms.
+
+## What the Final Cut brings together
+
+1. **ROY, Return on Your Words:** useful understanding relative to the effort of creating, reviewing, using, and maintaining an explanation.
+2. **The Council experiment:** compare alternatives, preserve disagreement, and let a human adjudicate against evidence.
+3. **Two diagram rounds:** Copilot V1 and Claude V2 are the author's round selections. Their strengths and defects remain inspectable.
+4. **Business implementation:** actors, evidence, authority, exceptions, acceptance gates, stopping rules, and a complete illustrative purchase-request example.
+5. **Knowledge behind the boxes:** link a Process Narrative Specification and selective diagram views through stable identifiers.
+6. **Visual consistency:** use Theme Builder to establish choices, then carry them into generation through proposed personal skills or plugins with profiles, exemplars, and renderer-specific rules.
+7. **Measurement and maintenance:** evaluate task accuracy, effort, styling correction turns, and change handling before claiming business benefit.
+
+ROY is a heuristic, not a validated composite score. A separate net-benefit
+calculation can be negative when costs exceed benefits. A valid render proves
+neither process fidelity nor reader comprehension nor operational improvement.
+
+The case preserves unequal product conditions and evolving prompts. It does
+not establish universal model rankings or measured productivity gains. The
+proposed personal styling package aims to bring known preferences into the first
+prompt; identical rendering or native skill execution across every host is not
+assumed.
+
+## Projects and tools
+
+| Resource | Understand it | Use or inspect it |
+|---|---|---|
+| Skillz Forge | [Project and approach](https://overkillhill.com/skillz-forge/) | [Browse the skill catalog](https://okhp3.github.io/skillz/) |
+| Mermaid Theme Builder | [Styling workflow](https://overkillhill.com/projects/mermaid-theme-builder/) | [Open the workbench](https://okhp3.github.io/mermaid-theme-builder/) |
+| BPMN for Mermaid | [Process-knowledge project](https://overkillhill.com/projects/bpmn-for-mermaid/) | [Explore the application](https://okhp3.github.io/mermaid-diagram-bpmn/) |
+| Mermaid | [Open-source overview](https://mermaid.ai/open-source/) | [Upstream repository](https://github.com/mermaid-js/mermaid) |
+| Agent Skills | [Format and ecosystem](https://agentskills.io/home) | [Specification repository](https://github.com/agentskills/agentskills) |
+| Replit | [Build environment](https://replit.com) | Used for building and iteration in the case |
+| Notion | [Knowledge workspace](https://www.notion.com) | Used for editorial organization and knowledge custody |
+
+Project pages explain purpose and boundaries; application links open the working
+surfaces; upstream repositories provide source and contribution routes. Links
+and topic tags identify resources, not endorsements or universal compatibility.
+
+#OverKillHill #SkillzForge #MermaidThemeBuilder #BPMNForMermaid #Mermaid #AgentSkills #Replit #Notion #ProcessImprovement #VisualCommunication
+
+## Diagram rounds and evidence
+
+**V1 and V2 identify diagram rounds.** They remain part of the evidence. Historical
+article-release labels are retained in the archive and receipts, while the Final
+Cut follows the argument rather than the release chronology.
+
+Keep the **Core Five**, **Specialty**, **Exhibition**, and **Attempted** entries
+distinct. The historical [Council brief](archive/diagramming-shootout/council-brief.md),
+[canonical story](archive/diagramming-shootout/canonical-story.md), and
+[diagram manifest](archive/diagramming-shootout/diagram-manifest.csv) preserve the
+case. The Final Cut's [source ledger](docs/final-publication/source-ledger.md)
+explains the bounded current interpretation and corrections.
+
+Historical sources are preserved rather than silently repaired. For example,
+Claude V2's missing negative decision route remains in the original source and
+render, with its significance explained beside the selected figure.
+
+## Run the tutorial
+
+### Display, pin, and share
+
+The header includes a GitHub source link and **Light / System / Dark** controls.
+System is the default. Your appearance choice is saved on this device separately
+from the tutorial session. It follows operating-system changes while System is
+selected.
+
+- **iPhone/iPad:** Safari's Share menu, then Add to Home Screen. The shortcut uses
+  the `First Diagram` name and a dedicated 180px Apple icon.
+- **Android:** use the browser's install or Add to Home Screen action when offered.
+  The manifest supplies regular icons and a separate opaque, maskable 512px icon.
+- **Shared links:** the field guide and Final Cut reading page expose absolute
+  Open Graph and large Twitter/X card image URLs. Preview refresh timing belongs
+  to the receiving platform.
+
+Home-screen launch needs a network connection; offline caching is not provided.
+Availability and wording of installation actions depend on the browser.
+
+[![First Diagram link preview](public/og-image.png)](https://okhp3.github.io/first-diagram-is-a-liar/)
+
+[Share image](public/og-image.png) · [Apple icon](public/apple-touch-icon.png) ·
+[Android maskable icon](public/icon-maskable-512.png) ·
+[Web manifest](public/site.webmanifest) ·
+[GitHub repository preview asset](public/github-social-preview.png)
+
+See the [presentation comparison and delivery notes](docs/presentation-polish.md)
+for the reference-app comparison and asset boundaries. GitHub's repository
+social-preview setting is separate from the application's share metadata.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-The application walks through the premise, the ROY exchange rate, a
-source-first V1/V2 diagram workbench, the Council fairness model, and a
-shipping checklist. It is the solution surface. The archive is the receipt
-stack. The local session remembers premise, controls, revision, synthesis,
-checklist, and handoff activity when browser storage is available.
+The application walks through the premise, an illustrative ROY calculation and reader-task measurement,
+a source-first V1/V2 workbench, a personal visual-profile exercise, Council conditions,
+and a business handoff with process ownership and exception handling.
+Browser storage can preserve the local session's premise, controls, revision,
+synthesis, checklist, and handoff activity. The tutorial is a separate learning
+surface aligned with the Final Cut; the complete reading edition is generated from the same committed article body. See the [alignment record](docs/final-cut-spa-alignment-2026-09-29.md).
 
-The handoff step offers two explicit deterministic Markdown packets. The
-`first-diagram-is-a-liar-handoff.md` full local packet contains the current
-local tutorial state, including the premise, ROY, workbench, Council, checklist,
-next test, receipts, generated date, and schema version. The
-`first-diagram-is-a-liar-handoff-redacted.md` sharing packet keeps the structural
-receipts and privacy boundary while omitting the learner-entered bounded claim,
-synthesis sentence, and next test. Both are assembled in the browser only:
-neither is cloud backup, durable server storage, or a verdict. Full is the
-default; redacted mode must be selected explicitly for each copy or download.
+The handoff step offers two deterministic Markdown packets:
 
-## The article and application
+- `first-diagram-is-a-liar-handoff.md`: full local tutorial state, including premise, ROY, workbench, Council, checklist, next test, receipts, generated date, and schema version.
+- `first-diagram-is-a-liar-handoff-redacted.md`: structural receipts and privacy boundaries, omitting the learner-entered bounded claim, synthesis sentence, and next test.
 
-- [Live article](https://overkillhill.com/writings/first-diagram-is-a-liar/)
-- [LinkedIn article](https://www.linkedin.com/pulse/first-diagram-usually-liar-jamie-hill-lv3hc)
-- [GitHub repository](https://github.com/OKHP3/first-diagram-is-a-liar)
-- **Live tutorial application:** [okhp3.github.io/first-diagram-is-a-liar](https://okhp3.github.io/first-diagram-is-a-liar/)
-  — the GitHub Pages route is live and technically verified. It is a separate
-  tutorial surface, not the `overkillhill.com` article host.
-- **Article release boundary:** the public article remains labelled v0.5. The
-  full `ARTICLE-1.0` editorial cut is frozen locally but deferred pending
-  owner approval and external publication evidence. The approved count-label
-  correction was deployed separately on 2026-09-01.
-- **Release evidence:** see
-  [`docs/article-1.0-release-evidence-2026-09-03.md`](docs/article-1.0-release-evidence-2026-09-03.md)
-  for the dated decision, Mermaid rerun, campaign-data limitation, and rollback
-  identifiers.
-
-## The core idea
-
-A picture is not automatically worth 1,000 words.
-
-ROY means Return on Your Words:
-
-> Understanding produced ÷ Explanation invested
-
-If a diagram costs more to make than it saves in comprehension, the return is
-negative. If a rough prompt creates a shared model in seconds, the return can
-be extraordinary. The tutorial makes that test usable instead of leaving it as
-a written exercise in hypocrisy.
+Both are assembled in the browser. They provide neither cloud backup nor durable
+server storage nor a verdict. Redacted is the default; full export requires deliberate confirmation.
 
 ## Repository map
 
 ```text
 src/                         interactive tutorial application
+docs/final-publication/       Final Cut published source, delivery receipts, evidence and review
 archive/
-  diagramming-shootout/      brief, prompts, diagrams, images, decks
+  diagramming-shootout/       brief, prompts, V1/V2 sources, images, decks
   member-deliberations/      specialty-role records
-  editorial-cut/             prepared local HTML article cut
-  legacy-exports/            selected preserved source captures
-docs/                        roadmap, technology inventory, proto-posts
-public/                      static icons and social-preview assets
-scripts/                     archive, Mermaid, and post-merge validation
+  editorial-cut/             historical prepared HTML cut
+  legacy-exports/            preserved source captures
+docs/                        roadmap, technology records, historical companion posts
+public/                      icons and social-preview assets
+scripts/                     archive, Mermaid and post-merge checks
+.agents/skills/              repository-local Agent Skill assets
 .github/workflows/           GitHub Pages build and deploy
 ```
-
-The canonical story, result language, attribution, and fairness rules live in
-[`archive/diagramming-shootout/canonical-story.md`](archive/diagramming-shootout/canonical-story.md)
-and [`archive/diagramming-shootout/council-brief.md`](archive/diagramming-shootout/council-brief.md).
 
 ## Validation
 

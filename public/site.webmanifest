@@ -1,7 +1,7 @@
 {
   "name": "The First Diagram Is Usually a Liar",
   "short_name": "First Diagram",
-  "description": "An interactive field guide for turning messy thinking into diagrams that earn their words.",
+  "description": "The Final Cut interactive field guide for honest AI diagrams, reusable visual preferences, and maintainable process knowledge.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
@@ -16,16 +16,37 @@
       "purpose": "any"
     },
     {
-      "src": "apple-touch-icon.png",
-      "sizes": "180x180",
+      "src": "icon-512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    }
+  ],
+  "lang": "en-US",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "orientation": "any",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Draw the truth",
+      "short_name": "Workbench",
+      "description": "Expose the revision loop and explore your visual preferences.",
+      "url": "./#step-3"
+    },
+    {
+      "name": "Read the Final Cut",
+      "short_name": "Final Cut",
+      "description": "Read the complete thesis with figures and evidence.",
+      "url": "./final-cut.html"
     }
   ]
 }

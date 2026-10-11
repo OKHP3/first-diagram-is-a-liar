@@ -11,11 +11,11 @@ export const councilCriteria: Array<{ id: CouncilCriterion; label: string; quest
 ];
 
 export const council = [
-  { name: "Copilot V1", tier: "Core Five" as const, role: "Renderer-level discipline", result: "Round 1 top performer", note: "Configured the Mermaid theme engine instead of decorating individual nodes.", comparable: true },
-  { name: "Claude V2", tier: "Core Five" as const, role: "Narrative architecture", result: "Round 2 top performer", note: "Made revision loops visible. Dashed arrows carried the uncomfortable truth.", comparable: true },
+  { name: "Copilot V1", tier: "Core Five" as const, role: "Renderer-level discipline", result: "Author’s Round 1 selection", note: "Explicit theme configuration in an earlier source capture. Later archived V1 headers reflect a different source stage.", comparable: true },
+  { name: "Claude V2", tier: "Core Five" as const, role: "Narrative architecture", result: "Author’s Round 2 selection", note: "Organized phases and revision paths; the preserved source also loses a negative decision route.", comparable: true },
   { name: "ChatGPT", tier: "Core Five" as const, role: "Scaffolding and synthesis", result: "Structural benchmark", note: "Strong loop logic and a useful first-pass scaffold.", comparable: true },
   { name: "Perplexity", tier: "Core Five" as const, role: "ROY framing", result: "Conceptual precision", note: "Compressed the argument tightly, with less patience for decorative noise.", comparable: true },
-  { name: "Gemini", tier: "Core Five" as const, role: "Maximalist energy", result: "Free-tier ceiling noted", note: "Evaluated fairly, with the different access condition left visible.", comparable: true },
+  { name: "Gemini", tier: "Core Five" as const, role: "Maximalist energy", result: "Free-tier ceiling noted", note: "Free-tier access differed from the other four paid-tier participants; the comparison is not controlled.", comparable: true },
   { name: "ChatGPT V2 Pro", tier: "Exhibition" as const, role: "Raised capability ceiling", result: "Exhibition only", note: "Interesting and instructive, but not a direct comparison with the Core Five.", comparable: false },
   { name: "Notion", tier: "Specialty Notion" as const, role: "Documentarian perspective", result: "Different brief", note: "A source-and-lineage perspective, not a cold-start competitor.", comparable: false },
   { name: "Replit", tier: "Specialty Replit" as const, role: "Builder perspective", result: "Different brief", note: "A delivery and implementation perspective, not a cold-start competitor.", comparable: false },

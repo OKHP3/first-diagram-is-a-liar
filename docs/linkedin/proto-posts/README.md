@@ -4,7 +4,7 @@ These are review drafts for the next four releases of **The First Diagram Is Usu
 
 They are intentionally saved as proto-posts rather than publication-final copy. The drafts use the current release spine:
 
-- v0.6: Notion as the writer's room and consolidation layer
+- v0.6: Notion as documentarian, MCP-connected hub, and project memory
 - v0.7: Replit as the build partner and execution environment
 - v0.8: Mermaid Theme Builder as the visual-governance response
 - v0.9: BPMN for Mermaid as the process-semantics response
@@ -25,6 +25,11 @@ space and are intentionally not linked or reproduced here.
 - [v0.9: BPMN for Mermaid](v0.9-bpmn-for-mermaid.md)
 
 ## Review status
+
+The v0.8 long-form article update and one comment were published on 2026-09-28.
+Their [publication record](../../v0.8-publication-2026-09-28.md) preserves the
+exact copy and release evidence. The standalone feed-posts in this directory
+remain drafts.
 
 - Audience: LinkedIn readers following the release series
 - Status: Proto-posts for Jamie's reading and review

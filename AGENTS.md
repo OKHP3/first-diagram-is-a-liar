@@ -28,10 +28,7 @@ Confirmed archive: the ETCH-AI-SKETCH brief, eight prompts, Mermaid V1/V2
 sources, rendered assets, slide exports, Replit specialty records, and the
 prepared editorial HTML cut are preserved under `archive/`.
 
-Current status: the root tutorial is implemented and has a source-controlled
-GitHub Pages workflow. The external article is v0.5, Council-Assisted Scoring,
-verified on 2026-08-24. Pages deployment is not confirmed until Actions and a
-live smoke test succeed.
+Current status: the root tutorial and Final Cut reading edition have a source-controlled GitHub Pages workflow. The complete Final Cut was published to LinkedIn, followed by one comment, then to the OverKill Hill website on 2026-09-29. Exact publication and deployment receipts are in `docs/final-publication/publication-record.md`. Earlier serialized releases remain historical evidence. Each future deployment requires its own successful Actions run and live verification.
 
 ## Repository map
 
@@ -90,3 +87,5 @@ The external article URL and GitHub repository are public anchors, not proof
 of the new Pages deployment. A passing build proves local source integrity, not
 live hosting. Report confirmed, inferred, proposed, and unknown claims
 separately.
+
+## Imported Claude Cowork project instructions
